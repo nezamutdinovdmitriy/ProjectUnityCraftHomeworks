@@ -453,7 +453,6 @@ GameObject:
   m_Component:
   - component: {fileID: 177601767}
   - component: {fileID: 177601768}
-  - component: {fileID: 177601769}
   m_Layer: 0
   m_Name: '[UI]'
   m_TagString: Untagged
@@ -506,24 +505,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &177601769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 177601766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ba1c9bb6cda40859c2a722f818fdc94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.UIController
-  _gameOverView: {fileID: 1375492023}
-  _scoreView: {fileID: 895558708}
-  _healthView: {fileID: 1243470931}
-  _enemyManager: {fileID: 562298205}
-  _player: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!1 &196756140
 GameObject:
   m_ObjectHideFlags: 0
