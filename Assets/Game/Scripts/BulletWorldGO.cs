@@ -41,7 +41,7 @@ namespace Game
                 Vector3 moveStep = bullet.direction * bullet.speed * Time.fixedDeltaTime;
                 bullet.transform.position += moveStep;
 
-                if (!_levelBounds.InBounds(bullet.transform.position))
+                if (_levelBounds.InBounds(bullet.transform.position) == false)
                 {
                     _bullets.RemoveAt(i);
 
@@ -91,7 +91,7 @@ namespace Game
 
         private void OnTriggerEntered(BulletData bullet, Collider2D other)
         {
-            if (!other.TryGetComponent(out ShipController ship)) 
+            if (other.TryGetComponent(out ShipController ship) == false) 
                 return;
 
             if (bullet.team == TeamType.Player && ship is Enemy ||

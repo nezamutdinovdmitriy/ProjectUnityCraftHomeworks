@@ -16,6 +16,6 @@ namespace Game
         public GameObject blueVFX;
         public GameObject redVFX;
 
-        private void OnTriggerEnter2D(Collider2D other) => this.OnTriggerEntered?.Invoke(this, other);
+        private void OnTriggerEnter2D(Collider2D other) => OnTriggerEntered?.Invoke(this, other);
     }
 }

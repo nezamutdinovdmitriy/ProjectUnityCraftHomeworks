@@ -23,7 +23,7 @@ namespace Game
 
         public void FixedUpdate()
         {
-            if (!_direction.HasValue)
+            if (_direction.HasValue == false)
                 return;
 
             Vector2 direction = _direction.Value;
@@ -31,7 +31,7 @@ namespace Game
             _rigidbody.MovePosition(newPosition);
             _direction = null;
             
-            this.OnMoved?.Invoke(direction);
+            OnMoved?.Invoke(direction);
         }
     }
 }

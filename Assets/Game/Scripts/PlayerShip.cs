@@ -22,43 +22,43 @@ namespace Game
 
         private void OnEnable()
         {
-            this.OnHealthChanged += health =>
+            OnHealthChanged += health =>
             {
-                _healthView.SetHealth(health, this.config.Health);
+                _healthView.SetHealth(health, config.Health);
                 _cameraShaker.Shake();
             };
-            this.OnDead += _gameOverView.Show;
+            OnDead += _gameOverView.Show;
         }
 
         private void OnDisable()
         {
-            this.OnHealthChanged -= health =>
+            OnHealthChanged -= health =>
             {
-                _healthView.SetHealth(health, this.config.Health);
+                _healthView.SetHealth(health, config.Health);
                 _cameraShaker.Shake();
             };
-            this.OnDead -= _gameOverView.Show;
+            OnDead -= _gameOverView.Show;
         }
 
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
-                this.Fire();
+                Fire();
 
             float dx = Input.GetAxisRaw("Horizontal");
             float dy = Input.GetAxisRaw("Vertical");
-            this.moveDirection = new Vector2(dx, dy);
+            moveDirection = new Vector2(dx, dy);
 
-            if (this.currentHealth > 0)
+            if (currentHealth > 0)
             {
-                _motor.MoveStep(this.moveDirection);
+                _motor.MoveStep(moveDirection);
             }
         }
 
         protected override void LateUpdate()
         {
             base.LateUpdate();
-            this.transform.position = _playerArea.ClampInBounds(this.transform.position);
+            this.transform.position = _playerArea.ClampInBounds(transform.position);
         }
     }
 }

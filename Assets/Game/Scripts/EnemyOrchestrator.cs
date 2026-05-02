@@ -62,7 +62,7 @@ namespace Game
         
         private void Start()
         {
-            this.ResetSpawnCooldown();
+            ResetSpawnCooldown();
         }
 
         private void FixedUpdate()
@@ -76,13 +76,13 @@ namespace Game
             else
                 enemy = Instantiate(_prefab, _container);
 
-            enemy.transform.position = this.NextSpawnPosition();
-            enemy.destination = this.NextDestination();
+            enemy.transform.position = NextSpawnPosition();
+            enemy.destination = NextDestination();
             enemy.currentHealth = enemy.config.Health;
 
             enemy.target = _player;
             enemy.SetDespawner(this);
-            enemy.OnFire += this.OnFire;
+            enemy.OnFire += OnFire;
                 
             this.ResetSpawnCooldown();
         }
@@ -97,7 +97,7 @@ namespace Game
         {
             _destroyedEnemies++;
             _scoreView.SetValue(_destroyedEnemies);
-            this.StartCoroutine(DespawnInNextFrame(enemy));
+            StartCoroutine(DespawnInNextFrame(enemy));
         }
 
         private IEnumerator DespawnInNextFrame(Enemy enemy)

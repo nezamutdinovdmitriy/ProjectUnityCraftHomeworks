@@ -57,7 +57,7 @@ namespace Game
 
         private void Awake()
         {
-            this.currentHealth = config.Health;
+            currentHealth = config.Health;
             _motor.SetSpeed(config.MoveSpeed);
 
             _material = new Material(_viewConfig.MaterialPrefab);
@@ -69,7 +69,7 @@ namespace Game
         protected void Fire()
         {
             float time = Time.time;
-            if (time - _fireTime < config.FireCooldown || this.currentHealth <= 0)
+            if (time - _fireTime < config.FireCooldown || currentHealth <= 0)
                 return;
 
             if (_fireSFX)
@@ -84,7 +84,7 @@ namespace Game
         
         protected virtual void LateUpdate()
         {
-            this.AnimateMovement(Time.deltaTime);
+            AnimateMovement(Time.deltaTime);
         }
 
         private void AnimateMovement(float deltaTime)
@@ -101,9 +101,9 @@ namespace Game
         public void NotifyAboutHealthChanged(int health)
         {
             if (health > 0)
-                this.AnimateDamage();
+                AnimateDamage();
 
-            this.OnHealthChanged?.Invoke(health);
+            OnHealthChanged?.Invoke(health);
         }
 
         public void NotifyAboutDead()
@@ -112,7 +112,7 @@ namespace Game
             ParticleSystem prefab = _viewConfig.DestroyEffectPrefab;
             Instantiate(prefab, _viewTransform.position, prefab.transform.rotation);
 
-            this.OnDead?.Invoke();
+            OnDead?.Invoke();
         }
 
         private void AnimateDamage()

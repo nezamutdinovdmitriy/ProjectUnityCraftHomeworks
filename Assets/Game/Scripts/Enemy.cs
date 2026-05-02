@@ -21,9 +21,9 @@ namespace Game
 
         public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
 
-        private void OnEnable() => this.OnDead += this.OnCharacterDead;
+        private void OnEnable() => OnDead += OnCharacterDead;
 
-        private void OnDisable() => this.OnDead -= this.OnCharacterDead;
+        private void OnDisable() => OnDead -= OnCharacterDead;
 
         private void OnCharacterDead() => _despawner.Despawn(this);
 
@@ -31,10 +31,10 @@ namespace Game
         {
             base.FixedUpdate();
 
-            if (this.currentHealth <= 0 || this.target == null || this.target.currentHealth <= 0)
+            if (currentHealth <= 0 || target == null || target.currentHealth <= 0)
                 return;
 
-            Vector2 distance = destination - (Vector2) this.transform.position;
+            Vector2 distance = destination - (Vector2)transform.position;
             bool isNotReached = distance.sqrMagnitude > _stoppingDistance * _stoppingDistance;
             
             moveDirection = isNotReached ? distance.normalized : Vector3.zero;

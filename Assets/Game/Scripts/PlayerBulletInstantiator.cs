@@ -13,12 +13,12 @@ namespace Game
 
         private void OnEnable()
         {
-            _player.OnFire += this.OnFire;
+            _player.OnFire += OnFire;
         }
 
         private void OnDisable()
         {
-            _player.OnFire -= this.OnFire;
+            _player.OnFire -= OnFire;
         }
 
         private void OnFire(ShipController _)
