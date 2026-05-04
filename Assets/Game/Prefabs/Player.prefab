@@ -54,9 +54,10 @@ MonoBehaviour:
   firePoint: {fileID: 8503432944885784460}
   bulletSpeed: 7
   bulletDamage: 1
-  _motor:
+  _team: 1
+  rigidbodyMovementComponent:
     _rigidbody: {fileID: 4575139502811685103}
-    _speed: 10
+    _speed: 15
   _renderer: {fileID: 795037679980988590}
   _viewTransform: {fileID: 1249406481267314197}
   _audioSource: {fileID: 8141832910989862937}

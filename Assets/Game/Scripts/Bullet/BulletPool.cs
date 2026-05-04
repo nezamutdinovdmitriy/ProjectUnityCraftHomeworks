@@ -24,6 +24,7 @@ namespace Game
             {
                 return _bulletFactory.Create(_container);
             }
+            
         }
 
         public void Push(Bullet bullet)

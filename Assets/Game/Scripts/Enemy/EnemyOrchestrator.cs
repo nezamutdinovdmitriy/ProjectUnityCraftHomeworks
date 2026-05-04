@@ -45,7 +45,7 @@ namespace Game
         
         [Header("Bullets")]
         [SerializeField]
-        private BulletManager _bulletWorld;
+        private BulletManager _bulletManager;
         
         [Header("UI")]
         [SerializeField]
@@ -82,7 +82,7 @@ namespace Game
 
             enemy.target = _player;
             enemy.SetDespawner(this);
-            enemy.OnFire += OnFire;
+            enemy.Fired += OnFired;
                 
             this.ResetSpawnCooldown();
         }
@@ -107,12 +107,12 @@ namespace Game
             _pool.Enqueue(enemy);
         }
         
-        private void OnFire(ShipController enemy)
+        private void OnFired(ShipController enemy)
         {
             Vector2 position = enemy.firePoint.position;
             Vector2 target = _player.transform.position;
             Vector2 direction = (target - position).normalized;
-            _bulletWorld.Spawn(
+            _bulletManager.Spawn(
                 enemy.firePoint.position,
                 direction,
                 enemy.bulletSpeed,

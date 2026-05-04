@@ -37,19 +37,17 @@ namespace Game
             _healthView.SetHealth(health, config.Health);
             _cameraShaker.Shake();
         }
+
+        public void SetMovementDirection(Vector2 direction)
+        {
+            moveDirection = direction;
+        }
         
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-                Fire();
-
-            float dx = Input.GetAxisRaw("Horizontal");
-            float dy = Input.GetAxisRaw("Vertical");
-            moveDirection = new Vector2(dx, dy);
-
             if (currentHealth > 0)
             {
-                _motor.MoveStep(moveDirection);
+                rigidbodyMovementComponent.MoveStep(moveDirection);
             }
         }
 

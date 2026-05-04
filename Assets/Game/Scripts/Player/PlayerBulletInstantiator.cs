@@ -13,22 +13,22 @@ namespace Game
 
         private void OnEnable()
         {
-            _player.OnFire += OnFire;
+            _player.Fired += OnFired;
         }
 
         private void OnDisable()
         {
-            _player.OnFire -= OnFire;
+            _player.Fired -= OnFired;
         }
 
-        private void OnFire(ShipController _)
+        private void OnFired(ShipController _)
         {
             _bulletWorld.Spawn(
                 _player.firePoint.position,
                 _player.firePoint.up,
                 _player.bulletSpeed,
                 _player.bulletDamage,
-                TeamType.Player
+                _player.Team
             );
         }
     }

@@ -5,7 +5,7 @@ namespace Game
 {
     // +
     [Serializable]
-    public sealed class Motor
+    public sealed class RigidbodyMovementComponent
     {
         public event Action<Vector3> OnMoved;
         

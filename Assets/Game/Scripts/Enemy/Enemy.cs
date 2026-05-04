@@ -41,7 +41,7 @@ namespace Game
 
             if (isNotReached)
             {
-                _motor.MoveStep(distance.normalized);
+                rigidbodyMovementComponent.MoveStep(distance.normalized);
             }
             else
             {

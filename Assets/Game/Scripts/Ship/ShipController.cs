@@ -5,17 +5,20 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public abstract class ShipController : MonoBehaviour
+    public abstract class ShipController : MonoBehaviour, IDamageable
     {
         public event Action<int> HealthChanged;
         public event Action OnDead;
 
-        public event Action<ShipController> OnFire;
+        public event Action<ShipController> Fired;
 
         public ShipControllerSO config;
 
+        public TeamType Team => _team;
+        
         [Header("Health")]
         public int currentHealth;
+        
 
         [Header("Combat")]
         public Transform firePoint;
@@ -23,9 +26,12 @@ namespace Game
         public int bulletDamage;
         private float _fireTime;
 
+        [SerializeField]
+        private TeamType _team;
+
         [Header("Movement")]
         [SerializeField]
-        protected Motor _motor;
+        protected RigidbodyMovementComponent rigidbodyMovementComponent;
         
         protected Vector3 moveDirection;
 
@@ -58,15 +64,15 @@ namespace Game
         private void Awake()
         {
             currentHealth = config.Health;
-            _motor.SetSpeed(config.MoveSpeed);
+            rigidbodyMovementComponent.SetSpeed(config.MoveSpeed);
 
             _material = new Material(_viewConfig.MaterialPrefab);
             _renderer.material = _material;
         }
 
-        protected virtual void FixedUpdate() => _motor.FixedUpdate();
+        protected virtual void FixedUpdate() => rigidbodyMovementComponent.FixedUpdate();
 
-        protected void Fire()
+        public void Fire()
         {
             float time = Time.time;
             if (time - _fireTime < config.FireCooldown || currentHealth <= 0)
@@ -78,7 +84,7 @@ namespace Game
             if (_fireVFX)
                 _fireVFX.Play();
 
-            this.OnFire?.Invoke(this);
+            this.Fired?.Invoke(this);
             _fireTime = time;
         }
         
@@ -130,6 +136,21 @@ namespace Game
 
             if (_damageSFX)
                 _audioSource.PlayOneShot(_damageSFX);
+        }
+        
+        public void TakeDamage(int damage)
+        {
+            if (damage > 0)
+            {
+                currentHealth = Mathf.Clamp(currentHealth - damage, 0, config.Health);
+                NotifyAboutHealthChanged(currentHealth);
+ 
+                if (currentHealth <= 0)
+                {
+                    NotifyAboutDead();
+                    gameObject.SetActive(false);
+                }
+            }
         }
     }
 }
