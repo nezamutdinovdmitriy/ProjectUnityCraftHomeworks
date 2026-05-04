@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
     public class BulletPool : MonoBehaviour
     {
+        private const int StartCount = 10;
+        
         private readonly Stack<Bullet> _stack = new();
 
         [SerializeField]
@@ -12,6 +15,16 @@ namespace Game
 
         [SerializeField]
         private Transform _container;
+
+        private void Awake()
+        {
+            for (int i = 0; i < StartCount; i++)
+            {
+                Bullet bullet = _bulletFactory.Create(_container);
+                bullet.gameObject.SetActive(false);
+                _stack.Push(bullet);
+            }
+        }
 
         public Bullet Rent()
         {
