@@ -48,7 +48,7 @@ namespace Game
                 float time = Time.time;
                 if (time - _fireTime >= _fireCooldown)
                 {
-                    this.Fire();
+                    this.OnFired();
                     _fireTime = time;
                 }
             }

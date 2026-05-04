@@ -12,7 +12,7 @@ namespace Game
 
         public event Action<ShipController> Fired;
 
-        public ShipControllerSO config;
+        public ShipConfig config;
 
         public TeamType Team => _team;
         
@@ -46,7 +46,7 @@ namespace Game
         private AudioSource _audioSource;
 
         [SerializeField]
-        private ShipControllerViewConfig _viewConfig;
+        private ShipViewConfig _viewConfig;
 
         [SerializeField]
         private ParticleSystem _fireVFX;
@@ -70,9 +70,22 @@ namespace Game
             _renderer.material = _material;
         }
 
-        protected virtual void FixedUpdate() => rigidbodyMovementComponent.FixedUpdate();
-
-        public void Fire()
+        public void TakeDamage(int damage)
+        {
+            if (damage > 0)
+            {
+                currentHealth = Mathf.Clamp(currentHealth - damage, 0, config.Health);
+                NotifyAboutHealthChanged(currentHealth);
+ 
+                if (currentHealth <= 0)
+                {
+                    NotifyAboutDead();
+                    gameObject.SetActive(false);
+                }
+            }
+        }
+        
+        public void OnFired()
         {
             float time = Time.time;
             if (time - _fireTime < config.FireCooldown || currentHealth <= 0)
@@ -86,22 +99,6 @@ namespace Game
 
             this.Fired?.Invoke(this);
             _fireTime = time;
-        }
-        
-        protected virtual void LateUpdate()
-        {
-            AnimateMovement(Time.deltaTime);
-        }
-
-        private void AnimateMovement(float deltaTime)
-        {
-            Vector3 shipAngles = _viewTransform.localEulerAngles;
-            shipAngles.x = _viewConfig.MoveRotationAngle * moveDirection.y;
-            shipAngles.y = _viewConfig.MoveRotationAngle / 2 * moveDirection.x * -1f;
-            
-            Quaternion shipRotation = Quaternion.Euler(shipAngles);
-            float t = _viewConfig.MoveSpeed * deltaTime;
-            _viewTransform.localRotation = Quaternion.Lerp(_viewTransform.localRotation, shipRotation, t);
         }
         
         public void NotifyAboutHealthChanged(int health)
@@ -120,6 +117,24 @@ namespace Game
 
             OnDead?.Invoke();
         }
+        
+        protected virtual void LateUpdate()
+        {
+            AnimateMovement(Time.deltaTime);
+        }
+
+        protected virtual void FixedUpdate() => rigidbodyMovementComponent.FixedUpdate();
+        
+        private void AnimateMovement(float deltaTime)
+        {
+            Vector3 shipAngles = _viewTransform.localEulerAngles;
+            shipAngles.x = _viewConfig.MoveRotationAngle * moveDirection.y;
+            shipAngles.y = _viewConfig.MoveRotationAngle / 2 * moveDirection.x * -1f;
+            
+            Quaternion shipRotation = Quaternion.Euler(shipAngles);
+            float t = _viewConfig.MoveSpeed * deltaTime;
+            _viewTransform.localRotation = Quaternion.Lerp(_viewTransform.localRotation, shipRotation, t);
+        }
 
         private void AnimateDamage()
         {
@@ -136,21 +151,6 @@ namespace Game
 
             if (_damageSFX)
                 _audioSource.PlayOneShot(_damageSFX);
-        }
-        
-        public void TakeDamage(int damage)
-        {
-            if (damage > 0)
-            {
-                currentHealth = Mathf.Clamp(currentHealth - damage, 0, config.Health);
-                NotifyAboutHealthChanged(currentHealth);
- 
-                if (currentHealth <= 0)
-                {
-                    NotifyAboutDead();
-                    gameObject.SetActive(false);
-                }
-            }
         }
     }
 }

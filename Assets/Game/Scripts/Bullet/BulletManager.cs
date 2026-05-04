@@ -19,47 +19,45 @@ namespace Game
         [SerializeField]
         private TransformBounds _levelBounds;
         
+        private void FixedUpdate()
+        {
+            for (int i = _bullets.Count - 1; i >= 0; i--)
+            {
+                Bullet bullet = _bullets[i];
+                
+                bullet.MoveStep(Time.fixedDeltaTime);
+
+                if (_levelBounds.InBounds(bullet.transform.position) == false)
+                    ReleaseBullet(bullet);
+            }
+        }
+        
         public void Spawn(Vector2 position, Vector2 direction, float speed, int damage, TeamType team)
         {
             Bullet bullet = _bulletPool.Rent();
             
             bullet.Initialize(position, direction, damage, speed, team);
 
-            bullet.Hit += OnHit;
-            
+            bullet.Hit += OnBulletHit;
             _bullets.Add(bullet);
         }
-        
-        private void FixedUpdate()
+
+        private void OnBulletHit(Bullet bullet, Collider2D other)
         {
-            for (int i = _bullets.Count - 1; i >= 0; i--)
-            {
-                Bullet bullet = _bullets[i];
-                bullet.MoveStep(Time.fixedDeltaTime);
-
-                if (_levelBounds.InBounds(bullet.transform.position) == false)
-                {
-                    _bullets.RemoveAt(i);
-
-                    ReleaseBullet(bullet);
-                }
-            }
-        }
-
-        private void OnHit(Bullet bullet, Collider2D other)
-        {
-            _bullets.Remove(bullet);
-
+            CreateExplosion(bullet.transform.position);
             ReleaseBullet(bullet);
-
-            // Explosion Vfx
-            GameObject prefab = _configView.ExplosionVFX;
-            Instantiate(prefab, bullet.transform.position, prefab.transform.rotation);
         }
 
+        private void CreateExplosion(Vector3 position)
+        {
+            GameObject prefab = _configView.ExplosionVFX;
+            Instantiate(prefab, position, prefab.transform.rotation);
+        }
+        
         private void ReleaseBullet(Bullet bullet)
         {
-            bullet.Hit -= OnHit;
+            bullet.Hit -= OnBulletHit;
+            _bullets.Remove(bullet);
             _bulletPool.Push(bullet);
         }
     }

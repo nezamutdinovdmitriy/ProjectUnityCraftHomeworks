@@ -19,7 +19,12 @@ namespace Game
         private TeamType _team;
         private Vector2 _direction;
 
-        public void Initialize(Vector2 position, Vector2 direction, int damage, float speed, TeamType team)
+        public void Initialize(
+            Vector2 position, 
+            Vector2 direction, 
+            int damage, 
+            float speed, 
+            TeamType team)
         {
             transform.position = position;
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
@@ -30,8 +35,6 @@ namespace Game
             _team = team;
 
             SetVfx(team);
-
-            Debug.Log($"TEAM: {team}");
             
             gameObject.layer = BulletLayerHelper.GetLayer(team);
         }
@@ -50,13 +53,11 @@ namespace Game
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out IDamageable target) == false)
-                return;
-
-            if (target.Team != _team)
+            if (other.TryGetComponent(out IDamageable target)
+                && target.Team != _team)
             {
                 target.TakeDamage(_damage);
-
+                
                 Hit?.Invoke(this, other);
             }
         }

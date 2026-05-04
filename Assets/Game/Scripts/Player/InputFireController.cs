@@ -13,7 +13,7 @@ namespace Game
         private void Update()
         {
             if (Input.GetKeyDown(_fireKey))
-                _playerShip.Fire();
+                _playerShip.OnFired();
         }
     }
 }

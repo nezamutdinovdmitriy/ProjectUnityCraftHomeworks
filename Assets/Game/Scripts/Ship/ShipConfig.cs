@@ -4,7 +4,7 @@ namespace Game
 {
     // +
     [CreateAssetMenu(menuName = "Game/ShipControllerInfo", order = 0)]
-    public sealed class ShipControllerSO : ScriptableObject
+    public sealed class ShipConfig : ScriptableObject
     {
         [Header("Core")]
         [field: SerializeField]
