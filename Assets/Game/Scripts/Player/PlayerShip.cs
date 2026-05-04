@@ -22,24 +22,22 @@ namespace Game
 
         private void OnEnable()
         {
-            OnHealthChanged += health =>
-            {
-                _healthView.SetHealth(health, config.Health);
-                _cameraShaker.Shake();
-            };
+            HealthChanged += OnHealthChanged;
             OnDead += _gameOverView.Show;
         }
 
         private void OnDisable()
         {
-            OnHealthChanged -= health =>
-            {
-                _healthView.SetHealth(health, config.Health);
-                _cameraShaker.Shake();
-            };
+            HealthChanged -= OnHealthChanged;
             OnDead -= _gameOverView.Show;
         }
 
+        private void OnHealthChanged(int health)
+        {
+            _healthView.SetHealth(health, config.Health);
+            _cameraShaker.Shake();
+        }
+        
         public void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))

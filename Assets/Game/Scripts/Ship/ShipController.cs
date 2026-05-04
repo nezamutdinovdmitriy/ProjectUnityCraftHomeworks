@@ -7,7 +7,7 @@ namespace Game
     // +
     public abstract class ShipController : MonoBehaviour
     {
-        public event Action<int> OnHealthChanged;
+        public event Action<int> HealthChanged;
         public event Action OnDead;
 
         public event Action<ShipController> OnFire;
@@ -103,7 +103,7 @@ namespace Game
             if (health > 0)
                 AnimateDamage();
 
-            OnHealthChanged?.Invoke(health);
+            HealthChanged?.Invoke(health);
         }
 
         public void NotifyAboutDead()

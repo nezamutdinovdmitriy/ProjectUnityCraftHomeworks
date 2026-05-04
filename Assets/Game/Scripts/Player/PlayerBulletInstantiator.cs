@@ -6,7 +6,7 @@ namespace Game
     public sealed class PlayerBulletInstantiator : MonoBehaviour
     {
         [SerializeField]
-        private BulletWorldGO _bulletWorld;
+        private BulletManager _bulletWorld;
 
         [SerializeField]
         private PlayerShip _player;

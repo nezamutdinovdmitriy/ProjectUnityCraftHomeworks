@@ -6,10 +6,10 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public sealed class BulletWorldGO : MonoBehaviour
+    public sealed class BulletManager : MonoBehaviour
     {
         [SerializeField]
-        private BulletData _prefab;
+        private Bullet _prefab;
 
         [SerializeField]
         private Transform _container;
@@ -20,14 +20,14 @@ namespace Game
         [SerializeField]
         private TransformBounds _levelBounds;
 
-        private readonly Stack<BulletData> _pool = new();
-        private readonly List<BulletData> _bullets = new();
+        private readonly Stack<Bullet> _pool = new();
+        private readonly List<Bullet> _bullets = new();
 
         private void Awake()
         {
             for (var i = 0; i < 10; i++)
             {
-                BulletData bullet = Instantiate(_prefab, _container);
+                Bullet bullet = Instantiate(_prefab, _container);
                 bullet.gameObject.SetActive(false);
                 _pool.Push(bullet);
             }
@@ -37,7 +37,7 @@ namespace Game
         {
             for (int i = _bullets.Count - 1; i >= 0; i--)
             {
-                BulletData bullet = _bullets[i];
+                Bullet bullet = _bullets[i];
                 Vector3 moveStep = bullet.direction * bullet.speed * Time.fixedDeltaTime;
                 bullet.transform.position += moveStep;
 
@@ -45,7 +45,7 @@ namespace Game
                 {
                     _bullets.RemoveAt(i);
 
-                    bullet.OnTriggerEntered -= this.OnTriggerEntered;
+                    bullet.TriggerEntered -= this.TriggerEntered;
                     bullet.gameObject.SetActive(false);
                     _pool.Push(bullet);
                 }
@@ -54,7 +54,7 @@ namespace Game
 
         public void Spawn(Vector2 position, Vector2 direction, float speed, int damage, TeamType team)
         {
-            if (_pool.TryPop(out BulletData bullet))
+            if (_pool.TryPop(out Bullet bullet))
                 bullet.gameObject.SetActive(true);
             else
                 bullet = Instantiate(_prefab, _container);
@@ -85,11 +85,11 @@ namespace Game
                 bullet.redVFX.SetActive(true);
             }
 
-            bullet.OnTriggerEntered += this.OnTriggerEntered;
+            bullet.TriggerEntered += this.TriggerEntered;
             _bullets.Add(bullet);
         }
 
-        private void OnTriggerEntered(BulletData bullet, Collider2D other)
+        private void TriggerEntered(Bullet bullet, Collider2D other)
         {
             if (other.TryGetComponent(out ShipController ship) == false) 
                 return;
@@ -110,7 +110,7 @@ namespace Game
                     }
                 }
 
-                bullet.OnTriggerEntered -= this.OnTriggerEntered;
+                bullet.TriggerEntered -= this.TriggerEntered;
 
                 _bullets.Remove(bullet);
 
