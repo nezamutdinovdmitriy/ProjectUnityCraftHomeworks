@@ -31,6 +31,8 @@ namespace Game
 
             SetVfx(team);
 
+            Debug.Log($"TEAM: {team}");
+            
             gameObject.layer = BulletLayerHelper.GetLayer(team);
         }
 
@@ -42,16 +44,8 @@ namespace Game
 
         private void SetVfx(TeamType team)
         {
-            if (team == TeamType.Player)
-            {
-                _blueVFX.SetActive(true);
-                _redVFX.SetActive(false);
-            }
-            else
-            {
-                _blueVFX.SetActive(false);
-                _redVFX.SetActive(true);
-            }
+            _blueVFX.SetActive(team == TeamType.Player);
+            _redVFX.SetActive(team == TeamType.Enemy);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

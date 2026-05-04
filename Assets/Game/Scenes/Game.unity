@@ -391,6 +391,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131519010}
   m_CullTransparentMesh: 1
+--- !u!1 &169464638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+  m_PrefabInstance: {fileID: 3559832809919233303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &171079932
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +551,8 @@ GameObject:
   m_Component:
   - component: {fileID: 363245576}
   - component: {fileID: 363245577}
+  - component: {fileID: 363245579}
+  - component: {fileID: 363245578}
   m_Layer: 0
   m_Name: <BulletSystem>
   m_TagString: Untagged
@@ -580,10 +587,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bd15923a144ffbab0333dc6e74e641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
-  _container: {fileID: 363245576}
+  _bulletPool: {fileID: 363245578}
   _configView: {fileID: 11400000, guid: f2107b212e6a245009f8ae9313cc81bb, type: 2}
   _levelBounds: {fileID: 2572952653776768186}
+--- !u!114 &363245578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363245575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9e41ee93fd542b895d77e364a9b4bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletPool
+  _bulletFactory: {fileID: 363245579}
+  _container: {fileID: 363245576}
+--- !u!114 &363245579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363245575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce47d808e77245f2b09d5e14b81802ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletFactory
+  _bulletPrefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
 --- !u!1 &404085825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,7 +1039,7 @@ MonoBehaviour:
   - {fileID: 1549378007}
   - {fileID: 78117031}
   - {fileID: 883274640}
-  _bulletWorld: {fileID: 363245577}
+  _bulletManager: {fileID: 363245577}
   _scoreView: {fileID: 895558708}
 --- !u!1 &574514311
 GameObject:
@@ -2539,7 +2572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d8a2134b32408a9ccae5fde8a74223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerBulletInstantiator
-  _bulletWorld: {fileID: 363245577}
+  _bulletManager: {fileID: 363245577}
   _player: {fileID: 4414282821800802410}
 --- !u!1 &1954893900
 GameObject:
@@ -3123,6 +3156,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 739865810}
     m_Modifications:
     - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: _team
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: _healthView
       value: 
       objectReference: {fileID: 1243470931}
@@ -3185,7 +3222,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 4414282821800802414}
+    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 4414282821800802415}
   m_SourcePrefab: {fileID: 100100000, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
 --- !u!1 &3569791732579588318
 GameObject:
@@ -3244,12 +3287,39 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
   m_PrefabInstance: {fileID: 3559832809919233303}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 169464638}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aab487c3ce89407b8153f9c2ff593bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerShip
+--- !u!114 &4414282821800802414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169464638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 404d6437004b4e8fa99bfbe3da0c60d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.InputMovementController
+  _playerShip: {fileID: 4414282821800802410}
+--- !u!114 &4414282821800802415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169464638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ac17dc556e413d83a789bbfda446ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.InputFireController
+  _playerShip: {fileID: 4414282821800802410}
+  _fireKey: 32
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0
