@@ -9,10 +9,7 @@ namespace Game
     public sealed class BulletManager : MonoBehaviour
     {
         [SerializeField]
-        private Bullet _prefab;
-
-        [SerializeField]
-        private Transform _container;
+        private BulletPool _bulletPool;
 
         [SerializeField]
         private BulletViewConfig _configView;
@@ -20,18 +17,7 @@ namespace Game
         [SerializeField]
         private TransformBounds _levelBounds;
 
-        private readonly Stack<Bullet> _pool = new();
         private readonly List<Bullet> _bullets = new();
-
-        private void Awake()
-        {
-            for (var i = 0; i < 10; i++)
-            {
-                Bullet bullet = Instantiate(_prefab, _container);
-                bullet.gameObject.SetActive(false);
-                _pool.Push(bullet);
-            }
-        }
 
         private void FixedUpdate()
         {
@@ -46,18 +32,14 @@ namespace Game
                     _bullets.RemoveAt(i);
 
                     bullet.TriggerEntered -= this.TriggerEntered;
-                    bullet.gameObject.SetActive(false);
-                    _pool.Push(bullet);
+                    _bulletPool.Push(bullet);
                 }
             }
         }
 
         public void Spawn(Vector2 position, Vector2 direction, float speed, int damage, TeamType team)
         {
-            if (_pool.TryPop(out Bullet bullet))
-                bullet.gameObject.SetActive(true);
-            else
-                bullet = Instantiate(_prefab, _container);
+            Bullet bullet = _bulletPool.Rent();
             
             bullet.direction = direction;
             bullet.speed = speed;
@@ -113,9 +95,8 @@ namespace Game
                 bullet.TriggerEntered -= this.TriggerEntered;
 
                 _bullets.Remove(bullet);
-
-                bullet.gameObject.SetActive(false);
-                _pool.Push(bullet);
+                
+                _bulletPool.Push(bullet);
 
                 // Explosion Vfx
                 GameObject prefab = _configView.ExplosionVFX;

@@ -7,9 +7,9 @@ namespace Game
         [SerializeField]
         private Bullet _bulletPrefab;
 
-        public Bullet Create()
+        public Bullet Create(Transform parent)
         {
-            Bullet instance = Instantiate(_bulletPrefab);
+            Bullet instance = Instantiate(_bulletPrefab, parent);
 
             return instance;
         }

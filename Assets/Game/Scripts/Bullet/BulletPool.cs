@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
     public class BulletPool : MonoBehaviour
     {
+        private readonly Stack<Bullet> _stack = new();
+
         [SerializeField]
         private BulletFactory _bulletFactory;
 
         [SerializeField]
-        private int _objectLimit = 10;
-
-        private Stack<Bullet> _stack;
-
-        private void Awake()
-        {
-            _stack = new Stack<Bullet>(capacity: _objectLimit);
-        }
+        private Transform _container;
 
         public Bullet Rent()
         {
@@ -27,10 +21,12 @@ namespace Game
                 return bullet;
             }
             else
-                return _bulletFactory.Create();
+            {
+                return _bulletFactory.Create(_container);
+            }
         }
 
-        public void Return(Bullet bullet)
+        public void Push(Bullet bullet)
         {
             bullet.gameObject.SetActive(false);
             _stack.Push(bullet);
