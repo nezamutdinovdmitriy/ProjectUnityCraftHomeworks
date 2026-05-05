@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public sealed class PlayerShip : ShipController
+    public sealed class PlayerShip : Ship
     {
         [SerializeField]
         private TransformBounds _playerArea;
@@ -51,9 +51,8 @@ namespace Game
             }
         }
 
-        protected override void LateUpdate()
+        private void LateUpdate()
         {
-            base.LateUpdate();
             this.transform.position = _playerArea.ClampInBounds(transform.position);
         }
     }

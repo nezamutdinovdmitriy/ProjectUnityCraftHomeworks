@@ -31,7 +31,7 @@ namespace Game
 
         [Header("Target")]
         [SerializeField]
-        private ShipController _player;
+        private Ship _player;
         
         [Header("Points")]
         [SerializeField]
@@ -107,7 +107,7 @@ namespace Game
             _pool.Enqueue(enemy);
         }
         
-        private void OnFired(ShipController enemy)
+        private void OnFired(Ship enemy)
         {
             Vector2 position = enemy.firePoint.position;
             Vector2 target = _player.transform.position;

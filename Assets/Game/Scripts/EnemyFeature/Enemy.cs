@@ -3,10 +3,10 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public sealed class Enemy : ShipController
+    public sealed class Enemy : Ship
     {
         [Header("Enemy")]
-        public ShipController target;
+        public Ship target;
         public Vector2 destination;
 
         [SerializeField]

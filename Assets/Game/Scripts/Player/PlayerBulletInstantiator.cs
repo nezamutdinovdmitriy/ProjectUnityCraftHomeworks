@@ -21,7 +21,7 @@ namespace Game
             _player.Fired -= OnFired;
         }
 
-        private void OnFired(ShipController _)
+        private void OnFired(Ship _)
         {
             _bulletManager.SpawnBullet(
                 _player.firePoint.position,
