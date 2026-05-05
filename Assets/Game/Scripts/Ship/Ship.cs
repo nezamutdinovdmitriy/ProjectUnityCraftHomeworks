@@ -42,7 +42,7 @@ namespace Game
             currentHealth = config.Health;
             rigidbodyMovementComponent.SetSpeed(config.MoveSpeed);
         }
-
+        
         public void TakeDamage(int damage)
         {
             if (damage > 0)

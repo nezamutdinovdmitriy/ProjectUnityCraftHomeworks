@@ -34,7 +34,7 @@ namespace Game
         private Material _material;
         private Tweener _damageAnimation;
 
-        private void Awake()
+        private void OnEnable()
         {
             _ship.HealthChanged += OnHealthChanged;
             _ship.Dead += OnDead;
@@ -43,6 +43,13 @@ namespace Game
             
             _material = new Material(_viewConfig.MaterialPrefab);
             _renderer.material = _material;
+        }
+
+        private void OnDisable()
+        {
+            _ship.HealthChanged -= OnHealthChanged;
+            _ship.Dead -= OnDead;
+            _ship.Fired -= OnFired;
         }
 
         private void LateUpdate() => AnimateMovement(Time.deltaTime);
