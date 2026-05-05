@@ -21,9 +21,9 @@ namespace Game
 
         public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
 
-        private void OnEnable() => OnDead += OnCharacterDead;
+        private void OnEnable() => Dead += OnCharacterDead;
 
-        private void OnDisable() => OnDead -= OnCharacterDead;
+        private void OnDisable() => Dead -= OnCharacterDead;
 
         private void OnCharacterDead() => _despawner.Despawn(this);
 

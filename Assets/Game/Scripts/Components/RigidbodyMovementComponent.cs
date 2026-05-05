@@ -7,7 +7,7 @@ namespace Game
     [Serializable]
     public sealed class RigidbodyMovementComponent
     {
-        public event Action<Vector3> OnMoved;
+        public event Action<Vector3> Moved;
         
         [SerializeField]
         private Rigidbody2D _rigidbody;
@@ -31,7 +31,7 @@ namespace Game
             _rigidbody.MovePosition(newPosition);
             _direction = null;
             
-            OnMoved?.Invoke(direction);
+            Moved?.Invoke(direction);
         }
     }
 }

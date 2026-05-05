@@ -8,7 +8,7 @@ namespace Game
     public abstract class ShipController : MonoBehaviour, IDamageable
     {
         public event Action<int> HealthChanged;
-        public event Action OnDead;
+        public event Action Dead;
 
         public event Action<ShipController> Fired;
 
@@ -115,7 +115,7 @@ namespace Game
             ParticleSystem prefab = _viewConfig.DestroyEffectPrefab;
             Instantiate(prefab, _viewTransform.position, prefab.transform.rotation);
 
-            OnDead?.Invoke();
+            Dead?.Invoke();
         }
         
         protected virtual void LateUpdate()

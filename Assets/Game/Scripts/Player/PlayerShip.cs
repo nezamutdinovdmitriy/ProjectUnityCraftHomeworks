@@ -23,13 +23,13 @@ namespace Game
         private void OnEnable()
         {
             HealthChanged += OnHealthChanged;
-            OnDead += _gameOverView.Show;
+            Dead += _gameOverView.Show;
         }
 
         private void OnDisable()
         {
             HealthChanged -= OnHealthChanged;
-            OnDead -= _gameOverView.Show;
+            Dead -= _gameOverView.Show;
         }
 
         private void OnHealthChanged(int health)
