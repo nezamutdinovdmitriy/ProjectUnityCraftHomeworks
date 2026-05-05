@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5706750963508843440}
   - component: {fileID: 328849090417711829}
+  - component: {fileID: 4640665866465748839}
   - component: {fileID: 4575139502811685103}
   - component: {fileID: 4075764219798992963}
   - component: {fileID: 8141832910989862937}
@@ -58,6 +59,23 @@ MonoBehaviour:
   rigidbodyMovementComponent:
     _rigidbody: {fileID: 4575139502811685103}
     _speed: 15
+  _playerArea: {fileID: 0}
+  _cameraShaker: {fileID: 0}
+  _gameOverView: {fileID: 0}
+  _healthView: {fileID: 0}
+--- !u!114 &4640665866465748839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109394316656653739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2477a4ff29e4e199a1dec5732bfd170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.ShipView
+  _ship: {fileID: 328849090417711829}
   _renderer: {fileID: 795037679980988590}
   _viewTransform: {fileID: 1249406481267314197}
   _audioSource: {fileID: 8141832910989862937}
@@ -65,10 +83,6 @@ MonoBehaviour:
   _fireVFX: {fileID: 375007784130398055}
   _fireSFX: {fileID: 8300000, guid: 4b0fadb8fc7bdaf489e9f7879d3c71bb, type: 3}
   _damageSFX: {fileID: 8300000, guid: 9d2f129290cb1a6489928f3dde8dbb39, type: 3}
-  _playerArea: {fileID: 0}
-  _cameraShaker: {fileID: 0}
-  _gameOverView: {fileID: 0}
-  _healthView: {fileID: 0}
 --- !u!50 &4575139502811685103
 Rigidbody2D:
   serializedVersion: 5

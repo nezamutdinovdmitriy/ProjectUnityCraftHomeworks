@@ -69,18 +69,9 @@ namespace Game
             this.Fired?.Invoke(this);
         }
         
-        public void NotifyAboutHealthChanged(int health)
-        {
-            HealthChanged?.Invoke(health);
-        }
-
-        public void NotifyAboutDead()
-        {
-            Dead?.Invoke();
-        }
-
         protected virtual void FixedUpdate() => rigidbodyMovementComponent.FixedUpdate();
         
-        
+        private void NotifyAboutHealthChanged(int health) => HealthChanged?.Invoke(health);
+        private void NotifyAboutDead() => Dead?.Invoke();
     }
 }

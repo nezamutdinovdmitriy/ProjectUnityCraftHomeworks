@@ -45,10 +45,7 @@ namespace Game
             _renderer.material = _material;
         }
 
-        private void LateUpdate()
-        {
-            AnimateMovement(Time.deltaTime);
-        }
+        private void LateUpdate() => AnimateMovement(Time.deltaTime);
 
         private void OnHealthChanged(int health) => AnimateDamage(health);
 

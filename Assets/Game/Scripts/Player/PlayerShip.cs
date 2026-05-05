@@ -38,22 +38,15 @@ namespace Game
             _cameraShaker.Shake();
         }
 
-        public void SetMovementDirection(Vector2 direction)
-        {
-            moveDirection = direction;
-        }
+        public void SetMovementDirection(Vector2 direction) => moveDirection = direction;
         
         public void Update()
         {
             if (currentHealth > 0)
-            {
                 rigidbodyMovementComponent.MoveStep(moveDirection);
-            }
         }
 
-        private void LateUpdate()
-        {
-            this.transform.position = _playerArea.ClampInBounds(transform.position);
-        }
+        private void LateUpdate() 
+            => transform.position = _playerArea.ClampInBounds(transform.position);
     }
 }
