@@ -7,18 +7,15 @@ namespace Game
     public sealed class Bullet : MonoBehaviour
     {
         public event Action<Bullet, Collider2D> Hit;
-
-        [SerializeField]
-        private GameObject _blueVFX;
-
-        [SerializeField]
-        private GameObject _redVFX;
+        public event Action<TeamType> Initialized;
 
         private int _damage;
         private float _speed;
         private TeamType _team;
         private Vector2 _direction;
 
+        public TeamType Team => _team;
+        
         public void Initialize(
             Vector2 position, 
             Vector2 direction, 
@@ -33,10 +30,10 @@ namespace Game
             _damage = damage;
             _speed = speed;
             _team = team;
-
-            SetVfx(team);
             
             gameObject.layer = BulletLayerHelper.GetLayer(team);
+
+            Initialized?.Invoke(team);
         }
 
         public void MoveStep(float deltaTime)
@@ -44,13 +41,7 @@ namespace Game
             Vector3 moveStep = _direction * _speed * deltaTime;
             transform.position += moveStep;
         }
-
-        private void SetVfx(TeamType team)
-        {
-            _blueVFX.SetActive(team == TeamType.Player);
-            _redVFX.SetActive(team == TeamType.Enemy);
-        }
-
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out IDamageable target)

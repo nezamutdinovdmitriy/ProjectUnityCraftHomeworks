@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 3555983760417175357}
   - component: {fileID: 3951101991959698325}
   - component: {fileID: 201757604187811891}
+  - component: {fileID: 8391882508013398650}
+  - component: {fileID: 8644821870718135584}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -110,8 +112,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f04ddcf68e44c1b95a5d6ea04d1a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blueVFX: {fileID: 2619809868877078830}
-  _redVFX: {fileID: 1820983718236820478}
+--- !u!114 &8391882508013398650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743036428890533592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8cd4c2aa21940f795bf5eebe68d1a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletView
+  _bullet: {fileID: 201757604187811891}
+  _blueVfx: {fileID: 2619809868877078830}
+  _redVfx: {fileID: 1820983718236820478}
+  _explosionFactory: {fileID: 8644821870718135584}
+--- !u!114 &8644821870718135584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2743036428890533592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1103c8a6c14e3383e0dc11d7e6935a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.BulletExplosionFactory
+  _explosionPrefab: {fileID: 1101452535904402, guid: 742ae5c3589574c4195065193e9181b5, type: 3}
 --- !u!1 &3276060438849189846
 GameObject:
   m_ObjectHideFlags: 0

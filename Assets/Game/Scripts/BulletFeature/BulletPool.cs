@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -33,11 +32,8 @@ namespace Game
                 bullet.gameObject.SetActive(true);
                 return bullet;
             }
-            else
-            {
-                return _bulletFactory.Create(_container);
-            }
-            
+   
+            return _bulletFactory.Create(_container);
         }
 
         public void Push(Bullet bullet)

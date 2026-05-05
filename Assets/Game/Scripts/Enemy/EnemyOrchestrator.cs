@@ -112,7 +112,7 @@ namespace Game
             Vector2 position = enemy.firePoint.position;
             Vector2 target = _player.transform.position;
             Vector2 direction = (target - position).normalized;
-            _bulletManager.Spawn(
+            _bulletManager.SpawnBullet(
                 enemy.firePoint.position,
                 direction,
                 enemy.bulletSpeed,

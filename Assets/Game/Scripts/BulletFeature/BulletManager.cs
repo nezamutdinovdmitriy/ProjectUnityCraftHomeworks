@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Modules.Utils;
 using UnityEngine;
@@ -12,9 +11,6 @@ namespace Game
         
         [SerializeField]
         private BulletPool _bulletPool;
-
-        [SerializeField]
-        private BulletViewConfig _configView;
 
         [SerializeField]
         private TransformBounds _levelBounds;
@@ -32,7 +28,12 @@ namespace Game
             }
         }
         
-        public void Spawn(Vector2 position, Vector2 direction, float speed, int damage, TeamType team)
+        public void SpawnBullet(
+            Vector2 position, 
+            Vector2 direction, 
+            float speed, 
+            int damage,     
+            TeamType team)
         {
             Bullet bullet = _bulletPool.Rent();
             
@@ -42,17 +43,7 @@ namespace Game
             _bullets.Add(bullet);
         }
 
-        private void OnBulletHit(Bullet bullet, Collider2D other)
-        {
-            CreateExplosion(bullet.transform.position);
-            ReleaseBullet(bullet);
-        }
-
-        private void CreateExplosion(Vector3 position)
-        {
-            GameObject prefab = _configView.ExplosionVFX;
-            Instantiate(prefab, position, prefab.transform.rotation);
-        }
+        private void OnBulletHit(Bullet bullet, Collider2D other) => ReleaseBullet(bullet);
         
         private void ReleaseBullet(Bullet bullet)
         {

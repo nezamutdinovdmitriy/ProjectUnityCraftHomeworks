@@ -23,7 +23,7 @@ namespace Game
 
         private void OnFired(ShipController _)
         {
-            _bulletManager.Spawn(
+            _bulletManager.SpawnBullet(
                 _player.firePoint.position,
                 _player.firePoint.up,
                 _player.bulletSpeed,
