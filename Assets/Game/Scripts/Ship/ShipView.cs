@@ -7,6 +7,7 @@ namespace Game
     public class ShipView : MonoBehaviour
     {
         [SerializeField] private Ship _ship;
+        
         [SerializeField] private ShipViewConfig _viewConfig;
         [SerializeField] private Transform _viewTransform;
 
