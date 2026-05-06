@@ -1,5 +1,4 @@
 using System;
-using DG.Tweening;
 using UnityEngine;
 
 namespace Game
@@ -7,17 +6,15 @@ namespace Game
     // +
     public abstract class Ship : MonoBehaviour, IDamageable
     {
-        public event Action<int> HealthChanged;
-        public event Action Dead;
         public event Action<Ship> Fired;
 
         public ShipConfig config;
 
         public TeamType Team => _team;
+
+        protected readonly HealthComponent _healthComponent = new HealthComponent();
         
-        [Header("Health")]
-        public int currentHealth;
-        
+        public HealthComponent Health => _healthComponent;
 
         [Header("Combat")]
         public Transform firePoint;
@@ -28,10 +25,9 @@ namespace Game
         [SerializeField]
         private TeamType _team;
 
-        [Header("Movement")]
-        [SerializeField]
+        [Header("Movement")] [SerializeField]
         protected RigidbodyMovementComponent rigidbodyMovementComponent;
-        
+
         protected Vector3 moveDirection;
 
         public Vector3 MoveDirection => moveDirection;
@@ -39,39 +35,33 @@ namespace Game
 
         private void Awake()
         {
-            currentHealth = config.Health;
+            _healthComponent.Initialize(config.Health);
+
+            _healthComponent.Dead += OnShipDestroyed;
+            
             rigidbodyMovementComponent.SetSpeed(config.MoveSpeed);
         }
+
+        protected virtual void FixedUpdate() => rigidbodyMovementComponent.FixedUpdate();
         
-        public void TakeDamage(int damage)
-        {
-            if (damage > 0)
-            {
-                currentHealth = Mathf.Clamp(currentHealth - damage, 0, config.Health);
-                NotifyAboutHealthChanged(currentHealth);
- 
-                if (currentHealth <= 0)
-                {
-                    NotifyAboutDead();
-                    gameObject.SetActive(false);
-                }
-            }
-        }
-        
+        private void OnEnable() => _healthComponent.Dead += OnShipDestroyed;
+        private void OnDisable() => _healthComponent.Dead -= OnShipDestroyed;
+
+        public void TakeDamage(int damage) => _healthComponent.TakeDamage(damage);
+
         public void OnFired()
         {
             float time = Time.time;
-            if (time - _fireTime < config.FireCooldown || currentHealth <= 0)
+            if (time - _fireTime < config.FireCooldown || _healthComponent.Current <= 0)
                 return;
 
             _fireTime = time;
-            
-            this.Fired?.Invoke(this);
+
+            Fired?.Invoke(this);
         }
-        
-        protected virtual void FixedUpdate() => rigidbodyMovementComponent.FixedUpdate();
-        
-        private void NotifyAboutHealthChanged(int health) => HealthChanged?.Invoke(health);
-        private void NotifyAboutDead() => Dead?.Invoke();
+
+        public void ResetHealth() => _healthComponent.Initialize(config.Health);
+
+        private void OnShipDestroyed() => gameObject.SetActive(false);
     }
 }

@@ -22,14 +22,14 @@ namespace Game
 
         private void OnEnable()
         {
-            HealthChanged += OnHealthChanged;
-            Dead += _gameOverView.Show;
+            Health.Changed += OnHealthChanged;
+            Health.Dead += _gameOverView.Show;
         }
 
         private void OnDisable()
         {
-            HealthChanged -= OnHealthChanged;
-            Dead -= _gameOverView.Show;
+            Health.Changed -= OnHealthChanged;
+            Health.Dead -= _gameOverView.Show;
         }
 
         private void OnHealthChanged(int health)
@@ -42,7 +42,7 @@ namespace Game
         
         public void Update()
         {
-            if (currentHealth > 0)
+            if (_healthComponent.Current > 0)
                 rigidbodyMovementComponent.MoveStep(moveDirection);
         }
 

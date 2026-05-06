@@ -25,9 +25,14 @@ namespace Game
 
             Current = Mathf.Max(0, Current - damage);
             Changed?.Invoke(Current);
+
+            Debug.Log("CURRENT HP: " + Current);
             
-            if(Current == 0)
+            if (Current == 0)
+            {
+                Debug.Log("+");
                 Dead?.Invoke();
+            }
         }
     }
 }

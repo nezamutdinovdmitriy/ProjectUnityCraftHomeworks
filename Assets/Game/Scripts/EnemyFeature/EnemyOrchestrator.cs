@@ -68,7 +68,7 @@ namespace Game
         private void FixedUpdate()
         {
             float time = Time.fixedTime;
-            if (time - _spawnTime < _spawnCooldown || _player.currentHealth <= 0)
+            if (time - _spawnTime < _spawnCooldown || _player.Health.Current <= 0)
                 return;
             
             if (_pool.TryDequeue(out Enemy enemy))
@@ -78,7 +78,7 @@ namespace Game
 
             enemy.transform.position = NextSpawnPosition();
             enemy.destination = NextDestination();
-            enemy.currentHealth = enemy.config.Health;
+            enemy.ResetHealth();
 
             enemy.target = _player;
             enemy.SetDespawner(this);

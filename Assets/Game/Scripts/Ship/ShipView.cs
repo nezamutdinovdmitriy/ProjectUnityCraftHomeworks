@@ -6,49 +6,41 @@ namespace Game
 {
     public class ShipView : MonoBehaviour
     {
-        [SerializeField]
-        private Ship _ship;
-        
+        [SerializeField] private Ship _ship;
+        [SerializeField] private ShipViewConfig _viewConfig;
+        [SerializeField] private Transform _viewTransform;
+
         [Header("Visual")]
-        [SerializeField]
-        private Renderer _renderer;
-
-        [SerializeField]
-        private Transform _viewTransform;
-
-        [SerializeField]
-        private AudioSource _audioSource;
-
-        [SerializeField]
-        private ShipViewConfig _viewConfig;
-
-        [SerializeField]
-        private ParticleSystem _fireVFX;
-
-        [SerializeField]
-        private AudioClip _fireSFX;
-
-        [SerializeField]
-        private AudioClip _damageSFX;
-
+        
+        [SerializeField] private ParticleSystem _fireVFX;
+        [SerializeField] private Renderer _renderer;
         private Material _material;
+
+        [Header("Audio")]
+        
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _fireSFX;
+        [SerializeField] private AudioClip _damageSFX;
+        
         private Tweener _damageAnimation;
 
-        private void OnEnable()
+        private void Awake()
         {
-            _ship.HealthChanged += OnHealthChanged;
-            _ship.Dead += OnDead;
-            _ship.Fired += OnFired;
-            
-            
             _material = new Material(_viewConfig.MaterialPrefab);
             _renderer.material = _material;
         }
 
+        private void OnEnable()
+        {
+            _ship.Health.Changed += OnHealthChanged;
+            _ship.Health.Dead += OnDead;
+            _ship.Fired += OnFired;
+        }
+
         private void OnDisable()
         {
-            _ship.HealthChanged -= OnHealthChanged;
-            _ship.Dead -= OnDead;
+            _ship.Health.Changed -= OnHealthChanged;
+            _ship.Health.Dead -= OnDead;
             _ship.Fired -= OnFired;
         }
 
