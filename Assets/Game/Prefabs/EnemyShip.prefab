@@ -118,9 +118,9 @@ MonoBehaviour:
   bulletSpeed: 3
   bulletDamage: 1
   _team: 2
-  rigidbodyMovementComponent:
+  RigidbodyMovementComponent:
     _rigidbody: {fileID: 659620479434099170}
-    _speed: 10
+    _speed: 7
   target: {fileID: 0}
   destination: {x: 0, y: 0}
   _fireCooldown: 1.25
