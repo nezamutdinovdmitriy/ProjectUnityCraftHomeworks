@@ -5,21 +5,23 @@ namespace Game
     // +
     public sealed class PlayerBulletInstantiator : MonoBehaviour
     {
-        [SerializeField] private BulletManager _bulletManager;
+        [SerializeField]
+        private BulletManager _bulletManager;
 
-        [SerializeField] private PlayerShip _player;
+        [SerializeField]
+        private PlayerShip _player;
 
         private void OnEnable()
         {
-            _player.FireComponent.Fired += OnFired;
+            _player.FireComponent.Fired += OnPlayerFired;
         }
 
         private void OnDisable()
         {
-            _player.FireComponent.Fired -= OnFired;
+            _player.FireComponent.Fired -= OnPlayerFired;
         }
 
-        private void OnFired(Ship _)
+        private void OnPlayerFired(Ship _)
         {
             _bulletManager.SpawnBullet(
                 _player.FirePoint.position,

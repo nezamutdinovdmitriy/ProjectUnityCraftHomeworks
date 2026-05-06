@@ -7,12 +7,15 @@ namespace Game
     // +
     public sealed class PlayerShip : Ship
     {
-        [SerializeField] private TransformBounds _playerArea;
-        [SerializeField] private CameraShaker _cameraShaker;
+        [SerializeField]
+        private TransformBounds _playerArea;
+        [SerializeField]
+        private CameraShaker _cameraShaker;
 
-        [Header("UI")]
-        [SerializeField] private GameOverView _gameOverView;
-        [SerializeField] private HealthView _healthView;
+        [Header("UI")] [SerializeField]
+        private GameOverView _gameOverView;
+        [SerializeField]
+        private HealthView _healthView;
 
         protected override void OnEnable()
         {
@@ -25,15 +28,15 @@ namespace Game
         protected override void OnDisable()
         {
             base.OnDisable();
-            
+
             HealthComponent.Changed -= OnHealthChanged;
             HealthComponent.Dead -= _gameOverView.Show;
         }
 
-        private void LateUpdate() 
-            => transform.position = _playerArea.ClampInBounds(transform.position);
-        
         public void SetMovementDirection(Vector2 direction) => MoveDirection = direction;
+        
+        private void LateUpdate()
+            => transform.position = _playerArea.ClampInBounds(transform.position);
 
         private void OnHealthChanged(int health)
         {

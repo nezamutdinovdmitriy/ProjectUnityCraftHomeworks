@@ -8,9 +8,11 @@ namespace Game
     {
         public event Action<int> Changed;
         public event Action Dead;
-        
+
         public int Current { get; private set; }
         public int Max { get; private set; }
+
+        public bool IsDead => Current <= 0;
 
         public void Initialize(int maxHealth)
         {

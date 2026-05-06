@@ -8,33 +8,35 @@ namespace Game
     public sealed class BulletManager : MonoBehaviour
     {
         private readonly List<Bullet> _bullets = new();
-        
-        [SerializeField] private BulletPool _bulletPool;
 
-        [SerializeField] private TransformBounds _levelBounds;
-        
+        [SerializeField]
+        private BulletPool _bulletPool;
+
+        [SerializeField]
+        private TransformBounds _levelBounds;
+
         private void FixedUpdate()
         {
             for (int i = _bullets.Count - 1; i >= 0; i--)
             {
                 Bullet bullet = _bullets[i];
-                
+
                 bullet.MoveStep(Time.fixedDeltaTime);
 
                 if (_levelBounds.InBounds(bullet.transform.position) == false)
                     ReleaseBullet(bullet);
             }
         }
-        
+
         public void SpawnBullet(
-            Vector2 position, 
-            Vector2 direction, 
-            float speed, 
-            int damage,     
+            Vector2 position,
+            Vector2 direction,
+            float speed,
+            int damage,
             TeamType team)
         {
             Bullet bullet = _bulletPool.Rent();
-            
+
             bullet.Initialize(position, direction, damage, speed, team);
 
             bullet.Hit += OnBulletHit;
@@ -42,7 +44,7 @@ namespace Game
         }
 
         private void OnBulletHit(Bullet bullet, Collider2D other) => ReleaseBullet(bullet);
-        
+
         private void ReleaseBullet(Bullet bullet)
         {
             bullet.Hit -= OnBulletHit;

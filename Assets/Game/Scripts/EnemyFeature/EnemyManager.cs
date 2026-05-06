@@ -10,56 +10,50 @@ namespace Game
     // +
     public sealed class EnemyManager : MonoBehaviour, IEnemyDespawner
     {
-        [Header("Spawn")]
-        [SerializeField]
+        [Header("Spawn")] [SerializeField]
         private float _minSpawnCooldown = 2;
 
         [SerializeField]
         private float _maxSpawnCooldown = 3;
-        
+
         private float _spawnCooldown;
         private float _spawnTime;
-        
-        [Header("Pool")]
-        [SerializeField]
+
+        [Header("Pool")] [SerializeField]
         private Enemy _prefab;
 
         [SerializeField]
         private Transform _container;
-        
+
         private readonly Queue<Enemy> _pool = new();
 
-        [Header("Target")]
-        [SerializeField]
+        [Header("Target")] [SerializeField]
         private Ship _player;
-        
-        [Header("Points")]
-        [SerializeField]
+
+        [Header("Points")] [SerializeField]
         private Transform[] _spawnPositions;
-        
+
         [SerializeField]
         private Transform[] _attackPositions;
-        
+
         private int _spawnIndex;
         private int _attackIndex;
-        
-        [Header("Bullets")]
-        [SerializeField]
+
+        [Header("Bullets")] [SerializeField]
         private BulletManager _bulletManager;
-        
-        [Header("UI")]
-        [SerializeField]
+
+        [Header("UI")] [SerializeField]
         private ScoreView _scoreView;
-        
+
         private int _destroyedEnemies;
-        
+
         private void Awake()
         {
             _spawnPositions.Shuffle();
             _attackPositions.Shuffle();
             _scoreView.SetValue(_destroyedEnemies);
         }
-        
+
         private void Start()
         {
             ResetSpawnCooldown();
@@ -70,7 +64,7 @@ namespace Game
             float time = Time.fixedTime;
             if (time - _spawnTime < _spawnCooldown || _player.HealthComponent.Current <= 0)
                 return;
-            
+
             if (_pool.TryDequeue(out Enemy enemy))
                 enemy.gameObject.SetActive(true);
             else
@@ -84,8 +78,8 @@ namespace Game
 
             enemy.target = _player;
             enemy.SetDespawner(this);
-            enemy.FireComponent.Fired += OnFired;
-            
+            enemy.FireComponent.Fired += OnEnemyFired;
+
             this.ResetSpawnCooldown();
         }
 
@@ -99,9 +93,9 @@ namespace Game
         {
             _destroyedEnemies++;
             _scoreView.SetValue(_destroyedEnemies);
-            
-            enemy.FireComponent.Fired -= OnFired;
-            
+
+            enemy.FireComponent.Fired -= OnEnemyFired;
+
             StartCoroutine(DespawnInNextFrame(enemy));
         }
 
@@ -111,8 +105,8 @@ namespace Game
             enemy.gameObject.SetActive(false);
             _pool.Enqueue(enemy);
         }
-        
-        private void OnFired(Ship enemy)
+
+        private void OnEnemyFired(Ship enemy)
         {
             Vector2 position = enemy.FirePoint.position;
             Vector2 target = _player.transform.position;
@@ -125,7 +119,7 @@ namespace Game
                 TeamType.Enemy
             );
         }
-        
+
         private Vector3 NextSpawnPosition()
         {
             if (_spawnIndex >= _spawnPositions.Length)

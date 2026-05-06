@@ -6,12 +6,14 @@ namespace Game
     public class BulletPool : MonoBehaviour
     {
         private const int StartCount = 10;
-        
+
         private readonly Stack<Bullet> _stack = new();
 
-        [SerializeField] private BulletFactory _bulletFactory;
+        [SerializeField]
+        private BulletFactory _bulletFactory;
 
-        [SerializeField] private Transform _container;
+        [SerializeField]
+        private Transform _container;
 
         private void Awake()
         {
@@ -30,7 +32,7 @@ namespace Game
                 bullet.gameObject.SetActive(true);
                 return bullet;
             }
-   
+
             return _bulletFactory.Create(_container);
         }
 

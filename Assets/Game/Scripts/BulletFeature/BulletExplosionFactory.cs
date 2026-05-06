@@ -4,7 +4,8 @@ namespace Game
 {
     public class BulletExplosionFactory : MonoBehaviour
     {
-        [SerializeField] private GameObject _explosionPrefab;
+        [SerializeField]
+        private GameObject _explosionPrefab;
 
         public GameObject Create(Vector3 position)
         {

@@ -9,24 +9,25 @@ namespace Game
         public Ship target;
         public Vector2 destination;
 
-        [SerializeField] private float _stoppingDistance = 0.25f;
+        [SerializeField]
+        private float _stoppingDistance = 0.25f;
 
         private IEnemyDespawner _despawner;
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            
+
             HealthComponent.Dead += OnCharacterDead;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            
+
             HealthComponent.Dead -= OnCharacterDead;
         }
-        
+
         public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
 
         protected override void FixedUpdate()
@@ -36,17 +37,17 @@ namespace Game
             if (HealthComponent.Current <= 0 || target == null || target.HealthComponent.Current <= 0)
                 return;
 
-            Vector2 distance = destination - (Vector2)transform.position;
+            Vector2 distance = destination - (Vector2) transform.position;
             bool isNotReached = distance.sqrMagnitude > _stoppingDistance * _stoppingDistance;
-            
+
             MoveDirection = isNotReached ? distance.normalized : Vector3.zero;
-            
+
             if (isNotReached)
                 RigidbodyMovementComponent.MoveStep(distance.normalized);
             else
                 Fire();
         }
-        
+
         private void OnCharacterDead() => _despawner.Despawn(this);
     }
 }

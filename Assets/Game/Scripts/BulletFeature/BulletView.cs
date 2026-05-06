@@ -4,11 +4,15 @@ namespace Game
 {
     public class BulletView : MonoBehaviour
     {
-        [SerializeField] private Bullet _bullet;
+        [SerializeField]
+        private Bullet _bullet;
 
-        [SerializeField] private GameObject _blueVfx;
-        [SerializeField] private GameObject _redVfx;
-        [SerializeField] private BulletExplosionFactory _explosionFactory;
+        [SerializeField]
+        private GameObject _blueVfx;
+        [SerializeField]
+        private GameObject _redVfx;
+        [SerializeField]
+        private BulletExplosionFactory _explosionFactory;
 
         private void OnEnable()
         {
@@ -26,7 +30,7 @@ namespace Game
             _bullet.Initialized -= SetBulletView;
             _bullet.Hit -= Explosion;
         }
-        
+
         private void SetBulletView(TeamType team)
         {
             _blueVfx.SetActive(team == TeamType.Player);

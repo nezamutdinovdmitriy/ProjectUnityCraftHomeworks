@@ -7,10 +7,12 @@ namespace Game
     public sealed class RigidbodyMovementComponent : MonoBehaviour
     {
         public event Action<Vector3> Moved;
-        
-        [SerializeField] private Rigidbody2D _rigidbody;
 
-        [SerializeField] private float _speed;
+        [SerializeField]
+        private Rigidbody2D _rigidbody;
+
+        [SerializeField]
+        private float _speed;
 
         private Vector2? _direction;
 
@@ -27,7 +29,7 @@ namespace Game
             Vector2 newPosition = _rigidbody.position + direction * (_speed * Time.fixedDeltaTime);
             _rigidbody.MovePosition(newPosition);
             _direction = null;
-            
+
             Moved?.Invoke(direction);
         }
     }

@@ -6,14 +6,15 @@ namespace Game
     // +
     public abstract class Ship : MonoBehaviour, IDamageable
     {
-        
-        
-        [SerializeField] protected ShipConfig ShipConfig;
-        
-        [SerializeField] protected RigidbodyMovementComponent RigidbodyMovementComponent;
-        
-        [SerializeField] private TeamType _team;
-        
+        [SerializeField]
+        protected ShipConfig ShipConfig;
+
+        [SerializeField]
+        protected RigidbodyMovementComponent RigidbodyMovementComponent;
+
+        [SerializeField]
+        private TeamType _team;
+
         public TeamType Team => _team;
         public HealthComponent HealthComponent { get; } = new HealthComponent();
         public FireComponent FireComponent { get; } = new FireComponent();
@@ -27,29 +28,24 @@ namespace Game
         protected virtual void Awake()
         {
             HealthComponent.Initialize(ShipConfig.Health);
-            FireComponent.Initialize(ShipConfig.FireCooldown);       
+
+            FireComponent.Initialize(ShipConfig.FireCooldown);
 
             RigidbodyMovementComponent.SetSpeed(ShipConfig.MoveSpeed);
         }
 
         protected virtual void FixedUpdate()
         {
-            if(HealthComponent.Current > 0)
+            if (HealthComponent.Current > 0)
                 RigidbodyMovementComponent.MoveStep(MoveDirection);
         }
-        
+
         protected virtual void OnEnable() => HealthComponent.Dead += OnShipDestroyed;
         protected virtual void OnDisable() => HealthComponent.Dead -= OnShipDestroyed;
 
         public void TakeDamage(int damage) => HealthComponent.TakeDamage(damage);
 
-        public void Fire()
-        {
-            if(HealthComponent.Current <= 0)
-                return;
-
-            FireComponent.Execute(this);
-        }
+        public void Fire() => FireComponent.Execute(this, HealthComponent.IsDead == false);
         
         public void ResetHealth() => HealthComponent.Initialize(ShipConfig.Health);
 
