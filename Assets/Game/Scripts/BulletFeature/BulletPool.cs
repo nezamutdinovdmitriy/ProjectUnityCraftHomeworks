@@ -9,11 +9,9 @@ namespace Game
         
         private readonly Stack<Bullet> _stack = new();
 
-        [SerializeField]
-        private BulletFactory _bulletFactory;
+        [SerializeField] private BulletFactory _bulletFactory;
 
-        [SerializeField]
-        private Transform _container;
+        [SerializeField] private Transform _container;
 
         private void Awake()
         {

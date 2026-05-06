@@ -7,8 +7,7 @@ namespace Game
         private const string HorizontalAxisKey = "Horizontal";
         private const string VerticalAxisKey = "Vertical";
         
-        [SerializeField]
-        private PlayerShip _playerShip;
+        [SerializeField] private PlayerShip _playerShip;
 
         private void Update()
         {

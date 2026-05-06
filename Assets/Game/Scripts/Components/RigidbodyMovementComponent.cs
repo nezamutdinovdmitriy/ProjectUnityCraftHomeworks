@@ -9,11 +9,9 @@ namespace Game
     {
         public event Action<Vector3> Moved;
         
-        [SerializeField]
-        private Rigidbody2D _rigidbody;
+        [SerializeField] private Rigidbody2D _rigidbody;
 
-        [SerializeField]
-        private float _speed;
+        [SerializeField] private float _speed;
 
         private Vector2? _direction;
 

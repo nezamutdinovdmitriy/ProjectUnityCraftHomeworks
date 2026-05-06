@@ -17,20 +17,19 @@ namespace Game
         public HealthComponent Health => _healthComponent;
 
         [Header("Combat")]
+        
         public Transform firePoint;
         public float bulletSpeed;
         public int bulletDamage;
         private float _fireTime;
 
-        [SerializeField]
-        private TeamType _team;
+        [SerializeField] private TeamType _team;
 
         [Header("Movement")] [SerializeField]
-        protected RigidbodyMovementComponent rigidbodyMovementComponent;
+        
+        protected RigidbodyMovementComponent RigidbodyMovementComponent;
 
-        protected Vector3 moveDirection;
-
-        public Vector3 MoveDirection => moveDirection;
+        public Vector3 MoveDirection { get; protected set; }
 
 
         private void Awake()
@@ -39,10 +38,10 @@ namespace Game
 
             _healthComponent.Dead += OnShipDestroyed;
             
-            rigidbodyMovementComponent.SetSpeed(config.MoveSpeed);
+            RigidbodyMovementComponent.SetSpeed(config.MoveSpeed);
         }
 
-        protected virtual void FixedUpdate() => rigidbodyMovementComponent.FixedUpdate();
+        protected virtual void FixedUpdate() => RigidbodyMovementComponent.FixedUpdate();
         
         private void OnEnable() => _healthComponent.Dead += OnShipDestroyed;
         private void OnDisable() => _healthComponent.Dead -= OnShipDestroyed;

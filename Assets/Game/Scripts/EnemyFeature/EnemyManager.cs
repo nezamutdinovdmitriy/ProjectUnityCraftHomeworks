@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 namespace Game
 {
     // +
-    public sealed class EnemyOrchestrator : MonoBehaviour, IEnemyDespawner
+    public sealed class EnemyManager : MonoBehaviour, IEnemyDespawner
     {
         [Header("Spawn")]
         [SerializeField]

@@ -9,11 +9,9 @@ namespace Game
     {
         private readonly List<Bullet> _bullets = new();
         
-        [SerializeField]
-        private BulletPool _bulletPool;
+        [SerializeField] private BulletPool _bulletPool;
 
-        [SerializeField]
-        private TransformBounds _levelBounds;
+        [SerializeField] private TransformBounds _levelBounds;
         
         private void FixedUpdate()
         {

@@ -4,17 +4,11 @@ namespace Game
 {
     public class BulletView : MonoBehaviour
     {
-        [SerializeField]
-        private Bullet _bullet;
+        [SerializeField] private Bullet _bullet;
 
-        [SerializeField]
-        private GameObject _blueVfx;
-
-        [SerializeField]
-        private GameObject _redVfx;
-
-        [SerializeField]
-        private BulletExplosionFactory _explosionFactory;
+        [SerializeField] private GameObject _blueVfx;
+        [SerializeField] private GameObject _redVfx;
+        [SerializeField] private BulletExplosionFactory _explosionFactory;
 
         private void OnEnable()
         {

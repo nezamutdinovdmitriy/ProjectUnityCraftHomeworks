@@ -19,11 +19,11 @@ namespace Game
 
         private IEnemyDespawner _despawner;
 
-        public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
-
+        
         private void OnEnable() => Health.Dead += OnCharacterDead;
-
         private void OnDisable() => Health.Dead -= OnCharacterDead;
+        
+        public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
 
         private void OnCharacterDead() => _despawner.Despawn(this);
 
@@ -37,11 +37,11 @@ namespace Game
             Vector2 distance = destination - (Vector2)transform.position;
             bool isNotReached = distance.sqrMagnitude > _stoppingDistance * _stoppingDistance;
             
-            moveDirection = isNotReached ? distance.normalized : Vector3.zero;
+            MoveDirection = isNotReached ? distance.normalized : Vector3.zero;
 
             if (isNotReached)
             {
-                rigidbodyMovementComponent.MoveStep(distance.normalized);
+                RigidbodyMovementComponent.MoveStep(distance.normalized);
             }
             else
             {
