@@ -33,16 +33,16 @@ namespace Game
 
         private void OnEnable()
         {
-            _ship.Health.Changed += OnHealthChanged;
-            _ship.Health.Dead += OnDead;
-            _ship.Fired += OnFired;
+            _ship.HealthComponent.Changed += OnHealthChanged;
+            _ship.HealthComponent.Dead += OnDead;
+            _ship.FireComponent.Fired += OnFired;
         }
 
         private void OnDisable()
         {
-            _ship.Health.Changed -= OnHealthChanged;
-            _ship.Health.Dead -= OnDead;
-            _ship.Fired -= OnFired;
+            _ship.HealthComponent.Changed -= OnHealthChanged;
+            _ship.HealthComponent.Dead -= OnDead;
+            _ship.FireComponent.Fired -= OnFired;
         }
 
         private void LateUpdate() => AnimateMovement(Time.deltaTime);

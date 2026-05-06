@@ -68,7 +68,7 @@ namespace Game
         private void FixedUpdate()
         {
             float time = Time.fixedTime;
-            if (time - _spawnTime < _spawnCooldown || _player.Health.Current <= 0)
+            if (time - _spawnTime < _spawnCooldown || _player.HealthComponent.Current <= 0)
                 return;
             
             if (_pool.TryDequeue(out Enemy enemy))
@@ -84,9 +84,7 @@ namespace Game
 
             enemy.target = _player;
             enemy.SetDespawner(this);
-            enemy.Fired += OnFired;
-            
-            Debug.Log("+");
+            enemy.FireComponent.Fired += OnFired;
             
             this.ResetSpawnCooldown();
         }
@@ -101,6 +99,9 @@ namespace Game
         {
             _destroyedEnemies++;
             _scoreView.SetValue(_destroyedEnemies);
+            
+            enemy.FireComponent.Fired -= OnFired;
+            
             StartCoroutine(DespawnInNextFrame(enemy));
         }
 

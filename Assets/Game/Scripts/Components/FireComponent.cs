@@ -6,21 +6,25 @@ namespace Game
     [Serializable]
     public class FireComponent
     {
-        public event Action Fired;
-        private float _lastFireTime;
+        public event Action<Ship> Fired;
 
-        public void Execute(float cooldown, bool isAlive)
+        private float _cooldown;
+        private float _lastFireTime;
+        
+        public void Initialize(float cooldown)
         {
-            if (isAlive == false)
-                return;
-            
+            _cooldown = cooldown;
+        }
+
+        public void Execute(Ship owner)
+        {
             float time = Time.time;
-            if (time - _lastFireTime < cooldown)
+            
+            if (time - _lastFireTime < _cooldown)
                 return;
 
             _lastFireTime = time;
-
-            Fired?.Invoke();
+            Fired?.Invoke(owner);
         }
     }
 }

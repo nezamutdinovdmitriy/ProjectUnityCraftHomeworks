@@ -11,10 +11,9 @@ namespace Game
 
         private int _damage;
         private float _speed;
-        private TeamType _team;
         private Vector2 _direction;
 
-        public TeamType Team => _team;
+        public TeamType Team { get; private set; }
         
         public void Initialize(
             Vector2 position, 
@@ -29,7 +28,7 @@ namespace Game
             _direction = direction;
             _damage = damage;
             _speed = speed;
-            _team = team;
+            Team = team;
             
             gameObject.layer = BulletLayerHelper.GetLayer(team);
 
@@ -45,7 +44,7 @@ namespace Game
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent(out IDamageable target)
-                && target.Team != _team)
+                && target.Team != Team)
             {
                 target.TakeDamage(_damage);
                 

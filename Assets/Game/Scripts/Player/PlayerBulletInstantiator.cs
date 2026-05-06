@@ -11,12 +11,12 @@ namespace Game
 
         private void OnEnable()
         {
-            _player.Fired += OnFired;
+            _player.FireComponent.Fired += OnFired;
         }
 
         private void OnDisable()
         {
-            _player.Fired -= OnFired;
+            _player.FireComponent.Fired -= OnFired;
         }
 
         private void OnFired(Ship _)

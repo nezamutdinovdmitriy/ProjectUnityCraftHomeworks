@@ -17,14 +17,14 @@ namespace Game
         {
             base.OnEnable();
             
-            Health.Dead += OnCharacterDead;
+            HealthComponent.Dead += OnCharacterDead;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
             
-            Health.Dead -= OnCharacterDead;
+            HealthComponent.Dead -= OnCharacterDead;
         }
         
         public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
@@ -33,15 +33,13 @@ namespace Game
         {
             base.FixedUpdate();
 
-            if (Health.Current <= 0 || target == null || target.Health.Current <= 0)
+            if (HealthComponent.Current <= 0 || target == null || target.HealthComponent.Current <= 0)
                 return;
 
             Vector2 distance = destination - (Vector2)transform.position;
             bool isNotReached = distance.sqrMagnitude > _stoppingDistance * _stoppingDistance;
             
             MoveDirection = isNotReached ? distance.normalized : Vector3.zero;
-            
-            Debug.Log($"isNotReached {isNotReached}");
             
             if (isNotReached)
                 RigidbodyMovementComponent.MoveStep(distance.normalized);
