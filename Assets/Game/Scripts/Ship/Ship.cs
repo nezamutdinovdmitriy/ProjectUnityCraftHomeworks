@@ -62,8 +62,6 @@ namespace Game
 
             _fireTime = time;
             
-            Debug.Log($"FRAME: {Time.frameCount} | SCRIPT_ID: {this.GetHashCode()} | FIRE_TIME: {_fireTime}");
-            
             Fired?.Invoke(this);
         }
 

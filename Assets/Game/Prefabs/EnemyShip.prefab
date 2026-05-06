@@ -118,7 +118,7 @@ MonoBehaviour:
   RigidbodyMovementComponent: {fileID: 4368471405756048172}
   _team: 2
   FirePoint: {fileID: 3195880656587174614}
-  BulletSpeed: 7
+  BulletSpeed: 3
   BulletDamage: 1
   target: {fileID: 0}
   destination: {x: 0, y: 0}
