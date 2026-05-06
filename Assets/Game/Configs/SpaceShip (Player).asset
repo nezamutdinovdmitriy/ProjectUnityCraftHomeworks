@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SpaceShip (Player)
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 10
-  <MoveSpeed>k__BackingField: 7
+  <MoveSpeed>k__BackingField: 5
   <FireCooldown>k__BackingField: 0.25

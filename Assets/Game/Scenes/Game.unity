@@ -995,6 +995,8 @@ GameObject:
   m_Component:
   - component: {fileID: 562298204}
   - component: {fileID: 562298205}
+  - component: {fileID: 562298207}
+  - component: {fileID: 562298206}
   m_Layer: 0
   m_Name: <EnemySystem>
   m_TagString: Untagged
@@ -1033,8 +1035,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minSpawnCooldown: 2
   _maxSpawnCooldown: 3
-  _prefab: {fileID: 102605417607457000, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
-  _container: {fileID: 1052031097}
   _player: {fileID: 4414282821800802410}
   _spawnPositions:
   - {fileID: 5098186055898699330}
@@ -1054,7 +1054,35 @@ MonoBehaviour:
   - {fileID: 78117031}
   - {fileID: 883274640}
   _bulletManager: {fileID: 363245577}
+  _pool: {fileID: 562298206}
   _scoreView: {fileID: 895558708}
+--- !u!114 &562298206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562298203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc65989b68342c3a6618c2be6557a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.EnemyPool
+  _enemyFactory: {fileID: 562298207}
+--- !u!114 &562298207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562298203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ca1c1b94314342b475988d0c8aa4a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.EnemyFactory
+  _prefab: {fileID: 102605417607457000, guid: 87fe189881a524806800482ac8eaaa83, type: 3}
+  _container: {fileID: 1052031097}
 --- !u!1 &574514311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,6 +2463,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1498479407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1694351842 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8503432944885784460, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+  m_PrefabInstance: {fileID: 3559832809919233303}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1736145931
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,6 +3207,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: FirePoint
+      value: 
+      objectReference: {fileID: 1694351842}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: ShipConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b9a4576e5f0a4babb44b3c82e6480d0, type: 2}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: BulletSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: _healthView
       value: 
       objectReference: {fileID: 1243470931}
@@ -3182,6 +3227,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1498479408}
     - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: BulletDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: FireComponent
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: _cameraShaker
       value: 
       objectReference: {fileID: 519420034}
@@ -3189,6 +3242,10 @@ PrefabInstance:
       propertyPath: _gameOverView
       value: 
       objectReference: {fileID: 1375492023}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: RigidbodyMovementComponent
+      value: 
+      objectReference: {fileID: 4414282821800802423}
     - target: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: m_Name
       value: <Player>
@@ -3246,6 +3303,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       insertIndex: 4
       addedObject: {fileID: 4414282821800802415}
+    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 4414282821800802423}
   m_SourcePrefab: {fileID: 100100000, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
 --- !u!1 &3569791732579588318
 GameObject:
@@ -3355,13 +3415,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.ShipView
   _ship: {fileID: 4414282821800802410}
-  _renderer: {fileID: 512517522}
-  _viewTransform: {fileID: 116700470}
-  _audioSource: {fileID: 4414282821800802416}
   _viewConfig: {fileID: 11400000, guid: 9298f762411724a389beae656b1dfcaa, type: 2}
+  _viewTransform: {fileID: 116700470}
   _fireVFX: {fileID: 365483436}
+  _renderer: {fileID: 512517522}
+  _audioSource: {fileID: 4414282821800802416}
   _fireSFX: {fileID: 8300000, guid: 4b0fadb8fc7bdaf489e9f7879d3c71bb, type: 3}
   _damageSFX: {fileID: 8300000, guid: 9d2f129290cb1a6489928f3dde8dbb39, type: 3}
+--- !u!50 &4414282821800802421 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 4575139502811685103, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+  m_PrefabInstance: {fileID: 3559832809919233303}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4414282821800802423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169464638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f4c3c53e55744ff9792aebcf0a01a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.RigidbodyMovementComponent
+  _rigidbody: {fileID: 4414282821800802421}
+  _speed: 3
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0

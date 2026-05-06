@@ -19,14 +19,6 @@ namespace Game
         private float _spawnCooldown;
         private float _spawnTime;
 
-        [Header("Pool")] [SerializeField]
-        private Enemy _prefab;
-
-        [SerializeField]
-        private Transform _container;
-
-        private readonly Queue<Enemy> _pool = new();
-
         [Header("Target")] [SerializeField]
         private Ship _player;
 
@@ -42,6 +34,9 @@ namespace Game
         [Header("Bullets")] [SerializeField]
         private BulletManager _bulletManager;
 
+        [Header("Pool")] [SerializeField]
+        private EnemyPool _pool;
+        
         [Header("UI")] [SerializeField]
         private ScoreView _scoreView;
 
@@ -65,12 +60,7 @@ namespace Game
             if (time - _spawnTime < _spawnCooldown || _player.HealthComponent.Current <= 0)
                 return;
 
-            if (_pool.TryDequeue(out Enemy enemy))
-                enemy.gameObject.SetActive(true);
-            else
-            {
-                enemy = Instantiate(_prefab, _container);
-            }
+            Enemy enemy = _pool.Rent();
 
             enemy.transform.position = NextSpawnPosition();
             enemy.destination = NextDestination();
@@ -103,7 +93,7 @@ namespace Game
         {
             yield return null;
             enemy.gameObject.SetActive(false);
-            _pool.Enqueue(enemy);
+            _pool.Push(enemy);
         }
 
         private void OnEnemyFired(Ship enemy)

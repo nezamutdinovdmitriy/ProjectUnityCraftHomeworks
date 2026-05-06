@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-
-namespace Game
+﻿namespace Game
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawner
     {
         
     }

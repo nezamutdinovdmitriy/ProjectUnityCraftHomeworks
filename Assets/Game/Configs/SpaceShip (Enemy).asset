@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 2
   <MoveSpeed>k__BackingField: 3
-  <FireCooldown>k__BackingField: 1
+  <FireCooldown>k__BackingField: 1.25
