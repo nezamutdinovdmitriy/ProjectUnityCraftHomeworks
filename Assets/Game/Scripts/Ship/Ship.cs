@@ -7,59 +7,67 @@ namespace Game
     public abstract class Ship : MonoBehaviour, IDamageable
     {
         public event Action<Ship> Fired;
-
-        public ShipConfig config;
-
-        public TeamType Team => _team;
-
-        protected readonly HealthComponent _healthComponent = new HealthComponent();
         
-        public HealthComponent Health => _healthComponent;
-
-        [Header("Combat")]
+        protected readonly HealthComponent HealthComponent = new HealthComponent();
         
-        public Transform firePoint;
-        public float bulletSpeed;
-        public int bulletDamage;
-        private float _fireTime;
-
+        [SerializeField] protected ShipConfig ShipConfig;
+        
+        [SerializeField] protected RigidbodyMovementComponent RigidbodyMovementComponent;
+        
         [SerializeField] private TeamType _team;
-
-        [Header("Movement")] [SerializeField]
         
-        protected RigidbodyMovementComponent RigidbodyMovementComponent;
-
+        public TeamType Team => _team;
+        
+        public HealthComponent Health => HealthComponent;
+        
         public Vector3 MoveDirection { get; protected set; }
 
+        [Header("Combat")]
+        public Transform FirePoint;
+        public float BulletSpeed;
+        public int BulletDamage;
+        
+        private float _fireTime;
 
-        private void Awake()
+
+        protected virtual void Awake()
         {
-            _healthComponent.Initialize(config.Health);
+            HealthComponent.Initialize(ShipConfig.Health);
 
-            _healthComponent.Dead += OnShipDestroyed;
+            HealthComponent.Dead += OnShipDestroyed;    
             
-            RigidbodyMovementComponent.SetSpeed(config.MoveSpeed);
+            RigidbodyMovementComponent.SetSpeed(ShipConfig.MoveSpeed);
         }
 
-        protected virtual void FixedUpdate() => RigidbodyMovementComponent.FixedUpdate();
-        
-        private void OnEnable() => _healthComponent.Dead += OnShipDestroyed;
-        private void OnDisable() => _healthComponent.Dead -= OnShipDestroyed;
-
-        public void TakeDamage(int damage) => _healthComponent.TakeDamage(damage);
-
-        public void OnFired()
+        protected virtual void FixedUpdate()
         {
+            if(HealthComponent.Current > 0)
+                RigidbodyMovementComponent.MoveStep(MoveDirection);
+        }
+        
+        protected virtual void OnEnable() => HealthComponent.Dead += OnShipDestroyed;
+        protected virtual void OnDisable() => HealthComponent.Dead -= OnShipDestroyed;
+
+        public void TakeDamage(int damage) => HealthComponent.TakeDamage(damage);
+
+        public void Fire()
+        {
+            if(HealthComponent.Current <= 0)
+                return;
+
             float time = Time.time;
-            if (time - _fireTime < config.FireCooldown || _healthComponent.Current <= 0)
+            
+            if (time - _fireTime < ShipConfig.FireCooldown)
                 return;
 
             _fireTime = time;
-
+            
+            Debug.Log($"FRAME: {Time.frameCount} | SCRIPT_ID: {this.GetHashCode()} | FIRE_TIME: {_fireTime}");
+            
             Fired?.Invoke(this);
         }
 
-        public void ResetHealth() => _healthComponent.Initialize(config.Health);
+        public void ResetHealth() => HealthComponent.Initialize(ShipConfig.Health);
 
         private void OnShipDestroyed() => gameObject.SetActive(false);
     }

@@ -5,27 +5,29 @@ namespace Game
     // +
     public sealed class Enemy : Ship
     {
-        [Header("Enemy")]
+        [Header("AI Settings")]
         public Ship target;
         public Vector2 destination;
 
-        [SerializeField]
-        private float _fireCooldown = 1.25f;
-
-        [SerializeField]
-        private float _stoppingDistance = 0.25f;
-
-        private float _fireTime;
+        [SerializeField] private float _stoppingDistance = 0.25f;
 
         private IEnemyDespawner _despawner;
 
-        
-        private void OnEnable() => Health.Dead += OnCharacterDead;
-        private void OnDisable() => Health.Dead -= OnCharacterDead;
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            
+            Health.Dead += OnCharacterDead;
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            
+            Health.Dead -= OnCharacterDead;
+        }
         
         public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
-
-        private void OnCharacterDead() => _despawner.Despawn(this);
 
         protected override void FixedUpdate()
         {
@@ -38,20 +40,15 @@ namespace Game
             bool isNotReached = distance.sqrMagnitude > _stoppingDistance * _stoppingDistance;
             
             MoveDirection = isNotReached ? distance.normalized : Vector3.zero;
-
+            
+            Debug.Log($"isNotReached {isNotReached}");
+            
             if (isNotReached)
-            {
                 RigidbodyMovementComponent.MoveStep(distance.normalized);
-            }
             else
-            {
-                float time = Time.time;
-                if (time - _fireTime >= _fireCooldown)
-                {
-                    this.OnFired();
-                    _fireTime = time;
-                }
-            }
+                Fire();
         }
+        
+        private void OnCharacterDead() => _despawner.Despawn(this);
     }
 }

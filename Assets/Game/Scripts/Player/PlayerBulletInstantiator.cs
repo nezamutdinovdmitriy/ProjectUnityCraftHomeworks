@@ -22,10 +22,10 @@ namespace Game
         private void OnFired(Ship _)
         {
             _bulletManager.SpawnBullet(
-                _player.firePoint.position,
-                _player.firePoint.up,
-                _player.bulletSpeed,
-                _player.bulletDamage,
+                _player.FirePoint.position,
+                _player.FirePoint.up,
+                _player.BulletSpeed,
+                _player.BulletDamage,
                 _player.Team
             );
         }

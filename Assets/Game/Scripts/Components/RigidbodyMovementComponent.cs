@@ -4,8 +4,7 @@ using UnityEngine;
 namespace Game
 {
     // +
-    [Serializable]
-    public sealed class RigidbodyMovementComponent
+    public sealed class RigidbodyMovementComponent : MonoBehaviour
     {
         public event Action<Vector3> Moved;
         

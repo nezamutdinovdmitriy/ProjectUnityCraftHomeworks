@@ -74,7 +74,9 @@ namespace Game
             if (_pool.TryDequeue(out Enemy enemy))
                 enemy.gameObject.SetActive(true);
             else
+            {
                 enemy = Instantiate(_prefab, _container);
+            }
 
             enemy.transform.position = NextSpawnPosition();
             enemy.destination = NextDestination();
@@ -83,7 +85,9 @@ namespace Game
             enemy.target = _player;
             enemy.SetDespawner(this);
             enemy.Fired += OnFired;
-                
+            
+            Debug.Log("+");
+            
             this.ResetSpawnCooldown();
         }
 
@@ -109,14 +113,14 @@ namespace Game
         
         private void OnFired(Ship enemy)
         {
-            Vector2 position = enemy.firePoint.position;
+            Vector2 position = enemy.FirePoint.position;
             Vector2 target = _player.transform.position;
             Vector2 direction = (target - position).normalized;
             _bulletManager.SpawnBullet(
-                enemy.firePoint.position,
+                enemy.FirePoint.position,
                 direction,
-                enemy.bulletSpeed,
-                enemy.bulletDamage,
+                enemy.BulletSpeed,
+                enemy.BulletDamage,
                 TeamType.Enemy
             );
         }
