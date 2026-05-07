@@ -30,10 +30,16 @@ namespace Game
             _enemySpawner.Tick(_player.HealthComponent.Current > 0);
         }
         
-        private void OnEnemySpawned(Enemy enemy)
+        private void OnEnemySpawned(Enemy enemy, Vector2 destination)
         {
             enemy.ResetHealth();
-            enemy.target = _player;
+
+            if (enemy.TryGetComponent(out EnemyAI ai))
+            {
+                ai.SetTarget(_player);
+                ai.SetDestination(destination);
+            }
+
             enemy.SetDespawner(this);
             enemy.FireComponent.Fired += OnEnemyFired;
         }

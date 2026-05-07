@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4408801746812772292}
   - component: {fileID: 4368471405756048172}
   - component: {fileID: 4560017961611896118}
+  - component: {fileID: 801416940867536591}
   m_Layer: 11
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -120,9 +121,6 @@ MonoBehaviour:
   FirePoint: {fileID: 3195880656587174614}
   BulletSpeed: 3
   BulletDamage: 1
-  target: {fileID: 0}
-  destination: {x: 0, y: 0}
-  _stoppingDistance: 0.25
 --- !u!114 &4408801746812772292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +252,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &801416940867536591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559606060570185700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 319762f3b4494fdc995727e34c091e57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.EnemyAI
+  _enemy: {fileID: 102605417607457000}
+  _stoppingDistance: 0.25
 --- !u!1 &1074127585690423075
 GameObject:
   m_ObjectHideFlags: 0

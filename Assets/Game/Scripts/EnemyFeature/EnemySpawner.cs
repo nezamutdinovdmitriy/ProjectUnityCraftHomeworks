@@ -7,7 +7,7 @@ namespace Game
 {
     public class EnemySpawner : MonoBehaviour
     {
-        public event Action<Enemy> Spawned;
+        public event Action<Enemy, Vector2> Spawned;
         
         [Header("Spawn")] 
         [SerializeField]
@@ -57,10 +57,12 @@ namespace Game
         {
             Enemy enemy = _pool.Rent();
 
-            enemy.transform.position = NextSpawnPosition();
-            enemy.destination = NextDestination();
+            Vector3 spawnPosition = NextSpawnPosition();
+            Vector2 attackPosition = NextDestination();
+
+            enemy.transform.position = spawnPosition;
             
-            Spawned?.Invoke(enemy);
+            Spawned?.Invoke(enemy, attackPosition);
         }
 
         public void Despawn(Enemy enemy)

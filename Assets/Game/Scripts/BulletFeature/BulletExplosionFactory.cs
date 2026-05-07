@@ -7,9 +7,7 @@ namespace Game
         [SerializeField]
         private GameObject _explosionPrefab;
 
-        public GameObject Create(Vector3 position)
-        {
-            return Instantiate(_explosionPrefab, position, Quaternion.identity);
-        }
+        public GameObject Create(Vector3 position) 
+            => Instantiate(_explosionPrefab, position, Quaternion.identity);
     }
 }

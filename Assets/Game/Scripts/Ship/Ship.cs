@@ -45,6 +45,8 @@ namespace Game
 
         public void TakeDamage(int damage) => HealthComponent.TakeDamage(damage);
 
+        public void SetMoveDirection(Vector2 direction) => MoveDirection = direction;
+        
         public void Fire() => FireComponent.Execute(this, HealthComponent.IsDead == false);
         
         public void ResetHealth() => HealthComponent.Initialize(ShipConfig.Health);
