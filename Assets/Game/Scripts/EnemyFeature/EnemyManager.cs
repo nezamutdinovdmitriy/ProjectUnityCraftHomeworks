@@ -1,99 +1,41 @@
 using System.Collections;
-using System.Collections.Generic;
 using Modules.UI;
-using Modules.Utils;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Game
 {
     // +
     public sealed class EnemyManager : MonoBehaviour, IEnemyDespawner
     {
-        [Header("Spawn")] [SerializeField]
-        private float _minSpawnCooldown = 2;
-
-        [SerializeField]
-        private float _maxSpawnCooldown = 3;
-
-        private float _spawnCooldown;
-        private float _spawnTime;
-
         [Header("Target")] [SerializeField]
         private Ship _player;
-
-        [Header("Points")] [SerializeField]
-        private Transform[] _spawnPositions;
-
-        [SerializeField]
-        private Transform[] _attackPositions;
-
-        private int _spawnIndex;
-        private int _attackIndex;
 
         [Header("Bullets")] [SerializeField]
         private BulletManager _bulletManager;
 
-        [Header("Pool")] [SerializeField]
-        private EnemyPool _pool;
-        
+        [Header("Spawn")] [SerializeField]
+        private EnemySpawner _enemySpawner;
+
         [Header("UI")] [SerializeField]
         private ScoreView _scoreView;
 
         private int _destroyedEnemies;
 
-        private void Awake()
-        {
-            _spawnPositions.Shuffle();
-            _attackPositions.Shuffle();
-            _scoreView.SetValue(_destroyedEnemies);
-        }
-
-        private void Start()
-        {
-            ResetSpawnCooldown();
-        }
+        private void Awake() => _scoreView.SetValue(_destroyedEnemies);
+        private void OnEnable() => _enemySpawner.Spawned += OnEnemySpawned;
+        private void OnDisable() => _enemySpawner.Spawned -= OnEnemySpawned;
 
         private void FixedUpdate()
         {
-            float time = Time.fixedTime;
-            if (time - _spawnTime < _spawnCooldown || _player.HealthComponent.Current <= 0)
-                return;
-
-            Enemy enemy = _pool.Rent();
-
-            enemy.transform.position = NextSpawnPosition();
-            enemy.destination = NextDestination();
+            _enemySpawner.Tick(_player.HealthComponent.Current > 0);
+        }
+        
+        private void OnEnemySpawned(Enemy enemy)
+        {
             enemy.ResetHealth();
-
             enemy.target = _player;
             enemy.SetDespawner(this);
             enemy.FireComponent.Fired += OnEnemyFired;
-
-            this.ResetSpawnCooldown();
-        }
-
-        private void ResetSpawnCooldown()
-        {
-            _spawnCooldown = Random.Range(_minSpawnCooldown, _maxSpawnCooldown);
-            _spawnTime = Time.fixedTime;
-        }
-
-        public void Despawn(Enemy enemy)
-        {
-            _destroyedEnemies++;
-            _scoreView.SetValue(_destroyedEnemies);
-
-            enemy.FireComponent.Fired -= OnEnemyFired;
-
-            StartCoroutine(DespawnInNextFrame(enemy));
-        }
-
-        private IEnumerator DespawnInNextFrame(Enemy enemy)
-        {
-            yield return null;
-            enemy.gameObject.SetActive(false);
-            _pool.Push(enemy);
         }
 
         private void OnEnemyFired(Ship enemy)
@@ -109,27 +51,22 @@ namespace Game
                 TeamType.Enemy
             );
         }
-
-        private Vector3 NextSpawnPosition()
+        
+        public void Despawn(Enemy enemy)
         {
-            if (_spawnIndex >= _spawnPositions.Length)
-            {
-                _spawnPositions.Shuffle();
-                _spawnIndex = 0;
-            }
+            _destroyedEnemies++;
+            _scoreView.SetValue(_destroyedEnemies);
 
-            return _spawnPositions[_spawnIndex++].position;
+            enemy.FireComponent.Fired -= OnEnemyFired;
+
+            StartCoroutine(DespawnInNextFrame(enemy));
         }
 
-        private Vector3 NextDestination()
+        private IEnumerator DespawnInNextFrame(Enemy enemy)
         {
-            if (_attackIndex >= _attackPositions.Length)
-            {
-                _attackPositions.Shuffle();
-                _attackIndex = 0;
-            }
-
-            return _attackPositions[_attackIndex++].position;
+            yield return null;
+            enemy.gameObject.SetActive(false);
+            _enemySpawner.Despawn(enemy);
         }
     }
 }
