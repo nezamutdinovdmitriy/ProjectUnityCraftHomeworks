@@ -34,8 +34,6 @@ namespace Game
         }
 
         public void SetMovementDirection(Vector2 direction) => MoveDirection = direction;
-        
-        
 
         private void OnHealthChanged(int health)
         {
