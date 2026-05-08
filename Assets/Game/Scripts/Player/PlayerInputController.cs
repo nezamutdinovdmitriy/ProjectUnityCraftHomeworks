@@ -8,7 +8,7 @@ namespace Game
         private const string VerticalAxisKey = "Vertical";
         
         [SerializeField]
-        private PlayerShip _playerShip;
+        private Ship _ship;
 
         [SerializeField]
         private KeyCode _fireKey;
@@ -23,7 +23,7 @@ namespace Game
         private void FireInputHandler()
         {
             if (Input.GetKeyDown(_fireKey))
-                _playerShip.Fire();
+                _ship.Fire();
         }
 
         private void MovementInputHandler()
@@ -33,7 +33,7 @@ namespace Game
 
             Vector2 direction = new Vector2(dx, dy);
 
-            _playerShip.SetMovementDirection(direction);
+            _ship.SetMoveDirection(direction);
         }
     }
 }

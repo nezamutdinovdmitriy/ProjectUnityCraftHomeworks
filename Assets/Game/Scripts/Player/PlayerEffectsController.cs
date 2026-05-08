@@ -6,13 +6,13 @@ namespace Game
     public class PlayerEffectsController : MonoBehaviour
     {
         [SerializeField]
-        private PlayerShip _player;
+        private Ship _ship;
 
         [SerializeField]
         private CameraShaker _cameraShaker;
 
-        private void OnEnable() => _player.HealthComponent.Changed += OnHealthChanged;
-        private void OnDisable() => _player.HealthComponent.Changed -= OnHealthChanged;
+        private void OnEnable() => _ship.HealthComponent.Changed += OnHealthChanged;
+        private void OnDisable() => _ship.HealthComponent.Changed -= OnHealthChanged;
 
         private void OnHealthChanged(int obj) => _cameraShaker.Shake();
     }

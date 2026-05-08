@@ -6,7 +6,7 @@ namespace Game
     public class PlayerUIController : MonoBehaviour
     {
         [SerializeField]
-        private PlayerShip _player;
+        private Ship _ship;
 
         [SerializeField]
         private HealthView _healthView;
@@ -16,17 +16,17 @@ namespace Game
 
         private void OnEnable()
         {
-            _player.HealthComponent.Changed += OnHealthChanged;
-            _player.HealthComponent.Dead += _gameOverView.Show;
+            _ship.HealthComponent.Changed += OnHealthChanged;
+            _ship.HealthComponent.Dead += _gameOverView.Show;
         }
 
         private void OnDisable()
         {
-            _player.HealthComponent.Changed -= OnHealthChanged;
-            _player.HealthComponent.Dead -= _gameOverView.Show;
+            _ship.HealthComponent.Changed -= OnHealthChanged;
+            _ship.HealthComponent.Dead -= _gameOverView.Show;
         }
         
         private void OnHealthChanged(int health)
-            => _healthView.SetHealth(health, _player.HealthComponent.Max);
+            => _healthView.SetHealth(health, _ship.HealthComponent.Max);
     }
 }

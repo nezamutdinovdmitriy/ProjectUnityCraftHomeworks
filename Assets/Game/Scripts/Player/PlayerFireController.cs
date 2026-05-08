@@ -9,19 +9,19 @@ namespace Game
         private BulletManager _bulletManager;
 
         [SerializeField]
-        private PlayerShip _player;
+        private Ship _ship;
 
-        private void OnEnable() => _player.FireComponent.Fired += OnPlayerFired;
-        private void OnDisable() => _player.FireComponent.Fired -= OnPlayerFired;
+        private void OnEnable() => _ship.FireComponent.Fired += OnPlayerFired;
+        private void OnDisable() => _ship.FireComponent.Fired -= OnPlayerFired;
 
         private void OnPlayerFired(Ship _)
         {
             _bulletManager.SpawnBullet(
-                _player.FirePoint.position,
-                _player.FirePoint.up,
-                _player.BulletSpeed,
-                _player.BulletDamage,
-                _player.Team
+                _ship.FirePoint.position,
+                _ship.FirePoint.up,
+                _ship.BulletSpeed,
+                _ship.BulletDamage,
+                _ship.Team
             );
         }
     }

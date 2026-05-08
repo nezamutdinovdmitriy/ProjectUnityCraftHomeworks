@@ -2636,7 +2636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac17dc556e413d83a789bbfda446ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.InputFireController
-  _playerShip: {fileID: 4414282821800802410}
+  _ship: {fileID: 0}
   _fireKey: 32
 --- !u!114 &1879759791
 MonoBehaviour:
@@ -2651,7 +2651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerFireController
   _bulletManager: {fileID: 363245577}
-  _player: {fileID: 4414282821800802410}
+  _ship: {fileID: 0}
 --- !u!114 &1879759792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,7 +2664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9612a7f52bb645dbb141dc5d5a8a26ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerEffectsController
-  _player: {fileID: 4414282821800802410}
+  _ship: {fileID: 0}
   _cameraShaker: {fileID: 519420034}
 --- !u!114 &1879759793
 MonoBehaviour:
@@ -2678,7 +2678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df6fc6baee24720ab70d772e8f509fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerUIController
-  _player: {fileID: 4414282821800802410}
+  _ship: {fileID: 0}
   _healthView: {fileID: 1243470931}
   _gameOverView: {fileID: 1375492023}
 --- !u!1 &1954893900
@@ -3499,7 +3499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac17dc556e413d83a789bbfda446ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.InputFireController
-  _playerShip: {fileID: 4414282821800802410}
+  _ship: {fileID: 0}
   _fireKey: 0
 --- !u!1 &4788406047096451828
 GameObject:
