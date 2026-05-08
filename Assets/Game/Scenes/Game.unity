@@ -2597,6 +2597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1879759789}
+  - component: {fileID: 1879759791}
   - component: {fileID: 1879759790}
   m_Layer: 0
   m_Name: <PlayerSystem>
@@ -2630,9 +2631,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1879759788}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ac17dc556e413d83a789bbfda446ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.InputFireController
+  _playerShip: {fileID: 4414282821800802410}
+  _fireKey: 32
+--- !u!114 &1879759791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879759788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0d8a2134b32408a9ccae5fde8a74223, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game::Game.PlayerBulletInstantiator
+  m_EditorClassIdentifier: Game::Game.PlayerFireController
   _bulletManager: {fileID: 363245577}
   _player: {fileID: 4414282821800802410}
 --- !u!1 &1954893900
@@ -3257,6 +3272,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1375492023}
     - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: _fireController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: _movementComponent
+      value: 
+      objectReference: {fileID: 4414282821800802423}
+    - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: RigidbodyMovementComponent
       value: 
       objectReference: {fileID: 4414282821800802423}
@@ -3264,6 +3287,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: <Player>
       objectReference: {fileID: 0}
+    - target: {fileID: 4875996833533332738, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 4414282821800802396}
+    - target: {fileID: 4875996833533332738, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: _playerArea
+      value: 
+      objectReference: {fileID: 2572952653776768186}
     - target: {fileID: 5706750963508843440, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3313,13 +3344,10 @@ PrefabInstance:
       addedObject: {fileID: 4414282821800802419}
     - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       insertIndex: 3
-      addedObject: {fileID: 4414282821800802414}
-    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-      insertIndex: 4
-      addedObject: {fileID: 4414282821800802415}
-    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-      insertIndex: 5
       addedObject: {fileID: 4414282821800802423}
+    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4414282821800802429}
   m_SourcePrefab: {fileID: 100100000, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
 --- !u!1 &3569791732579588318
 GameObject:
@@ -3384,33 +3412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab487c3ce89407b8153f9c2ff593bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerShip
---- !u!114 &4414282821800802414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169464638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 404d6437004b4e8fa99bfbe3da0c60d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.InputMovementController
-  _playerShip: {fileID: 4414282821800802410}
---- !u!114 &4414282821800802415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169464638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ac17dc556e413d83a789bbfda446ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.InputFireController
-  _playerShip: {fileID: 4414282821800802410}
-  _fireKey: 32
 --- !u!82 &4414282821800802416 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 8141832910989862937, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
@@ -3455,6 +3456,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::Game.RigidbodyMovementComponent
   _rigidbody: {fileID: 4414282821800802421}
   _speed: 3
+--- !u!114 &4414282821800802429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169464638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ac17dc556e413d83a789bbfda446ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.InputFireController
+  _playerShip: {fileID: 4414282821800802410}
+  _fireKey: 0
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0

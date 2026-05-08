@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public sealed class PlayerBulletInstantiator : MonoBehaviour
+    public sealed class PlayerFireController : MonoBehaviour
     {
         [SerializeField]
         private BulletManager _bulletManager;
@@ -11,15 +11,8 @@ namespace Game
         [SerializeField]
         private PlayerShip _player;
 
-        private void OnEnable()
-        {
-            _player.FireComponent.Fired += OnPlayerFired;
-        }
-
-        private void OnDisable()
-        {
-            _player.FireComponent.Fired -= OnPlayerFired;
-        }
+        private void OnEnable() => _player.FireComponent.Fired += OnPlayerFired;
+        private void OnDisable() => _player.FireComponent.Fired -= OnPlayerFired;
 
         private void OnPlayerFired(Ship _)
         {

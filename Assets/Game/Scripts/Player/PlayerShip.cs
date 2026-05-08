@@ -35,8 +35,7 @@ namespace Game
 
         public void SetMovementDirection(Vector2 direction) => MoveDirection = direction;
         
-        private void LateUpdate()
-            => transform.position = _playerArea.ClampInBounds(transform.position);
+        
 
         private void OnHealthChanged(int health)
         {

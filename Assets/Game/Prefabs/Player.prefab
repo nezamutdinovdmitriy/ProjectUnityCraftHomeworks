@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5706750963508843440}
   - component: {fileID: 328849090417711829}
   - component: {fileID: 4640665866465748839}
+  - component: {fileID: 4875996833533332738}
   - component: {fileID: 4575139502811685103}
   - component: {fileID: 4075764219798992963}
   - component: {fileID: 8141832910989862937}
@@ -50,15 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab487c3ce89407b8153f9c2ff593bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerShip
-  config: {fileID: 11400000, guid: 0b9a4576e5f0a4babb44b3c82e6480d0, type: 2}
-  currentHealth: 10
-  firePoint: {fileID: 8503432944885784460}
-  bulletSpeed: 7
-  bulletDamage: 1
+  ShipConfig: {fileID: 0}
+  RigidbodyMovementComponent: {fileID: 0}
   _team: 1
-  rigidbodyMovementComponent:
-    _rigidbody: {fileID: 4575139502811685103}
-    _speed: 15
+  FirePoint: {fileID: 0}
+  BulletSpeed: 0
+  BulletDamage: 0
   _playerArea: {fileID: 0}
   _cameraShaker: {fileID: 0}
   _gameOverView: {fileID: 0}
@@ -76,13 +74,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.ShipView
   _ship: {fileID: 328849090417711829}
-  _renderer: {fileID: 795037679980988590}
-  _viewTransform: {fileID: 1249406481267314197}
-  _audioSource: {fileID: 8141832910989862937}
   _viewConfig: {fileID: 11400000, guid: 9298f762411724a389beae656b1dfcaa, type: 2}
+  _viewTransform: {fileID: 1249406481267314197}
   _fireVFX: {fileID: 375007784130398055}
+  _renderer: {fileID: 795037679980988590}
+  _audioSource: {fileID: 8141832910989862937}
   _fireSFX: {fileID: 8300000, guid: 4b0fadb8fc7bdaf489e9f7879d3c71bb, type: 3}
   _damageSFX: {fileID: 8300000, guid: 9d2f129290cb1a6489928f3dde8dbb39, type: 3}
+--- !u!114 &4875996833533332738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109394316656653739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7d49d0025d4f16af8f8408f3cabcc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.PlayerBoundsController
+  _target: {fileID: 0}
+  _playerArea: {fileID: 0}
 --- !u!50 &4575139502811685103
 Rigidbody2D:
   serializedVersion: 5
