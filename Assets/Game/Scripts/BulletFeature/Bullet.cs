@@ -14,6 +14,7 @@ namespace Game
         private Vector2 _direction;
 
         public TeamType Team { get; private set; }
+        public int Damage => _damage;
 
         public void Initialize(
             Vector2 position,
@@ -41,15 +42,6 @@ namespace Game
             transform.position += moveStep;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.TryGetComponent(out IDamageable target)
-                && target.Team != Team)
-            {
-                target.TakeDamage(_damage);
-
-                Hit?.Invoke(this, other);
-            }
-        }
+        private void OnTriggerEnter2D(Collider2D other) => Hit?.Invoke(this, other);
     }
 }

@@ -43,7 +43,14 @@ namespace Game
             _bullets.Add(bullet);
         }
 
-        private void OnBulletHit(Bullet bullet, Collider2D other) => ReleaseBullet(bullet);
+        private void OnBulletHit(Bullet bullet, Collider2D other)
+        {
+            if (other.TryGetComponent(out IDamageable target)
+                && target.Team != bullet.Team)
+                target.TakeDamage(bullet.Damage);
+            
+            ReleaseBullet(bullet);
+        }
 
         private void ReleaseBullet(Bullet bullet)
         {
