@@ -1,5 +1,4 @@
 using System.Collections;
-using Modules.UI;
 using UnityEngine;
 
 namespace Game
@@ -16,12 +15,9 @@ namespace Game
         [Header("Spawn")] [SerializeField]
         private EnemySpawner _enemySpawner;
 
-        [Header("UI")] [SerializeField]
-        private ScoreView _scoreView;
+        [Space] [SerializeField]
+        private ScoreController _scoreController;
 
-        private int _destroyedEnemies;
-
-        private void Awake() => _scoreView.SetValue(_destroyedEnemies);
         private void OnEnable() => _enemySpawner.Spawned += OnEnemySpawned;
         private void OnDisable() => _enemySpawner.Spawned -= OnEnemySpawned;
 
@@ -29,18 +25,11 @@ namespace Game
         {
             _enemySpawner.Tick(_player.HealthComponent.Current > 0);
         }
-        
+
         private void OnEnemySpawned(Enemy enemy, Vector2 destination)
         {
-            enemy.ResetHealth();
+            enemy.Initialize(_player, destination, this);
 
-            if (enemy.TryGetComponent(out EnemyAI ai))
-            {
-                ai.SetTarget(_player);
-                ai.SetDestination(destination);
-            }
-
-            enemy.SetDespawner(this);
             enemy.FireComponent.Fired += OnEnemyFired;
         }
 
@@ -57,11 +46,10 @@ namespace Game
                 TeamType.Enemy
             );
         }
-        
+
         public void Despawn(Enemy enemy)
         {
-            _destroyedEnemies++;
-            _scoreView.SetValue(_destroyedEnemies);
+            _scoreController.AddScore();
 
             enemy.FireComponent.Fired -= OnEnemyFired;
 

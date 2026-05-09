@@ -21,7 +21,22 @@ namespace Game
             HealthComponent.Dead -= OnCharacterDead;
         }
 
-        public void SetDespawner(IEnemyDespawner despawner) => _despawner = despawner;
+        public void Initialize(
+            Ship target,
+            Vector3 destination,
+            IEnemyDespawner despawner
+        )
+        {
+            _despawner = despawner;
+            
+            ResetHealth();
+
+            if (TryGetComponent(out EnemyAI ai))
+            {
+                ai.SetTarget(target);
+                ai.SetDestination(destination);
+            }
+        }
 
         private void OnCharacterDead() => _despawner.Despawn(this);
     }

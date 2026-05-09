@@ -5,7 +5,7 @@ namespace Game
 {
     public class EnemyPool : MonoBehaviour
     {
-        private const int StartCount = 10;
+        private const int PrewarmCount  = 10;
         
         [SerializeField]
         private EnemyFactory _enemyFactory;
@@ -14,7 +14,7 @@ namespace Game
 
         private void Awake()
         {
-            for (int i = 0; i < StartCount; i++)
+            for (int i = 0; i < PrewarmCount ; i++)
             {
                 Enemy enemy = _enemyFactory.Create();
                 enemy.gameObject.SetActive(false);

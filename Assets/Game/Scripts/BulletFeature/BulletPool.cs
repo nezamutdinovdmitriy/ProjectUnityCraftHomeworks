@@ -5,7 +5,7 @@ namespace Game
 {
     public class BulletPool : MonoBehaviour
     {
-        private const int StartCount = 10;
+        private const int PrewarmCount  = 10;
 
         private readonly Stack<Bullet> _stack = new();
 
@@ -17,7 +17,7 @@ namespace Game
 
         private void Awake()
         {
-            for (int i = 0; i < StartCount; i++)
+            for (int i = 0; i < PrewarmCount ; i++)
             {
                 Bullet bullet = _bulletFactory.Create(_container);
                 bullet.gameObject.SetActive(false);
