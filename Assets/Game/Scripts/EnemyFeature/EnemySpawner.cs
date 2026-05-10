@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Scripts.Utilities;
 using Modules.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,6 +9,8 @@ namespace Game
     public class EnemySpawner : MonoBehaviour
     {
         public event Action<Enemy, Vector2> Spawned;
+
+        private Timer _timer;
         
         [Header("Spawn")] 
         [SerializeField]
