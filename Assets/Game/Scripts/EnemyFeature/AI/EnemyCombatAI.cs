@@ -5,17 +5,24 @@ namespace Game
     public class EnemyCombatAI : MonoBehaviour
     {
         [SerializeField]
-        private Enemy _enemy;
-        [SerializeField]
         private EnemyNavigationAI _navigation;
+        
+        private Enemy _enemy;
         
         [Header("AI Settings")]
         private Ship _target;
 
-        public void SetTarget(Ship target) => _target = target;
-
+        public void Initialize(Enemy enemy, Ship target)
+        {
+            _enemy = enemy;
+            _target = target;
+        }
+        
         private void FixedUpdate()
         {
+            if (_enemy == null)
+                return;
+            
             if (_enemy.HealthComponent.IsDead 
                 || _target == null 
                 || _target.HealthComponent.IsDead)

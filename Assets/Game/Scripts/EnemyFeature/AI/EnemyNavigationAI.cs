@@ -5,19 +5,26 @@ namespace Game
     public class EnemyNavigationAI : MonoBehaviour
     {
         [SerializeField]
-        private Enemy _enemy;
-        [SerializeField]
         private float _stoppingDistance = 0.25f;
+        
+        private Enemy _enemy;
         
         [Header("AI Settings")]
         private Vector2 _destination;
         
         public bool IsReached { get; private set; }
-        
-        public void SetDestination(Vector2 destination) => _destination = destination;
+
+        public void Initialize(Enemy enemy, Vector2 destination)
+        {
+            _enemy = enemy;
+            _destination = destination;
+        }
         
         private void FixedUpdate()
         {
+            if (_enemy == null)
+                return;
+            
             if (_enemy.HealthComponent.IsDead)
                 return;
 

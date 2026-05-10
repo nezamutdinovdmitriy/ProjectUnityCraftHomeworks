@@ -32,10 +32,10 @@ namespace Game
             ResetHealth();
 
             if (TryGetComponent(out EnemyCombatAI combatAI))
-                combatAI.SetTarget(target);
+                combatAI.Initialize(this, target);
             
             if(TryGetComponent(out EnemyNavigationAI navigationAI))
-                navigationAI.SetDestination(destination);
+                navigationAI.Initialize(this, destination);
         }
 
         private void OnCharacterDead() => _despawner.Despawn(this);

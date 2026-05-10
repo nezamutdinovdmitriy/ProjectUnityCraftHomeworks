@@ -2,7 +2,6 @@
 using Game.Scripts.Utilities;
 using Modules.Utils;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -10,13 +9,8 @@ namespace Game
     {
         public event Action<Enemy, Vector2> Spawned;
 
+        [SerializeField]
         private Timer _timer;
-        
-        [Header("Spawn")] 
-        [SerializeField]
-        private float _minSpawnCooldown = 2;
-        [SerializeField]
-        private float _maxSpawnCooldown = 3;
 
         [Header("Points")] 
         [SerializeField]
@@ -28,9 +22,6 @@ namespace Game
         [SerializeField]
         private EnemyPool _pool;
         
-        private float _spawnCooldown;
-        private float _spawnTime;
-        
         private int _spawnIndex;
         private int _attackIndex;
 
@@ -39,21 +30,14 @@ namespace Game
             _spawnPositions.Shuffle();
             _attackPositions.Shuffle();
         }
-
-        private void Start() => ResetSpawnCooldown();
         
         public void Tick(bool canSpawn)
         {
-            if (canSpawn == false)
-                return;
-
-            float time = Time.fixedTime;
-            
-            if (time - _spawnTime < _spawnCooldown)
+            if (canSpawn == false || _timer.IsReady == false)
                 return;
             
             Spawn();
-            ResetSpawnCooldown();
+            _timer.Reset();
         }
         
         private void Spawn()
@@ -72,12 +56,6 @@ namespace Game
         {
             enemy.gameObject.SetActive(false);
             _pool.Push(enemy);
-        }
-        
-        private void ResetSpawnCooldown()
-        {
-            _spawnCooldown = Random.Range(_minSpawnCooldown, _maxSpawnCooldown);
-            _spawnTime = Time.fixedTime;
         }
         
         private Vector3 NextSpawnPosition()
