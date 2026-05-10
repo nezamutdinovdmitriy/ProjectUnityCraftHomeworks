@@ -16,7 +16,7 @@ namespace Game
         private EnemySpawner _enemySpawner;
 
         [Space] [SerializeField]
-        private ScoreController _scoreController;
+        private ScoreCounter _scoreCounter;
 
         private void OnEnable() => _enemySpawner.Spawned += OnEnemySpawned;
         private void OnDisable() => _enemySpawner.Spawned -= OnEnemySpawned;
@@ -49,7 +49,7 @@ namespace Game
 
         public void Despawn(Enemy enemy)
         {
-            _scoreController.AddScore();
+            _scoreCounter.AddScore();
 
             enemy.FireComponent.Fired -= OnEnemyFired;
 

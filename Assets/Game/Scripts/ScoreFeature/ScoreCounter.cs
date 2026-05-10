@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ScoreController : MonoBehaviour
+    public class ScoreCounter : MonoBehaviour
     {
         public event Action<int> ScoreChanged;
         

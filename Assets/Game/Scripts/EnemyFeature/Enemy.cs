@@ -31,11 +31,11 @@ namespace Game
             
             ResetHealth();
 
-            if (TryGetComponent(out EnemyAI ai))
-            {
-                ai.SetTarget(target);
-                ai.SetDestination(destination);
-            }
+            if (TryGetComponent(out EnemyCombatAI combatAI))
+                combatAI.SetTarget(target);
+            
+            if(TryGetComponent(out EnemyNavigationAI navigationAI))
+                navigationAI.SetDestination(destination);
         }
 
         private void OnCharacterDead() => _despawner.Despawn(this);

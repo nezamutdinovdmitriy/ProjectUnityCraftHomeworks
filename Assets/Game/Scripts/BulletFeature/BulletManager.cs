@@ -43,6 +43,13 @@ namespace Game
             _bullets.Add(bullet);
         }
 
+        private void ReleaseBullet(Bullet bullet)
+        {
+            bullet.Hit -= OnBulletHit;
+            _bullets.Remove(bullet);
+            _bulletPool.Push(bullet);
+        }
+        
         private void OnBulletHit(Bullet bullet, Collider2D other)
         {
             if (other.TryGetComponent(out IDamageable target)
@@ -50,13 +57,6 @@ namespace Game
                 target.TakeDamage(bullet.Damage);
             
             ReleaseBullet(bullet);
-        }
-
-        private void ReleaseBullet(Bullet bullet)
-        {
-            bullet.Hit -= OnBulletHit;
-            _bullets.Remove(bullet);
-            _bulletPool.Push(bullet);
         }
     }
 }

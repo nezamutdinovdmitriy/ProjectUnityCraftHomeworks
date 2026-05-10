@@ -9,15 +9,15 @@ namespace Game
         private ScoreView _view;
 
         [SerializeField]
-        private ScoreController _scoreController;
+        private ScoreCounter scoreCounter;
 
         private void Awake()
         {
-            _scoreController.ScoreChanged += OnScoreChanged;
-            _view.SetValue(_scoreController.CurrentScore);
+            scoreCounter.ScoreChanged += OnScoreChanged;
+            _view.SetValue(scoreCounter.CurrentScore);
         }
 
-        private void OnDisable() => _scoreController.ScoreChanged -= OnScoreChanged;
+        private void OnDisable() => scoreCounter.ScoreChanged -= OnScoreChanged;
 
         private void OnScoreChanged(int value) => _view.SetValue(value);
     }

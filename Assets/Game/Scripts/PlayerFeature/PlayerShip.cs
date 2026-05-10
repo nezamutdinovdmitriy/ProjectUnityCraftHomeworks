@@ -1,7 +1,3 @@
-using Modules.UI;
-using Modules.Utils;
-using UnityEngine;
-
 namespace Game
 {
     // +

@@ -14,6 +14,6 @@ namespace Game
         private void OnEnable() => _ship.HealthComponent.Changed += OnHealthChanged;
         private void OnDisable() => _ship.HealthComponent.Changed -= OnHealthChanged;
 
-        private void OnHealthChanged(int obj) => _cameraShaker.Shake();
+        private void OnHealthChanged(int value) => _cameraShaker.Shake();
     }
 }

@@ -6,10 +6,10 @@ namespace Game
     public sealed class PlayerFireController : MonoBehaviour
     {
         [SerializeField]
-        private BulletManager _bulletManager;
-
-        [SerializeField]
         private Ship _ship;
+        
+        [SerializeField]
+        private BulletManager _bulletManager;
 
         private void OnEnable() => _ship.FireComponent.Fired += OnPlayerFired;
         private void OnDisable() => _ship.FireComponent.Fired -= OnPlayerFired;

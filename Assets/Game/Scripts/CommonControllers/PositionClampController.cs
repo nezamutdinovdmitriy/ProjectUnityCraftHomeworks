@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class PlayerBoundsController : MonoBehaviour
+    public class PositionClampController : MonoBehaviour
     {
         [SerializeField]
         private Transform _target;
