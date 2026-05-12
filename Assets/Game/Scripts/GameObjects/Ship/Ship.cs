@@ -21,8 +21,6 @@ namespace Game
 
         [Header("Combat")]
         public Transform FirePoint;
-        // public float BulletSpeed;
-        // public int BulletDamage;
 
         protected virtual void Awake()
         {

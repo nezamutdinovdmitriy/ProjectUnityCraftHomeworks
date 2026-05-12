@@ -7,6 +7,8 @@ namespace Game
     {
         private IEnemyDespawner _despawner;
 
+        public Ship Target { get; private set; }
+        
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -21,8 +23,15 @@ namespace Game
             HealthComponent.Dead -= OnCharacterDead;
         }
 
+        public void SetTarget(Ship target)
+        {
+            if (TryGetComponent(out EnemyCombatAI combatAI))
+                combatAI.Initialize(this, target);
+
+            Target = target;
+        }
+        
         public void Initialize(
-            Ship target,
             Vector3 destination,
             IEnemyDespawner despawner
         )
@@ -30,9 +39,6 @@ namespace Game
             _despawner = despawner;
             
             ResetHealth();
-
-            if (TryGetComponent(out EnemyCombatAI combatAI))
-                combatAI.Initialize(this, target);
             
             if(TryGetComponent(out EnemyNavigationAI navigationAI))
                 navigationAI.Initialize(this, destination);

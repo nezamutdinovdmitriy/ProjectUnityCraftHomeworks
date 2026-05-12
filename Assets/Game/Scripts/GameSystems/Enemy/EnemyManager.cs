@@ -6,9 +6,6 @@ namespace Game
     // +
     public sealed class EnemyManager : MonoBehaviour, IEnemyDespawner
     {
-        [Header("Target")] [SerializeField]
-        private Ship _player;
-
         [Header("Bullets")] [SerializeField]
         private BulletManager _bulletManager;
 
@@ -23,26 +20,30 @@ namespace Game
 
         private void FixedUpdate()
         {
-            _enemySpawner.Tick(_player.HealthComponent.Current > 0);
+            // _enemySpawner.Tick(_player.HealthComponent.Current > 0);
+            _enemySpawner.Tick(true);
         }
 
         private void OnEnemySpawned(Enemy enemy, Vector2 destination)
         {
-            enemy.Initialize(_player, destination, this);
+            enemy.Initialize(destination, this);
 
             enemy.FireComponent.Fired += OnEnemyFired;
         }
 
-        private void OnEnemyFired(Ship enemy)
+        private void OnEnemyFired(Ship ship)
         {
-            Vector2 position = enemy.FirePoint.position;
-            Vector2 target = _player.transform.position;
-            Vector2 direction = (target - position).normalized;
-            _bulletManager.SpawnBullet(
-                enemy.FirePoint.position,
-                direction,
-                TeamType.Enemy
-            );
+            if (ship is Enemy enemy)
+            {
+                Vector2 position = enemy.FirePoint.position;
+                Vector2 target = enemy.Target.transform.position;
+                Vector2 direction = (target - position).normalized;
+                _bulletManager.SpawnBullet(
+                    enemy.FirePoint.position,
+                    direction,
+                    TeamType.Enemy
+                );   
+            }
         }
 
         public void Despawn(Enemy enemy)
