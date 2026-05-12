@@ -23,7 +23,7 @@ namespace Game
         private void FireInputHandler()
         {
             if (Input.GetKeyDown(_fireKey))
-                _ship.Fire();
+                _ship.Fire(Vector2.up);
         }
 
         private void MovementInputHandler()

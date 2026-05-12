@@ -11,8 +11,9 @@ namespace Game
         private GameObject _blueVfx;
         [SerializeField]
         private GameObject _redVfx;
+        
         [SerializeField]
-        private BulletExplosionFactory _explosionFactory;
+        private GameObject _explosionPrefab;
 
         private void OnEnable()
         {
@@ -20,10 +21,8 @@ namespace Game
             _bullet.Hit += Explosion;
         }
 
-        private void Explosion(Bullet arg1, Collider2D arg2)
-        {
-            _explosionFactory.Create(_bullet.transform.position);
-        }
+        private void Explosion(Bullet bullet, Collider2D arg2)
+            => Instantiate(_explosionPrefab, bullet.transform.position, Quaternion.identity);
 
         private void OnDisable()
         {

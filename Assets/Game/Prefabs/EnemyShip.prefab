@@ -13,10 +13,8 @@ GameObject:
   - component: {fileID: 659620479434099170}
   - component: {fileID: 102605417607457000}
   - component: {fileID: 4408801746812772292}
-  - component: {fileID: 4368471405756048172}
   - component: {fileID: 4560017961611896118}
-  - component: {fileID: 1321937000907094479}
-  - component: {fileID: -6621559760085832030}
+  - component: {fileID: 2253496533956823574}
   m_Layer: 11
   m_Name: EnemyShip
   m_TagString: Untagged
@@ -116,12 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09a324f54d94d6e84681731f36566c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShipConfig: {fileID: 11400000, guid: 342eb63e507d644daae6ffc27bd8fc71, type: 2}
-  RigidbodyMovementComponent: {fileID: 4368471405756048172}
-  _team: 2
-  FirePoint: {fileID: 3195880656587174614}
-  BulletSpeed: 3
-  BulletDamage: 1
+  _ship: {fileID: 2253496533956823574}
+  _destination: {x: 0, y: 0}
 --- !u!114 &4408801746812772292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2477a4ff29e4e199a1dec5732bfd170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.ShipView
-  _ship: {fileID: 102605417607457000}
+  _ship: {fileID: 2253496533956823574}
   _viewConfig: {fileID: 11400000, guid: f6ecf0b3d1d004b3893cc42c64995303, type: 2}
   _viewTransform: {fileID: 2570692159425164225}
   _fireVFX: {fileID: 1792961037914348205}
@@ -142,20 +136,6 @@ MonoBehaviour:
   _audioSource: {fileID: 4560017961611896118}
   _fireSFX: {fileID: 0}
   _damageSFX: {fileID: 8300000, guid: 9d2f129290cb1a6489928f3dde8dbb39, type: 3}
---- !u!114 &4368471405756048172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559606060570185700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4c3c53e55744ff9792aebcf0a01a80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.RigidbodyMovementComponent
-  _rigidbody: {fileID: 659620479434099170}
-  _speed: 5
 --- !u!82 &4560017961611896118
 AudioSource:
   m_ObjectHideFlags: 0
@@ -253,7 +233,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1321937000907094479
+--- !u!114 &2253496533956823574
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,23 +242,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 559606060570185700}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 319762f3b4494fdc995727e34c091e57, type: 3}
+  m_Script: {fileID: 11500000, guid: 558b312fd53c491ab69f3e55255aae3c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Game::Game.EnemyCombatAI
-  _navigation: {fileID: -6621559760085832030}
---- !u!114 &-6621559760085832030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559606060570185700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eea4fb6affb4c33a967ac57f826834f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.EnemyNavigationAI
-  _stoppingDistance: 0.25
+  m_EditorClassIdentifier: Game::Game.Ship
+  ShipConfig: {fileID: 11400000, guid: 342eb63e507d644daae6ffc27bd8fc71, type: 2}
+  movementComponent:
+    _rigidbody: {fileID: 659620479434099170}
+    _speed: 5
+  _team: 2
+  <FireComponent>k__BackingField:
+    _bulletManager: {fileID: 0}
+  FirePoint: {fileID: 3195880656587174614}
 --- !u!1 &1074127585690423075
 GameObject:
   m_ObjectHideFlags: 0

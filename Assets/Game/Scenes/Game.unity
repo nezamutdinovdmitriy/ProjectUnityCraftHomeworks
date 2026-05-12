@@ -2642,7 +2642,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1879759789}
-  - component: {fileID: 1879759791}
   - component: {fileID: 1879759790}
   - component: {fileID: 1879759792}
   - component: {fileID: 1879759793}
@@ -2683,20 +2682,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::Game.InputFireController
   _ship: {fileID: 4414282821800802427}
   _fireKey: 32
---- !u!114 &1879759791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1879759788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0d8a2134b32408a9ccae5fde8a74223, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.PlayerFireController
-  _ship: {fileID: 4414282821800802427}
-  _bulletManager: {fileID: 363245577}
 --- !u!114 &1879759792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3353,11 +3338,11 @@ PrefabInstance:
     - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: _movementComponent
       value: 
-      objectReference: {fileID: 4414282821800802423}
+      objectReference: {fileID: 0}
     - target: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: RigidbodyMovementComponent
       value: 
-      objectReference: {fileID: 4414282821800802423}
+      objectReference: {fileID: 0}
     - target: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: m_Name
       value: <Player>
@@ -3422,9 +3407,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       insertIndex: 1
-      addedObject: {fileID: 4414282821800802423}
-    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-      insertIndex: 3
       addedObject: {fileID: 4414282821800802427}
   m_SourcePrefab: {fileID: 100100000, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
 --- !u!1 &3569791732579588318
@@ -3484,20 +3466,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 4575139502811685103, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
   m_PrefabInstance: {fileID: 3559832809919233303}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4414282821800802423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169464638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4c3c53e55744ff9792aebcf0a01a80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.RigidbodyMovementComponent
-  _rigidbody: {fileID: 4414282821800802421}
-  _speed: 3
 --- !u!114 &4414282821800802427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3511,8 +3479,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.Ship
   ShipConfig: {fileID: 11400000, guid: 0b9a4576e5f0a4babb44b3c82e6480d0, type: 2}
-  RigidbodyMovementComponent: {fileID: 4414282821800802423}
+  movementComponent:
+    _rigidbody: {fileID: 4414282821800802421}
+    _speed: 6
   _team: 1
+  <FireComponent>k__BackingField:
+    _bulletManager: {fileID: 363245577}
   FirePoint: {fileID: 1694351842}
 --- !u!1 &4788406047096451828
 GameObject:

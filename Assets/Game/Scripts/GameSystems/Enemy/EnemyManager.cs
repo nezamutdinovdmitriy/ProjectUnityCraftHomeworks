@@ -26,29 +26,13 @@ namespace Game
 
         private void OnEnemySpawned(Enemy enemy, Vector2 destination)
         {
-            enemy.Initialize(destination, this);
-
-            enemy.Ship.FireComponent.Fired += OnEnemyFired;
-        }
-
-        private void OnEnemyFired(Ship ship)
-        {
-            Vector2 position = enemy.Ship.FirePoint.position;
-            Vector2 target = enemy.Target.transform.position;
-            Vector2 direction = (target - position).normalized;
-            _bulletManager.SpawnBullet(
-                enemy.Ship.FirePoint.position,
-                direction,
-                TeamType.Enemy
-            ); 
+            enemy.Initialize(destination, _bulletManager, this);
         }
 
         public void Despawn(Enemy enemy)
         {
             _scoreCounter.AddScore();
-
-            enemy.Ship.FireComponent.Fired -= OnEnemyFired;
-
+            
             StartCoroutine(DespawnInNextFrame(enemy));
         }
 

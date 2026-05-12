@@ -9,14 +9,17 @@ namespace Game
         protected ShipConfig ShipConfig;
 
         [SerializeField]
-        protected RigidbodyMovementComponent RigidbodyMovementComponent;
+        protected MovementComponent movementComponent;
 
         [SerializeField]
         private TeamType _team;
 
         public TeamType Team => _team;
+        
+        [field: SerializeField]
+        public FireComponent FireComponent { get; private set; }
+        
         public HealthComponent HealthComponent { get; } = new HealthComponent();
-        public FireComponent FireComponent { get; } = new FireComponent();
         public Vector3 MoveDirection { get; protected set; }
 
         [Header("Combat")]
@@ -28,13 +31,13 @@ namespace Game
 
             FireComponent.Initialize(ShipConfig.FireCooldown);
 
-            RigidbodyMovementComponent.SetSpeed(ShipConfig.MoveSpeed);
+            movementComponent.SetSpeed(ShipConfig.MoveSpeed);
         }
 
         protected virtual void FixedUpdate()
         {
             if (HealthComponent.Current > 0)
-                RigidbodyMovementComponent.MoveStep(MoveDirection);
+                movementComponent.MoveStep(MoveDirection, Time.fixedDeltaTime);
         }
 
         protected virtual void OnEnable() => HealthComponent.Dead += OnShipDestroyed;
@@ -44,7 +47,8 @@ namespace Game
 
         public void SetMoveDirection(Vector2 direction) => MoveDirection = direction;
         
-        public void Fire() => FireComponent.Execute(this, HealthComponent.IsDead == false);
+        public void Fire(Vector2 direction) 
+            => FireComponent.Execute(this, direction, HealthComponent.IsDead == false);
         
         public void ResetHealth() => HealthComponent.Initialize(ShipConfig.Health);
 
