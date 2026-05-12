@@ -4,7 +4,7 @@ namespace Game
 {
     public class EnemyCombatAI : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         private EnemyNavigationAI _navigation;
         
         private Enemy _enemy;
@@ -30,6 +30,6 @@ namespace Game
 
             if(_navigation.IsReached)
                 _enemy.Fire();
-        }
+        }*/
     }
 }

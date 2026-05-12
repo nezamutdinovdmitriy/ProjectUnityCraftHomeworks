@@ -4,7 +4,7 @@ namespace Game
 {
     public class EnemyNavigationAI : MonoBehaviour
     {
-        [SerializeField]
+        /*[SerializeField]
         private float _stoppingDistance = 0.25f;
         
         private Enemy _enemy;
@@ -34,6 +34,6 @@ namespace Game
             IsReached = sqrDistance <= _stoppingDistance * _stoppingDistance;
 
             _enemy.SetMoveDirection(IsReached ? Vector3.zero : vectorToDestination.normalized);
-        }
+        }*/
     }
 }
