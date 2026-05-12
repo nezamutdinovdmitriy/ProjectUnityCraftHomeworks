@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class PlayerEffectsController : MonoBehaviour
+    public class CameraShakeController : MonoBehaviour
     {
         [SerializeField]
         private Ship _ship;

@@ -28,7 +28,7 @@ namespace Game
             _direction = direction;
             Team = team;
 
-            gameObject.layer = BulletLayerHelper.GetLayer(team);
+            gameObject.layer = BulletLayers.GetLayer(team);
 
             Initialized?.Invoke(team);
         }

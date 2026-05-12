@@ -2,7 +2,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Game.Scripts.Utilities
+namespace Game
 {
     [Serializable]
     public class Timer

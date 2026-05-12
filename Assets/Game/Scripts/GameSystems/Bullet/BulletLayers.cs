@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public static class BulletLayerHelper
+    public static class BulletLayers
     {
         private const string PlayerBulletKey = "PlayerBullet";
         private const string EnemyBulletKey = "EnemyBullet";
