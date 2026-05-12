@@ -52,10 +52,6 @@ namespace Game
         
         private void OnBulletHit(Bullet bullet, Collider2D other)
         {
-            if (other.TryGetComponent(out IDamageable target)
-                && target.Team != bullet.Team)
-                target.TakeDamage(bullet.Damage);
-            
             ReleaseBullet(bullet);
         }
     }

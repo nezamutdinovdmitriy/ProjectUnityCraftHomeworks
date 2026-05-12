@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class GameOverController : MonoBehaviour
+    public class GameOverPresenter : MonoBehaviour
     {
         [SerializeField]
         private Ship _ship;

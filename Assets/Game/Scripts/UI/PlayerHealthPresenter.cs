@@ -12,8 +12,10 @@ namespace Game
         [SerializeField]
         private HealthView _healthView;
 
-        private void OnEnable()
+        private void Start()
         {
+            Debug.Log(_ship.HealthComponent.Current);
+            
             _ship.HealthComponent.Changed += OnHealthChanged;
             OnHealthChanged(_ship.HealthComponent.Current);
         }
