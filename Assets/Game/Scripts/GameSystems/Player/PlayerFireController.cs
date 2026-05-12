@@ -19,8 +19,6 @@ namespace Game
             _bulletManager.SpawnBullet(
                 _ship.FirePoint.position,
                 _ship.FirePoint.up,
-                _ship.BulletSpeed,
-                _ship.BulletDamage,
                 _ship.Team
             );
         }

@@ -616,6 +616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Game::Game.BulletFactory
   _bulletPrefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d, type: 3}
+  _config: {fileID: 11400000, guid: a5d2c2ab7c609c04bbb223412b5ec040, type: 2}
 --- !u!1 &404085825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,7 +1020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32dae85f8264479bac19d85418d92392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 4414282821800802410}
+  _player: {fileID: 4414282821800802427}
   _bulletManager: {fileID: 363245577}
   _enemySpawner: {fileID: 562298208}
   _scoreCounter: {fileID: 739865811}
@@ -1295,7 +1296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df6fc6baee24720ab70d772e8f509fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerUIController
-  _ship: {fileID: 4414282821800802410}
+  _ship: {fileID: 4414282821800802427}
   _gameOverView: {fileID: 1375492023}
 --- !u!1 &770582453
 GameObject:
@@ -1899,6 +1900,7 @@ GameObject:
   - component: {fileID: 1243470930}
   - component: {fileID: 1243470929}
   - component: {fileID: 1243470931}
+  - component: {fileID: 1243470932}
   m_Layer: 0
   m_Name: Health
   m_TagString: Untagged
@@ -1992,6 +1994,20 @@ MonoBehaviour:
   - {fileID: 2117408057}
   - {fileID: 2088291630}
   - {fileID: 1009791782}
+--- !u!114 &1243470932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243470927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ba93eb63344dbd9e131c4a150e9483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.PlayerHealthPresenter
+  _ship: {fileID: 4414282821800802427}
+  _healthView: {fileID: 1243470931}
 --- !u!850595691 &1263964384
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -2665,7 +2681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ac17dc556e413d83a789bbfda446ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.InputFireController
-  _ship: {fileID: 4414282821800802410}
+  _ship: {fileID: 4414282821800802427}
   _fireKey: 32
 --- !u!114 &1879759791
 MonoBehaviour:
@@ -2679,7 +2695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d8a2134b32408a9ccae5fde8a74223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerFireController
-  _ship: {fileID: 4414282821800802410}
+  _ship: {fileID: 4414282821800802427}
   _bulletManager: {fileID: 363245577}
 --- !u!114 &1879759792
 MonoBehaviour:
@@ -2693,7 +2709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9612a7f52bb645dbb141dc5d5a8a26ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.PlayerEffectsController
-  _ship: {fileID: 4414282821800802410}
+  _ship: {fileID: 4414282821800802427}
   _cameraShaker: {fileID: 519420034}
 --- !u!114 &1879759793
 MonoBehaviour:
@@ -3346,6 +3362,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: <Player>
       objectReference: {fileID: 0}
+    - target: {fileID: 4640665866465748839, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      propertyPath: _ship
+      value: 
+      objectReference: {fileID: 4414282821800802427}
     - target: {fileID: 4875996833533332738, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
       propertyPath: _target
       value: 
@@ -3396,12 +3416,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4875996833533332738, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+    - {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-      insertIndex: 2
+      insertIndex: 1
       addedObject: {fileID: 4414282821800802423}
+    - targetCorrespondingSourceObject: {fileID: 4109394316656653739, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 4414282821800802427}
   m_SourcePrefab: {fileID: 100100000, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
 --- !u!1 &3569791732579588318
 GameObject:
@@ -3455,17 +3479,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5706750963508843440, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
   m_PrefabInstance: {fileID: 3559832809919233303}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4414282821800802410 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 328849090417711829, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
-  m_PrefabInstance: {fileID: 3559832809919233303}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 169464638}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab487c3ce89407b8153f9c2ff593bc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.PlayerShip
 --- !u!50 &4414282821800802421 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 4575139502811685103, guid: 0446acb84a7c9424d841676cef3b1d04, type: 3}
@@ -3485,6 +3498,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Game::Game.RigidbodyMovementComponent
   _rigidbody: {fileID: 4414282821800802421}
   _speed: 3
+--- !u!114 &4414282821800802427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169464638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558b312fd53c491ab69f3e55255aae3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game::Game.Ship
+  ShipConfig: {fileID: 11400000, guid: 0b9a4576e5f0a4babb44b3c82e6480d0, type: 2}
+  RigidbodyMovementComponent: {fileID: 4414282821800802423}
+  _team: 1
+  FirePoint: {fileID: 1694351842}
 --- !u!1 &4788406047096451828
 GameObject:
   m_ObjectHideFlags: 0

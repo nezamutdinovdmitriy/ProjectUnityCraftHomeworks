@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Game
 {
     // +
-    public abstract class Ship : MonoBehaviour, IDamageable
+    public class Ship : MonoBehaviour, IDamageable
     {
         [SerializeField]
         protected ShipConfig ShipConfig;
@@ -21,8 +21,8 @@ namespace Game
 
         [Header("Combat")]
         public Transform FirePoint;
-        public float BulletSpeed;
-        public int BulletDamage;
+        // public float BulletSpeed;
+        // public int BulletDamage;
 
         protected virtual void Awake()
         {

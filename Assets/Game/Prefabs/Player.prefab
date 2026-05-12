@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5706750963508843440}
-  - component: {fileID: 328849090417711829}
   - component: {fileID: 4640665866465748839}
   - component: {fileID: 4875996833533332738}
   - component: {fileID: 4575139502811685103}
@@ -39,28 +38,6 @@ Transform:
   - {fileID: 1249406481267314197}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &328849090417711829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4109394316656653739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab487c3ce89407b8153f9c2ff593bc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Game::Game.PlayerShip
-  ShipConfig: {fileID: 0}
-  RigidbodyMovementComponent: {fileID: 0}
-  _team: 1
-  FirePoint: {fileID: 0}
-  BulletSpeed: 0
-  BulletDamage: 0
-  _playerArea: {fileID: 0}
-  _cameraShaker: {fileID: 0}
-  _gameOverView: {fileID: 0}
-  _healthView: {fileID: 0}
 --- !u!114 &4640665866465748839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2477a4ff29e4e199a1dec5732bfd170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game::Game.ShipView
-  _ship: {fileID: 328849090417711829}
+  _ship: {fileID: 0}
   _viewConfig: {fileID: 11400000, guid: 9298f762411724a389beae656b1dfcaa, type: 2}
   _viewTransform: {fileID: 1249406481267314197}
   _fireVFX: {fileID: 375007784130398055}

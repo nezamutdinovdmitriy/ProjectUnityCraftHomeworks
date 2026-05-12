@@ -31,13 +31,11 @@ namespace Game
         public void SpawnBullet(
             Vector2 position,
             Vector2 direction,
-            float speed,
-            int damage,
             TeamType team)
         {
             Bullet bullet = _bulletPool.Rent();
 
-            bullet.Initialize(position, direction, damage, speed, team);
+            bullet.Initialize(position, direction, team);
 
             bullet.Hit += OnBulletHit;
             _bullets.Add(bullet);

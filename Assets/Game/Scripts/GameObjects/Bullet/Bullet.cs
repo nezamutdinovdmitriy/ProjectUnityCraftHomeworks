@@ -9,25 +9,23 @@ namespace Game
         public event Action<Bullet, Collider2D> Hit;
         public event Action<TeamType> Initialized;
 
-        private int _damage;
-        private float _speed;
+        private BulletConfig _config;
+        
         private Vector2 _direction;
 
         public TeamType Team { get; private set; }
 
+        public void Construct(BulletConfig config) => _config = config;
+        
         public void Initialize(
             Vector2 position,
             Vector2 direction,
-            int damage,
-            float speed,
             TeamType team)
         {
             transform.position = position;
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 
             _direction = direction;
-            _damage = damage;
-            _speed = speed;
             Team = team;
 
             gameObject.layer = BulletLayerHelper.GetLayer(team);
@@ -37,7 +35,7 @@ namespace Game
 
         public void MoveStep(float deltaTime)
         {
-            Vector3 moveStep = _direction * _speed * deltaTime;
+            Vector3 moveStep = _direction * _config.Speed * deltaTime;
             transform.position += moveStep;
         }
 
@@ -45,7 +43,7 @@ namespace Game
         {
             if (other.TryGetComponent(out IDamageable target)
                 && target.Team != Team)
-                target.TakeDamage(_damage);
+                target.TakeDamage(_config.Damage);
             
             Hit?.Invoke(this, other);
         }

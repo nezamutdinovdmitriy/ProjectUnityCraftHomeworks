@@ -41,8 +41,6 @@ namespace Game
             _bulletManager.SpawnBullet(
                 enemy.FirePoint.position,
                 direction,
-                enemy.BulletSpeed,
-                enemy.BulletDamage,
                 TeamType.Enemy
             );
         }
