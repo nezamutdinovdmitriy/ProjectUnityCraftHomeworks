@@ -21,7 +21,7 @@ namespace Game
             if (direction.HasValue == false)
                 return;
             
-            Vector2 newPosition = _rigidbody.position + direction.Value * (_speed * Time.fixedDeltaTime);
+            Vector2 newPosition = _rigidbody.position + direction.Value * (_speed * deltaTime);
             _rigidbody.MovePosition(newPosition);
             direction = null;
 
