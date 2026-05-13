@@ -12,18 +12,10 @@ namespace Game
         
         [Header("Spawn")] [SerializeField]
         private Pool<Enemy> _pool;
-        
-        /*[Space] [SerializeField]
-        private ScoreCounter _scoreCounter;*/
 
         public void Spawn() => _pool.Rent();
 
-        public void Despawn(Enemy enemy)
-        {
-            /*_scoreCounter.AddScore();*/
-            
-            StartCoroutine(DespawnInNextFrame(enemy));
-        }
+        public void Despawn(Enemy enemy) => StartCoroutine(DespawnInNextFrame(enemy));
 
         private IEnumerator DespawnInNextFrame(Enemy enemy)
         {
