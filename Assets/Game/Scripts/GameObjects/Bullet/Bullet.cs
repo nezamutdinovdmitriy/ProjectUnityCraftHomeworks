@@ -9,13 +9,14 @@ namespace Game
         public event Action<Bullet, Collider2D> Hit;
         public event Action<TeamType> Initialized;
 
+        [SerializeField]
         private BulletConfig _config;
 
         private Vector2 _direction;
 
         public TeamType Team { get; private set; }
 
-        public void Construct(BulletConfig config) => _config = config;
+        //public void Construct(BulletConfig config) => _config = config;
 
         public void Initialize(
             Vector2 position,
