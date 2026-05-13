@@ -18,7 +18,6 @@ namespace Game
         
         [field: SerializeField]
         public FireComponent FireComponent { get; private set; }
-        
         public HealthComponent HealthComponent { get; } = new HealthComponent();
         public Vector3 MoveDirection { get; protected set; }
 
@@ -28,7 +27,7 @@ namespace Game
         protected virtual void Awake()
         {
             HealthComponent.Initialize(ShipConfig.Health);
-
+            FireComponent.Initialize(ShipConfig.FireCooldown);
             movementComponent.SetSpeed(ShipConfig.MoveSpeed);
         }
         
@@ -41,9 +40,9 @@ namespace Game
                 movementComponent.MoveStep(MoveDirection, Time.fixedDeltaTime);
         }
 
-        public void Construct(BulletManager bulletManager)
+        public void Initialize(BulletManager bulletManager)
         {
-            FireComponent.Initialize(bulletManager, ShipConfig.FireCooldown);
+            FireComponent.Initialize(ShipConfig.FireCooldown, bulletManager);
         }
         
         public void TakeDamage(int damage) => HealthComponent.TakeDamage(damage);

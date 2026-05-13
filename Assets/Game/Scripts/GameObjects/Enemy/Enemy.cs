@@ -17,7 +17,9 @@ namespace Game
         private float _stoppingDistance = 0.25f;
 
         public Ship Target { get; private set; }
+        
         public bool IsReached { get; private set; }
+        
         public Ship Ship => _ship;
 
         private void Start() => _ship.HealthComponent.Dead += OnCharacterDead;
@@ -37,17 +39,17 @@ namespace Game
             Fire(direction);
         }
 
-        public void Construct(Ship target, BulletManager bulletManager)
+        public void Construct(Ship target, BulletManager bulletManager, IEnemyDespawner despawner)
         {
             Target = target;
             
-            _ship.Construct(bulletManager);
+            _despawner = despawner;
+            
+            _ship.Initialize(bulletManager);
         }
         
-        public void Initialize(Vector3 destination, IEnemyDespawner despawner)
+        public void Initialize(Vector3 destination)
         {
-            _despawner = despawner;
-
             _destination = destination;
             
             _ship.ResetHealth();

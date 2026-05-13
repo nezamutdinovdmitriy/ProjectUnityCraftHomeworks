@@ -10,16 +10,18 @@ namespace Game
 
         [SerializeField]
         private BulletManager _bulletManager;
-        
+
         private float _cooldown;
         private float _lastFireTime;
 
-        public void Initialize(BulletManager bulletManager, float cooldown)
+        public void Initialize(float cooldown, BulletManager bulletManager = null)
         {
             _cooldown = cooldown;
-            _bulletManager = bulletManager;
+
+            if (bulletManager != null)
+                _bulletManager = bulletManager;
         }
-        
+
         public void Execute(Ship owner, Vector2 direction, bool canFire)
         {
             if (canFire == false)
@@ -29,9 +31,9 @@ namespace Game
 
             if (time - _lastFireTime < _cooldown)
                 return;
-            
+
             Fire(owner, direction);
-            
+
             _lastFireTime = time;
             Fired?.Invoke(owner);
         }
@@ -42,7 +44,7 @@ namespace Game
                 ship.FirePoint.position,
                 direction,
                 ship.Team
-            ); 
+            );
         }
     }
 }

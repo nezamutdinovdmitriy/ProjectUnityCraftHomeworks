@@ -10,12 +10,15 @@ namespace Game
 
         [SerializeField]
         private BulletManager _bulletManager;
+        
+        [SerializeField]
+        private EnemyManager _enemyManager;
 
         public override Enemy Create()
         {
             Enemy instance = base.Create();
 
-            instance.Construct(_player, _bulletManager);
+            instance.Construct(_player, _bulletManager, _enemyManager);
 
             return instance;
         }

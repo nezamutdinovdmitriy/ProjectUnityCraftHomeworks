@@ -22,7 +22,7 @@ namespace Game
 
             enemy.transform.position = _enemyPositions.NextSpawnPosition();
             
-            enemy.Initialize(_enemyPositions.NextDestination(), this);
+            enemy.Initialize(_enemyPositions.NextDestination());
         }
         
         public void Despawn(Enemy enemy)
