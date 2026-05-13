@@ -23,7 +23,7 @@ namespace Game.Spawn
             }
         }
 
-        public T Rent()
+        public virtual T Rent()
         {
             T instance = _stack.TryPop(out T obj) ? obj : _factory.Create();
             

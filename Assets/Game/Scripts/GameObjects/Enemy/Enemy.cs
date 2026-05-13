@@ -12,14 +12,14 @@ namespace Game
 
         [Header("AI Settings")] [SerializeField]
         private Vector2 _destination;
-        
+
         [SerializeField]
         private float _stoppingDistance = 0.25f;
 
         public Ship Target { get; private set; }
-        
+
         public bool IsReached { get; private set; }
-        
+
         public Ship Ship => _ship;
 
         private void Start() => _ship.HealthComponent.Dead += OnCharacterDead;
@@ -27,31 +27,36 @@ namespace Game
 
         private void FixedUpdate()
         {
-            if (_ship.HealthComponent.IsDead
-                || Target == null
-                || Target.HealthComponent.IsDead)
+            if (_ship.HealthComponent.IsDead)
                 return;
 
             Move();
 
-            Vector2 direction = (Target.transform.position - _ship.FirePoint.position).normalized;
-            
-            Fire(direction);
+            if (Target != null && Target.HealthComponent.IsDead == false)
+            {
+                Vector2 direction = (Target.transform.position - _ship.FirePoint.position).normalized;
+                Fire(direction);
+            }
+            else
+            {
+                if (IsReached)
+                    _ship.SetMoveDirection(Vector2.zero);
+            }
         }
 
         public void Construct(Ship target, BulletManager bulletManager, IEnemyDespawner despawner)
         {
             Target = target;
-            
+
             _despawner = despawner;
-            
+
             _ship.Initialize(bulletManager);
         }
-        
+
         public void Initialize(Vector3 destination)
         {
             _destination = destination;
-            
+
             _ship.ResetHealth();
         }
 
@@ -70,8 +75,7 @@ namespace Game
             if (IsReached)
                 _ship.Fire(direction);
         }
-        
+
         private void OnCharacterDead() => _despawner.Despawn(this);
-        
     }
 }
