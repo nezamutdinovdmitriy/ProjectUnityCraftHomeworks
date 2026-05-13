@@ -1,21 +1,19 @@
-﻿using UnityEngine;
+﻿using Game.Spawn;
+using UnityEngine;
 
 namespace Game
 {
-    public class BulletFactory : MonoBehaviour
+    public class BulletFactory : Factory<Bullet>
     {
-        [SerializeField]
-        private Bullet _bulletPrefab;
-
         [SerializeField]
         private BulletConfig _config;
 
-        public Bullet Create(Transform parent)
+        public override Bullet Create()
         {
-            Bullet instance = Instantiate(_bulletPrefab, parent);
-
-            instance.Construct(_config);
+            Bullet instance = base.Create();
             
+            instance.Construct(_config);
+
             return instance;
         }
     }

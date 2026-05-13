@@ -41,6 +41,7 @@ namespace Game
         {
             Target = target;
             
+            _ship.Construct(bulletManager);
         }
         
         public void Initialize(Vector3 destination, IEnemyDespawner despawner)
@@ -51,8 +52,6 @@ namespace Game
             
             _ship.ResetHealth();
         }
-
-        public void SetTarget(Ship target) => Target = target;
 
         private void Move()
         {

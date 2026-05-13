@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Game.Spawn;
 using Modules.Utils;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Game
         private readonly List<Bullet> _bullets = new();
 
         [SerializeField]
-        private BulletPool _bulletPool;
+        private Pool<Bullet> _pool;
 
         [SerializeField]
         private TransformBounds _levelBounds;
@@ -33,7 +34,7 @@ namespace Game
             Vector2 direction,
             TeamType team)
         {
-            Bullet bullet = _bulletPool.Rent();
+            Bullet bullet = _pool.Rent();
 
             bullet.Initialize(position, direction, team);
 
@@ -45,7 +46,7 @@ namespace Game
         {
             bullet.Hit -= OnBulletHit;
             _bullets.Remove(bullet);
-            _bulletPool.Push(bullet);
+            _pool.Push(bullet);
         }
         
         private void OnBulletHit(Bullet bullet, Collider2D other)

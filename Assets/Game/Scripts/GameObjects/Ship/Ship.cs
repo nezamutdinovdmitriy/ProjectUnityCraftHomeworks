@@ -29,20 +29,23 @@ namespace Game
         {
             HealthComponent.Initialize(ShipConfig.Health);
 
-            FireComponent.Initialize(ShipConfig.FireCooldown);
-
             movementComponent.SetSpeed(ShipConfig.MoveSpeed);
         }
-
+        
+        protected virtual void OnEnable() => HealthComponent.Dead += OnShipDestroyed;
+        protected virtual void OnDisable() => HealthComponent.Dead -= OnShipDestroyed;
+        
         protected virtual void FixedUpdate()
         {
             if (HealthComponent.Current > 0)
                 movementComponent.MoveStep(MoveDirection, Time.fixedDeltaTime);
         }
 
-        protected virtual void OnEnable() => HealthComponent.Dead += OnShipDestroyed;
-        protected virtual void OnDisable() => HealthComponent.Dead -= OnShipDestroyed;
-
+        public void Construct(BulletManager bulletManager)
+        {
+            FireComponent.Initialize(bulletManager, ShipConfig.FireCooldown);
+        }
+        
         public void TakeDamage(int damage) => HealthComponent.TakeDamage(damage);
 
         public void SetMoveDirection(Vector2 direction) => MoveDirection = direction;

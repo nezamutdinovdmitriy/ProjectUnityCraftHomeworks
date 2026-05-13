@@ -1,24 +1,21 @@
-﻿using UnityEngine;
+﻿using Game.Spawn;
+using UnityEngine;
 
 namespace Game
 {
-    public class EnemyFactory : MonoBehaviour
+    public class EnemyFactory : Factory<Enemy>
     {
-        [SerializeField]
-        private Enemy _prefab;
-        [SerializeField]
-        private Transform _container;
-
         [Header("Target")] [SerializeField]
         private Ship _player;
-        
-        [Header("Bullets")] [SerializeField]
+
+        [SerializeField]
         private BulletManager _bulletManager;
 
-        public Enemy Create()
+        public override Enemy Create()
         {
-            Enemy instance = Instantiate(_prefab, _container);
-            instance.SetTarget(_player);
+            Enemy instance = base.Create();
+
+            instance.Construct(_player, _bulletManager);
 
             return instance;
         }

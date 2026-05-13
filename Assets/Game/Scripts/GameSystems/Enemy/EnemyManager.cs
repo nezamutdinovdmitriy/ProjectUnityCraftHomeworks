@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Spawn;
 using UnityEngine;
 
 namespace Game
@@ -7,8 +8,8 @@ namespace Game
     public sealed class EnemyManager : MonoBehaviour, IEnemyDespawner
     {
         [Header("Spawn")] [SerializeField]
-        private EnemyPool _pool;
-
+        private Pool<Enemy> _pool;
+        
         [SerializeField]
         private EnemyPositions _enemyPositions;
         

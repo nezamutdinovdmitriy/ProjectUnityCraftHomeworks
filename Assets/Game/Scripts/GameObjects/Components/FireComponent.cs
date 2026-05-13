@@ -14,7 +14,11 @@ namespace Game
         private float _cooldown;
         private float _lastFireTime;
 
-        public void Initialize(float cooldown) => _cooldown = cooldown;
+        public void Initialize(BulletManager bulletManager, float cooldown)
+        {
+            _cooldown = cooldown;
+            _bulletManager = bulletManager;
+        }
         
         public void Execute(Ship owner, Vector2 direction, bool canFire)
         {
@@ -37,7 +41,7 @@ namespace Game
             _bulletManager.SpawnBullet(
                 ship.FirePoint.position,
                 direction,
-                TeamType.Enemy
+                ship.Team
             ); 
         }
     }
