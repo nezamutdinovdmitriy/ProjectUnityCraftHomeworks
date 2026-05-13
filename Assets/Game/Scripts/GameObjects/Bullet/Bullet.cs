@@ -10,28 +10,35 @@ namespace Game
         public event Action<TeamType> Initialized;
 
         private BulletConfig _config;
-        
+
         private Vector2 _direction;
 
         public TeamType Team { get; private set; }
 
         public void Construct(BulletConfig config) => _config = config;
-        
+
         public void Initialize(
             Vector2 position,
             Vector2 direction,
             TeamType team)
         {
-            transform.position = position;
-            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+            SetPosition(position);
+            SetRotation(direction);
+            SetTeam(team);
 
             _direction = direction;
-            Team = team;
 
             gameObject.layer = BulletLayers.GetLayer(team);
 
             Initialized?.Invoke(team);
         }
+
+        public void SetPosition(Vector2 position) => transform.position = position;
+
+        public void SetRotation(Vector2 direction) =>
+            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+
+        public void SetTeam(TeamType team) => Team = team;
 
         public void MoveStep(float deltaTime)
         {
@@ -44,7 +51,7 @@ namespace Game
             if (other.TryGetComponent(out IDamageable target)
                 && target.Team != Team)
                 target.TakeDamage(_config.Damage);
-            
+
             Hit?.Invoke(this, other);
         }
     }
