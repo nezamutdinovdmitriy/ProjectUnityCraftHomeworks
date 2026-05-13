@@ -11,6 +11,9 @@ namespace Game
 
         [Header("Target")] [SerializeField]
         private Ship _player;
+        
+        [Header("Bullets")] [SerializeField]
+        private BulletManager _bulletManager;
 
         public Enemy Create()
         {

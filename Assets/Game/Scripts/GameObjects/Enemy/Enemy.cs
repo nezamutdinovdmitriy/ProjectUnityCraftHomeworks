@@ -12,6 +12,8 @@ namespace Game
 
         [Header("AI Settings")] [SerializeField]
         private Vector2 _destination;
+        
+        [SerializeField]
         private float _stoppingDistance = 0.25f;
 
         public Ship Target { get; private set; }
@@ -34,10 +36,19 @@ namespace Game
             
             Fire(direction);
         }
+
+        public void Construct(Ship target, BulletManager bulletManager)
+        {
+            Target = target;
+            
+        }
         
-        public void Initialize(Vector3 destination, BulletManager bulletManager, IEnemyDespawner despawner)
+        public void Initialize(Vector3 destination, IEnemyDespawner despawner)
         {
             _despawner = despawner;
+
+            _destination = destination;
+            
             _ship.ResetHealth();
         }
 

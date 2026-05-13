@@ -6,29 +6,24 @@ namespace Game
     // +
     public sealed class EnemyManager : MonoBehaviour, IEnemyDespawner
     {
-        [Header("Bullets")] [SerializeField]
-        private BulletManager _bulletManager;
-
         [Header("Spawn")] [SerializeField]
-        private EnemySpawner _enemySpawner;
+        private EnemyPool _pool;
 
+        [SerializeField]
+        private EnemyPositions _enemyPositions;
+        
         [Space] [SerializeField]
         private ScoreCounter _scoreCounter;
 
-        private void OnEnable() => _enemySpawner.Spawned += OnEnemySpawned;
-        private void OnDisable() => _enemySpawner.Spawned -= OnEnemySpawned;
-
-        private void FixedUpdate()
+        public void Spawn()
         {
-            // _enemySpawner.Tick(_player.HealthComponent.Current > 0);
-            _enemySpawner.Tick(true);
-        }
+            Enemy enemy = _pool.Rent();
 
-        private void OnEnemySpawned(Enemy enemy, Vector2 destination)
-        {
-            enemy.Initialize(destination, _bulletManager, this);
+            enemy.transform.position = _enemyPositions.NextSpawnPosition();
+            
+            enemy.Initialize(_enemyPositions.NextDestination(), this);
         }
-
+        
         public void Despawn(Enemy enemy)
         {
             _scoreCounter.AddScore();
@@ -39,8 +34,8 @@ namespace Game
         private IEnumerator DespawnInNextFrame(Enemy enemy)
         {
             yield return null;
-            enemy.gameObject.SetActive(false);
-            _enemySpawner.Despawn(enemy);
+            
+            _pool.Push(enemy);
         }
     }
 }

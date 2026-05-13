@@ -14,10 +14,7 @@ namespace Game
         private float _cooldown;
         private float _lastFireTime;
 
-        public void Initialize(float cooldown)
-        {
-            _cooldown = cooldown;
-        }
+        public void Initialize(float cooldown) => _cooldown = cooldown;
         
         public void Execute(Ship owner, Vector2 direction, bool canFire)
         {

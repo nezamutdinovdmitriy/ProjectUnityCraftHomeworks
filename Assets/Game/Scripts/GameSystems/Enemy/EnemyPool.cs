@@ -9,7 +9,7 @@ namespace Game
         
         [SerializeField]
         private EnemyFactory _enemyFactory;
-
+        
         private readonly Stack<Enemy> _stack = new();
 
         private void Awake()
@@ -24,19 +24,21 @@ namespace Game
 
         public Enemy Rent()
         {
-            if (_stack.TryPop(out Enemy enemy))
-            {
-                enemy.gameObject.SetActive(true);
-                return enemy;
-            }
+            Enemy instance = _stack.TryPop(out Enemy enemy) ? enemy : _enemyFactory.Create();
 
-            return _enemyFactory.Create();
+            instance.gameObject.SetActive(true);
+            
+            Debug.Log("Enemy Rent");
+            
+            return instance;
         }
         
         public void Push(Enemy enemy)
         {
             enemy.gameObject.SetActive(false);
             _stack.Push(enemy);
+            
+            Debug.Log("Enemy Push");
         }
     }
 }
