@@ -13,7 +13,17 @@ namespace Game
         [Header("Spawn")] [SerializeField]
         private Pool<Enemy> _pool;
 
-        public void Spawn() => _pool.Rent();
+        [SerializeField]
+        private EnemyPositions _enemyPositions;
+
+        public void Spawn()
+        {
+            Enemy enemy = _pool.Rent();
+            
+            enemy.transform.position = _enemyPositions.NextSpawnPosition();
+            
+            enemy.Initialize(_enemyPositions.NextDestination());
+        }
 
         public void Despawn(Enemy enemy) => StartCoroutine(DespawnInNextFrame(enemy));
 

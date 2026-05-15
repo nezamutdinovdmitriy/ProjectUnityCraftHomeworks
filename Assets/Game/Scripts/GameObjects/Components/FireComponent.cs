@@ -22,6 +22,10 @@ namespace Game
                 _bulletManager = bulletManager;
         }
 
+        public void SetCooldown(float cooldown) => _cooldown = cooldown;
+
+        public void Construct(BulletManager bulletManager) => _bulletManager = bulletManager;
+        
         public void Execute(Ship owner, Vector2 direction, bool canFire)
         {
             if (canFire == false)

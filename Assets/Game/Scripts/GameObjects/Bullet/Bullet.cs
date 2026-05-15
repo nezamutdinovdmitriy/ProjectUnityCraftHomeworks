@@ -34,12 +34,12 @@ namespace Game
             Initialized?.Invoke(team);
         }
 
-        public void SetPosition(Vector2 position) => transform.position = position;
+        private void SetPosition(Vector2 position) => transform.position = position;
 
-        public void SetRotation(Vector2 direction) =>
+        private void SetRotation(Vector2 direction) =>
             transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
 
-        public void SetTeam(TeamType team) => Team = team;
+        private void SetTeam(TeamType team) => Team = team;
 
         public void MoveStep(float deltaTime)
         {

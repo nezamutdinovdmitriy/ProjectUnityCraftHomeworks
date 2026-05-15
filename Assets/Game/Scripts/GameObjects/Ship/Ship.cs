@@ -26,8 +26,11 @@ namespace Game
 
         protected virtual void Awake()
         {
-            HealthComponent.Initialize(ShipConfig.Health);
-            FireComponent.Initialize(ShipConfig.FireCooldown);
+            HealthComponent.SetMaxHealth(ShipConfig.Health);
+            HealthComponent.SetCurrentHealth(ShipConfig.Health);
+
+            FireComponent.SetCooldown(ShipConfig.FireCooldown);
+            
             movementComponent.SetSpeed(ShipConfig.MoveSpeed);
         }
         
@@ -42,7 +45,8 @@ namespace Game
 
         public void Initialize(BulletManager bulletManager)
         {
-            FireComponent.Initialize(ShipConfig.FireCooldown, bulletManager);
+            FireComponent.Construct(bulletManager);
+            FireComponent.SetCooldown(ShipConfig.FireCooldown);
         }
         
         public void TakeDamage(int damage) => HealthComponent.TakeDamage(damage);
@@ -52,7 +56,7 @@ namespace Game
         public void Fire(Vector2 direction) 
             => FireComponent.Execute(this, direction, HealthComponent.IsDead == false);
         
-        public void ResetHealth() => HealthComponent.Initialize(ShipConfig.Health);
+        public void ResetHealth() => HealthComponent.SetCurrentHealth(ShipConfig.Health);
 
         private void OnShipDestroyed() => gameObject.SetActive(false);
     }

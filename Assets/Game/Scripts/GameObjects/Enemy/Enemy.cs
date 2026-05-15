@@ -20,8 +20,6 @@ namespace Game
 
         public bool IsReached { get; private set; }
 
-        public Ship Ship => _ship;
-
         private void Start() => _ship.HealthComponent.Dead += OnCharacterDead;
         private void OnDisable() => _ship.HealthComponent.Dead -= OnCharacterDead;
 

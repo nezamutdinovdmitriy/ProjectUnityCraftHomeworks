@@ -14,12 +14,9 @@ namespace Game
 
         public bool IsDead => Current <= 0;
 
-        public void Initialize(int maxHealth)
-        {
-            Max = maxHealth;
-            Current = maxHealth;
-        }
-
+        public void SetMaxHealth(int value) => Max = value;
+        public void SetCurrentHealth(int value) => Current = value;
+        
         public void TakeDamage(int damage)
         {
             if (Current <= 0 || damage <= 0)
