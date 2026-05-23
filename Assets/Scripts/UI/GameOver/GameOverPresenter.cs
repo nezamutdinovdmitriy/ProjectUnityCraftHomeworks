@@ -9,33 +9,32 @@ namespace UI
     public class GameOverPresenter : IInitializable, IDisposable
     {
         private readonly DefeatGameHandler _defeatHandler;
-        private readonly LevelManager _levelManger;
+        private readonly VictoryGameHandler _victoryHandler;
         private readonly IGameUI _gameOverScreen;
         
         public GameOverPresenter(
             DefeatGameHandler defeatHandler, 
-            IGameUI gameOverScreen, 
-            LevelManager levelManger)
+            VictoryGameHandler victoryHandler,
+            IGameUI gameOverScreen)
         {
             _defeatHandler = defeatHandler;
+            _victoryHandler = victoryHandler;
             _gameOverScreen = gameOverScreen;
-            _levelManger = levelManger;
         }
 
         public void Initialize()
         {
             _defeatHandler.Defeated += OnDefeated;
-            _levelManger.GameWin += OnWin;
+            _victoryHandler.Victory += OnVictory;
         }
 
         public void Dispose()
         {
             _defeatHandler.Defeated -= OnDefeated;
-            _levelManger.GameWin -= OnWin;
+            _victoryHandler.Victory -= OnVictory;
         }
 
-        private void OnWin() => _gameOverScreen.GameOver(true);
-        
+        private void OnVictory() => _gameOverScreen.GameOver(true);
         private void OnDefeated() => _gameOverScreen.GameOver(false);
     }
 }

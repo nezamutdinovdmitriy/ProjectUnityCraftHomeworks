@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GameSystems.Coin;
 using Modules;
 using UnityEngine;
@@ -8,7 +9,7 @@ namespace GameSystems.Level
 {
     public class LevelManager : IInitializable, IDisposable
     {
-        public event Action GameWin;
+        public event Action AllLevelsCompleted;
 
         private readonly ISnake _snake;
         private readonly CoinManager _coinManager;
@@ -30,46 +31,43 @@ namespace GameSystems.Level
         public void Initialize()
         {
             _snake.OnMoved += OnSnakeMoved;
-            _coinManager.AllCoinsCollected += OnAllCoinsCollected;
-
             StartLevel(_difficulty.Current);
         }
 
-        public void Dispose()
-        {
-            _snake.OnMoved -= OnSnakeMoved;
-            _coinManager.AllCoinsCollected -= OnAllCoinsCollected;
-        }
-        
-        private void OnAllCoinsCollected()
-        {
-            if (_difficulty.Next(out int nextLevel))
-            {
-                StartLevel(nextLevel);
-            }
-            else
-            {
-                _snake.SetActive(false);
-                _coinManager.ClearActiveCoins();
-                GameWin?.Invoke();
-            }
-        }
+        public void Dispose() => _snake.OnMoved -= OnSnakeMoved;
 
         private void OnSnakeMoved(Vector2Int headPosition)
         {
-            if (_coinManager.CheckCoinCollision(headPosition, out ICoin collectedCoin))
+            IReadOnlyList<Modules.Coin> activeCoins = _coinManager.ActiveCoins;
+
+            for (int i = activeCoins.Count - 1; i >= 0; i--)
             {
-                _snake.Expand(collectedCoin.Bones);
-                _score.Add(collectedCoin.Score);
+                if (activeCoins[i].Position == headPosition)
+                {
+                    _snake.Expand(activeCoins[i].Bones);
+                    _score.Add(activeCoins[i].Score);
+                    _coinManager.DespawnCoin(activeCoins[i]);
+                }
             }
+            
+            if (_coinManager.ActiveCoins.Count == 0)
+                ProcessLevelCompleted();
         }
-        
+
+        private void ProcessLevelCompleted()
+        {
+            if (_difficulty.Next(out int nextLevel))
+                StartLevel(nextLevel);
+            else
+                AllLevelsCompleted?.Invoke();
+        }
+
         private void StartLevel(int level)
         {
-            int mod = level == 0 ? 1 : level;
+            int modifier = level == 0 ? 1 : level;
             
-            _coinManager.SpawnCoins(mod);
-            _snake.SetSpeed(mod);
+            _coinManager.SpawnCoins(modifier);
+            _snake.SetSpeed(modifier);
         }
     }
 }
