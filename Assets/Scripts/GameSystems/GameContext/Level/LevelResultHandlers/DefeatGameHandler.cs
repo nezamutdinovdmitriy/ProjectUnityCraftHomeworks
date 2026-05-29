@@ -1,4 +1,5 @@
 ﻿using System;
+using GameSystems.GameContext;
 using Modules;
 using SnakeGame;
 using UnityEngine;
@@ -8,15 +9,16 @@ namespace GameSystems
 {
     public class DefeatGameHandler : IInitializable, IDisposable
     {
-        public event Action Defeated;
+        private readonly GameCycle _gameCycle;
         
         private readonly ISnake _snake;
         private readonly IWorldBounds _worldBounds;
         
-        public DefeatGameHandler(ISnake snake, IWorldBounds worldBounds)
+        public DefeatGameHandler(ISnake snake, IWorldBounds worldBounds, GameCycle gameCycle)
         {
             _snake = snake;
             _worldBounds = worldBounds;
+            _gameCycle = gameCycle;
         }
         
         public void Initialize()
@@ -42,7 +44,8 @@ namespace GameSystems
         private void DefeatProcess()
         {
             _snake.SetActive(false);
-            Defeated?.Invoke();
+            
+            _gameCycle.SetDefeat();
         }
     }
 }

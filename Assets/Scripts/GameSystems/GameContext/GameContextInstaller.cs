@@ -17,6 +17,9 @@ namespace GameSystems.GameContext
             Container
                 .Install(_coinInstaller)
                 .Install(_levelInstaller);
+
+            Container.BindInterfacesTo<ScoreController>().AsSingle();
+            Container.Bind<GameCycle>().AsSingle();
         }
     }
 }

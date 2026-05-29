@@ -1,5 +1,6 @@
 ﻿using System;
 using GameSystems.Coin;
+using GameSystems.GameContext;
 using Modules;
 using Zenject;
 
@@ -7,7 +8,7 @@ namespace GameSystems.Level
 {
     public class VictoryGameHandler : IInitializable, IDisposable
     {
-        public event Action Victory;
+        private readonly GameCycle _gameCycle;
 
         private readonly LevelManager _levelManger;
         private readonly ISnake _snake;
@@ -16,11 +17,12 @@ namespace GameSystems.Level
         public VictoryGameHandler(
             LevelManager levelManger,
             ISnake snake,
-            CoinManager coinManager)
+            CoinManager coinManager, GameCycle gameCycle)
         {
             _levelManger = levelManger;
             _snake = snake;
             _coinManager = coinManager;
+            _gameCycle = gameCycle;
         }
 
         public void Initialize() => _levelManger.AllLevelsCompleted += HandleVictory;
@@ -32,7 +34,7 @@ namespace GameSystems.Level
             _snake.SetActive(false);
             _coinManager.ClearActiveCoins();
             
-            Victory?.Invoke();
+            _gameCycle.SetVictory();
         }
     }
 }

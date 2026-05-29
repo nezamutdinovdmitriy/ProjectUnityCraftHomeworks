@@ -1,6 +1,5 @@
 ﻿using System;
-using GameSystems;
-using GameSystems.Level;
+using GameSystems.GameContext;
 using SnakeGame;
 using Zenject;
 
@@ -8,30 +7,27 @@ namespace UI
 {
     public class GameOverPresenter : IInitializable, IDisposable
     {
-        private readonly DefeatGameHandler _defeatHandler;
-        private readonly VictoryGameHandler _victoryHandler;
+        private readonly GameCycle _gameCycle;
         private readonly IGameUI _gameOverScreen;
         
         public GameOverPresenter(
-            DefeatGameHandler defeatHandler, 
-            VictoryGameHandler victoryHandler,
+            GameCycle gameCycle,
             IGameUI gameOverScreen)
         {
-            _defeatHandler = defeatHandler;
-            _victoryHandler = victoryHandler;
+            _gameCycle = gameCycle;
             _gameOverScreen = gameOverScreen;
         }
 
         public void Initialize()
         {
-            _defeatHandler.Defeated += OnDefeated;
-            _victoryHandler.Victory += OnVictory;
+            _gameCycle.Defeated += OnDefeated;
+            _gameCycle.Victory += OnVictory;
         }
 
         public void Dispose()
         {
-            _defeatHandler.Defeated -= OnDefeated;
-            _victoryHandler.Victory -= OnVictory;
+            _gameCycle.Defeated -= OnDefeated;
+            _gameCycle.Victory -= OnVictory;
         }
 
         private void OnVictory() => _gameOverScreen.GameOver(true);

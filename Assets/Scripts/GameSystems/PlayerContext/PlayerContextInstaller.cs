@@ -1,4 +1,4 @@
-﻿using Extensions;
+﻿using Modules;
 using UnityEngine;
 using Zenject;
 
@@ -7,16 +7,17 @@ namespace GameSystems.PlayerContext
     public class PlayerContextInstaller : MonoInstaller
     {
         [SerializeField]
-        private PlayerInputInstaller _playerInputInstaller;
-
-        [SerializeField]
-        private CharacterInstaller _characterInstaller;
+        private Snake _snake;
 
         public override void InstallBindings()
         {
-            Container
-                .Install(_playerInputInstaller)
-                .Install(_characterInstaller);
+            Container.Bind<IInputProvider>().To<DesktopInputProvider>().AsSingle();
+            
+            Container.Bind<ITickable>().To<MovementController>().AsCached();
+
+            Container.Bind<ISnake>().FromInstance(_snake).AsSingle();
+
+            Container.BindInterfacesTo<SnakeExpandController>().AsSingle();
         }
     }
 }

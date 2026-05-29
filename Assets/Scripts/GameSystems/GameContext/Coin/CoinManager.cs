@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Modules;
+using GameSystems.Coin;
 using SnakeGame;
 using UnityEngine;
 
-namespace GameSystems.Coin
+namespace GameSystems
 {
     public class CoinManager : IDisposable
     {
+        public event Action<Modules.Coin> CoinConsumed;
+        public event Action AllCoinsCollected;
+        
         private readonly CoinPool _coinPool;
         private readonly IWorldBounds _worldBounds;
         private readonly List<Modules.Coin> _activeCoins = new();
@@ -17,8 +20,6 @@ namespace GameSystems.Coin
             _coinPool = pool;
             _worldBounds = worldBounds;
         }
-
-        public IReadOnlyList<Modules.Coin> ActiveCoins => _activeCoins;
 
         public void Dispose() => ClearActiveCoins();
 
@@ -35,10 +36,24 @@ namespace GameSystems.Coin
             }
         }
 
-        public void DespawnCoin(Modules.Coin coin)
+        public bool TryConsumeCoin(Vector2Int consumerPosition)
         {
-            if(_activeCoins.Remove(coin))
-                _coinPool.Despawn(coin);
+            for (int i = _activeCoins.Count - 1; i >= 0; i--)
+            {
+                Modules.Coin coin = _activeCoins[i];
+                
+                if (coin.Position == consumerPosition)
+                {
+                    ConsumeCoin(coin);
+                    
+                    if(_activeCoins.Count == 0)
+                        AllCoinsCollected?.Invoke();
+                    
+                    return true;
+                }
+            }
+
+            return false;
         }
         
         public void ClearActiveCoins()
@@ -47,6 +62,13 @@ namespace GameSystems.Coin
                 _coinPool.Despawn(_activeCoins[i]);
             
             _activeCoins.Clear();
+        }
+
+        private void ConsumeCoin(Modules.Coin coin)
+        {
+            _activeCoins.Remove(coin);
+            _coinPool.Despawn(coin);
+            CoinConsumed?.Invoke(coin);
         }
     }
 }
