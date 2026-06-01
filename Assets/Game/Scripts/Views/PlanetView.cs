@@ -26,9 +26,6 @@ namespace Game.Views
         private TMP_Text _timerText;
 
         [SerializeField]
-        private Image _currencyIcon;
-
-        [SerializeField]
         private TMP_Text _priceText;
 
         [SerializeField]
@@ -43,8 +40,6 @@ namespace Game.Views
         public void SetIcon(Sprite sprite) => _icon.sprite = sprite;
         
         public void SetLock(Sprite sprite) => _lock.sprite = sprite;
-        
-        public void SetCurrencyIcon(Sprite sprite) => _currencyIcon.sprite = sprite;
         
         public void SetPrice(string price) => _priceText.text = price;
         

@@ -1,3 +1,4 @@
+using Modules.Planets;
 using UnityEngine;
 using Zenject;
 
@@ -9,9 +10,17 @@ namespace Game.Presenters
     )]
     public sealed class PresentersInstallers : ScriptableObjectInstaller
     {
+        [SerializeField]
+        private PlanetPresenter _planetPresenter;
+
+        [Inject]
+        private PlanetCatalog _planetCatalog;
+
         public override void InstallBindings()
         {
-            //TODO:
+            Container.Bind<PlanetPresenter>().FromInstance(_planetPresenter).AsSingle();
         }
+
+        //TODO:
     }
 }

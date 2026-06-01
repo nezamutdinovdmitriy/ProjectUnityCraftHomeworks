@@ -1341,6 +1341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf1abd95338489aa5e953f001a270a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _planetPopupView: {fileID: 5263598761770793470, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
+  _planetView: {fileID: -5453260490585078673, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
 --- !u!1 &974007725
 GameObject:
   m_ObjectHideFlags: 0
