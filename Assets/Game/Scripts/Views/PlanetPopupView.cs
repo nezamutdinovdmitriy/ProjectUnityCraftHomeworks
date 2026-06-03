@@ -9,7 +9,7 @@ namespace Game.Views
     {
         public event Action CloseButtonClicked;
         public event Action UpgradeButtonClicked;
-        
+
         [Header("Header")] [SerializeField]
         private TMP_Text _title;
 
@@ -19,17 +19,20 @@ namespace Game.Views
         [Header("Body")] [SerializeField]
         private Image _avatar;
 
-        [Header("Population")] [SerializeField]
+        [SerializeField]
         private TMP_Text _populationText;
 
-        [Header("Level")] [SerializeField]
+        [SerializeField]
         private TMP_Text _levelText;
 
-        [Header("Income")] [SerializeField]
+        [SerializeField]
         private TMP_Text _incomeText;
 
         [Header("Upgrade")] [SerializeField]
         private Button _upgradeButton;
+
+        [SerializeField]
+        private TMP_Text _text;
 
         [SerializeField]
         private TMP_Text _priceText;
@@ -50,19 +53,16 @@ namespace Game.Views
         public void Hide() => gameObject.SetActive(false);
 
         public void SetTitle(string title) => _title.text = title;
-
         public void SetAvatar(Sprite sprite) => _avatar.sprite = sprite;
-
         public void SetPopulation(string population) => _populationText.text = population;
-
         public void SetLevel(string level) => _levelText.text = level;
-
         public void SetIncome(string income) => _incomeText.text = income;
-
+        public void SetUpgradeButtonText(string text) => _text.text = text;
+        public void SetInteractableUpgradeButton(bool interactable) => _upgradeButton.interactable = interactable;
         public void SetPrice(string price) => _priceText.text = price;
-        
+        public void PriceVisible(bool visible) => _priceText.gameObject.SetActive(visible);
+
         private void OnCloseButtonClicked() => CloseButtonClicked?.Invoke();
         private void OnUpgradeButtonClicked() => UpgradeButtonClicked?.Invoke();
-
     }
 }

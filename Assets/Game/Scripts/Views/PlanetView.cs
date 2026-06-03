@@ -9,6 +9,10 @@ namespace Game.Views
     public class PlanetView : MonoBehaviour
     {
         public event Action PlanetButtonClicked;
+        public event Action PlanetButtonHeld;
+
+        [SerializeField]
+        private SmartButton _button;
         
         [SerializeField]
         private Image _icon;
@@ -19,30 +23,62 @@ namespace Game.Views
         [SerializeField]
         private Image _coin;
 
-        [SerializeField]
-        private Image _progressBar;
+        [Header("Income")] [SerializeField]
+        private GameObject _incomeRoot;
 
         [SerializeField]
-        private TMP_Text _timerText;
+        private Image _incomeProgress;
+
+        [SerializeField]
+        private TMP_Text _incomeTimeText;
+
+        [Header("Price")] [SerializeField]
+        private GameObject _priceRoot;
+
+        [SerializeField]
+        private Image _priceIcon;
 
         [SerializeField]
         private TMP_Text _priceText;
 
-        [SerializeField]
-        private SmartButton _button;
+        public Image Coin => _coin;
+        
+        private void OnEnable()
+        {
+            _button.OnClick += OnPlanetButtonClicked;
+            _button.OnHold += OnPlanetButtonHeld;
+        }
 
-        private void OnEnable() => _button.OnClick += OnPlanetButtonClicked;
-        private void OnDisable() => _button.OnClick -= OnPlanetButtonClicked;
+        private void OnDisable()
+        {
+            _button.OnClick -= OnPlanetButtonClicked;
+            _button.OnHold -= OnPlanetButtonHeld;
+        }
 
         public void Show() => gameObject.SetActive(true);
         public void Hide() => gameObject.SetActive(false);
 
         public void SetIcon(Sprite sprite) => _icon.sprite = sprite;
+
+        public void DisplayCoin(bool display) => _coin.gameObject.SetActive(display);
+
+        public void DisplayIncome(bool display) => _incomeRoot.SetActive(display);
         
-        public void SetLock(Sprite sprite) => _lock.sprite = sprite;
+        public void SetIncomeProgress(float progress) => _incomeProgress.fillAmount = progress;
+        public void SetIncomeTimer(string value) => _incomeTimeText.text = value;
         
+        public void Lock(bool state)
+        {
+            _coin.gameObject.SetActive(state);
+            _lock.gameObject.SetActive(!state);
+            _incomeRoot.SetActive(state);
+            _priceRoot.SetActive(!state);
+        }
+
         public void SetPrice(string price) => _priceText.text = price;
-        
+
         private void OnPlanetButtonClicked() => PlanetButtonClicked?.Invoke();
+
+        private void OnPlanetButtonHeld() => PlanetButtonHeld?.Invoke();
     }
 }

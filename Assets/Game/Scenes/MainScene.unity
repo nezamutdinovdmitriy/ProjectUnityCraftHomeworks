@@ -127,6 +127,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 974007726}
     m_Modifications:
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _moneyPresenter
+      value: 
+      objectReference: {fileID: 867879253}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _popupPresenter
+      value: 
+      objectReference: {fileID: 2126486649}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 606508972301849034, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -275,7 +287,8 @@ PrefabInstance:
       propertyPath: _config
       value: 
       objectReference: {fileID: 11400000, guid: d47be69243fca4a0cb97f35f6a336174, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5994234569800898148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -298,6 +311,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 974007726}
     m_Modifications:
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _moneyPresenter
+      value: 
+      objectReference: {fileID: 867879253}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _popupPresenter
+      value: 
+      objectReference: {fileID: 2126486649}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 606508972301849034, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -468,6 +493,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 249258343}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &327377240 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  m_PrefabInstance: {fileID: 249258343}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!1001 &470088492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -476,6 +512,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 974007726}
     m_Modifications:
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _moneyPresenter
+      value: 
+      objectReference: {fileID: 867879253}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _popupPresenter
+      value: 
+      objectReference: {fileID: 2126486649}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 606508972301849034, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -903,6 +951,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 974007726}
     m_Modifications:
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _moneyPresenter
+      value: 
+      objectReference: {fileID: 867879253}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _popupPresenter
+      value: 
+      objectReference: {fileID: 2126486649}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 606508972301849034, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1061,6 +1121,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 680929136}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &680929138 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  m_PrefabInstance: {fileID: 680929136}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
+--- !u!114 &710550700 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  m_PrefabInstance: {fileID: 52783606}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!1001 &734240810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1069,6 +1151,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 974007726}
     m_Modifications:
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _moneyPresenter
+      value: 
+      objectReference: {fileID: 867879253}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _popupPresenter
+      value: 
+      objectReference: {fileID: 2126486649}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 606508972301849034, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1227,6 +1321,33 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 734240810}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &734240812 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  m_PrefabInstance: {fileID: 734240810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
+--- !u!114 &808751083 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3299675748291971791, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+  m_PrefabInstance: {fileID: 6121086404576301247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!224 &817397791 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2141774753821636071, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+  m_PrefabInstance: {fileID: 6121086404576301247}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &859427043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1295,6 +1416,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 873220071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &867879249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7207275897469232668, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+  m_PrefabInstance: {fileID: 6121086404576301247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &867879250 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1662089309810064739, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+  m_PrefabInstance: {fileID: 6121086404576301247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867879249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f21495690b14b1cbc7931893956592e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.MoneyStorageView
+--- !u!114 &867879253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867879249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43cffed410d546f1873541b45f5c978a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Presenters.MoneyPresenter
+  _view: {fileID: 867879250}
+  _scrollDuration: 0.3
+  _scaleTarget: {fileID: 817397791}
+  _scalePunchIntensity: 0.15
+  _scaleDuration: 0.2
+--- !u!114 &867879254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867879249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046cdd3a9f5d40c594a69c76aa9e8ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UIComponents::Modules.UI.ParticleAnimator
+  _particlePrefab: {fileID: 8463490587080572799, guid: 38d7f5045319aa547904a82ff3c91ebb, type: 3}
+  _parent: {fileID: 188265542}
 --- !u!1 &873220070
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,6 +1473,7 @@ GameObject:
   m_Component:
   - component: {fileID: 873220071}
   - component: {fileID: 873220075}
+  - component: {fileID: 873220076}
   m_Layer: 0
   m_Name: '[UI]'
   m_TagString: Untagged
@@ -1343,6 +1512,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _planetPopupView: {fileID: 5263598761770793470, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
   _planetView: {fileID: -5453260490585078673, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  _particleAnimator: {fileID: 867879254}
+--- !u!114 &873220076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873220070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 156bc8ffb0ce4d8aad5e31b34a97919f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.Bootstrap
+  _presenters:
+  - {fileID: 7237256081421283247}
+  - {fileID: 710550700}
+  - {fileID: 734240812}
+  - {fileID: 1982094042}
+  - {fileID: 680929138}
+  - {fileID: 1918786894}
+  - {fileID: 1945007518}
+  - {fileID: 1000499688}
+  - {fileID: 327377240}
 --- !u!1 &974007725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,6 +1587,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 974007726}
     m_Modifications:
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _moneyPresenter
+      value: 
+      objectReference: {fileID: 867879253}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _popupPresenter
+      value: 
+      objectReference: {fileID: 2126486649}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 606508972301849034, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1553,6 +1757,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 1000499686}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1000499688 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  m_PrefabInstance: {fileID: 1000499686}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!1001 &1247079640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1561,6 +1776,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 974007726}
     m_Modifications:
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _moneyPresenter
+      value: 
+      objectReference: {fileID: 867879253}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _popupPresenter
+      value: 
+      objectReference: {fileID: 2126486649}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 606508972301849034, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1919,6 +2146,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 974007726}
     m_Modifications:
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _moneyPresenter
+      value: 
+      objectReference: {fileID: 867879253}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _popupPresenter
+      value: 
+      objectReference: {fileID: 2126486649}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 606508972301849034, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -2077,6 +2316,55 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 1918786892}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1918786894 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  m_PrefabInstance: {fileID: 1918786892}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
+--- !u!114 &1945007518 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  m_PrefabInstance: {fileID: 1247079640}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
+--- !u!114 &1982094042 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  m_PrefabInstance: {fileID: 470088492}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
+--- !u!224 &2001346279 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6204055655084186918, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+  m_PrefabInstance: {fileID: 6121086404576301247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2126486649 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4838692015953698427, guid: c6f3aabda10ed1841ba1c1a8999ef4ba, type: 3}
+  m_PrefabInstance: {fileID: 1052078977217180737}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2edf4da85ea4f21a76e00dcab4d0508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Presenters.PlanetPopupPresenter
 --- !u!1001 &1052078977217180737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2230,6 +2518,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1465214279}
     m_Modifications:
+    - target: {fileID: 1662089309810064739, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+      propertyPath: _value
+      value: 
+      objectReference: {fileID: 808751083}
     - target: {fileID: 7207275897469232668, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
       propertyPath: m_Name
       value: MoneyView
@@ -2318,13 +2610,30 @@ PrefabInstance:
     - {fileID: 7832056747382589570, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7207275897469232668, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 867879253}
+    - targetCorrespondingSourceObject: {fileID: 7207275897469232668, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 867879254}
   m_SourcePrefab: {fileID: 100100000, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
 --- !u!224 &7237256081421283246 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 7566780103441064638}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7237256081421283247 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+  m_PrefabInstance: {fileID: 7566780103441064638}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!1001 &7566780103441064638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2333,6 +2642,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 974007726}
     m_Modifications:
+    - target: {fileID: -5453260490585078673, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _moneyPresenter
+      value: 
+      objectReference: {fileID: 867879253}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _popupPresenter
+      value: 
+      objectReference: {fileID: 2126486649}
+    - target: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 1080244410604157239, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: m_Name
       value: Planet1
@@ -2469,7 +2794,8 @@ PrefabInstance:
       propertyPath: _name
       value: Planet #1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5994234569800898148, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

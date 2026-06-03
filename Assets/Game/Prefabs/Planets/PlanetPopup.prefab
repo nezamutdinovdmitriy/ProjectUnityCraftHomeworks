@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 5364966909751367753}
   - component: {fileID: 5263598761770793470}
   - component: {fileID: 5146271484780636146}
+  - component: {fileID: -4838692015953698427}
   m_Layer: 5
   m_Name: PlanetPopup
   m_TagString: Untagged
@@ -266,14 +267,11 @@ MonoBehaviour:
   _title: {fileID: 9209584536786063595}
   _closeButton: {fileID: 4860622370961867766}
   _avatar: {fileID: 328163744762118583}
-  _populationIcon: {fileID: 2095353233791933510}
   _populationText: {fileID: 2821577711935674451}
-  _levelIcon: {fileID: 3914001645376438811}
   _levelText: {fileID: 5472911088123096804}
-  _incomeIcon: {fileID: 6310599451786976666}
   _incomeText: {fileID: 159619003737596086}
   _upgradeButton: {fileID: 3885529525276896717}
-  _priceIcon: {fileID: 5007378044800662361}
+  _text: {fileID: 7285282909723352476}
   _priceText: {fileID: 2019871224800427396}
 --- !u!114 &5146271484780636146
 MonoBehaviour:
@@ -292,6 +290,19 @@ MonoBehaviour:
   hiddenScale: {x: 0, y: 0, z: 0}
   shownScale: {x: 1, y: 1, z: 1}
   bounceIntensity: 1.2
+--- !u!114 &-4838692015953698427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 860805340701978150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2edf4da85ea4f21a76e00dcab4d0508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Presenters.PlanetPopupPresenter
+  _view: {fileID: 5263598761770793470}
 --- !u!1 &965717003820527526
 GameObject:
   m_ObjectHideFlags: 0

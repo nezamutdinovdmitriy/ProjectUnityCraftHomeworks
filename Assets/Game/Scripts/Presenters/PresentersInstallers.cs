@@ -1,3 +1,4 @@
+using Game.Scripts.Presenters;
 using Modules.Planets;
 using UnityEngine;
 using Zenject;
@@ -10,17 +11,28 @@ namespace Game.Presenters
     )]
     public sealed class PresentersInstallers : ScriptableObjectInstaller
     {
-        [SerializeField]
+        /*[SerializeField]
         private PlanetPresenter _planetPresenter;
 
-        [Inject]
-        private PlanetCatalog _planetCatalog;
+        [SerializeField]
+        private MoneyPresenter _moneyPresenter;
+
+        [SerializeField]
+        private PlanetPopupPresenter _planetPopupPresenter;*/
 
         public override void InstallBindings()
         {
-            Container.Bind<PlanetPresenter>().FromInstance(_planetPresenter).AsSingle();
-        }
+            Container.Bind<PlanetPopupPresenter>().FromComponentInHierarchy().AsSingle();
+            
+            Container.Bind<MoneyPresenter>().FromComponentInHierarchy().AsSingle();
 
-        //TODO:
+            Container.Bind<PlanetPresenter>().FromComponentInHierarchy().AsCached();
+            
+            /*Container.Bind<PlanetPopupPresenter>().FromInstance(_planetPopupPresenter).AsSingle();
+            
+            Container.Bind<MoneyPresenter>().FromInstance(_moneyPresenter).AsSingle();
+            
+            Container.Bind<PlanetPresenter>().FromInstance(_planetPresenter).AsSingle();*/
+        }
     }
 }

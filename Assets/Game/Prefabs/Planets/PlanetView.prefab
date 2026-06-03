@@ -499,13 +499,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533359bcb4314f04af0662970925ab77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.PlanetView
+  _button: {fileID: 5583372068559771244}
   _icon: {fileID: 606508972301849034}
   _lock: {fileID: 991180089803824017}
   _coin: {fileID: 648301223005266422}
-  _progressBar: {fileID: 6948507870913343312}
-  _timerText: {fileID: 8019802931863089282}
+  _incomeRoot: {fileID: 5564512366540979095}
+  _incomeProgress: {fileID: 6948507870913343312}
+  _incomeTimeText: {fileID: 8019802931863089282}
+  _priceRoot: {fileID: 6850814019076832775}
+  _priceIcon: {fileID: 5537683316222300304}
   _priceText: {fileID: 5444377921757551026}
-  _button: {fileID: 5583372068559771244}
 --- !u!114 &175621091821841473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,6 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
   _view: {fileID: -5453260490585078673}
+  _transformMoneyViewIcon: {fileID: 0}
 --- !u!1 &5564512366540979095
 GameObject:
   m_ObjectHideFlags: 0
