@@ -448,6 +448,7 @@ GameObject:
   - component: {fileID: 7486801599208217449}
   - component: {fileID: -5453260490585078673}
   - component: {fileID: 175621091821841473}
+  - component: {fileID: 8091007608960423330}
   m_Layer: 5
   m_Name: PlanetView
   m_TagString: Untagged
@@ -521,6 +522,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
+  _view: {fileID: -5453260490585078673}
+--- !u!114 &8091007608960423330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080244410604157239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 387bd9c6f2a24b5bb300784ca07510ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Presenters.PlanetIncomePresenter
   _view: {fileID: -5453260490585078673}
   _transformMoneyViewIcon: {fileID: 0}
 --- !u!1 &5564512366540979095

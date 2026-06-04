@@ -1,5 +1,4 @@
 using Game.Scripts.Presenters;
-using Modules.Planets;
 using UnityEngine;
 using Zenject;
 
@@ -17,7 +16,9 @@ namespace Game.Presenters
             
             Container.BindInterfacesAndSelfTo<MoneyPresenter>().FromComponentInHierarchy().AsSingle();
 
-            Container.Bind<PlanetPresenter>().FromComponentInHierarchy().AsCached();
+            Container.Bind<PlanetPresenter>().FromComponentsInHierarchy().AsCached();
+
+            Container.Bind<PlanetIncomePresenter>().FromComponentsInHierarchy().AsCached();
         }
     }
 }
