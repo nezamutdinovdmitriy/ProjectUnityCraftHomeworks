@@ -1,4 +1,5 @@
 using System;
+using Game.Presenters;
 using Game.Views;
 using Modules.Planets;
 using Modules.UI;
@@ -10,11 +11,15 @@ namespace Game.Scripts.Presenters
     public class PlanetIncomePresenter : MonoBehaviour
     {
         [SerializeField]
-        private PlanetView _view;
+        private PlanetIncomeView _view;
 
         [SerializeField]
         private Transform _transformMoneyViewIcon;
 
+        // Какую зависимость сюда стоило прокинуть, на презентер или на вьюшку, чтобы слушать клик по планете?
+        [SerializeField]
+        private PlanetPresenter _planetPresenter;
+            
         private IPlanet _planet;
         private ParticleAnimator _particleAnimator;
 
@@ -31,7 +36,8 @@ namespace Game.Scripts.Presenters
             _planet.OnIncomeReady += OnIncomeReady;
             _planet.OnIncomeTimeChanged += OnIncomeTimeChanged;
             _planet.OnUnlocked += OnPlanetUnlocked;
-            _view.PlanetButtonClicked += OnPlanetButtonClicked;
+
+            _planetPresenter.PlanetClicked += OnPlanetButtonClicked;
 
             UpdateState();
         }
@@ -51,7 +57,7 @@ namespace Game.Scripts.Presenters
 
         private void OnDisable()
         {
-            _view.PlanetButtonClicked -= OnPlanetButtonClicked;
+            _planetPresenter.PlanetClicked -= OnPlanetButtonClicked;
             
             _planet.OnIncomeReady -= OnIncomeReady;
             _planet.OnIncomeTimeChanged -= OnIncomeTimeChanged;

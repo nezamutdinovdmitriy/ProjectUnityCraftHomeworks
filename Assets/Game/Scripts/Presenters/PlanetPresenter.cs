@@ -1,3 +1,4 @@
+using System;
 using Game.Scripts.Presenters;
 using Game.Views;
 using Modules.Planets;
@@ -8,6 +9,8 @@ namespace Game.Presenters
 {
     public class PlanetPresenter : MonoBehaviour
     {
+        public event Action PlanetClicked;
+        
         [SerializeField]
         private PlanetView _view;
 
@@ -56,6 +59,8 @@ namespace Game.Presenters
                 _planet.UnlockOrUpgrade();
                 UpdateState();
             }
+            
+            PlanetClicked?.Invoke();
         }
 
         private void UpdateState()

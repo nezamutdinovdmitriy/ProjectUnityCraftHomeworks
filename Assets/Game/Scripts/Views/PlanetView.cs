@@ -20,18 +20,6 @@ namespace Game.Views
         [SerializeField]
         private Image _lock;
 
-        [SerializeField]
-        private Image _coin;
-
-        [Header("Income")] [SerializeField]
-        private GameObject _incomeRoot;
-
-        [SerializeField]
-        private Image _incomeProgress;
-
-        [SerializeField]
-        private TMP_Text _incomeTimeText;
-
         [Header("Price")] [SerializeField]
         private GameObject _priceRoot;
 
@@ -41,7 +29,6 @@ namespace Game.Views
         [SerializeField]
         private TMP_Text _priceText;
 
-        public Image Coin => _coin;
         
         private void OnEnable()
         {
@@ -54,19 +41,15 @@ namespace Game.Views
             _button.OnClick -= OnPlanetButtonClicked;
             _button.OnHold -= OnPlanetButtonHeld;
         }
-
-        public void SetIcon(Sprite sprite) => _icon.sprite = sprite;
-        public void DisplayCoin(bool display) => _coin.gameObject.SetActive(display);
-        public void DisplayIncome(bool display) => _incomeRoot.SetActive(display);
-        public void SetIncomeProgress(float progress) => _incomeProgress.fillAmount = progress;
-        public void SetIncomeTimer(string value) => _incomeTimeText.text = value;
-        public void SetPrice(string price) => _priceText.text = price;
         
         public void SetPurchaseState(bool state)
         {
             _lock.gameObject.SetActive(!state);
             _priceRoot.SetActive(!state);
         }
+        
+        public void SetIcon(Sprite sprite) => _icon.sprite = sprite;
+        public void SetPrice(string price) => _priceText.text = price;
         
         private void OnPlanetButtonClicked() => PlanetButtonClicked?.Invoke();
         private void OnPlanetButtonHeld() => PlanetButtonHeld?.Invoke();

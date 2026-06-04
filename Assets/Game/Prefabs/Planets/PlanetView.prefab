@@ -447,6 +447,7 @@ GameObject:
   - component: {fileID: 1226517422905731925}
   - component: {fileID: 7486801599208217449}
   - component: {fileID: -5453260490585078673}
+  - component: {fileID: 5615221435842766056}
   - component: {fileID: 175621091821841473}
   - component: {fileID: 8091007608960423330}
   m_Layer: 5
@@ -503,13 +504,25 @@ MonoBehaviour:
   _button: {fileID: 5583372068559771244}
   _icon: {fileID: 606508972301849034}
   _lock: {fileID: 991180089803824017}
+  _priceRoot: {fileID: 6850814019076832775}
+  _priceIcon: {fileID: 5537683316222300304}
+  _priceText: {fileID: 5444377921757551026}
+--- !u!114 &5615221435842766056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080244410604157239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a563bf4d7f0489392fa2558ad52987a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Game.Views::Game.Views.PlanetIncomeView
   _coin: {fileID: 648301223005266422}
   _incomeRoot: {fileID: 5564512366540979095}
   _incomeProgress: {fileID: 6948507870913343312}
   _incomeTimeText: {fileID: 8019802931863089282}
-  _priceRoot: {fileID: 6850814019076832775}
-  _priceIcon: {fileID: 5537683316222300304}
-  _priceText: {fileID: 5444377921757551026}
 --- !u!114 &175621091821841473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,8 +548,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387bd9c6f2a24b5bb300784ca07510ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Presenters.PlanetIncomePresenter
-  _view: {fileID: -5453260490585078673}
+  _view: {fileID: 5615221435842766056}
   _transformMoneyViewIcon: {fileID: 0}
+  _planetPresenter: {fileID: 175621091821841473}
 --- !u!1 &5564512366540979095
 GameObject:
   m_ObjectHideFlags: 0
