@@ -1,6 +1,4 @@
 ﻿using System;
-using GameSystems.Coin;
-using GameSystems.GameContext.Coin;
 using UnityEngine;
 using Zenject;
 
@@ -29,6 +27,8 @@ namespace GameSystems
             Container.BindInterfacesAndSelfTo<CoinManager>().AsSingle();
 
             Container.BindInterfacesTo<CoinPickupController>().AsSingle();
+
+            Container.BindInterfacesTo<CoinSpawnController>().AsSingle();
         }
     }
 }

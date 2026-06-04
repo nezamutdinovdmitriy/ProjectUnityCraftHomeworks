@@ -1,5 +1,6 @@
 ﻿using System;
 using GameSystems.GameContext.Level;
+using GameSystems.GameContext.Level.LevelResultHandlers;
 using GameSystems.Level;
 using Modules;
 using SnakeGame;
@@ -25,13 +26,17 @@ namespace GameSystems
 
             Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<DefeatGameHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<DefeatGameController>().AsSingle();
             
-            Container.BindInterfacesAndSelfTo<VictoryGameHandler>().AsSingle();
+            Container.BindInterfacesAndSelfTo<VictoryGameController>().AsSingle();
             
             Container.Bind<IWorldBounds>().FromInstance(_worldBounds).AsSingle();
 
             Container.BindInterfacesTo<LevelProgressionController>().AsSingle();
+
+            Container.BindInterfacesTo<DefeatGameHandler>().AsSingle();
+            
+            Container.BindInterfacesTo<VictoryGameHandler>().AsSingle();
         }
     }
 }

@@ -3,12 +3,12 @@ using Zenject;
 
 namespace GameSystems
 {
-    public class MovementController : ITickable
+    public class SnakeMovementController : ITickable
     {
         private readonly IInputProvider _inputProvider;
         private readonly ISnake _snake;
 
-        public MovementController(IInputProvider input, ISnake snake)
+        public SnakeMovementController(IInputProvider input, ISnake snake)
         {
             _inputProvider = input;
             _snake = snake;

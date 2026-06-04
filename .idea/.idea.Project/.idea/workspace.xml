@@ -2,8 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0149c866-dbb6-406c-9081-62ff9afb9afa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/Controllers.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/Controllers/CoinSpawnController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/Controllers/CoinSpawnController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Controllers.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Controllers/VictoryGameController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Handlers/DefeatGameHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Handlers/DefeatGameHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Handlers/VictoryGameHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Handlers/VictoryGameHandler.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/SnakeSpeedController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/SnakeSpeedController.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinPickupController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/Controllers/CoinPickupController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinPickupController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/Controllers/CoinPickupController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelProgressionController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelProgressionController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelResultHandlers.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Handlers.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelResultHandlers/DefeatGameHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Controllers/DefeatGameController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelResultHandlers/DefeatGameHandler.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Controllers/DefeatGameController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelResultHandlers/VictoryGameHandler.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelResultHandlers/VictoryGameHandler.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/Controllers/VictoryGameController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Input/DesktopInputProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Input/KeyboardInputProvider.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Input/DesktopInputProvider.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Input/KeyboardInputProvider.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/PlayerContextInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/PlayerContextInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/MovementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/SnakeMovementController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/MovementController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/SnakeMovementController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,23 +55,18 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Extensions/ZenjectExtensions.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinPickupController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/CoinPool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Coin/Controllers/CoinsSpawnController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/GameContextInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/GameCycle.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelProgressionController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelResultHandlers/DefeatGameHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/Level/LevelResultHandlers/VictoryGameHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/GameContext/ScoreController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Input/DesktopInputProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Input/IInputProvider.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Input/PlayerInputInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/PlayerContextInstaller.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/CharacterInstaller.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/ExpandController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/MovementController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameSystems/PlayerContext/Snake/SnakeSpeedController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/GameOver/GameOverPresenter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PlayerHUD/DifficultyPresenter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/PlayerHUD/ScorePresenter.cs" root0="FORCE_HIGHLIGHTING" />
@@ -126,6 +150,7 @@
       <workItem from="1779439700106" duration="18136000" />
       <workItem from="1779460954352" duration="7637000" />
       <workItem from="1779533186923" duration="10197000" />
+      <workItem from="1780596003008" duration="8560000" />
     </task>
     <servers />
   </component>

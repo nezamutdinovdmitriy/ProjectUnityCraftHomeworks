@@ -19,6 +19,6 @@ namespace GameSystems.GameContext.Level
 
         public void Dispose() => _coinManager.AllCoinsCollected -= OnAllCoinsCollected;
 
-        private void OnAllCoinsCollected() => _levelManager.ProcessLevelCompleted();
+        private void OnAllCoinsCollected() => _levelManager.CompleteLevel();
     }
 }

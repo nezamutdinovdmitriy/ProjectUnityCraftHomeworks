@@ -7,14 +7,14 @@ using Zenject;
 
 namespace GameSystems
 {
-    public class DefeatGameHandler : IInitializable, IDisposable
+    public class DefeatGameController : IInitializable, IDisposable
     {
         private readonly GameCycle _gameCycle;
         
         private readonly ISnake _snake;
         private readonly IWorldBounds _worldBounds;
         
-        public DefeatGameHandler(ISnake snake, IWorldBounds worldBounds, GameCycle gameCycle)
+        public DefeatGameController(ISnake snake, IWorldBounds worldBounds, GameCycle gameCycle)
         {
             _snake = snake;
             _worldBounds = worldBounds;
@@ -33,19 +33,14 @@ namespace GameSystems
             _snake.OnMoved -= HandleOutOfBounds;
         }
 
-        private void HandleSelfCollision() => DefeatProcess();
+        private void HandleSelfCollision() => SetDefeat();
         
         private void HandleOutOfBounds(Vector2Int position)
         {
             if (_worldBounds.IsInBounds(position) == false)
-                DefeatProcess();
+                SetDefeat();
         }
 
-        private void DefeatProcess()
-        {
-            _snake.SetActive(false);
-            
-            _gameCycle.SetDefeat();
-        }
+        private void SetDefeat() => _gameCycle.SetDefeat();
     }
 }

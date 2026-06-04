@@ -11,13 +11,15 @@ namespace GameSystems.PlayerContext
 
         public override void InstallBindings()
         {
-            Container.Bind<IInputProvider>().To<DesktopInputProvider>().AsSingle();
+            Container.Bind<IInputProvider>().To<KeyboardInputProvider>().AsSingle();
             
-            Container.Bind<ITickable>().To<MovementController>().AsCached();
+            Container.Bind<ITickable>().To<SnakeMovementController>().AsCached();
 
             Container.Bind<ISnake>().FromInstance(_snake).AsSingle();
 
             Container.BindInterfacesTo<SnakeExpandController>().AsSingle();
+
+            Container.BindInterfacesTo<SnakeSpeedController>().AsSingle();
         }
     }
 }

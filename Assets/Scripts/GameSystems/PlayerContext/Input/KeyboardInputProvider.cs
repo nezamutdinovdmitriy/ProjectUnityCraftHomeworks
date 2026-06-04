@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameSystems
 {
-    public class DesktopInputProvider : IInputProvider
+    public class KeyboardInputProvider : IInputProvider
     {
         public SnakeDirection GetDirection()
         {

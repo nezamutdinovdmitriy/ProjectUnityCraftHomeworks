@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameSystems.Coin;
 using SnakeGame;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ namespace GameSystems
     {
         public event Action<Modules.Coin> CoinConsumed;
         public event Action AllCoinsCollected;
-        
+
         private readonly CoinPool _coinPool;
         private readonly IWorldBounds _worldBounds;
         private readonly List<Modules.Coin> _activeCoins = new();
@@ -41,26 +40,29 @@ namespace GameSystems
             for (int i = _activeCoins.Count - 1; i >= 0; i--)
             {
                 Modules.Coin coin = _activeCoins[i];
-                
+
                 if (coin.Position == consumerPosition)
                 {
                     ConsumeCoin(coin);
-                    
-                    if(_activeCoins.Count == 0)
+
+                    if (_activeCoins.Count == 0)
                         AllCoinsCollected?.Invoke();
-                    
+
                     return true;
                 }
             }
 
             return false;
         }
-        
+
         public void ClearActiveCoins()
         {
-            for(int i = _activeCoins.Count - 1; i >= 0; i--)
-                _coinPool.Despawn(_activeCoins[i]);
-            
+            for (int i = _activeCoins.Count - 1; i >= 0; i--)
+            {
+                if (_activeCoins[i] != null)
+                    _coinPool.Despawn(_activeCoins[i]);
+            }
+
             _activeCoins.Clear();
         }
 

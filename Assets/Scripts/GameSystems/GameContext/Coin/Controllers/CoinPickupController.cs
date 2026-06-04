@@ -3,7 +3,7 @@ using Modules;
 using UnityEngine;
 using Zenject;
 
-namespace GameSystems.GameContext.Coin
+namespace GameSystems
 {
     public class CoinPickupController : IInitializable, IDisposable
     {
