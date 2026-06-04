@@ -279,6 +279,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 729e6d44a4d894b58b544dda569daee7, type: 3}
+    - target: {fileID: 8091007608960423330, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 8801953262427805897, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _name
       value: Planet #2
@@ -475,6 +479,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e8639112b42c44bc798e8dfca2096581, type: 3}
+    - target: {fileID: 8091007608960423330, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 8801953262427805897, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _name
       value: Planet #9
@@ -493,17 +501,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 249258343}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &327377240 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
-  m_PrefabInstance: {fileID: 249258343}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!1001 &470088492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -664,6 +661,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 0b7abd89460d842828058726c3f10740, type: 3}
+    - target: {fileID: 8091007608960423330, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 8801953262427805897, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _name
       value: Planet #4
@@ -1103,6 +1104,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b1fb985298df542a99c59586e687fb13, type: 3}
+    - target: {fileID: 8091007608960423330, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 8801953262427805897, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _name
       value: Planet #5
@@ -1121,28 +1126,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 680929136}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &680929138 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
-  m_PrefabInstance: {fileID: 680929136}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
---- !u!114 &710550700 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
-  m_PrefabInstance: {fileID: 52783606}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!1001 &734240810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1303,6 +1286,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 08b97e315d4f6428bb5511be1eb34293, type: 3}
+    - target: {fileID: 8091007608960423330, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 8801953262427805897, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _name
       value: Planet #3
@@ -1321,17 +1308,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 734240810}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &734240812 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
-  m_PrefabInstance: {fileID: 734240810}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!114 &808751083 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3299675748291971791, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
@@ -1525,16 +1501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156bc8ffb0ce4d8aad5e31b34a97919f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Gameplay.Bootstrap
-  _presenters:
-  - {fileID: 7237256081421283247}
-  - {fileID: 710550700}
-  - {fileID: 734240812}
-  - {fileID: 1982094042}
-  - {fileID: 680929138}
-  - {fileID: 1918786894}
-  - {fileID: 1945007518}
-  - {fileID: 1000499688}
-  - {fileID: 327377240}
 --- !u!1 &974007725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,6 +1705,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 5d907e3ed04484c77b547becf87c2a0e, type: 3}
+    - target: {fileID: 8091007608960423330, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 8801953262427805897, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _name
       value: Planet #8
@@ -1757,17 +1727,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 1000499686}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1000499688 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
-  m_PrefabInstance: {fileID: 1000499686}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!1001 &1247079640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1928,6 +1887,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: bf03b8e59368c4021ae88028bbd5eecc, type: 3}
+    - target: {fileID: 8091007608960423330, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 8801953262427805897, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _name
       value: Planet #7
@@ -2298,6 +2261,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 395fe48aa25fb492ca46e0a1b08f5897, type: 3}
+    - target: {fileID: 8091007608960423330, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 8801953262427805897, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _name
       value: Planet #6
@@ -2316,39 +2283,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 1918786892}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1918786894 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
-  m_PrefabInstance: {fileID: 1918786892}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
---- !u!114 &1945007518 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
-  m_PrefabInstance: {fileID: 1247079640}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
---- !u!114 &1982094042 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
-  m_PrefabInstance: {fileID: 470088492}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!224 &2001346279 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6204055655084186918, guid: 922a3fcd633baa0498344270e9eabd2a, type: 3}
@@ -2623,17 +2557,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1226517422905731925, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
   m_PrefabInstance: {fileID: 7566780103441064638}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7237256081421283247 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 175621091821841473, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
-  m_PrefabInstance: {fileID: 7566780103441064638}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd251bcb16014d3688d074a43b108a13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
 --- !u!1001 &7566780103441064638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2790,6 +2713,10 @@ PrefabInstance:
       propertyPath: speed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 8091007608960423330, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
+      propertyPath: _transformMoneyViewIcon
+      value: 
+      objectReference: {fileID: 2001346279}
     - target: {fileID: 8801953262427805897, guid: 368c7b958afaee34caa5e1b9338e5e65, type: 3}
       propertyPath: _name
       value: Planet #1
