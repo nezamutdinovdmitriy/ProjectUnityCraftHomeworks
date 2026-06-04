@@ -28,7 +28,6 @@ namespace Game.Views
 
         [SerializeField]
         private TMP_Text _priceText;
-
         
         private void OnEnable()
         {
