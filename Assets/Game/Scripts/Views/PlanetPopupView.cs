@@ -35,6 +35,9 @@ namespace Game.Views
         private TMP_Text _text;
 
         [SerializeField]
+        private GameObject _price;
+        
+        [SerializeField]
         private TMP_Text _priceText;
 
         private void OnEnable()
@@ -60,7 +63,7 @@ namespace Game.Views
         public void SetUpgradeButtonText(string text) => _text.text = text;
         public void SetInteractableUpgradeButton(bool interactable) => _upgradeButton.interactable = interactable;
         public void SetPrice(string price) => _priceText.text = price;
-        public void PriceVisible(bool visible) => _priceText.gameObject.SetActive(visible);
+        public void PriceVisible(bool visible) => _price.SetActive(visible);
 
         private void OnCloseButtonClicked() => CloseButtonClicked?.Invoke();
         private void OnUpgradeButtonClicked() => UpgradeButtonClicked?.Invoke();

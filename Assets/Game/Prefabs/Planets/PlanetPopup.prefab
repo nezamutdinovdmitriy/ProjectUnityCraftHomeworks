@@ -272,6 +272,7 @@ MonoBehaviour:
   _incomeText: {fileID: 159619003737596086}
   _upgradeButton: {fileID: 3885529525276896717}
   _text: {fileID: 7285282909723352476}
+  _price: {fileID: 7510333081995661202}
   _priceText: {fileID: 2019871224800427396}
 --- !u!114 &5146271484780636146
 MonoBehaviour:
