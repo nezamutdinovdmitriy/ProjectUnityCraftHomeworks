@@ -15,11 +15,11 @@ namespace Game.Presenters
 
         [SerializeField]
         private Transform _transformMoneyViewIcon;
-        
+
         private PlanetPopupPresenter _popupPresenter;
-        
+
         private IPlanet _planet;
-        
+
         private ParticleAnimator _particleAnimator;
 
         [Inject]
@@ -30,15 +30,15 @@ namespace Game.Presenters
             _popupPresenter = planetPopupPresenter;
             _particleAnimator = particleAnimator;
         }
-        
+
         public void Initialize(IPlanet planet)
         {
             _planet = planet;
-            
+
             _planet.OnUnlocked += OnPlanetUnlocked;
             _planet.OnIncomeReady += OnIncomeReady;
             _planet.OnIncomeTimeChanged += OnIncomeTimeChanged;
-            
+
             OnPlanetUnlocked();
         }
 
@@ -60,17 +60,17 @@ namespace Game.Presenters
         private void OnIncomeTimeChanged(float time)
         {
             TimeSpan incomeTime = TimeSpan.FromSeconds(time);
-            
+
             _view.SetIncomeProgress(_planet.IncomeProgress);
-            _view.SetIncomeTimer($"{(int)incomeTime.TotalMinutes}m:{incomeTime.Seconds:D2}s");
+            _view.SetIncomeTimer($"{(int) incomeTime.TotalMinutes}m:{incomeTime.Seconds:D2}s");
         }
-        
+
         private void OnIncomeReady(bool display)
         {
             _view.DisplayIncome(!display);
             _view.DisplayCoin(display);
         }
-        
+
         private void OnPlanetButtonHeld()
         {
             if (_planet.IsUnlocked)
@@ -79,7 +79,7 @@ namespace Game.Presenters
 
         private void OnPlanetButtonClicked()
         {
-            if (_planet.IsUnlocked == false 
+            if (_planet.IsUnlocked == false
                 && _planet.CanUnlock)
             {
                 _planet.UnlockOrUpgrade();
@@ -89,28 +89,24 @@ namespace Game.Presenters
 
             if (_planet.IsIncomeReady)
             {
-                int income = _planet.MinuteIncome;
-                
                 _view.Coin.gameObject.SetActive(false);
-                _particleAnimator.Emit(_view.Coin.transform.position, _transformMoneyViewIcon.position, 1f);
+                _particleAnimator.Emit(_view.Coin.transform.position, _transformMoneyViewIcon.position);
                 _planet.GatherIncome();
             }
         }
-        
+
         private void UpdateState()
         {
             _view.SetIcon(_planet.GetIcon(_planet.IsUnlocked));
             _view.SetPrice(_planet.Price.ToString());
 
             if (_planet.IsUnlocked)
-            {
-                OnIncomeReady(_planet.IsIncomeReady);   
-            }
+                OnIncomeReady(_planet.IsIncomeReady);
         }
-        
+
         private void OnPlanetUnlocked()
         {
-            _view.Lock(_planet.IsUnlocked);
+            _view.SetPurchaseState(_planet.IsUnlocked);
             UpdateState();
         }
     }

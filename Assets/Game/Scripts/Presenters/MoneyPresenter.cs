@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Game.Scripts.Presenters
 {
-    public class MoneyPresenter : MonoBehaviour
+    public class MoneyPresenter : MonoBehaviour, IInitializable
     {
         [SerializeField]
         private MoneyView _view;
@@ -35,20 +35,20 @@ namespace Game.Scripts.Presenters
 
             _visualMoney = _moneyStorage.Money;
             _view.SetValue(_visualMoney.ToString());
+        }
 
+        public void Initialize()
+        {
             _moneyStorage.OnMoneySpent += OnMoneySpent;
             _moneyStorage.OnMoneyChanged += OnMoneyChanged;
             _moneyStorage.OnMoneyEarned += OnMoneyEarned;
         }
-
+        
         private void OnDestroy()
         {
-            if (_moneyStorage != null)
-            {
-                _moneyStorage.OnMoneySpent -= OnMoneySpent;
-                _moneyStorage.OnMoneyChanged -= OnMoneyChanged;
-                _moneyStorage.OnMoneyEarned -= OnMoneyEarned;
-            }
+            _moneyStorage.OnMoneySpent -= OnMoneySpent;
+            _moneyStorage.OnMoneyChanged -= OnMoneyChanged;
+            _moneyStorage.OnMoneyEarned -= OnMoneyEarned;
 
             _delayTween?.Kill();
             _counterTween?.Kill();

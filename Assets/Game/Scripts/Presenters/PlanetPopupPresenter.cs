@@ -38,7 +38,6 @@ namespace Game.Scripts.Presenters
             _selectedPlanet.OnPopulationChanged -= OnPopulationChanged;
             
             _view.Hide();
-            
             _selectedPlanet = null;
         }
 
@@ -71,10 +70,7 @@ namespace Game.Scripts.Presenters
             }
         }
 
-        private void OnPopulationChanged(int value)
-        {
-            _view.SetPopulation($"Population: {value}");
-        }
+        private void OnPopulationChanged(int value) => _view.SetPopulation($"Population: {value}");
 
         private void OnUpgradeButtonClicked()
         {

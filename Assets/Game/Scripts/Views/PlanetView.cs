@@ -59,26 +59,22 @@ namespace Game.Views
         public void Hide() => gameObject.SetActive(false);
 
         public void SetIcon(Sprite sprite) => _icon.sprite = sprite;
-
         public void DisplayCoin(bool display) => _coin.gameObject.SetActive(display);
-
         public void DisplayIncome(bool display) => _incomeRoot.SetActive(display);
-        
         public void SetIncomeProgress(float progress) => _incomeProgress.fillAmount = progress;
         public void SetIncomeTimer(string value) => _incomeTimeText.text = value;
+        public void SetPrice(string price) => _priceText.text = price;
         
-        public void Lock(bool state)
+        public void SetPurchaseState(bool state)
         {
             _coin.gameObject.SetActive(state);
-            _lock.gameObject.SetActive(!state);
             _incomeRoot.SetActive(state);
+            
+            _lock.gameObject.SetActive(!state);
             _priceRoot.SetActive(!state);
         }
-
-        public void SetPrice(string price) => _priceText.text = price;
-
+        
         private void OnPlanetButtonClicked() => PlanetButtonClicked?.Invoke();
-
         private void OnPlanetButtonHeld() => PlanetButtonHeld?.Invoke();
     }
 }
