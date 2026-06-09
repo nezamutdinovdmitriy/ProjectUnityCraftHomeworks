@@ -13,21 +13,13 @@ namespace Game.Scripts.Presenters
 
         [SerializeField]
         private float _scrollDuration = 0.3f;
-
-        [SerializeField]
-        private RectTransform _scaleTarget;
-
-        [SerializeField]
-        private float _scalePunchIntensity = 0.15f;
-
-        [SerializeField]
-        private float _scaleDuration = 0.2f;
-
-        private IMoneyStorage _moneyStorage;
+        
         private int _visualMoney;
         private Tween _counterTween;
         private Tween _delayTween;
 
+        private IMoneyStorage _moneyStorage;
+        
         [Inject]
         public void Construct(IMoneyStorage moneyStorage)
         {
@@ -62,20 +54,10 @@ namespace Game.Scripts.Presenters
                     _visualMoney = x;
                     _view.SetValue(_visualMoney.ToString());
                 }, amount, _scrollDuration)
-                .SetEase(Ease.Linear); // Строго линейно!
+                .SetEase(Ease.Linear)
+                .SetLink(gameObject); // Строго линейно!
 
-            if (_scaleTarget != null)
-            {
-                _scaleTarget.DOKill();
-                _scaleTarget.localScale = Vector3.one;
-                _scaleTarget.DOPunchScale(
-                    new Vector3(
-                        _scalePunchIntensity,
-                        _scalePunchIntensity,
-                        0f),
-                    _scaleDuration, 1, 0.5f
-                );
-            }
+            _view.PlayAnimation();
         }
 
         private void OnMoneyEarned(int newValue, int range)
@@ -88,8 +70,8 @@ namespace Game.Scripts.Presenters
             _delayTween = DOVirtual.DelayedCall(1f, () =>
             {
                 AnimateToTarget(targetMoney);
-                _delayTween = null; // Обязательно чистим ссылку по завершению!
-            }, false);
+                _delayTween = null;
+            }, false).SetLink(gameObject);
         }
 
         private void OnMoneyChanged(int newValue, int prevValue)
@@ -104,17 +86,20 @@ namespace Game.Scripts.Presenters
 
         private void ResetVisuals(int targetValue)
         {
-            if (_delayTween.IsActive()) _delayTween.Kill();
+            if (_delayTween.IsActive()) 
+                _delayTween.Kill();
+            
             _delayTween = null;
 
-            if (_counterTween.IsActive()) _counterTween.Kill();
+            if (_counterTween.IsActive())
+                _counterTween.Kill();
+            
             _counterTween = null;
 
-            if (_scaleTarget != null) _scaleTarget.DOKill();
-            
             _visualMoney = targetValue;
             _view.SetValue(_visualMoney.ToString());
-            if (_scaleTarget != null) _scaleTarget.localScale = Vector3.one;
+            
+            _view.ResetAnimation();
         }
     }
 }

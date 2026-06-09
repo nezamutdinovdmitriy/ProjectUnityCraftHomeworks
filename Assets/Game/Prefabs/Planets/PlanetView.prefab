@@ -501,6 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533359bcb4314f04af0662970925ab77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.PlanetView
+  _incomeView: {fileID: 5615221435842766056}
   _button: {fileID: 5583372068559771244}
   _icon: {fileID: 606508972301849034}
   _lock: {fileID: 991180089803824017}
@@ -536,6 +537,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Presenters.PlanetPresenter
   _view: {fileID: -5453260490585078673}
+  _incomePresenter: {fileID: 8091007608960423330}
+  <Name>k__BackingField: 
 --- !u!114 &8091007608960423330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,8 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Presenters.PlanetIncomePresenter
   _view: {fileID: 5615221435842766056}
-  _transformMoneyViewIcon: {fileID: 0}
-  _planetPresenter: {fileID: 175621091821841473}
+  _transformMoneyViewIcon: {fileID: 4069365071620109237}
 --- !u!1 &5564512366540979095
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,14 +9,20 @@ namespace Game.Presenters
 {
     public class PlanetPresenter : MonoBehaviour
     {
-        public event Action PlanetClicked;
+        [SerializeField]
+        private string _name;
         
         [SerializeField]
         private PlanetView _view;
 
+        [SerializeField]
+        private PlanetIncomePresenter _incomePresenter;
+        
         private PlanetPopupPresenter _popupPresenter;
         private IPlanet _planet;
 
+        public string Name => _name;
+        
         [Inject]
         public void Construct(PlanetPopupPresenter planetPopupPresenter)
         {
@@ -26,7 +32,9 @@ namespace Game.Presenters
         public void Initialize(IPlanet planet)
         {
             _planet = planet;
-
+            
+            _incomePresenter.Initialize(planet);
+            
             _planet.OnUnlocked += OnPlanetUnlocked;
 
             OnPlanetUnlocked();
@@ -60,7 +68,7 @@ namespace Game.Presenters
                 UpdateState();
             }
             
-            PlanetClicked?.Invoke();
+            _incomePresenter.OnPlanetButtonClicked();
         }
 
         private void UpdateState()

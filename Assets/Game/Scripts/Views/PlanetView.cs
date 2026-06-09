@@ -8,9 +8,20 @@ namespace Game.Views
 {
     public class PlanetView : MonoBehaviour
     {
-        public event Action PlanetButtonClicked;
-        public event Action PlanetButtonHeld;
+        public event Action PlanetButtonClicked
+        {
+            add => _button.OnClick += value;
+            remove => _button.OnClick -= value;
+        }
+        public event Action PlanetButtonHeld
+        {
+            add => _button.OnHold += value;
+            remove => _button.OnHold -= value;
+        }
 
+        [SerializeField]
+        private PlanetIncomeView _incomeView;
+        
         [SerializeField]
         private SmartButton _button;
         
@@ -29,18 +40,6 @@ namespace Game.Views
         [SerializeField]
         private TMP_Text _priceText;
         
-        private void OnEnable()
-        {
-            _button.OnClick += OnPlanetButtonClicked;
-            _button.OnHold += OnPlanetButtonHeld;
-        }
-
-        private void OnDisable()
-        {
-            _button.OnClick -= OnPlanetButtonClicked;
-            _button.OnHold -= OnPlanetButtonHeld;
-        }
-        
         public void SetPurchaseState(bool state)
         {
             _lock.gameObject.SetActive(!state);
@@ -49,8 +48,5 @@ namespace Game.Views
         
         public void SetIcon(Sprite sprite) => _icon.sprite = sprite;
         public void SetPrice(string price) => _priceText.text = price;
-        
-        private void OnPlanetButtonClicked() => PlanetButtonClicked?.Invoke();
-        private void OnPlanetButtonHeld() => PlanetButtonHeld?.Invoke();
     }
 }

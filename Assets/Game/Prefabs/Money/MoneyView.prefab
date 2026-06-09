@@ -302,3 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f21495690b14b1cbc7931893956592e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Game.Views::Game.Views.MoneyStorageView
+  _value: {fileID: 3299675748291971791}
+  _scaleTarget: {fileID: 2141774753821636071}
+  _scalePunchIntensity: 0.15
+  _scaleDuration: 0.2

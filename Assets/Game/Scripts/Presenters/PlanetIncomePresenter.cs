@@ -15,10 +15,7 @@ namespace Game.Scripts.Presenters
 
         [SerializeField]
         private Transform _transformMoneyViewIcon;
-
-        // Какую зависимость сюда стоило прокинуть, на презентер или на вьюшку, чтобы слушать клик по планете?
-        [SerializeField]
-        private PlanetPresenter _planetPresenter;
+        
             
         private IPlanet _planet;
         private ParticleAnimator _particleAnimator;
@@ -36,8 +33,6 @@ namespace Game.Scripts.Presenters
             _planet.OnIncomeReady += OnIncomeReady;
             _planet.OnIncomeTimeChanged += OnIncomeTimeChanged;
             _planet.OnUnlocked += OnPlanetUnlocked;
-
-            _planetPresenter.PlanetClicked += OnPlanetButtonClicked;
 
             UpdateState();
         }
@@ -57,14 +52,12 @@ namespace Game.Scripts.Presenters
 
         private void OnDisable()
         {
-            _planetPresenter.PlanetClicked -= OnPlanetButtonClicked;
-            
             _planet.OnIncomeReady -= OnIncomeReady;
             _planet.OnIncomeTimeChanged -= OnIncomeTimeChanged;
             _planet.OnUnlocked -= OnPlanetUnlocked;
         }
         
-        private void OnPlanetButtonClicked()
+        public void OnPlanetButtonClicked()
         {
             if (_planet.IsUnlocked && _planet.IsIncomeReady)
             {
