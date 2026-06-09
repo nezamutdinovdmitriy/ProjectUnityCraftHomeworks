@@ -1,4 +1,3 @@
-using DG.Tweening;
 using Game.Views;
 using Modules.Money;
 using UnityEngine;
@@ -11,22 +10,12 @@ namespace Game.Scripts.Presenters
         [SerializeField]
         private MoneyView _view;
 
-        [SerializeField]
-        private float _scrollDuration = 0.3f;
-        
-        private int _visualMoney;
-        private Tween _counterTween;
-        private Tween _delayTween;
-
         private IMoneyStorage _moneyStorage;
         
         [Inject]
         public void Construct(IMoneyStorage moneyStorage)
         {
             _moneyStorage = moneyStorage;
-
-            _visualMoney = _moneyStorage.Money;
-            _view.SetValue(_visualMoney.ToString());
         }
 
         public void Initialize()
@@ -34,6 +23,8 @@ namespace Game.Scripts.Presenters
             _moneyStorage.OnMoneySpent += OnMoneySpent;
             _moneyStorage.OnMoneyChanged += OnMoneyChanged;
             _moneyStorage.OnMoneyEarned += OnMoneyEarned;
+            
+            _view.RenderInstant(_moneyStorage.Money.ToString());
         }
         
         private void OnDestroy()
@@ -41,65 +32,10 @@ namespace Game.Scripts.Presenters
             _moneyStorage.OnMoneySpent -= OnMoneySpent;
             _moneyStorage.OnMoneyChanged -= OnMoneyChanged;
             _moneyStorage.OnMoneyEarned -= OnMoneyEarned;
-
-            _delayTween?.Kill();
-            _counterTween?.Kill();
         }
 
-        public void AnimateToTarget(int amount)
-        {
-            _counterTween?.Kill();
-            _counterTween = DOTween.To(() => _visualMoney, x =>
-                {
-                    _visualMoney = x;
-                    _view.SetValue(_visualMoney.ToString());
-                }, amount, _scrollDuration)
-                .SetEase(Ease.Linear)
-                .SetLink(gameObject); // Строго линейно!
-
-            _view.PlayAnimation();
-        }
-
-        private void OnMoneyEarned(int newValue, int range)
-        {
-            int targetMoney = newValue;
-            
-            if (_delayTween.IsActive()) 
-                _delayTween.Kill();
-
-            _delayTween = DOVirtual.DelayedCall(1f, () =>
-            {
-                AnimateToTarget(targetMoney);
-                _delayTween = null;
-            }, false).SetLink(gameObject);
-        }
-
-        private void OnMoneyChanged(int newValue, int prevValue)
-        {
-            if (_delayTween.IsActive() && _delayTween.IsPlaying()) 
-                return;
-
-            ResetVisuals(newValue);
-        }
-
-        private void OnMoneySpent(int newValue, int range) => ResetVisuals(newValue);
-
-        private void ResetVisuals(int targetValue)
-        {
-            if (_delayTween.IsActive()) 
-                _delayTween.Kill();
-            
-            _delayTween = null;
-
-            if (_counterTween.IsActive())
-                _counterTween.Kill();
-            
-            _counterTween = null;
-
-            _visualMoney = targetValue;
-            _view.SetValue(_visualMoney.ToString());
-            
-            _view.ResetAnimation();
-        }
+        private void OnMoneyEarned(int newValue, int range) => _view.RenderEarned(newValue);
+        private void OnMoneyChanged(int newValue, int prevValue) => _view.RenderSmooth(newValue);
+        private void OnMoneySpent(int newValue, int range) => _view.RenderInstant(newValue.ToString());
     }
 }
