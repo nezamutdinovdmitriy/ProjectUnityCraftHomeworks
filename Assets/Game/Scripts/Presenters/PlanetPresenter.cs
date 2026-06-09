@@ -24,10 +24,8 @@ namespace Game.Presenters
         public string Name => _name;
         
         [Inject]
-        public void Construct(PlanetPopupPresenter planetPopupPresenter)
-        {
-            _popupPresenter = planetPopupPresenter;
-        }
+        public void Construct(PlanetPopupPresenter planetPopupPresenter) 
+            => _popupPresenter = planetPopupPresenter;
 
         public void Initialize(IPlanet planet)
         {

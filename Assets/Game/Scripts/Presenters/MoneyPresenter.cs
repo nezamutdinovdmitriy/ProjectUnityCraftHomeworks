@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Game.Scripts.Presenters
 {
-    public class MoneyPresenter : MonoBehaviour, IInitializable
+    public class MoneyPresenter : MonoBehaviour
     {
         [SerializeField]
         private MoneyView _view;
@@ -13,18 +13,15 @@ namespace Game.Scripts.Presenters
         private IMoneyStorage _moneyStorage;
         
         [Inject]
-        public void Construct(IMoneyStorage moneyStorage)
-        {
-            _moneyStorage = moneyStorage;
-        }
+        public void Construct(IMoneyStorage moneyStorage) => _moneyStorage = moneyStorage;
 
-        public void Initialize()
+        private void Start() => _view.SetText(_moneyStorage.Money.ToString());
+
+        public void OnEnable()
         {
             _moneyStorage.OnMoneySpent += OnMoneySpent;
             _moneyStorage.OnMoneyChanged += OnMoneyChanged;
             _moneyStorage.OnMoneyEarned += OnMoneyEarned;
-            
-            _view.RenderInstant(_moneyStorage.Money.ToString());
         }
         
         private void OnDestroy()
@@ -34,8 +31,8 @@ namespace Game.Scripts.Presenters
             _moneyStorage.OnMoneyEarned -= OnMoneyEarned;
         }
 
-        private void OnMoneyEarned(int newValue, int range) => _view.RenderEarned(newValue);
-        private void OnMoneyChanged(int newValue, int prevValue) => _view.RenderSmooth(newValue);
-        private void OnMoneySpent(int newValue, int range) => _view.RenderInstant(newValue.ToString());
+        private void OnMoneyEarned(int newValue, int range) => _view.SetTextAnimatedWithDelay(newValue);
+        private void OnMoneyChanged(int newValue, int prevValue) => _view.SetTextAnimated(newValue);
+        private void OnMoneySpent(int newValue, int range) => _view.SetText(newValue.ToString());
     }
 }

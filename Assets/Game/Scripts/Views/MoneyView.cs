@@ -28,9 +28,13 @@ namespace Game.Views
         private Tween _counterTween;
         private Tween _delayTween;
 
-        public void SetValue(string value) => _value.text = value;
-
-        public void RenderInstant(string value)
+        private void OnDestroy()
+        {
+            KillAllTweens();
+            _scaleTarget?.DOKill();
+        }
+        
+        public void SetText(string value)
         {
             KillAllTweens();
 
@@ -40,7 +44,7 @@ namespace Game.Views
             ResetScale();
         }
 
-        public void RenderEarned(int targetValue)
+        public void SetTextAnimatedWithDelay(int targetValue)
         {
             _delayTween?.Kill();
 
@@ -51,7 +55,7 @@ namespace Game.Views
             }, false).SetLink(gameObject);
         }
 
-        public void RenderSmooth(int targetValue)
+        public void SetTextAnimated(int targetValue)
         {
             if (_delayTween.IsActive() && _delayTween.IsPlaying())
                 return;
@@ -102,12 +106,6 @@ namespace Game.Views
 
             _counterTween?.Kill();
             _counterTween = null;
-        }
-
-        private void OnDestroy()
-        {
-            KillAllTweens();
-            _scaleTarget?.DOKill();
         }
     }
 }

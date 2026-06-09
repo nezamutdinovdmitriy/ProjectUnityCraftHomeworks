@@ -13,12 +13,8 @@ namespace Game.Presenters
         public override void InstallBindings()
         {
             Container.Bind<PlanetPopupPresenter>().FromComponentInHierarchy().AsSingle();
-            
-            Container.BindInterfacesAndSelfTo<MoneyPresenter>().FromComponentInHierarchy().AsSingle();
 
             Container.Bind<PlanetPresenter>().FromComponentsInHierarchy().AsCached();
-
-            Container.Bind<PlanetIncomePresenter>().FromComponentsInHierarchy().AsCached();
         }
     }
 }
