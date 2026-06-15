@@ -1,3 +1,4 @@
+using Game.Scripts.Domain.Repositories;
 using Modules.Entities;
 using UnityEngine;
 using Zenject;
