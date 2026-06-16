@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Scripts.Domain.Serializers;
 using Zenject;
 
 namespace Game.Scripts.Domain
@@ -8,7 +9,9 @@ namespace Game.Scripts.Domain
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<SaveManager>().AsSingle();
+            Container.Bind<SaveManager>().AsSingle();
+
+            Container.Bind<ISaveSerializer>().To<EntityWorldSerializer>().AsCached();
         }
     }
 }

@@ -37,7 +37,10 @@ namespace Game.Scripts.Domain.Repositories
             
             await request.SendWebRequest();
 
-            if (request.result != UnityWebRequest.Result.Success)
+            string jsonText = request.downloadHandler.text;
+            
+            if (request.result != UnityWebRequest.Result.Success 
+                || string.IsNullOrEmpty(jsonText))
                 return (false, null);
 
             JObject saveData = JObject.Parse(request.downloadHandler.text);

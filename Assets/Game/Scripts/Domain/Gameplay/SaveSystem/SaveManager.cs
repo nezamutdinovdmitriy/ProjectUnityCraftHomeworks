@@ -1,12 +1,13 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using Zenject;
+using UnityEngine;
 
 namespace Game.Scripts.Domain
 {
     public class SaveManager
     {
+        private const string SaveVersionKey = "SaveVersion";
+        
         private readonly ISaveSerializer[] _serializers;
         private readonly IRepository _repository;
 
@@ -18,6 +19,8 @@ namespace Game.Scripts.Domain
         {
             _serializers = serializers;
             _repository = repository;
+
+            _version = PlayerPrefs.GetInt(SaveVersionKey, 0);
         }
 
         public async UniTask<(bool success, int version)> SaveAsync()
@@ -32,23 +35,32 @@ namespace Game.Scripts.Domain
             bool success = await _repository.Save(nextVersion.ToString(), saveData);
 
             if (success)
+            {
                 _version = nextVersion;
+                
+                PlayerPrefs.SetInt(SaveVersionKey, _version);
+                PlayerPrefs.Save();
+            }
 
             return (success, nextVersion);
         }
 
         public async UniTask<(bool success, int version)> LoadAsync(string version)
         {
-            (bool success, JObject saveData) = await _repository.Load(version.ToString());
-
+            int parsedVersion = int.TryParse(version, out var result) ? result : -1;
+            
+            if (parsedVersion < 0 
+                || parsedVersion > PlayerPrefs.GetInt(SaveVersionKey, 0))
+                return (false, parsedVersion);
+            
+            (bool success, JObject saveData) = await _repository.Load(version);
+            
             if (success)
                 foreach (ISaveSerializer serializer in _serializers)
                     if (saveData.TryGetValue(serializer.Key, out JToken data))
                         serializer.Deserialize(data);
-
-            int v = int.TryParse(version, out var result) ? result : -1;
-
-            return (success, v);
+            
+            return (success, parsedVersion);
         }
     }
 }
