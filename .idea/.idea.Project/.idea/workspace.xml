@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57197a8a-99b6-439e-a4a2-af49f65870e2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Serializers/EntityWorldSerializer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Serializers/EntityWorldSerializer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/IComponentSavable.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/IComponentSavable.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/ISaveSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/ISaveSerializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveSystemInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveSystemInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Presentation/SaveLoadPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Presentation/SaveLoadPresenter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Modules/Entities/EntityType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Modules/Entities/EntityType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Countdown.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Countdown.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/DestinationPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/DestinationPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Health.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ProductionOrder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ProductionOrder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ResourceBag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ResourceBag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/TargetObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/TargetObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Team.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Team.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +32,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RepositoryInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveSystemInstaller.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Serializers/IComponentSavable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Presentation/PresentersInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Presentation/SaveLoadPresenter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/View/ControlsView.cs" root0="FORCE_HIGHLIGHTING" />
@@ -155,7 +157,7 @@
       <workItem from="1781512805203" duration="11680000" />
       <workItem from="1781550991828" duration="4976000" />
       <workItem from="1781596434450" duration="2438000" />
-      <workItem from="1781603466839" duration="6963000" />
+      <workItem from="1781603466839" duration="13392000" />
     </task>
     <servers />
   </component>
