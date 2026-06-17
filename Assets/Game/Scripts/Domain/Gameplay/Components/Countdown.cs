@@ -1,5 +1,3 @@
-using Game.Scripts.Domain.Serializers;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace SampleGame.Gameplay
@@ -14,9 +12,7 @@ namespace SampleGame.Gameplay
         ///Const
         [field: SerializeField]
         public float Duration { get; private set; }
-        
-        public JToken Serialize() => JToken.FromObject(Current);
 
-        public void Deserialize(JToken saveData) => Current = saveData.ToObject<float>();
+        public void Accept(IComponentVisitor visitor) => visitor.Visit(this);
     }
 }

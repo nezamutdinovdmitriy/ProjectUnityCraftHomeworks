@@ -1,5 +1,3 @@
-using Game.Scripts.Domain.Serializers;
-using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace SampleGame.Gameplay
@@ -15,8 +13,6 @@ namespace SampleGame.Gameplay
         [field: SerializeField]
         public int Max { get; private set; } = 100;
         
-        public JToken Serialize() => JToken.FromObject(Current);
-
-        public void Deserialize(JToken saveData) => Current = saveData.ToObject<int>();
+        public void Accept(IComponentVisitor visitor) => visitor.Visit(this);
     }
 }

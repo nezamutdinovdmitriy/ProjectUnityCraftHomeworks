@@ -1,6 +1,3 @@
-using Game.Scripts.Domain.Serializers;
-using Newtonsoft.Json.Linq;
-using SampleGame.Common;
 using UnityEngine;
 
 namespace SampleGame.Gameplay
@@ -12,8 +9,6 @@ namespace SampleGame.Gameplay
         [field: SerializeField]
         public Vector3 Value { get; set; }
         
-        public JToken Serialize() => JToken.FromObject((SerializedVector3)Value);
-
-        public void Deserialize(JToken saveData) => Value = saveData.ToObject<SerializedVector3>();
+        public void Accept(IComponentVisitor visitor) => visitor.Visit(this);
     }
 }

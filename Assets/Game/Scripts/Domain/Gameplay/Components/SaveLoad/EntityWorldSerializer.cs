@@ -4,6 +4,7 @@ using System.Linq;
 using Modules.Entities;
 using Newtonsoft.Json.Linq;
 using SampleGame.Common;
+using SampleGame.Gameplay;
 using UnityEngine;
 
 namespace Game.Scripts.Domain.Serializers
@@ -13,6 +14,7 @@ namespace Game.Scripts.Domain.Serializers
     {
         public int Id;
         public string Name;
+        
         public SerializedVector3 Position;
         public SerializedVector3 Rotation;
 
@@ -22,10 +24,17 @@ namespace Game.Scripts.Domain.Serializers
     public class EntityWorldSerializer : ISaveSerializer<EntityData[]>
     {
         private readonly EntityWorld _entityWorld;
+        private readonly EntityCatalog _entityCatalog;
+        
         private readonly List<IComponentSavable> _componentsCache = new();
 
-        public EntityWorldSerializer(EntityWorld entityWorld) 
-            => _entityWorld = entityWorld;
+        public EntityWorldSerializer(
+            EntityWorld entityWorld, 
+            EntityCatalog entityCatalog)
+        {
+            _entityWorld = entityWorld;
+            _entityCatalog = entityCatalog;
+        }
 
         public EntityData[] Serialize()
         {
@@ -44,7 +53,14 @@ namespace Game.Scripts.Domain.Serializers
                 Dictionary<string, JToken> componentsMap = new();
 
                 foreach (IComponentSavable component in _componentsCache)
-                    componentsMap[component.Key] = component.Serialize();
+                {
+                    JsonComponentVisitor saveVisitor = new();
+                    
+                    component.Accept(saveVisitor);
+
+                    string key = component.GetType().Name;
+                    componentsMap[key] = saveVisitor.SaveData;
+                }
                 
                 result[index++] = new EntityData()
                 {
@@ -98,8 +114,19 @@ namespace Game.Scripts.Domain.Serializers
                     entity.GetComponents(_componentsCache);
 
                     foreach (IComponentSavable component in _componentsCache)
-                        if(data.Components.TryGetValue(component.Key, out JToken componentData))
-                            component.Deserialize(componentData);
+                    {
+                        string key = component.GetType().Name;
+
+                        if (data.Components.TryGetValue(key, out JToken componentData))
+                        {
+                            JsonComponentVisitor loadVisitor = new(
+                                componentData, 
+                                _entityCatalog, 
+                                _entityWorld);
+                            
+                            component.Accept(loadVisitor);
+                        }
+                    }
                 }
             }
 
