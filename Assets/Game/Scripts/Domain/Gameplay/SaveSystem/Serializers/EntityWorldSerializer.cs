@@ -12,7 +12,7 @@ namespace Game.Scripts.Domain.Serializers
     public struct EntityData
     {
         public int Id;
-        public string ConfigName;
+        public string Name;
         public SerializedVector3 Position;
         public SerializedVector3 Rotation;
 
@@ -49,7 +49,7 @@ namespace Game.Scripts.Domain.Serializers
                 result[index++] = new EntityData()
                 {
                     Id = entity.Id,
-                    ConfigName = entity.Name,
+                    Name = entity.Name,
                     Position = entityTransform.position,
                     Rotation = entityTransform.rotation.eulerAngles,
                     Components = componentsMap
@@ -85,7 +85,7 @@ namespace Game.Scripts.Domain.Serializers
                 else
                 {
                    entity = _entityWorld.Spawn(
-                        data.ConfigName,
+                        data.Name,
                         data.Position,
                         Quaternion.Euler(data.Rotation),
                         data.Id);
