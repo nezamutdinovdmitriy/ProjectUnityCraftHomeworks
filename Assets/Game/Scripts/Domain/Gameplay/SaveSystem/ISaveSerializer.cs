@@ -21,6 +21,6 @@ namespace Game.Scripts.Domain
         
         public new T Serialize();
         
-        public void Deserialize(T data);
+        public void Deserialize(T saveData);
     }
 }

@@ -12,6 +12,7 @@ namespace Game.Scripts.Domain
             Container.Bind<SaveManager>().AsSingle();
 
             Container.Bind<ISaveSerializer>().To<EntityWorldSerializer>().AsCached();
+            //Container.Bind<ISaveSerializer>().To<ComponentSerializer>().AsCached();
         }
     }
 }

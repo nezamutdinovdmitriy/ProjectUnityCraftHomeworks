@@ -2,6 +2,7 @@ using Game.Scripts.Domain.Serializers;
 using Modules.Entities;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace SampleGame.Gameplay
 {
@@ -14,9 +15,10 @@ namespace SampleGame.Gameplay
         [field: SerializeField]
         public Entity Value { get; set; }
 
-        private readonly EntityWorld _entityWorld;
+        private EntityWorld _entityWorld;
 
-        public TargetObject(EntityWorld entityWorld) 
+        [Inject]
+        public void Construct(EntityWorld entityWorld) 
             => _entityWorld = entityWorld;
 
         public JToken Serialize()

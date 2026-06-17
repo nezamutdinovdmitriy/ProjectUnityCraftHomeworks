@@ -4,6 +4,7 @@ using Game.Scripts.Domain.Serializers;
 using Modules.Entities;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace SampleGame.Gameplay
 {
@@ -14,9 +15,10 @@ namespace SampleGame.Gameplay
         [SerializeField]
         private List<EntityConfig> _queue;
 
-        private readonly EntityCatalog _entityCatalog;
+        private EntityCatalog _entityCatalog;
 
-        public ProductionOrder(EntityCatalog entityCatalog) 
+        [Inject]
+        public void Construct(EntityCatalog entityCatalog) 
             => _entityCatalog = entityCatalog;
 
         public IReadOnlyList<EntityConfig> Queue
