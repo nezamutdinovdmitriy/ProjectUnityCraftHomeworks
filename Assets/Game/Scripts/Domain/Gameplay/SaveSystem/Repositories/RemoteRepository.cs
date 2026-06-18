@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 using UnityEngine.Networking;
 
 namespace Game.Scripts.Domain.Repositories
@@ -17,10 +18,10 @@ namespace Game.Scripts.Domain.Repositories
         public async UniTask<bool> Save(string version, JObject saveData)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(
-                saveData.ToString(Newtonsoft.Json.Formatting.None));
+                saveData.ToString(Newtonsoft.Json.Formatting.Indented));
             
             using UnityWebRequest request = UnityWebRequest.Put(
-                _config.Save(version), 
+                _config.GetSavePath(version), 
                 bytes);
             
             request.SetRequestHeader(ContentType, JsonContentType);
@@ -33,7 +34,7 @@ namespace Game.Scripts.Domain.Repositories
         public async UniTask<(bool, JObject)> Load(string version)
         {
             using UnityWebRequest request = UnityWebRequest.Get(
-                _config.Load(version));
+                _config.GetLoadPath(version));
             
             await request.SendWebRequest();
 

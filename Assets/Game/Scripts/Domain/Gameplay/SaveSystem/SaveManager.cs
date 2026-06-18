@@ -30,7 +30,9 @@ namespace Game.Scripts.Domain
             int nextVersion = _version + 1;
 
             foreach (ISaveSerializer serializer in _serializers)
-                saveData.Add(serializer.Key, serializer.Serialize());
+                saveData.Add(
+                    serializer.Key, 
+                    serializer.Serialize());
 
             bool success = await _repository.Save(nextVersion.ToString(), saveData);
 

@@ -23,17 +23,19 @@ namespace Game.Scripts.Domain.Serializers
     
     public class EntityWorldSerializer : ISaveSerializer<EntityData[]>
     {
-        private readonly EntityWorld _entityWorld;
-        private readonly EntityCatalog _entityCatalog;
+        private readonly List<IComponentSavable> _componentsCache;
+        private readonly JsonComponentVisitor _sharedVisitor;
         
-        private readonly List<IComponentSavable> _componentsCache = new();
-
+        private readonly EntityWorld _entityWorld;
+        
         public EntityWorldSerializer(
             EntityWorld entityWorld, 
             EntityCatalog entityCatalog)
         {
             _entityWorld = entityWorld;
-            _entityCatalog = entityCatalog;
+
+            _componentsCache = new List<IComponentSavable>();
+            _sharedVisitor = new JsonComponentVisitor(entityCatalog, _entityWorld);
         }
 
         public EntityData[] Serialize()
@@ -43,23 +45,25 @@ namespace Game.Scripts.Domain.Serializers
 
             int index = 0;
 
+            _sharedVisitor.PrepareForSave();
+            
             foreach (Entity entity in activeEntities)
             {
-                Transform entityTransform = entity.transform;
-
                 _componentsCache.Clear();
                 entity.GetComponents(_componentsCache);
+                
+                Transform entityTransform = entity.transform;
 
                 Dictionary<string, JToken> componentsMap = new();
 
                 foreach (IComponentSavable component in _componentsCache)
                 {
-                    JsonComponentVisitor saveVisitor = new();
+                    _sharedVisitor.ClearData();
                     
-                    component.Accept(saveVisitor);
+                    component.Accept(_sharedVisitor);
 
                     string key = component.GetType().Name;
-                    componentsMap[key] = saveVisitor.SaveData;
+                    componentsMap[key] = _sharedVisitor.SaveData;
                 }
                 
                 result[index++] = new EntityData()
@@ -107,8 +111,7 @@ namespace Game.Scripts.Domain.Serializers
                         data.Id);
                 }
 
-                if (entity != null
-                    && data.Components != null)
+                if (entity != null && data.Components != null)
                 {
                     _componentsCache.Clear();
                     entity.GetComponents(_componentsCache);
@@ -119,12 +122,9 @@ namespace Game.Scripts.Domain.Serializers
 
                         if (data.Components.TryGetValue(key, out JToken componentData))
                         {
-                            JsonComponentVisitor loadVisitor = new(
-                                componentData, 
-                                _entityCatalog, 
-                                _entityWorld);
+                            _sharedVisitor.PrepareForLoad(componentData);
                             
-                            component.Accept(loadVisitor);
+                            component.Accept(_sharedVisitor);
                         }
                     }
                 }

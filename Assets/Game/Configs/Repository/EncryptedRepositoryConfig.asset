@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbcdae2b29c9472d9970c52b4966c2c3, type: 3}
+  m_Name: EncryptedRepositoryConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Domain.Repositories.EncryptedRepositoryConfig
+  <Key>k__BackingField: A67B9A34EF9832A1BC9D8F7E6A5B4C32
+  <InitializationVector>k__BackingField: abcdefghijklmnop

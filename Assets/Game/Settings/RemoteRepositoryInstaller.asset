@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83225d57e05c4f0790fe4bff161777c2, type: 3}
   m_Name: RemoteRepositoryInstaller
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Domain.Repositories.RepositoryInstaller
-  _config: {fileID: 11400000, guid: 848893021910d9f4287d54b319d5997e, type: 2}
+  _fileName: SaveData
+  _remoteConfig: {fileID: 11400000, guid: 848893021910d9f4287d54b319d5997e, type: 2}
+  _encryptedConfig: {fileID: 11400000, guid: e805892fe7ec8ef4f87b93ec99cb103c, type: 2}

@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using System.Text;
+using Game.Scripts.Domain.Encrypt;
+using UnityEngine;
 using Zenject;
 
 namespace Game.Scripts.Domain.Repositories
@@ -9,12 +12,47 @@ namespace Game.Scripts.Domain.Repositories
     public class RepositoryInstaller : ScriptableObjectInstaller
     {
         [SerializeField]
-        private RemoteRepositoryConfig _config;
+        private string _fileName;
+        
+        [SerializeField]
+        private RemoteRepositoryConfig _remoteConfig;
+
+        [SerializeField]
+        private EncryptedRepositoryConfig _encryptedConfig;
         
         public override void InstallBindings()
         {
-            Container.BindInstance(_config).AsSingle();
-            Container.Bind<IRepository>().To<RemoteRepository>().AsSingle();
+            Container
+                .Bind<RemoteRepository>()
+                .AsSingle()
+                .WithArguments(_remoteConfig);
+
+            Container.Bind<FileRepository>()
+                .AsSingle()
+                .WithArguments(
+                Path.Combine(
+                    Application.persistentDataPath, 
+                    _fileName));
+            
+            Container
+                .Bind<IRepository>()
+                .To<SyncRepository>()
+                .FromMethod(CreateSyncRepository);
+            
+            Container
+                .Bind<IEncryptor>()
+                .To<AesEncryptionService>()
+                .AsSingle()
+                .WithArguments(
+                    Encoding.UTF8.GetBytes(_encryptedConfig.Key), 
+                    Encoding.UTF8.GetBytes(_encryptedConfig.InitializationVector));
+            
+            //Container.Decorate<IRepository>().With<EncryptedRepositoryDecorator>();
         }
+
+        private SyncRepository CreateSyncRepository() 
+            => new(
+                Container.Resolve<RemoteRepository>(),
+                Container.Resolve<FileRepository>());
     }
 }

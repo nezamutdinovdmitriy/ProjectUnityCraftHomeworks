@@ -16,7 +16,7 @@ namespace Game.Scripts.Domain.Repositories
         [SerializeField]
         private string _loadPath = "/load?version=";
 
-        public string Save(string version) => $"{_uri}{_savePath}{version}";
-        public string Load(string version) => $"{_uri}{_loadPath}{version}";
+        public string GetSavePath(string version) => $"{_uri}{_savePath}{version}";
+        public string GetLoadPath(string version) => $"{_uri}{_loadPath}{version}";
     }
 }
