@@ -33,7 +33,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/TargetObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Team.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/GameplayInstaller.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptionService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/IEncryptor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/IRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/ISaveSerializer.cs" root0="FORCE_HIGHLIGHTING" />

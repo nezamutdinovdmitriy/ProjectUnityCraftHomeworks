@@ -27,18 +27,14 @@ namespace Game.Scripts.Domain.Repositories
                 .AsSingle()
                 .WithArguments(_remoteConfig);
 
-            Container.Bind<FileRepository>()
+            Container
+                .Bind<FileRepository>()
                 .AsSingle()
                 .WithArguments(
                 Path.Combine(
                     Application.persistentDataPath, 
                     _fileName));
-            
-            Container
-                .Bind<IRepository>()
-                .To<SyncRepository>()
-                .FromMethod(CreateSyncRepository);
-            
+                        
             Container
                 .Bind<IEncryptor>()
                 .To<AesEncryptor>()
@@ -47,13 +43,23 @@ namespace Game.Scripts.Domain.Repositories
                     Encoding.UTF8.GetBytes(_encryptedConfig.Key), 
                     Encoding.UTF8.GetBytes(_encryptedConfig.InitializationVector));
             
-            Container.Decorate<IRepository>().With<EncryptedRepository>();
+            Container
+                .Bind<IRepository>()
+                .To<SyncRepository>()
+                .FromMethod(CreateSyncRepository)
+                .AsSingle();
         }
 
-        private SyncRepository CreateSyncRepository() 
-            => new(
-                Container.Resolve<FileRepository>(),
-                Container.Resolve<RemoteRepository>()
-                );
+        private SyncRepository CreateSyncRepository()
+        {
+            FileRepository fileRepository = Container.Resolve<FileRepository>();
+            RemoteRepository remoteRepository = Container.Resolve<RemoteRepository>();
+            IEncryptor encryptor = Container.Resolve<IEncryptor>();
+
+            EncryptedRepository fileEncryptedRepository = new(fileRepository, encryptor);
+            EncryptedRepository remoteEncryptedRepository = new(remoteRepository, encryptor);
+
+            return new SyncRepository(fileEncryptedRepository, remoteEncryptedRepository);
+        }
     }
 }
