@@ -52,7 +52,8 @@ namespace Game.Scripts.Domain.Repositories
 
         private SyncRepository CreateSyncRepository() 
             => new(
-                Container.Resolve<RemoteRepository>(),
-                Container.Resolve<FileRepository>());
+                Container.Resolve<FileRepository>(),
+                Container.Resolve<RemoteRepository>()
+                );
     }
 }

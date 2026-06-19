@@ -2,6 +2,7 @@
 using System.Text;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using UnityEngine;
 
 namespace Game.Scripts.Domain.Repositories
 {
@@ -37,7 +38,7 @@ namespace Game.Scripts.Domain.Repositories
 
             byte[] bytes = await File.ReadAllBytesAsync(path);
             string json = Encoding.UTF8.GetString(bytes);
-
+            
             return (true, JObject.Parse(json));
         }
 

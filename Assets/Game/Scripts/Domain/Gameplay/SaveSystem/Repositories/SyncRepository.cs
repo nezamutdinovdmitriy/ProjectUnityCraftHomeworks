@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using UnityEngine;
 
 namespace Game.Scripts.Domain.Repositories
 {
@@ -48,6 +49,7 @@ namespace Game.Scripts.Domain.Repositories
 
             long lastTimestamp = long.MinValue;
             JObject lastSaveData = null;
+            int lastRepositoryIndex = -1;
 
             for (int i = 0; i < repositoriesCount; i++)
             {
@@ -65,9 +67,12 @@ namespace Game.Scripts.Domain.Repositories
                 {
                     lastTimestamp = timestamp;
                     lastSaveData = saveData;
+                    lastRepositoryIndex = i;
                 }
             }
 
+            Debug.Log($"Save loaded from {_repositories[lastRepositoryIndex].GetType().Name}");
+            
             return lastSaveData != null ? (true, lastSaveData) : (false, null);
         }
     }
