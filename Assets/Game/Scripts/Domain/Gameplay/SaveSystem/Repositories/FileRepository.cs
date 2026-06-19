@@ -2,7 +2,6 @@
 using System.Text;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using UnityEngine;
 
 namespace Game.Scripts.Domain.Repositories
 {
