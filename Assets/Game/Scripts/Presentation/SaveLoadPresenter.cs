@@ -1,9 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Domain;
-using Newtonsoft.Json.Linq;
-using Unity.VisualScripting.Dependencies.NCalc;
-using UnityEngine;
 
 namespace Game.Gameplay
 {
@@ -11,7 +8,8 @@ namespace Game.Gameplay
     {
         private readonly SaveManager _saveManager;
         
-        public SaveLoadPresenter(SaveManager saveManager) => _saveManager = saveManager;
+        public SaveLoadPresenter(SaveManager saveManager) 
+            => _saveManager = saveManager;
         
         public void Save(Action<bool, int> callback) 
             => ExecuteSave(callback).Forget();

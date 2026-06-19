@@ -2,31 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57197a8a-99b6-439e-a4a2-af49f65870e2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.Visits.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.Visits.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptionService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptionService.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/IEncryptor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/IEncryptor.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/EncryptedRepositoryConfig.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/EncryptedRepositoryConfig.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/EncryptedRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/EncryptedRepository.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/FileRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/FileRepository.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/SyncRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/SyncRepository.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/EntityWorldSerializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/EntityWorldSerializer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/GameplayInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/GameplayInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptionService.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/EncryptedRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/EncryptedRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepositoryConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/RemoteRepositoryConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepositoryConfig.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/RemoteRepositoryConfig.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RepositoryInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RepositoryInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Settings/RemoteRepositoryInstaller.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Settings/RemoteRepositoryInstaller.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Presentation/SaveLoadPresenter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Presentation/SaveLoadPresenter.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +188,8 @@
       <workItem from="1781646919296" duration="16000" />
       <workItem from="1781646967338" duration="1369000" />
       <workItem from="1781679535177" duration="24631000" />
-      <workItem from="1781760522164" duration="19211000" />
+      <workItem from="1781760522164" duration="19323000" />
+      <workItem from="1781857216168" duration="3361000" />
     </task>
     <servers />
   </component>

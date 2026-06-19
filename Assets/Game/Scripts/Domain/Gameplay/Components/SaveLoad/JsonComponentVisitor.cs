@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Modules.Entities;
+﻿using Modules.Entities;
 using Newtonsoft.Json.Linq;
-using SampleGame.Common;
 
 namespace SampleGame.Gameplay
 {

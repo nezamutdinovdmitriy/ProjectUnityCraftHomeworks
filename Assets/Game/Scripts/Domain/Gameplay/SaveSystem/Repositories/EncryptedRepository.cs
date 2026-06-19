@@ -1,11 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 using Cysharp.Threading.Tasks;
 using Game.Scripts.Domain.Encrypt;
 using Newtonsoft.Json.Linq;
-using UnityEngine;
 
 namespace Game.Scripts.Domain.Repositories
 {

@@ -41,13 +41,13 @@ namespace Game.Scripts.Domain.Repositories
             
             Container
                 .Bind<IEncryptor>()
-                .To<AesEncryptionService>()
+                .To<AesEncryptor>()
                 .AsSingle()
                 .WithArguments(
                     Encoding.UTF8.GetBytes(_encryptedConfig.Key), 
                     Encoding.UTF8.GetBytes(_encryptedConfig.InitializationVector));
             
-            //Container.Decorate<IRepository>().With<EncryptedRepositoryDecorator>();
+            Container.Decorate<IRepository>().With<EncryptedRepository>();
         }
 
         private SyncRepository CreateSyncRepository() 

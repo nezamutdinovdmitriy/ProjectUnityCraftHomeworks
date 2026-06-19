@@ -1,7 +1,6 @@
 ﻿using System.Text;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace Game.Scripts.Domain.Repositories

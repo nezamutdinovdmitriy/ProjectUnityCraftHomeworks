@@ -3,12 +3,12 @@ using System.Security.Cryptography;
 
 namespace Game.Scripts.Domain.Encrypt
 {
-    public class AesEncryptionService : IEncryptor
+    public class AesEncryptor : IEncryptor
     {
         private readonly byte[] _key;
         private readonly byte[] _iv;
         
-        public AesEncryptionService(byte[] key, byte[] iv)
+        public AesEncryptor(byte[] key, byte[] iv)
         {
             _key = key;
             _iv = iv;
