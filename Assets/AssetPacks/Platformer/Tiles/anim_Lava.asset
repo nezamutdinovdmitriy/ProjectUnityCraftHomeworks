@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: anim_Lava
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 21300000, guid: 8ef7bc3580ca94c71945ddfb6df9bba8, type: 3}
+  - {fileID: 21300000, guid: 4c4e21a7f1a2a4c7bbc40ad2bf5fe37e, type: 3}
+  - {fileID: 21300000, guid: 1b95d5f8013b745c5a9125d79c1b01c7, type: 3}
+  - {fileID: 21300000, guid: 47a7eb25094894d0aa2410974c99a696, type: 3}
+  - {fileID: 21300000, guid: 0622569b1fa254acfa79e5ac7b346b28, type: 3}
+  - {fileID: 21300000, guid: 67222f212dca84fa9958ecaa42ab7518, type: 3}
+  - {fileID: 21300000, guid: 03e0cf4cb8ed84b25974b0816cc9ad3d, type: 3}
+  - {fileID: 21300000, guid: dbe263ca7515249ec9a566aa5e2234f5, type: 3}
+  m_MinSpeed: 5
+  m_MaxSpeed: 5
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 2
+  m_TileAnimationFlags: 0
