@@ -3,8 +3,57 @@
   <component name="ChangeListManager">
     <list default="true" id="57197a8a-99b6-439e-a4a2-af49f65870e2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/FileRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/FileRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Resources/ProjectContext.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Resources/ProjectContext.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Countdown.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Countdown.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/DestinationPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/DestinationPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Health.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ProductionOrder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ProductionOrder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ResourceBag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ResourceBag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/EntityWorldSerializer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/EntityWorldSerializer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentSavable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentSavable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentVisitor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentVisitor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.Visits.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.Visits.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/VisitorMode.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/VisitorMode.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/TargetObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/TargetObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Team.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Team.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/IEncryptor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/IEncryptor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/IRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/IRepository.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/ISaveSerializer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/ISaveSerializer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/EncryptedRepositoryConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/EncryptedRepositoryConfig.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/RemoteRepositoryConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/RemoteRepositoryConfig.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/EncryptedRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/EncryptedRepository.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/FileRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/FileRepository.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RepositoryInstaller.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RepositoryInstaller.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/SyncRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/SyncRepository.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveSystemInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveSystemInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Settings/AppInstaller.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Settings/AppInstaller.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Settings/AppInstaller.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Settings/AppInstaller.asset.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +64,8 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/App/Encrypt/EncryptInstaller.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/App/Repositories/CheckSumRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Common/SerializedVector3.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Common/TeamType.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Countdown.cs" root0="FORCE_HIGHLIGHTING" />
@@ -24,29 +75,16 @@
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/MoveSpeed.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ProductionOrder.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ResourceBag.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/EntityWorldSerializer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentSavable.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentVisitor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.Visits.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/VisitorMode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/TargetObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Team.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/GameplayInstaller.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/IEncryptor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/IRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/ISaveSerializer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/EncryptedRepositoryConfig.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/FileRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RepositoryInstaller.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/SyncRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveSystemInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Presentation/PresentersInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Presentation/SaveLoadPresenter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/View/ControlsView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/View/UIInstaller.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Settings/AppInstaller.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Modules/Entities/Entity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Modules/Entities/EntityConfig.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Modules/Entities/EntityType.cs" root0="FORCE_HIGHLIGHTING" />
@@ -57,6 +95,11 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/bd9f5e114ec249838c382ecb2aa58f04ee00/8c/2d0dafa9/UnityWebRequest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f27f375161264267910e5cbe7a0862ec1f7600/dc/7835dc44/SerializeField.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b2856ca068a85f5ce4a0462fdd6462e56463d4b04c303e873a2783e049125f45/System.Security.Cryptography.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -183,12 +226,17 @@
       <workItem from="1781679535177" duration="24631000" />
       <workItem from="1781760522164" duration="19323000" />
       <workItem from="1781857216168" duration="6300000" />
+      <workItem from="1782146907571" duration="7820000" />
+      <workItem from="1782228686912" duration="13820000" />
+      <workItem from="1782286914293" duration="11873000" />
+      <workItem from="1782301476366" duration="118000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
     <option name="hasUnityReference" value="true" />

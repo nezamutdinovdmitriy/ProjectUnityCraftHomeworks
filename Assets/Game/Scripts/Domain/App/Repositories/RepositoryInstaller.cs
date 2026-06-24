@@ -1,6 +1,5 @@
 ﻿using System.IO;
-using System.Text;
-using Game.Scripts.Domain.Encrypt;
+using Game.Scripts.Domain.App.Hash;
 using UnityEngine;
 using Zenject;
 
@@ -16,9 +15,6 @@ namespace Game.Scripts.Domain.Repositories
         
         [SerializeField]
         private RemoteRepositoryConfig _remoteConfig;
-
-        [SerializeField]
-        private EncryptedRepositoryConfig _encryptedConfig;
         
         public override void InstallBindings()
         {
@@ -34,14 +30,6 @@ namespace Game.Scripts.Domain.Repositories
                 Path.Combine(
                     Application.persistentDataPath, 
                     _fileName));
-                        
-            Container
-                .Bind<IEncryptor>()
-                .To<AesEncryptor>()
-                .AsSingle()
-                .WithArguments(
-                    Encoding.UTF8.GetBytes(_encryptedConfig.Key), 
-                    Encoding.UTF8.GetBytes(_encryptedConfig.InitializationVector));
             
             Container
                 .Bind<IRepository>()
@@ -54,12 +42,12 @@ namespace Game.Scripts.Domain.Repositories
         {
             FileRepository fileRepository = Container.Resolve<FileRepository>();
             RemoteRepository remoteRepository = Container.Resolve<RemoteRepository>();
-            IEncryptor encryptor = Container.Resolve<IEncryptor>();
-
-            EncryptedRepository fileEncryptedRepository = new(fileRepository, encryptor);
-            EncryptedRepository remoteEncryptedRepository = new(remoteRepository, encryptor);
-
-            return new SyncRepository(fileEncryptedRepository, remoteEncryptedRepository);
+            IHashProvider hashProvider = Container.Resolve<IHashProvider>();
+            
+            IRepository securedFile = new CheckSumRepository(fileRepository, hashProvider);
+            IRepository securedRemote = new CheckSumRepository(remoteRepository, hashProvider);
+        
+            return new SyncRepository(securedFile, securedRemote);
         }
     }
 }

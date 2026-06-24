@@ -1,15 +1,20 @@
+using Newtonsoft.Json.Linq;
 using SampleGame.Common;
 using UnityEngine;
 
 namespace SampleGame.Gameplay
 {
     //Can be extended
-    public sealed class Team : MonoBehaviour, IComponentSavable
+    public sealed class Team : MonoBehaviour, ISerializableComponent
     {
         ///Variable
         [field: SerializeField]
         public TeamType Type { get; set; }
-        
-        public void Accept(IComponentVisitor visitor) => visitor.Visit(this);
+
+        public JToken Serialize(IComponentSerializer serializer)
+            => serializer.Serialize(this);
+
+        public void Deserialize(IComponentSerializer serializer, JToken token)
+            => serializer.Deserialize(this, token);
     }
 }

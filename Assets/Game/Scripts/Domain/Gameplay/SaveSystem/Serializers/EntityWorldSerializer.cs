@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Modules.Entities;
 using Newtonsoft.Json.Linq;
 using SampleGame.Common;
@@ -23,8 +22,8 @@ namespace Game.Scripts.Domain.Serializers
     
     public class EntityWorldSerializer : ISaveSerializer<EntityData[]>
     {
-        private readonly List<IComponentSavable> _componentsCache;
-        private readonly JsonComponentVisitor _sharedVisitor;
+        private readonly List<ISerializableComponent> _componentsCache;
+        private readonly ComponentSerializer _componentSerializer;
         
         private readonly EntityWorld _entityWorld;
         
@@ -34,8 +33,8 @@ namespace Game.Scripts.Domain.Serializers
         {
             _entityWorld = entityWorld;
 
-            _componentsCache = new List<IComponentSavable>();
-            _sharedVisitor = new JsonComponentVisitor(entityCatalog, _entityWorld);
+            _componentsCache = new List<ISerializableComponent>();
+            _componentSerializer = new ComponentSerializer(entityCatalog, _entityWorld);
         }
 
         public EntityData[] Serialize()
@@ -44,8 +43,6 @@ namespace Game.Scripts.Domain.Serializers
             EntityData[] result = new EntityData[activeEntities.Count];
 
             int index = 0;
-
-            _sharedVisitor.PrepareForSave();
             
             foreach (Entity entity in activeEntities)
             {
@@ -56,17 +53,13 @@ namespace Game.Scripts.Domain.Serializers
 
                 Dictionary<string, JToken> componentsMap = new();
 
-                foreach (IComponentSavable component in _componentsCache)
+                foreach (ISerializableComponent component in _componentsCache)
                 {
-                    _sharedVisitor.ClearData();
-                    
-                    component.Accept(_sharedVisitor);
-
                     string key = component.GetType().Name;
-                    componentsMap[key] = _sharedVisitor.SaveData;
+                    componentsMap[key] = component.Serialize(_componentSerializer);
                 }
                 
-                result[index++] = new EntityData()
+                result[index++] = new EntityData
                 {
                     Id = entity.Id,
                     Name = entity.Name,
@@ -85,55 +78,80 @@ namespace Game.Scripts.Domain.Serializers
             if (saveData == null)
                 return;
 
+            List<(Entity entity, EntityData data)> actualState = UpdateWorldState(saveData);
+            
+            DeserializeComponentFor(actualState);
+        }
+
+        private void DeserializeComponentFor(List<(Entity entity, EntityData data)> pairs)
+        {
+            foreach ((Entity entity, EntityData data) in pairs)
+            {
+                if (entity != null && data.Components != null)
+                {
+                    _componentsCache.Clear();
+
+                    entity.GetComponents(_componentsCache);
+
+                    foreach (ISerializableComponent component in _componentsCache)
+                    {
+                        string key = component.GetType().Name;
+                        
+                        if(data.Components.TryGetValue(key, out JToken token))
+                            component.Deserialize(_componentSerializer, token);
+                    }
+                }
+            }
+            _componentsCache.Clear();
+        }
+        
+        private List<(Entity entity, EntityData data)> UpdateWorldState(EntityData[] saveData)
+        {
             IReadOnlyCollection<Entity> currentEntities = _entityWorld.GetAll();
 
-            HashSet<int> idsToRemove = new HashSet<int>(
-                currentEntities.Select(entity => entity.Id));
+            List<(Entity, EntityData)> result = new();
+            
+            HashSet<int> idsToRemove = new HashSet<int>();
+            
+            foreach (Entity entity in currentEntities)
+                idsToRemove.Add(entity.Id);
 
             foreach (EntityData data in saveData)
             {
-                Entity entity;
-                
+                Entity entity = null;
+
                 if (_entityWorld.TryGet(data.Id, out Entity existingEntity))
                 {
-                    idsToRemove.Remove(data.Id);
+                    if (existingEntity.Name == data.Name)
+                    {
+                        existingEntity.transform.position = data.Position;
+                        existingEntity.transform.rotation = Quaternion.Euler(data.Rotation);
+                        entity = existingEntity;
+                    }
+                    else
+                    {
+                        _entityWorld.Destroy(data.Id);
+                    }
 
-                    existingEntity.transform.position = data.Position;
-                    existingEntity.transform.rotation = Quaternion.Euler(data.Rotation);
-                    entity = existingEntity;
+                    idsToRemove.Remove(data.Id);
                 }
-                else
+                
+                if (entity == null)
                 {
-                   entity = _entityWorld.Spawn(
+                    entity = _entityWorld.Spawn(
                         data.Name,
                         data.Position,
                         Quaternion.Euler(data.Rotation),
                         data.Id);
                 }
 
-                if (entity != null && data.Components != null)
-                {
-                    _componentsCache.Clear();
-                    entity.GetComponents(_componentsCache);
-
-                    foreach (IComponentSavable component in _componentsCache)
-                    {
-                        string key = component.GetType().Name;
-
-                        if (data.Components.TryGetValue(key, out JToken componentData))
-                        {
-                            _sharedVisitor.PrepareForLoad(componentData);
-                            
-                            component.Accept(_sharedVisitor);
-                        }
-                    }
-                }
+                result.Add((entity, data));
             }
-
+            
             foreach (int id in idsToRemove)
                 _entityWorld.Destroy(id);
-            
-            _componentsCache.Clear();
+
+            return result;
         }
     }
 }

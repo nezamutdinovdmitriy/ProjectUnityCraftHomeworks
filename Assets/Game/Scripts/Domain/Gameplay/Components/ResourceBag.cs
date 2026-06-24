@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using SampleGame.Common;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace SampleGame.Gameplay
     }
     
     //Can be extended
-    public sealed class ResourceBag : MonoBehaviour, IComponentSavable
+    public sealed class ResourceBag : MonoBehaviour, ISerializableComponent
     {
         ///Variable
         [field: SerializeField]
@@ -23,7 +24,11 @@ namespace SampleGame.Gameplay
         ///Const
         [field: SerializeField]
         public int Capacity { get; set; }
-        
-        public void Accept(IComponentVisitor visitor) => visitor.Visit(this);
+
+        public JToken Serialize(IComponentSerializer serializer)
+            => serializer.Serialize(this);
+
+        public void Deserialize(IComponentSerializer serializer, JToken token)
+            => serializer.Deserialize(this, token);
     }
 }

@@ -13,9 +13,7 @@ namespace Game.Scripts.Domain.Repositories
         private readonly IRepository _wrappedRepository;
         private readonly IEncryptor _encryptor;
 
-        public EncryptedRepository(
-            IRepository wrappedRepository,
-                IEncryptor encryptor)
+        public EncryptedRepository(IRepository wrappedRepository, IEncryptor encryptor)
         {
             _wrappedRepository = wrappedRepository;
             _encryptor = encryptor;

@@ -1,58 +1,49 @@
 ﻿using Cysharp.Threading.Tasks;
+using Game.Scripts.Domain.App;
 using Newtonsoft.Json.Linq;
-using UnityEngine;
 
 namespace Game.Scripts.Domain
 {
     public class SaveManager
     {
-        private const string SaveVersionKey = "SaveVersion";
-        
         private readonly ISaveSerializer[] _serializers;
         private readonly IRepository _repository;
-
-        private int _version;
+        private readonly IVersionProvider _versionProvider;
 
         public SaveManager(
             ISaveSerializer[] serializers,
-            IRepository repository)
+            IRepository repository, 
+            IVersionProvider versionProvider)
         {
             _serializers = serializers;
             _repository = repository;
-
-            _version = PlayerPrefs.GetInt(SaveVersionKey, 0);
+            _versionProvider = versionProvider;
         }
 
         public async UniTask<(bool success, int version)> SaveAsync()
         {
             JObject saveData = new();
 
-            int nextVersion = _version + 1;
-
             foreach (ISaveSerializer serializer in _serializers)
                 saveData.Add(
                     serializer.Key, 
                     serializer.Serialize());
 
-            bool success = await _repository.Save(nextVersion.ToString(), saveData);
+            bool success = await _repository.Save(
+                _versionProvider.GetNextVersion().ToString(),
+                saveData);
 
             if (success)
-            {
-                _version = nextVersion;
-                
-                PlayerPrefs.SetInt(SaveVersionKey, _version);
-                PlayerPrefs.Save();
-            }
+                _versionProvider.IncreaseVersion();
 
-            return (success, nextVersion);
+            return (success, _versionProvider.GetCurrentVersion());
         }
 
         public async UniTask<(bool success, int version)> LoadAsync(string version)
         {
             int parsedVersion = int.TryParse(version, out var result) ? result : -1;
             
-            if (parsedVersion < 0 
-                || parsedVersion > PlayerPrefs.GetInt(SaveVersionKey, 0))
+            if (_versionProvider.IsVersionValid(parsedVersion) == false)
                 return (false, parsedVersion);
             
             (bool success, JObject saveData) = await _repository.Load(version);

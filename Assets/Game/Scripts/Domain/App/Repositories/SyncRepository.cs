@@ -68,6 +68,8 @@ namespace Game.Scripts.Domain.Repositories
                     lastTimestamp = timestamp;
                     lastSaveData = saveData;
                     lastRepositoryIndex = i;
+                    
+                    Debug.Log(_repositories[i].GetType().Name);
                 }
             }
 

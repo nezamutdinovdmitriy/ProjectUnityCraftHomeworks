@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2259390703443485560}
   - component: {fileID: 3748515522107707423}
+  - component: {fileID: 8964013037807235162}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -44,8 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e6589720da476459dc6dd71624b071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 1db4995efe59de04299b83fc615faaa7, type: 2}
+  _monoInstallers:
+  - {fileID: 8964013037807235162}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -55,8 +58,21 @@ MonoBehaviour:
     _displayWarningWhenResolvingDuringInstall: 0
     _validationRootResolveMethod: 0
     _validationErrorResponse: 0
+    _constructorChoiceStrategy: 0
     _signalSettings:
       _defaultSyncMode: 0
       _missingHandlerDefaultResponse: 2
       _requireStrictUnsubscribe: 0
       _defaultAsyncTickPriority: 1
+--- !u!114 &8964013037807235162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4627858491665913416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568ea89d6deb41439a2c8976e904c5dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Domain.App.Encrypt.EncryptInstaller
