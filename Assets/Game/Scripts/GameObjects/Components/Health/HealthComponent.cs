@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game
@@ -20,6 +21,7 @@ namespace Game
             CurrentHealth = _maxHealth;
         }
 
+        [Button]
         public void TakeDamage(float damage)
         {
             if (!IsAlive || damage <= 0)
@@ -32,6 +34,7 @@ namespace Game
                 OnDied?.Invoke();
         }
 
+        [Button]
         public void SetZero() => 
             this.TakeDamage(this.CurrentHealth);
     }

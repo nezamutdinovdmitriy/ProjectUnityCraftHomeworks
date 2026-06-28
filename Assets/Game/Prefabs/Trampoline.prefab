@@ -171,6 +171,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4979841302588641904}
   - component: {fileID: 2682617834291874480}
+  - component: {fileID: 2392427716072176944}
+  - component: {fileID: 8741177940319584074}
   m_Layer: 6
   m_Name: Trampoline
   m_TagString: Untagged
@@ -241,6 +243,32 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &2392427716072176944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d593a8a1f8b744bd8a7218744541ba68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Trampoline
+  _triggerComponent: {fileID: 8741177940319584074}
+  _force: {x: 3, y: 45}
+--- !u!114 &8741177940319584074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bd3481cde748c6a96e2417a23b6532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.TriggerComponent
 --- !u!1001 &6107861610219695209
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -320,10 +348,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6520197305528185379, guid: 28f029043f95045acb51c96cd97b1f2e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8980330183377502408}
   m_SourcePrefab: {fileID: 100100000, guid: 28f029043f95045acb51c96cd97b1f2e, type: 3}
+--- !u!1 &1062602265473621578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6520197305528185379, guid: 28f029043f95045acb51c96cd97b1f2e, type: 3}
+  m_PrefabInstance: {fileID: 6107861610219695209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8980330183377502408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062602265473621578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04abe1535f574ea6a91a7c7b230f9c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.TrampolineView
+  _triggerComponent: {fileID: 8741177940319584074}
+  _audioSource: {fileID: 1617741907949594362}
+  _animator: {fileID: 4677638989116518506}
 --- !u!4 &4422620278971791076 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7611987650906331789, guid: 28f029043f95045acb51c96cd97b1f2e, type: 3}
+  m_PrefabInstance: {fileID: 6107861610219695209}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &4677638989116518506 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1452749695094709251, guid: 28f029043f95045acb51c96cd97b1f2e, type: 3}
   m_PrefabInstance: {fileID: 6107861610219695209}
   m_PrefabAsset: {fileID: 0}

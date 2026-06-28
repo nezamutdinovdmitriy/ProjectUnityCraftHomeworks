@@ -101,6 +101,9 @@ GameObject:
   - component: {fileID: 3794226191236126334}
   - component: {fileID: 2940493185476011704}
   - component: {fileID: 4089788546235685001}
+  - component: {fileID: 51633063150183177}
+  - component: {fileID: 5219329684062543592}
+  - component: {fileID: 7787548348394232032}
   m_Layer: 8
   m_Name: Trap
   m_TagString: Untagged
@@ -197,3 +200,41 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.4669671, y: 1.423512}
   m_EdgeRadius: 0
+--- !u!114 &51633063150183177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940468643134046639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0433d3d123d04f19a7dc33fac5206b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Trap
+  _damage: 1
+--- !u!114 &5219329684062543592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940468643134046639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7246bdb0d9af44fa945f8bed8138ba95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.HealthComponent
+  _maxHealth: 1
+--- !u!114 &7787548348394232032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8940468643134046639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16615f4fd9aa496686de7e8755045b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.CollisionComponent

@@ -7,6 +7,9 @@ namespace Game
         [SerializeField]
         private AudioSource _audioSource;
 
+        [SerializeField]
+        private AudioClip _audioClip;
+        
         private TriggerComponent _triggerComponent;
 
         private void Awake() => _triggerComponent = this.GetComponentInParent<TriggerComponent>();
@@ -15,6 +18,6 @@ namespace Game
 
         private void OnDisable() => _triggerComponent.OnEntered -= this.OnTrigger;
 
-        private void OnTrigger(Collider2D obj) => _audioSource.Play();
+        private void OnTrigger(Collider2D obj) => _audioSource.PlayOneShot(_audioClip);
     }
 }
