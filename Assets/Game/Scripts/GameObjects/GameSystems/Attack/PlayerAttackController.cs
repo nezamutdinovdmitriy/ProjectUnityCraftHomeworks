@@ -7,14 +7,12 @@ namespace Game.Scripts.GameObjects.GameSystems.Attack
         [SerializeField]
         private GameObject _object;
 
+        [SerializeField]
         private InputService _input;
+        
         private IPlayerAttacks _playerAttacks;
 
-        private void Awake()
-        {
-            _input = GetComponent<InputService>();
-            _playerAttacks = GetComponent<IPlayerAttacks>();
-        }
+        private void Awake() => _playerAttacks = _object.GetComponent<IPlayerAttacks>();
 
         private void Update()
         {

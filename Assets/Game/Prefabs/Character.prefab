@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 2368799523315337502}
   - component: {fileID: 3804929200056887071}
   - component: {fileID: 7613685377690168504}
+  - component: {fileID: 7040871636072628368}
   m_Layer: 0
   m_Name: <System>
   m_TagString: Untagged
@@ -181,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.GameSystems.Attack.AttackController
   _object: {fileID: 3322474405303096178}
+  _input: {fileID: 7613685377690168504}
 --- !u!114 &3804929200056887071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.JumpController
   _object: {fileID: 3322474405303096178}
+  _input: {fileID: 7613685377690168504}
 --- !u!114 &7613685377690168504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +209,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3709a44359d44eaa286ee854a3999f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.InputService
+--- !u!114 &7040871636072628368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121739212659639119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf42ec39bb6a4aefb3fd549a16e0de90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerMoveController
+  _object: {fileID: 3322474405303096178}
+  _input: {fileID: 7613685377690168504}
 --- !u!1 &2252480666122037092
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +338,6 @@ GameObject:
   - component: {fileID: 7272755494647540306}
   - component: {fileID: 7928076216595582710}
   - component: {fileID: 2910868181901889652}
-  - component: {fileID: 5755511355904548823}
   - component: {fileID: 1068911880190645359}
   - component: {fileID: 2369164036256240015}
   - component: {fileID: 6419185599575225899}
@@ -501,20 +517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3167382f374350b002992a1314d737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.MoveRequestComponent
---- !u!114 &5755511355904548823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3322474405303096178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf42ec39bb6a4aefb3fd549a16e0de90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveController
-  _object: {fileID: 3322474405303096178}
-  _input: {fileID: 0}
 --- !u!114 &1068911880190645359
 MonoBehaviour:
   m_ObjectHideFlags: 0
