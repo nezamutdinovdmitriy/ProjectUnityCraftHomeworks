@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class JumpController : MonoBehaviour
+    public class PLayerJumpController : MonoBehaviour
     {
         [SerializeField]
         private GameObject _object;
