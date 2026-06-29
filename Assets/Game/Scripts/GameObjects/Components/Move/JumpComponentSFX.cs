@@ -3,7 +3,7 @@ using Random = UnityEngine.Random;
 
 namespace Game
 {
-    public class JumpComponentAudioView : MonoBehaviour
+    public class JumpComponentSFX : MonoBehaviour
     {
         [SerializeField]
         private AudioSource _audioSource;

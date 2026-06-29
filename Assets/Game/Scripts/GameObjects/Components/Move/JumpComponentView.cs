@@ -20,7 +20,7 @@ namespace Game
         }
 
         private void OnEnable() => _jumpRequestComponent.Jumped += OnJumped;
-        private void OnDisable() => _jumpRequestComponent.Jumped += OnJumped;
+        private void OnDisable() => _jumpRequestComponent.Jumped -= OnJumped;
         
         private void OnJumped() => _animator.SetTrigger(JumpAnimatorKeyHash);
     }
