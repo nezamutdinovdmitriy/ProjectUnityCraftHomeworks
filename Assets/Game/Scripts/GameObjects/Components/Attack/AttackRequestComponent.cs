@@ -1,21 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using Zenject;
 
 namespace Game
 {
-    public class AttackRequestComponent : IFixedTickable
+    public class AttackRequestComponent : MonoBehaviour
     {
-        [Serializable]
-        public class Settings
-        {
-            [field: SerializeField]
-            public float Cooldown { get; private set; }
-
-            [field: SerializeField]
-            public float Delay { get; private set; }
-        }
-        
         public interface IAction
         {
             public void Invoke();
@@ -27,8 +16,12 @@ namespace Game
         }
 
         public event Action Attacked;
+        
+        [SerializeField]
+        private float _cooldown;
 
-        private readonly Settings _settings;
+        [SerializeField]
+        private float _delay;
 
         private bool _isRequested;
         private float _requestTime;
@@ -36,9 +29,7 @@ namespace Game
         
         private IAction _action;
         private ICondition _condition;
-
-        public AttackRequestComponent(Settings settings) => _settings = settings;
-
+        
         public void SetAction(IAction action) => _action = action;
         public void SetCondition(ICondition condition) => _condition = condition;
 
@@ -53,11 +44,11 @@ namespace Game
             _isRequested = true;
         }
 
-        public void FixedTick()
+        public void FixedUpdate()
         {
             bool canAttack = _condition == null || _condition.Evaluate();
 
-            if (_isRequested == false || Time.time < _requestTime + _settings.Delay)
+            if (_isRequested == false || Time.time < _requestTime + _delay)
                 return;
 
             if (canAttack == false)
@@ -69,7 +60,7 @@ namespace Game
             _action?.Invoke();
             Attacked?.Invoke();
 
-            _nextAllowedAttackTime = Time.time + _settings.Cooldown;
+            _nextAllowedAttackTime = Time.time + _cooldown;
             
             _isRequested = false;
         }

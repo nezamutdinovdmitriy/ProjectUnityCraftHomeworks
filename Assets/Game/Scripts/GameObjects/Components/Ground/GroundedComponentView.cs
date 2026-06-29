@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Zenject;
 
 namespace Game
 {
@@ -8,13 +7,10 @@ namespace Game
     {
         private readonly int IsGroundedAnimatorKeyHash = Animator.StringToHash("IsGrounded");
         
-        private Animator _animator;
-        
+        [SerializeField]
         private GroundedComponent _groundedComponent;
-
-        [Inject]
-        public void Construct(GroundedComponent groundedComponent) 
-            => _groundedComponent = groundedComponent;
+        
+        private Animator _animator;
         
         private void Awake() => _animator = GetComponent<Animator>();
 

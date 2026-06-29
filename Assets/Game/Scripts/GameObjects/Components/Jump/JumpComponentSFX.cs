@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Zenject;
 using Random = UnityEngine.Random;
 
 namespace Game
@@ -13,10 +12,6 @@ namespace Game
         private AudioClip _audioClip;
 
         private JumpRequestComponent _jumpRequestComponent;
-        
-        [Inject]
-        public void Construct(JumpRequestComponent jumpRequestComponent) 
-            => _jumpRequestComponent = jumpRequestComponent;
 
         private void Awake() => _jumpRequestComponent = GetComponentInParent<JumpRequestComponent>();
 

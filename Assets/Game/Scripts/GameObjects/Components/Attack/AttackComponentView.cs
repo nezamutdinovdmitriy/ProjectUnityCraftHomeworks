@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Zenject;
 
 namespace Game
 {
@@ -8,25 +7,22 @@ namespace Game
         private int AnimatorKeyHash;
         
         [SerializeField]
-        private Animator _animator;
-        
-        [SerializeField]
         private string _animatorKeyString;
         
         [SerializeField]
-        private ParticleSystem _particleSystem;
+        private AttackRequestComponent _attackRequest;
+
+        [SerializeField]
+        private Animator _animator;
         
+        [SerializeField]
+        private ParticleSystem _particleSystem;
+
         [SerializeField]
         private AudioSource _audioSource;
 
         [SerializeField]
         private AudioClip _audioClip;
-        
-        private AttackRequestComponent _attackRequest;
-
-        [Inject]
-        public void Construct(AttackRequestComponent attackRequestComponent) 
-            => _attackRequest = attackRequestComponent;
 
         private void Awake() => AnimatorKeyHash = Animator.StringToHash(_animatorKeyString);
 

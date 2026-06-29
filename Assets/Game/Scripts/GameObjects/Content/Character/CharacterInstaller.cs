@@ -1,14 +1,7 @@
-﻿using System;
-using Zenject;
-
-namespace Game
+﻿namespace Game
 {
-    [Serializable]
-    public class CharacterInstaller : Installer
+    public class CharacterInstaller
     {
-        public override void InstallBindings()
-        {
-            
-        }
+        
     }
 }

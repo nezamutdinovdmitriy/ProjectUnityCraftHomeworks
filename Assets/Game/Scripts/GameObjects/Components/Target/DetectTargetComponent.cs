@@ -1,51 +1,30 @@
-﻿using System;
-using Sirenix.OdinInspector;
-using UnityEngine;
-using Zenject;
+﻿using UnityEngine;
 
 namespace Game.Target
 {
-    public class DetectTargetComponent : IInitializable, IFixedTickable
+    public class DetectTargetComponent : MonoBehaviour
     {
-        [Serializable]
-        public class Settings
-        {
-            [field: SerializeField]
-            public float DetectRadius { get; private set; }
+        [SerializeField]
+        private float _detectRadius;
 
-            [field: SerializeField]
-            public LayerMask TargetMask { get; private set; }
-            
-            [field: SerializeField]
-            public int ColliderBufferCount { get; private set; }
-        }
+        [SerializeField]
+        private LayerMask _targetMask;
 
-        private readonly Settings _settings;
-        private readonly TransformComponent _transform;
-        
-        [ShowInInspector, ReadOnly]
+        [SerializeField]
         private GameObject _currentTarget;
 
         private Collider2D[] _colliderBuffer;
         private ContactFilter2D _filter;
 
-        public DetectTargetComponent(
-            Settings settings, 
-            TransformComponent transform)
+        private void Awake()
         {
-            _settings = settings;
-            _transform = transform;
-        }
-
-        public void Initialize()
-        {
-            _colliderBuffer = new Collider2D[_settings.ColliderBufferCount];
+            _colliderBuffer = new Collider2D[5];
             
             _filter = new ContactFilter2D();
-            _filter.SetLayerMask(_settings.TargetMask);
+            _filter.SetLayerMask(_targetMask);
         }
-        
-        public void FixedTick() => DetectTarget();
+
+        private void FixedUpdate() => DetectTarget();
 
         public bool TryGetTarget(out GameObject target)
         {
@@ -64,11 +43,11 @@ namespace Game.Target
             _currentTarget = null;
             
             int collidersCount = Physics2D.OverlapCircle(
-                _transform.Position, 
-                _settings.DetectRadius,
+                transform.position, 
+                _detectRadius,
                 _filter,
                 _colliderBuffer);
-            
+
             for (int i = 0; i < collidersCount; i++)
             {
                 if (_colliderBuffer[i].TryGetComponent(out Character character))
@@ -79,11 +58,11 @@ namespace Game.Target
             }
         }
         
-        // private void OnDrawGizmosSelected()
-        // {
-        //     Gizmos.color = Color.blue;
-        //
-        //     Gizmos.DrawWireSphere(transform.position, _detectRadius);
-        // }
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+
+            Gizmos.DrawWireSphere(transform.position, _detectRadius);
+        }
     }
 }

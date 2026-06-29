@@ -1,18 +1,9 @@
-﻿using System;
-using UnityEngine;
-using Zenject;
+﻿using UnityEngine;
 
 namespace Game
 {
-    public class DeathComponent : IFixedTickable
+    public class DeathComponent : MonoBehaviour
     {
-        [Serializable]
-        public class Settings
-        {
-            [field: SerializeField]
-            public float Delay { get; private set; }
-        }
-        
         public interface IAction
         {
             public void Invoke();
@@ -22,27 +13,27 @@ namespace Game
         {
             public bool Evaluate();
         }
-
-        private readonly Settings _settings;
         
         private IAction _action;
         private ICondition _condition;
 
         private float _requestTime;
+        
+        [SerializeField]
+        private float _delay;
+        
         private bool _isRequested;
-
-        public DeathComponent(Settings settings) => _settings = settings;
-
+        
         public void SetAction(IAction action) => _action = action;
         public void SetCondition(ICondition condition) => _condition = condition;
 
         public void RequestDeath()
         {
-            _requestTime = Time.time + _settings.Delay;
+            _requestTime = Time.time + _delay;
             _isRequested = true;
         }
-
-        public void FixedTick()
+        
+        public void FixedUpdate()
         {
             bool canDie = _condition == null || _condition.Evaluate();
 

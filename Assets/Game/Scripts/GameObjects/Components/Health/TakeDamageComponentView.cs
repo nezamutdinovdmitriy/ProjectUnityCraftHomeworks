@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Zenject;
 
 namespace Game
 {
+    [RequireComponent(typeof(Animator))]
     public class TakeDamageComponentView : MonoBehaviour
     {
         [SerializeField]
@@ -10,9 +10,7 @@ namespace Game
         
         private HealthComponent _healthComponent;
 
-        [Inject]
-        public void Construct(HealthComponent healthComponent) 
-            => _healthComponent = healthComponent;
+        private void Awake() => _healthComponent = GetComponentInParent<HealthComponent>();
 
         private void OnEnable() => _healthComponent.OnHealthChanged += OnHealthChanged;
         private void OnDisable() => _healthComponent.OnHealthChanged -= OnHealthChanged;

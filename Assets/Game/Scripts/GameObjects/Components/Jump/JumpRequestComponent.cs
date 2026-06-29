@@ -1,21 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using Zenject;
 
 namespace Game
 {
-    public class JumpRequestComponent : IFixedTickable
+    public class JumpRequestComponent : MonoBehaviour
     {
-        [Serializable]
-        public class Settings
-        {
-            [field: SerializeField]
-            public float Cooldown { get; private set; } = 0.25f;
-
-            [field: SerializeField]
-            public float Delay { get; private set; } = 0.05f;
-        }
-        
         public interface IAction
         {
             public void Invoke();
@@ -28,7 +17,11 @@ namespace Game
 
         public event Action Jumped;
 
-        private readonly Settings _settings;
+        [SerializeField]
+        private float _jumpCooldown = 0.25f;
+
+        [SerializeField]
+        private float _jumpDelay = 0.05f;
         
         private IAction _action;
         private ICondition _condition;
@@ -37,8 +30,6 @@ namespace Game
         private float _nextAllowedJumpTime;
         
         private bool _isRequested;
-
-        public JumpRequestComponent(Settings settings) => _settings = settings;
 
         public void SetAction(IAction action) => _action = action;
         public void SetCondition(ICondition condition) => _condition = condition;
@@ -52,12 +43,12 @@ namespace Game
             _isRequested = true;
         }
 
-        public void FixedTick()
+        private void FixedUpdate()
         {
             bool canJump = _condition == null || _condition.Evaluate();
             
             if (_isRequested == false
-                || Time.time < _requestTime + _settings.Delay)
+                || Time.time < _requestTime + _jumpDelay)
                 return;
 
             if (canJump == false)
@@ -69,7 +60,7 @@ namespace Game
             _action?.Invoke();
             Jumped?.Invoke();
 
-            _nextAllowedJumpTime = Time.time + _settings.Cooldown;
+            _nextAllowedJumpTime = Time.time + _jumpCooldown;
 
             _isRequested = false;
         }

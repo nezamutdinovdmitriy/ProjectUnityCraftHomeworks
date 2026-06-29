@@ -1,37 +1,28 @@
 using UnityEngine;
-using Zenject;
 
 namespace Game
 {
-    public sealed class StandingPlatformComponent : IFixedTickable
+    public sealed class StandingPlatformComponent : MonoBehaviour
     {
-        private readonly GroundedComponent _groundedComponent;
-        private readonly TransformComponent _transform;
-        
-        private Transform _currentGround;
+        [SerializeField]
+        private GroundedComponent _groundedComponent;
 
-        public StandingPlatformComponent(
-            GroundedComponent groundedComponent, 
-            TransformComponent transform)
-        {
-            _groundedComponent = groundedComponent;
-            _transform = transform;
-        }
+        private Transform _currentGround;
         
-        public void FixedTick()
+        private void FixedUpdate()
         {
             bool standing = _currentGround != null;
             bool hasPlatform = this.IsStanding(out Transform platform);
 
             if (!standing && hasPlatform)
             {
-                _transform.Parent = platform;
+                this.transform.parent = platform;
                 _currentGround = platform;
             }
 
             if (standing && !hasPlatform)
             {
-                _transform.Parent = null;
+                this.transform.parent = null;
                 _currentGround = null;
             }
         }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Zenject;
 
 namespace Game
 {
@@ -10,11 +9,12 @@ namespace Game
         
         private Animator _animator;
         private HealthComponent _healthComponent;
-
-        [Inject]
-        public void Construct(HealthComponent healthComponent) => _healthComponent = healthComponent;
         
-        private void Awake() => _animator = GetComponent<Animator>();
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
+            _healthComponent = GetComponentInParent<HealthComponent>();
+        }
 
         private void OnEnable() => _healthComponent.OnDied += OnDied;
         private void OnDisable() => _healthComponent.OnDied -= OnDied;

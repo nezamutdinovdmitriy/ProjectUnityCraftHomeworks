@@ -1,10 +1,9 @@
 ﻿using System;
 using UnityEngine;
-using Zenject;
 
 namespace Game
 {
-    public class MoveRequestComponent : IFixedTickable
+    public class MoveRequestComponent : MonoBehaviour
     {
         public interface IAction
         {
@@ -32,7 +31,7 @@ namespace Game
             _isRequested = true;
         }
 
-        public void FixedTick()
+        private void FixedUpdate()
         {
             if (_isRequested 
                 && _moveDirection != Vector2.zero
