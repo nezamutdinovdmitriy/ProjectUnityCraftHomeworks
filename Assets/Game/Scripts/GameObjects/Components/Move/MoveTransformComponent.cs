@@ -1,16 +1,32 @@
+using System;
 using UnityEngine;
 
 namespace Game
 {
-    public sealed class MoveTransformComponent : MonoBehaviour
+    public sealed class MoveTransformComponent
     {
-        [SerializeField]
-        private float _speed = 4.5f;
+        [Serializable]
+        public class Settings
+        {
+            [field: SerializeField]
+            public float Speed { get; private set; } = 4.5f;
+        }
+
+        private readonly Settings _settings;
+        private readonly TransformComponent _transform;
+
+        public MoveTransformComponent(Settings settings, TransformComponent transform)
+        {
+            _settings = settings;
+            _transform = transform;
+        }
 
         public void Move(Vector2 direction)
         {
             if (direction != Vector2.zero) 
-                this.transform.Translate((Vector3) direction * _speed * Time.fixedDeltaTime, Space.World);
+                _transform.Translate(
+                    (Vector3) direction * _settings.Speed * Time.fixedDeltaTime,
+                    Space.World);
         }
     }
 }

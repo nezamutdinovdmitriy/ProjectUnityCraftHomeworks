@@ -1,10 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Patrol
 {
-    public class PointProviderComponent : MonoBehaviour
+    public class PointProviderComponent : IInitializable, IFixedTickable
     {
+        [Serializable]
+        public class Settings
+        {
+            [field: SerializeField]
+            public List<Transform> PatrolPoints { get; private set; }
+        }
+        
         public interface ICondition
         {
             public bool Evaluate();
@@ -14,20 +23,20 @@ namespace Game.Patrol
         {
             public void Invoke();
         }
-        
-        [SerializeField]
-        private List<Transform> _patrolPoints;
-        
+
+        private readonly Settings _settings;
         private readonly Queue<Transform> _patrolPointsQueue = new();
         
         private Vector2 _point;
 
         private ICondition _condition;
         private IAction _action;
+
+        public PointProviderComponent(Settings settings) => _settings = settings;
         
-        private void Awake()
+        public void Initialize()
         {
-            foreach (Transform patrolPoint in _patrolPoints)
+            foreach (Transform patrolPoint in _settings.PatrolPoints)
                 _patrolPointsQueue.Enqueue(patrolPoint);
 
             SwitchToNextPoint();
@@ -39,7 +48,7 @@ namespace Game.Patrol
         
         public Vector2 GetPoint() => _point;
 
-        private void FixedUpdate()
+        public void FixedTick()
         {
             if (_condition.Evaluate())
             {

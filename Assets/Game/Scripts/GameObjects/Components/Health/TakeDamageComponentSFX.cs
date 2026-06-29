@@ -1,13 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using Zenject;
 using Random = UnityEngine.Random;
 
 namespace Game
 {
     public class TakeDamageComponentSFX : MonoBehaviour
     {
-        private readonly int DeathAnimatorKeyHash = Animator.StringToHash("Death");
-        
         [SerializeField]
         private AudioSource _audioSource;
 
@@ -16,6 +14,10 @@ namespace Game
         
         private HealthComponent _healthComponent;
 
+        [Inject]
+        public void Construct(HealthComponent healthComponent) 
+            => _healthComponent = healthComponent;
+        
         private void Awake() => _healthComponent = GetComponentInParent<HealthComponent>();
 
         private void OnEnable() => _healthComponent.OnHealthChanged += OnHealthChanged;

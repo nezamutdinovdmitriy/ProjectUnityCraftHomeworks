@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Game
 {
@@ -7,14 +8,15 @@ namespace Game
     {
         private readonly int AnimatorKeyHash = Animator.StringToHash("IsMoving");
         
-        private MoveRequestComponent _moveRequestComponent;
         private Animator _animator;
         
-        private void Awake()
-        {
-            _moveRequestComponent = GetComponentInParent<MoveRequestComponent>();
-            _animator = GetComponent<Animator>();
-        }
+        private MoveRequestComponent _moveRequestComponent;
+
+        [Inject]
+        public void Construct(MoveRequestComponent moveRequestComponent) 
+            => _moveRequestComponent = moveRequestComponent;
+
+        private void Awake() => _animator = GetComponent<Animator>();
 
         private void OnEnable() => _moveRequestComponent.Moved += OnMoved;
         private void OnDisable() => _moveRequestComponent.Moved -= OnMoved;

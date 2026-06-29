@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Random = UnityEngine.Random;
+using Zenject;
 
 namespace Game
 {
@@ -12,12 +12,11 @@ namespace Game
         
         private Animator _animator;
 
-        private void Awake()
-        {
-            _jumpRequestComponent = GetComponentInParent<JumpRequestComponent>();
-            
-            _animator = GetComponent<Animator>();
-        }
+        [Inject]
+        public void Construct(JumpRequestComponent jumpRequestComponent) 
+            => _jumpRequestComponent = jumpRequestComponent;
+        
+        private void Awake() => _animator = GetComponent<Animator>();
 
         private void OnEnable() => _jumpRequestComponent.Jumped += OnJumped;
         private void OnDisable() => _jumpRequestComponent.Jumped -= OnJumped;

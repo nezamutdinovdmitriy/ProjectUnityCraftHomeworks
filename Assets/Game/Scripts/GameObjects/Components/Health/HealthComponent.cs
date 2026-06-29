@@ -4,20 +4,17 @@ using UnityEngine;
 
 namespace Game
 {
-    public sealed class HealthComponent : MonoBehaviour
+    public sealed class HealthComponent
     {
-        [SerializeField]
-        private float _maxHealth;
-
-        public float CurrentHealth { get; private set; }
-        public bool IsAlive => CurrentHealth > 0;
-        public bool IsDied => CurrentHealth <= 0;
-
         public event Action<float> OnHealthChanged;
         public event Action OnDied;
 
-        private void Awake() => CurrentHealth = _maxHealth;
-
+        public HealthComponent(float maxHealth) => CurrentHealth = maxHealth;
+        
+        public float CurrentHealth { get; private set; }
+        public bool IsAlive => CurrentHealth > 0;
+        public bool IsDied => CurrentHealth <= 0;
+        
         [Button]
         public void TakeDamage(float damage)
         {

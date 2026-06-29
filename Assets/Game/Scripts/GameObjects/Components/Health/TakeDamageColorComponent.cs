@@ -22,16 +22,10 @@ namespace Game
         private float _blend; // 0..1
         private Tween _tween;
 
-        private void Reset()
-        {
-            _renderers = this.GetComponentsInChildren<SpriteRenderer>();
-        }
+        private void Reset() => _renderers = this.GetComponentsInChildren<SpriteRenderer>();
 
-        private void Awake()
-        {
-            _baseColor = _renderers is {Length: > 0} ? _renderers[0].color : Color.white;
-        }
-        
+        private void Awake() => _baseColor = _renderers is {Length: > 0} ? _renderers[0].color : Color.white;
+
         public void TakeDamage()
         {
             _tween?.Kill();
@@ -50,9 +44,6 @@ namespace Game
                 r.color = new Color(color.r, color.g, color.b, r.color.a);;
         }
 
-        private void OnDisable()
-        {
-            _tween?.Kill();
-        }
+        private void OnDisable() => _tween?.Kill();
     }
 }

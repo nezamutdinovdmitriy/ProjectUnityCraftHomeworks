@@ -1,17 +1,17 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(Rigidbody2D))]
-    public class JumpRigidbodyComponent : MonoBehaviour
+    public class JumpRigidbodyComponent
     {
-        [SerializeField]
-        private float _jumpForce = 12f;
+        private readonly float _jumpForce;
+        private readonly Rigidbody2D _rigidbody;
 
-        private Rigidbody2D _rigidbody;
-
-        private void Awake() => _rigidbody = GetComponent<Rigidbody2D>();
+        public JumpRigidbodyComponent(float jumpForce, Rigidbody2D rigidbody)
+        {
+            _jumpForce = jumpForce;
+            _rigidbody = rigidbody;
+        }
 
         public void Jump() => _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
