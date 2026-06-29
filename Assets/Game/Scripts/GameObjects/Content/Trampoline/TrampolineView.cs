@@ -19,10 +19,7 @@ namespace Game
 
         private Tween _tween;
 
-        private void OnEnable()
-        {
-            _triggerComponent.OnEntered += this.OnEntered;
-        }
+        private void OnEnable() => _triggerComponent.OnEntered += this.OnEntered;
 
         private void OnDisable()
         {

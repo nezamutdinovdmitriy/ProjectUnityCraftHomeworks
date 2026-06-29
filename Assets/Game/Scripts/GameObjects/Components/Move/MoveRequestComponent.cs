@@ -17,7 +17,7 @@ namespace Game
 
         public event Action<Vector2> Moved;
 
-        private bool _moveRequired;
+        private bool _isRequested;
         private Vector2 _moveDirection;
 
         private IAction _action;
@@ -28,12 +28,12 @@ namespace Game
         public void SetMoveDirection(Vector2 direction)
         {
             _moveDirection = direction;
-            _moveRequired = true;
+            _isRequested = true;
         }
 
         private void FixedUpdate()
         {
-            if (_moveRequired 
+            if (_isRequested 
                 && _moveDirection != Vector2.zero
                 && (_condition == null || _condition.Evaluate()))
             {
@@ -45,7 +45,7 @@ namespace Game
                 Moved?.Invoke(Vector2.zero);
             }
 
-            _moveRequired = false;
+            _isRequested = false;
         }
     }
 }

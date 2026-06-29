@@ -124,7 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Spider
   _damage: 1
-  _collisionComponent: {fileID: 5090146356383979123}
 --- !u!114 &5090146356383979123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,6 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e373817ca7479f880b2ede6f4e4fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GroundedComponentView
+  _groundedComponent: {fileID: 5870654604288831585}
 --- !u!114 &8284295116782539714
 MonoBehaviour:
   m_ObjectHideFlags: 0

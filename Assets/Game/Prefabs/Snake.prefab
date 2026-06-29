@@ -581,6 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e373817ca7479f880b2ede6f4e4fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GroundedComponentView
+  _groundedComponent: {fileID: 7159923900500106356}
 --- !u!212 &3449857208236993421 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5231195682645585227, guid: 8de6c8196ff844187a9cfad369c6a805, type: 3}

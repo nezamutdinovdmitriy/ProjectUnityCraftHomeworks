@@ -2,6 +2,7 @@
 
 namespace Game
 {
+    [RequireComponent(typeof(CollisionComponent))]
     public class Trap : MonoBehaviour
     {
         [SerializeField]

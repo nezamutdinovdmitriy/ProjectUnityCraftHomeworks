@@ -50,21 +50,8 @@ namespace Game
             AttackBehaviorSetup();
         }
 
-        private void OnEnable()
-        {
-            _healthComponent.OnDied += OnDied;
-        }
-
-        private void OnDisable()
-        {
-            _healthComponent.OnDied -= OnDied;
-        }
-
-        private void OnDied()
-        {
-            _rigidbody.simulated = false;
-            _deathComponent.RequestDeath();
-        }
+        private void OnEnable() => _healthComponent.OnDied += OnDied;
+        private void OnDisable() => _healthComponent.OnDied -= OnDied;
 
         public void MainAttack() => _pushAttackRequestComponent.RequestAttack();
         public void AdditionalAttack() => _tossAttackRequestComponent.RequestAttack();
@@ -109,6 +96,12 @@ namespace Game
             _tossAttackRequestComponent.SetAction(tossAttack);
         }
 
+        private void OnDied()
+        {
+            _rigidbody.simulated = false;
+            _deathComponent.RequestDeath();
+        }
+        
         void MoveRequestComponent.IAction.Invoke(Vector2 direction)
         {
             _moveTransformComponent.Move(direction);
@@ -137,7 +130,7 @@ namespace Game
 
             bool AttackRequestComponent.ICondition.Evaluate()
             {
-                return _parent._tossAttackRequestComponent.Requested == false
+                return _parent._tossAttackRequestComponent.IsRequested == false
                        && _parent._healthComponent.IsAlive;
             }
         }
@@ -154,7 +147,7 @@ namespace Game
 
             bool AttackRequestComponent.ICondition.Evaluate()
             {
-                return _parent._pushAttackRequestComponent.Requested == false
+                return _parent._pushAttackRequestComponent.IsRequested == false
                        && _parent._healthComponent.IsAlive
                        && _parent._groundedComponent.IsGrounded;
             }

@@ -13,64 +13,41 @@ namespace Game
         AttackRequestComponent.IAction,
         DeathComponent.IAction,
         DeathComponent.ICondition,
-        PatrolComponent.IAction,
-        PatrolComponent.ICondition
+        PointProviderComponent.IAction,
+        PointProviderComponent.ICondition
     {
         [SerializeField]
         private float _damage;
         
         private MoveRequestComponent _moveRequestComponent;
         private MoveTransformComponent _moveTransformComponent;
+        
+        private FollowTargetComponent _followTargetComponent;
 
-        private PatrolComponent _patrolComponent;
+        private PointProviderComponent pointProviderComponent;
 
         private HealthComponent _healthComponent;
+        private DeathComponent _deathComponent;
 
         private AttackRequestComponent _attackRequestComponent;
         private ForceAttackComponent _attackComponent;
 
         private GroundedComponent _groundedComponent;
-
-        [SerializeField]
+        
         private CollisionComponent _collisionComponent;
-
-        private DeathComponent _deathComponent;
-
-        private FollowTargetComponent _followTargetComponent;
-
+        
         private void Awake()
         {
-            _moveRequestComponent = GetComponent<MoveRequestComponent>();
-            _moveRequestComponent.SetAction(this);
-            _moveRequestComponent.SetCondition(this);
-            
-            _moveTransformComponent = GetComponent<MoveTransformComponent>();
+            MovementBehaviourSetup();
+            LifeCycleBehaviourSetup();
+            AttackBehaviourSetup();
 
-            _patrolComponent = GetComponent<PatrolComponent>();
-            _patrolComponent.SetAction(this);
-            _patrolComponent.SetCondition(this);
-
-            _healthComponent = GetComponent<HealthComponent>();
-
-            _attackRequestComponent = GetComponent<AttackRequestComponent>();
-            _attackRequestComponent.SetAction(this);
-            _attackRequestComponent.SetCondition(this);
-            
-            _attackComponent = GetComponent<ForceAttackComponent>();
-
+            _collisionComponent = GetComponent<CollisionComponent>();
             _groundedComponent = GetComponent<GroundedComponent>();
-
-            _deathComponent = GetComponent<DeathComponent>();
-            _deathComponent.SetCondition(this);
-            _deathComponent.SetAction(this);
-
-            _followTargetComponent = GetComponent<FollowTargetComponent>();
         }
 
-        private void Start()
-        {
-            _followTargetComponent.SetTargetPoint(_patrolComponent.GetPoint());
-        }
+        private void Start() 
+            => _followTargetComponent.SetTargetPoint(pointProviderComponent.GetPoint());
 
         private void OnEnable()
         {
@@ -99,6 +76,39 @@ namespace Game
             }
         }
         
+        private void MovementBehaviourSetup()
+        {
+            _moveRequestComponent = GetComponent<MoveRequestComponent>();
+            _moveRequestComponent.SetAction(this);
+            _moveRequestComponent.SetCondition(this);
+            
+            _moveTransformComponent = GetComponent<MoveTransformComponent>();
+            
+            _followTargetComponent = GetComponent<FollowTargetComponent>();
+
+            pointProviderComponent = GetComponent<PointProviderComponent>();
+            pointProviderComponent.SetAction(this);
+            pointProviderComponent.SetCondition(this);
+        }
+
+        private void LifeCycleBehaviourSetup()
+        {
+            _healthComponent = GetComponent<HealthComponent>();
+
+            _deathComponent = GetComponent<DeathComponent>();
+            _deathComponent.SetCondition(this);
+            _deathComponent.SetAction(this);
+        }
+
+        private void AttackBehaviourSetup()
+        {
+            _attackRequestComponent = GetComponent<AttackRequestComponent>();
+            _attackRequestComponent.SetAction(this);
+            _attackRequestComponent.SetCondition(this);
+            
+            _attackComponent = GetComponent<ForceAttackComponent>();
+        }
+        
         void MoveRequestComponent.IAction.Invoke(Vector2 direction) 
             => _moveTransformComponent.Move(direction);
 
@@ -116,10 +126,10 @@ namespace Game
 
         bool DeathComponent.ICondition.Evaluate() => _healthComponent.IsDied;
 
-        void PatrolComponent.IAction.Invoke() 
-            => _followTargetComponent.SetTargetPoint(_patrolComponent.GetPoint());
+        void PointProviderComponent.IAction.Invoke() 
+            => _followTargetComponent.SetTargetPoint(pointProviderComponent.GetPoint());
 
-        bool PatrolComponent.ICondition.Evaluate() 
+        bool PointProviderComponent.ICondition.Evaluate() 
             => _followTargetComponent.IsDestinationReached();
     }
 }

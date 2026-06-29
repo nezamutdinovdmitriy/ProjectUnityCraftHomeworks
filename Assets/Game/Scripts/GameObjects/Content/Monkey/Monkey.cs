@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace Game.Scripts.GameObjects.Content.Monkey
 {
+    [RequireComponent(typeof(JumpRequestComponent), typeof(JumpRigidbodyComponent))]
+    [RequireComponent(typeof(AttackRequestComponent), typeof(ForceAttackComponent))]
+    [RequireComponent(typeof(HealthComponent), typeof(DeathComponent))]
+    [RequireComponent(typeof(GroundedComponent), typeof(LookComponent))]
+    [RequireComponent(typeof(DetectTargetComponent), typeof(CollisionComponent))]
     public class Monkey : MonoBehaviour,
         AttackRequestComponent.IAction,
         AttackRequestComponent.ICondition,
@@ -19,11 +24,11 @@ namespace Game.Scripts.GameObjects.Content.Monkey
         private JumpRigidbodyComponent _jumpRigidbodyComponent;
 
         private AttackRequestComponent _attackRequestComponent;
-        
         private ForceAttackComponent _forceAttackComponent;
 
         private HealthComponent _healthComponent;
-
+        private DeathComponent _deathComponent;
+        
         private GroundedComponent _groundedComponent;
 
         private LookComponent _lookComponent;
@@ -32,37 +37,17 @@ namespace Game.Scripts.GameObjects.Content.Monkey
         
         private CollisionComponent _collisionComponent;
 
-        private DeathComponent _deathComponent;
-
         private void Awake()
         {
-            _jumpRequestComponent = GetComponent<JumpRequestComponent>();
-            _jumpRequestComponent.SetAction(this);
-            _jumpRequestComponent.SetCondition(this);
-            
-            _jumpRigidbodyComponent = GetComponent<JumpRigidbodyComponent>();
-            
-            _attackRequestComponent = GetComponent<AttackRequestComponent>();
-            _attackRequestComponent.SetAction(this);
-            _attackRequestComponent.SetCondition(this);
-            
-            _forceAttackComponent = GetComponent<ForceAttackComponent>();
-            
-            _healthComponent = GetComponent<HealthComponent>();
-            
+            JumpBehaviourSetup();
+            AttackBehaviourSetup();
+            LifeCycleBehaviourSetup();
+            TargetBehaviourSetup();
+
             _groundedComponent = GetComponent<GroundedComponent>();
-            
-            _lookComponent = GetComponent<LookComponent>();
-
             _collisionComponent = GetComponent<CollisionComponent>();
-
-            _detectTargetComponent = GetComponent<DetectTargetComponent>();
-
-            _deathComponent = GetComponent<DeathComponent>();
-            _deathComponent.SetAction(this);
-            _deathComponent.SetCondition(this);
         }
-
+        
         private void OnEnable()
         {
             _collisionComponent.OnEntered += OnCollisionEntered;
@@ -98,6 +83,38 @@ namespace Game.Scripts.GameObjects.Content.Monkey
             
             _attackRequestComponent.RequestAttack();
             _jumpRequestComponent.RequestJump();
+        }
+        
+        private void TargetBehaviourSetup()
+        {
+            _lookComponent = GetComponent<LookComponent>();
+            _detectTargetComponent = GetComponent<DetectTargetComponent>();
+        }
+
+        private void LifeCycleBehaviourSetup()
+        {
+            _healthComponent = GetComponent<HealthComponent>();
+            _deathComponent = GetComponent<DeathComponent>();
+            _deathComponent.SetAction(this);
+            _deathComponent.SetCondition(this);
+        }
+
+        private void AttackBehaviourSetup()
+        {
+            _attackRequestComponent = GetComponent<AttackRequestComponent>();
+            _attackRequestComponent.SetAction(this);
+            _attackRequestComponent.SetCondition(this);
+            
+            _forceAttackComponent = GetComponent<ForceAttackComponent>();
+        }
+
+        private void JumpBehaviourSetup()
+        {
+            _jumpRequestComponent = GetComponent<JumpRequestComponent>();
+            _jumpRequestComponent.SetAction(this);
+            _jumpRequestComponent.SetCondition(this);
+            
+            _jumpRigidbodyComponent = GetComponent<JumpRigidbodyComponent>();
         }
 
         [Obsolete]

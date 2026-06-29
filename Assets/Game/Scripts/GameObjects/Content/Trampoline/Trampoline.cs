@@ -10,15 +10,9 @@ namespace Game
         [SerializeField]
         private Vector2 _force;
         
-        private void OnEnable()
-        {
-            _triggerComponent.OnEntered += this.OnEntered;
-        }
+        private void OnEnable() => _triggerComponent.OnEntered += this.OnEntered;
 
-        private void OnDisable()
-        {
-            _triggerComponent.OnEntered -= this.OnEntered;
-        }
+        private void OnDisable() => _triggerComponent.OnEntered -= this.OnEntered;
 
         private void OnEntered(Collider2D other)
         {

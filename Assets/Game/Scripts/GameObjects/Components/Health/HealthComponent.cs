@@ -16,10 +16,7 @@ namespace Game
         public event Action<float> OnHealthChanged;
         public event Action OnDied;
 
-        private void Awake()
-        {
-            CurrentHealth = _maxHealth;
-        }
+        private void Awake() => CurrentHealth = _maxHealth;
 
         [Button]
         public void TakeDamage(float damage)

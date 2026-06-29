@@ -7,13 +7,13 @@ namespace Game
         private int AnimatorKeyHash;
         
         [SerializeField]
-        private AttackRequestComponent _attackComponent;
+        private string _animatorKeyString;
+        
+        [SerializeField]
+        private AttackRequestComponent _attackRequest;
 
         [SerializeField]
         private Animator _animator;
-
-        [SerializeField]
-        private string _animatorKeyString;
         
         [SerializeField]
         private ParticleSystem _particleSystem;
@@ -26,8 +26,8 @@ namespace Game
 
         private void Awake() => AnimatorKeyHash = Animator.StringToHash(_animatorKeyString);
 
-        private void OnEnable() => _attackComponent.Attacked += OnAttacked;
-        private void OnDisable() => _attackComponent.Attacked -= OnAttacked;
+        private void OnEnable() => _attackRequest.Attacked += OnAttacked;
+        private void OnDisable() => _attackRequest.Attacked -= OnAttacked;
 
         private void OnAttacked()
         {

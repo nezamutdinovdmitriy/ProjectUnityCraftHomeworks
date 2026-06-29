@@ -2,6 +2,7 @@
 
 namespace Game
 {
+    [RequireComponent(typeof(Animator))]
     public class DeathComponentView : MonoBehaviour
     {
         private readonly int DeathAnimatorKeyHash = Animator.StringToHash("Death");

@@ -4,7 +4,7 @@ using Random = UnityEngine.Random;
 
 namespace Game
 {
-    public class TakeDamageComponentAudioView : MonoBehaviour
+    public class TakeDamageComponentSFX : MonoBehaviour
     {
         private readonly int DeathAnimatorKeyHash = Animator.StringToHash("Death");
         

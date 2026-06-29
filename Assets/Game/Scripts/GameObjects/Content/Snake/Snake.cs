@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace Game
 {
+    [RequireComponent(typeof(MoveRequestComponent), typeof(MoveTransformComponent))]
+    [RequireComponent(typeof(DetectTargetComponent), typeof(FollowTargetComponent))]
+    [RequireComponent(typeof(HealthComponent), typeof(DeathComponent))]
+    [RequireComponent(typeof(AttackRequestComponent), typeof(ForceAttackComponent))]
+    [RequireComponent(typeof(LookComponent), typeof(CollisionComponent))]
     public class Snake : MonoBehaviour,
         MoveRequestComponent.IAction,
         MoveRequestComponent.ICondition,
@@ -15,55 +20,34 @@ namespace Game
         [SerializeField]
         private int _damage;
         
-        private DetectTargetComponent _detectTargetComponent;
-
         private MoveRequestComponent _moveRequestComponent;
         private MoveTransformComponent _moveTransformComponent;
 
-        private HealthComponent _healthComponent;
-
+        private DetectTargetComponent _detectTargetComponent;
         private FollowTargetComponent _followTargetComponent;
-
-        private CollisionComponent _collisionComponent;
+        
+        private HealthComponent _healthComponent;
+        private DeathComponent _deathComponent;
 
         private AttackRequestComponent _attackRequestComponent;
         private ForceAttackComponent _forceAttackComponent;
+        
+        private LookComponent _lookComponent;
+        
+        private CollisionComponent _collisionComponent;
 
         private HealthComponent _currentTargetToDamage;
-
-        private LookComponent _lookComponent;
-
-        private DeathComponent _deathComponent;
         
         private void Awake()
         {
-            _detectTargetComponent = GetComponent<DetectTargetComponent>();
-            
-            _moveRequestComponent = GetComponent<MoveRequestComponent>();
-            _moveRequestComponent.SetAction(this);
-            _moveRequestComponent.SetCondition(this);
-            
-            _moveTransformComponent = GetComponent<MoveTransformComponent>();
-
-            _healthComponent = GetComponent<HealthComponent>();
-
-            _followTargetComponent = GetComponent<FollowTargetComponent>();
+            MovementBehaviourSetup();
+            AttackBehaviourSetup();
+            LifeCycleBehaviourSetup();
 
             _collisionComponent = GetComponent<CollisionComponent>();
-
-            _attackRequestComponent = GetComponent<AttackRequestComponent>();
-            _attackRequestComponent.SetAction(this);
-            _attackRequestComponent.SetCondition(this);
-            
-            _forceAttackComponent = GetComponent<ForceAttackComponent>();
-
             _lookComponent = GetComponent<LookComponent>();
-
-            _deathComponent = GetComponent<DeathComponent>();
-            _deathComponent.SetAction(this);
-            _deathComponent.SetCondition(this);
         }
-
+        
         private void OnEnable()
         {
             _healthComponent.OnDied += OnDied;
@@ -96,6 +80,34 @@ namespace Game
                 _currentTargetToDamage = healthComponent;
                 _attackRequestComponent.RequestAttack();
             }
+        }
+        
+        private void LifeCycleBehaviourSetup()
+        {
+            _healthComponent = GetComponent<HealthComponent>();
+            _deathComponent = GetComponent<DeathComponent>();
+            _deathComponent.SetAction(this);
+            _deathComponent.SetCondition(this);
+        }
+
+        private void AttackBehaviourSetup()
+        {
+            _attackRequestComponent = GetComponent<AttackRequestComponent>();
+            _attackRequestComponent.SetAction(this);
+            _attackRequestComponent.SetCondition(this);
+            
+            _forceAttackComponent = GetComponent<ForceAttackComponent>();
+        }
+
+        private void MovementBehaviourSetup()
+        {
+            _moveRequestComponent = GetComponent<MoveRequestComponent>();
+            _moveRequestComponent.SetAction(this);
+            _moveRequestComponent.SetCondition(this);
+            
+            _moveTransformComponent = GetComponent<MoveTransformComponent>();
+            _detectTargetComponent = GetComponent<DetectTargetComponent>();
+            _followTargetComponent = GetComponent<FollowTargetComponent>();
         }
         
         void MoveRequestComponent.IAction.Invoke(Vector2 direction)

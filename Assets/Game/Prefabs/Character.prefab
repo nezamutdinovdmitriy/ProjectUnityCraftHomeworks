@@ -178,9 +178,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7fb51fa47b4344b7eb3f8a51ab41aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.AttackComponentView
-  _attackComponent: {fileID: 4979707929399080649}
-  _animator: {fileID: 5219259647563851570}
   _animatorKeyString: BlowUp
+  _attackRequest: {fileID: 4979707929399080649}
+  _animator: {fileID: 5219259647563851570}
   _particleSystem: {fileID: 7825429286214371121}
   _audioSource: {fileID: 8589338179893557342}
   _audioClip: {fileID: 8300000, guid: a2fb8d4706a16468592a6e50aa24de65, type: 3}
@@ -228,9 +228,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7fb51fa47b4344b7eb3f8a51ab41aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.AttackComponentView
-  _attackComponent: {fileID: 6810532107484706773}
-  _animator: {fileID: 5219259647563851570}
   _animatorKeyString: BlowForward
+  _attackRequest: {fileID: 6810532107484706773}
+  _animator: {fileID: 5219259647563851570}
   _particleSystem: {fileID: 6138593199860099477}
   _audioSource: {fileID: 8589338179893557342}
   _audioClip: {fileID: 8300000, guid: 3dbd84c2bfae847229cd1013f68c0da7, type: 3}
@@ -1216,6 +1216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e373817ca7479f880b2ede6f4e4fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GroundedComponentView
+  _groundedComponent: {fileID: 5047785149009041406}
 --- !u!114 &2565620941048259452
 MonoBehaviour:
   m_ObjectHideFlags: 0

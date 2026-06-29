@@ -29,7 +29,7 @@ namespace Game
         private float _requestTime;
         private float _nextAllowedJumpTime;
         
-        private bool _jumpRequested;
+        private bool _isRequested;
 
         public void SetAction(IAction action) => _action = action;
         public void SetCondition(ICondition condition) => _condition = condition;
@@ -40,20 +40,20 @@ namespace Game
                 return;
 
             _requestTime = Time.time;
-            _jumpRequested = true;
+            _isRequested = true;
         }
 
         private void FixedUpdate()
         {
             bool canJump = _condition == null || _condition.Evaluate();
             
-            if (_jumpRequested == false
+            if (_isRequested == false
                 || Time.time < _requestTime + _jumpDelay)
                 return;
 
             if (canJump == false)
             {
-                _jumpRequested = false;
+                _isRequested = false;
                 return;
             }
 
@@ -62,7 +62,7 @@ namespace Game
 
             _nextAllowedJumpTime = Time.time + _jumpCooldown;
 
-            _jumpRequested = false;
+            _isRequested = false;
         }
     }
 }

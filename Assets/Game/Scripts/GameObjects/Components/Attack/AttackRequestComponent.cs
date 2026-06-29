@@ -23,8 +23,7 @@ namespace Game
         [SerializeField]
         private float _delay;
 
-        private bool _requested;
-        
+        private bool _isRequested;
         private float _requestTime;
         private float _nextAllowedAttackTime;
         
@@ -34,7 +33,7 @@ namespace Game
         public void SetAction(IAction action) => _action = action;
         public void SetCondition(ICondition condition) => _condition = condition;
 
-        public bool Requested => _requested;
+        public bool IsRequested => _isRequested;
         
         public void RequestAttack()
         {
@@ -42,19 +41,19 @@ namespace Game
                 return;
 
             _requestTime = Time.time;
-            _requested = true;
+            _isRequested = true;
         }
 
         public void FixedUpdate()
         {
             bool canAttack = _condition == null || _condition.Evaluate();
 
-            if (_requested == false || Time.time < _requestTime + _delay)
+            if (_isRequested == false || Time.time < _requestTime + _delay)
                 return;
 
             if (canAttack == false)
             {
-                _requested = false;
+                _isRequested = false;
                 return;
             }
             
@@ -63,7 +62,7 @@ namespace Game
 
             _nextAllowedAttackTime = Time.time + _cooldown;
             
-            _requested = false;
+            _isRequested = false;
         }
     }
 }

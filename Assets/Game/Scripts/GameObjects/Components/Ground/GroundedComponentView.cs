@@ -7,14 +7,12 @@ namespace Game
     {
         private readonly int IsGroundedAnimatorKeyHash = Animator.StringToHash("IsGrounded");
         
+        [SerializeField]
         private GroundedComponent _groundedComponent;
+        
         private Animator _animator;
         
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-            _groundedComponent = GetComponentInParent<GroundedComponent>();
-        }
+        private void Awake() => _animator = GetComponent<Animator>();
 
         private void FixedUpdate() 
             => _animator.SetBool(IsGroundedAnimatorKeyHash, _groundedComponent.IsGrounded);

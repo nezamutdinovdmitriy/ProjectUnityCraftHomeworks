@@ -3,7 +3,7 @@
 namespace Game
 {
     [RequireComponent(typeof(Animator))]
-    public class TakeDamageComponentAnimationView : MonoBehaviour
+    public class TakeDamageComponentView : MonoBehaviour
     {
         [SerializeField]
         private TakeDamageColorComponent _takeDamageColorComponent;

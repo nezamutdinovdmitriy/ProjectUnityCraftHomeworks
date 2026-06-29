@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Patrol
 {
-    public class PatrolComponent : MonoBehaviour
+    public class PointProviderComponent : MonoBehaviour
     {
         public interface ICondition
         {

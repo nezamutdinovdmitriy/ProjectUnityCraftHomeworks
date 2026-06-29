@@ -5,25 +5,16 @@ using UnityEngine;
 namespace Game
 {
     public class Platform : MonoBehaviour,
-        PatrolComponent.ICondition,
-        PatrolComponent.IAction
+        PointProviderComponent.ICondition,
+        PointProviderComponent.IAction
     {
         private MoveTransformComponent _moveTransformComponent;
-        private PatrolComponent _patrolComponent;
+        private PointProviderComponent _pointProviderComponent;
         private FollowTargetComponent _followTargetComponent;
         
-        private void Awake()
-        {
-            _moveTransformComponent = GetComponent<MoveTransformComponent>();
-            
-            _patrolComponent = GetComponent<PatrolComponent>();
-            _patrolComponent.SetAction(this);
-            _patrolComponent.SetCondition(this);
-            
-            _followTargetComponent = GetComponent<FollowTargetComponent>();
-        }
+        private void Awake() => MovementBehaviourSetup();
 
-        private void Start() => _followTargetComponent.SetTargetPoint(_patrolComponent.GetPoint());
+        private void Start() => _followTargetComponent.SetTargetPoint(_pointProviderComponent.GetPoint());
 
         private void FixedUpdate()
         {
@@ -33,10 +24,20 @@ namespace Game
             _moveTransformComponent.Move(_followTargetComponent.GetDirectionToTarget());
         }
 
-        bool PatrolComponent.ICondition.Evaluate() 
+        private void MovementBehaviourSetup()
+        {
+            _moveTransformComponent = GetComponent<MoveTransformComponent>();
+            _followTargetComponent = GetComponent<FollowTargetComponent>();
+            
+            _pointProviderComponent = GetComponent<PointProviderComponent>();
+            _pointProviderComponent.SetAction(this);
+            _pointProviderComponent.SetCondition(this);
+        }
+        
+        bool PointProviderComponent.ICondition.Evaluate() 
             => _followTargetComponent.IsDestinationReached();
 
-        void PatrolComponent.IAction.Invoke() 
-            => _followTargetComponent.SetTargetPoint(_patrolComponent.GetPoint());
+        void PointProviderComponent.IAction.Invoke() 
+            => _followTargetComponent.SetTargetPoint(_pointProviderComponent.GetPoint());
     }
 }

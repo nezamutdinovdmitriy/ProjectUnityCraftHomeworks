@@ -7,17 +7,17 @@ namespace Game
     {
         private readonly int AnimatorKeyHash = Animator.StringToHash("IsMoving");
         
-        private MoveRequestComponent _moveComponent;
+        private MoveRequestComponent _moveRequestComponent;
         private Animator _animator;
         
         private void Awake()
         {
-            _moveComponent = GetComponentInParent<MoveRequestComponent>();
+            _moveRequestComponent = GetComponentInParent<MoveRequestComponent>();
             _animator = GetComponent<Animator>();
         }
 
-        private void OnEnable() => _moveComponent.Moved += OnMoved;
-        private void OnDisable() => _moveComponent.Moved -= OnMoved;
+        private void OnEnable() => _moveRequestComponent.Moved += OnMoved;
+        private void OnDisable() => _moveRequestComponent.Moved -= OnMoved;
 
         private void OnMoved(Vector2 direction)
         {

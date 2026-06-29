@@ -22,7 +22,7 @@ namespace Game
         [SerializeField]
         private float _delay;
         
-        private bool _requested;
+        private bool _isRequested;
         
         public void SetAction(IAction action) => _action = action;
         public void SetCondition(ICondition condition) => _condition = condition;
@@ -30,24 +30,24 @@ namespace Game
         public void RequestDeath()
         {
             _requestTime = Time.time + _delay;
-            _requested = true;
+            _isRequested = true;
         }
         
         public void FixedUpdate()
         {
             bool canDie = _condition == null || _condition.Evaluate();
 
-            if (_requested == false || Time.fixedTime < _requestTime )
+            if (_isRequested == false || Time.fixedTime < _requestTime )
                 return;
 
             if (canDie == false)
             {
-                _requested = false;
+                _isRequested = false;
                 return;
             }
             
             _action?.Invoke();
-            _requested = false;
+            _isRequested = false;
         }
     }
 }

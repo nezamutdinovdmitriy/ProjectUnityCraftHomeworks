@@ -511,6 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e373817ca7479f880b2ede6f4e4fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GroundedComponentView
+  _groundedComponent: {fileID: 3776983940913601037}
 --- !u!114 &8664869840975011315
 MonoBehaviour:
   m_ObjectHideFlags: 0
