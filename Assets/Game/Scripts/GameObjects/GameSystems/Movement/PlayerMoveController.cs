@@ -12,7 +12,7 @@ namespace Game
 
         private MoveRequestComponent _moveRequest;
 
-        private void Awake() => _moveRequest = GetComponent<MoveRequestComponent>();
+        private void Awake() => _moveRequest = _object.GetComponent<MoveRequestComponent>();
 
         public void Update()
         {

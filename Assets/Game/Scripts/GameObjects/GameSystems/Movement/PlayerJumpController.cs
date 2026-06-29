@@ -13,7 +13,7 @@ namespace Game
         private void Awake()
         {
             _input = GetComponent<InputService>();
-            _jumpRequestComponent = GetComponent<JumpRequestComponent>();
+            _jumpRequestComponent = _object.GetComponent<JumpRequestComponent>();
         }
 
         private void Update()

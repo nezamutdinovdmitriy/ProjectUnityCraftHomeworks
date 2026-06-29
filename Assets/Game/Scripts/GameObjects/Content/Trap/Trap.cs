@@ -13,7 +13,7 @@ namespace Game
         private void Awake() => _collisionComponent = GetComponent<CollisionComponent>();
 
         private void OnEnable() => _collisionComponent.OnEntered += OnCollisionEntered;
-        private void OnDisable() => _collisionComponent.OnEntered += OnCollisionEntered;
+        private void OnDisable() => _collisionComponent.OnEntered -= OnCollisionEntered;
 
         private void OnCollisionEntered(Collision2D collision)
         {
