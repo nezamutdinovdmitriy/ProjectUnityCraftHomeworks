@@ -1,43 +1,53 @@
 ﻿using Game.Patrol;
 using Game.Target;
-using UnityEngine;
+using Zenject;
 
 namespace Game
 {
-    public class Platform : MonoBehaviour,
+    public class Platform : 
         PointProviderComponent.ICondition,
-        PointProviderComponent.IAction
+        PointProviderComponent.IAction, 
+        IFixedTickable,
+        IInitializable
     {
-        private MoveTransformComponent _moveTransformComponent;
-        private PointProviderComponent _pointProviderComponent;
-        private FollowTargetComponent _followTargetComponent;
-        
-        private void Awake() => MovementBehaviourSetup();
+        private readonly MoveTransformComponent _transform;
+        private readonly PointProviderComponent _pointProvider;
+        private readonly FollowTargetComponent _followTarget;
 
-        private void Start() => _followTargetComponent.SetTargetPoint(_pointProviderComponent.GetPoint());
-
-        private void FixedUpdate()
+        public Platform(
+            MoveTransformComponent transform, 
+            PointProviderComponent pointProvider,
+            FollowTargetComponent followTarget)
         {
-            if (_followTargetComponent.IsDestinationReached())
+            _transform = transform;
+            _pointProvider = pointProvider;
+            _followTarget = followTarget;
+        }
+
+        public void Initialize()
+        {
+            MovementBehaviourSetup();
+            _followTarget.SetTargetPoint(_pointProvider.GetPoint());
+        }
+
+        public void FixedTick()
+        {
+            if (_followTarget.IsDestinationReached())
                 return;
             
-            _moveTransformComponent.Move(_followTargetComponent.GetDirectionToTarget());
+            _transform.Move(_followTarget.GetDirectionToTarget());
         }
 
         private void MovementBehaviourSetup()
         {
-            _moveTransformComponent = GetComponent<MoveTransformComponent>();
-            _followTargetComponent = GetComponent<FollowTargetComponent>();
-            
-            _pointProviderComponent = GetComponent<PointProviderComponent>();
-            _pointProviderComponent.SetAction(this);
-            _pointProviderComponent.SetCondition(this);
+            _pointProvider.SetAction(this);
+            _pointProvider.SetCondition(this);
         }
         
         bool PointProviderComponent.ICondition.Evaluate() 
-            => _followTargetComponent.IsDestinationReached();
+            => _followTarget.IsDestinationReached();
 
         void PointProviderComponent.IAction.Invoke() 
-            => _followTargetComponent.SetTargetPoint(_pointProviderComponent.GetPoint());
+            => _followTarget.SetTargetPoint(_pointProvider.GetPoint());
     }
 }

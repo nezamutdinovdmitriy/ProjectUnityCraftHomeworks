@@ -13,13 +13,11 @@ namespace Game.Target
         }
 
         private readonly Settings _settings;
-        private readonly TransformComponent _transform;
+        private readonly Transform _transform;
         
         private Vector2 _targetPoint;
 
-        public FollowTargetComponent(
-            Settings settings, 
-            TransformComponent transform)
+        public FollowTargetComponent(Settings settings, Transform transform)
         {
             _settings = settings;
             _transform = transform;
@@ -30,10 +28,10 @@ namespace Game.Target
         public bool IsDestinationReached() => GetDistanceToTarget() <= _settings.StoppingDistance;
 
         public Vector2 GetDirectionToTarget() 
-            => (_targetPoint - (Vector2) _transform.Position).normalized;
+            => (_targetPoint - (Vector2) _transform.position).normalized;
 
         private float GetDistanceToTarget() 
-            => (_targetPoint - (Vector2) _transform.Position).magnitude;
+            => (_targetPoint - (Vector2) _transform.position).magnitude;
         
         // private void OnDrawGizmosSelected()
         // {

@@ -11,10 +11,8 @@ GameObject:
   - component: {fileID: 7845036276167105276}
   - component: {fileID: 4998109996826579298}
   - component: {fileID: 9111860641350533513}
-  - component: {fileID: 2745134502584741679}
-  - component: {fileID: 1788277104734801383}
-  - component: {fileID: 5079909746171844772}
-  - component: {fileID: 1587972684786690449}
+  - component: {fileID: 5653537310158763273}
+  - component: {fileID: 8725622860849809190}
   m_Layer: 3
   m_Name: GameObject
   m_TagString: Platform
@@ -111,7 +109,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &2745134502584741679
+--- !u!114 &5653537310158763273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,10 +118,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 240930164425400058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec7c92258e8e453987f051b21300d910, type: 3}
+  m_Script: {fileID: 11500000, guid: e898e81540a94a789a14103bf62ef23f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Content.Platform.Platform
---- !u!114 &1788277104734801383
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Entity
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 8725622860849809190}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &8725622860849809190
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,38 +136,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 240930164425400058}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02cacb46435c4591b76a63ad5a8dba1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d99271ec43541c097d0cad21a593c92, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Patrol.PatrolComponent
-  _patrolPoints:
-  - {fileID: 5434138037557620653}
-  - {fileID: 7441270365842623162}
---- !u!114 &5079909746171844772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240930164425400058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44b4c715012943db9fdf26735a9e7876, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveTransformComponent
-  _speed: 2
---- !u!114 &1587972684786690449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240930164425400058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 352f869d3ce944e88c7a72f173c1b652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Target.FollowTargetComponent
-  _stoppingDistance: 0.3
+  m_EditorClassIdentifier: Assembly-CSharp::Game.PlatformInstaller
+  _moveRequestSettings:
+    <Speed>k__BackingField: 4.5
+  _pointProviderSettings:
+    <PatrolPoints>k__BackingField:
+    - {fileID: 5434138037557620653}
+    - {fileID: 7441270365842623162}
+  _followTargetSettings:
+    <StoppingDistance>k__BackingField: 0.25
+  _transform: {fileID: 7845036276167105276}
 --- !u!1 &2402534428499199933
 GameObject:
   m_ObjectHideFlags: 0

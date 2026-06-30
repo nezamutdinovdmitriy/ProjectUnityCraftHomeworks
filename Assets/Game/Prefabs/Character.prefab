@@ -73,6 +73,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3621371499456615259}
+  - component: {fileID: 342559742705791485}
+  - component: {fileID: 5173345606863848280}
+  - component: {fileID: 8150745250994624600}
   m_Layer: 0
   m_Name: <System>
   m_TagString: Untagged
@@ -95,6 +98,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1040288790560490883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &342559742705791485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121739212659639119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3709a44359d44eaa286ee854a3999f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.InputService
+--- !u!114 &5173345606863848280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121739212659639119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf42ec39bb6a4aefb3fd549a16e0de90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerMoveController
+  _entity: {fileID: 1461971782293153505}
+  _input: {fileID: 342559742705791485}
+--- !u!114 &8150745250994624600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121739212659639119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8486312c818541d788a0b623ebd1d0a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.PlayerJumpController
+  _entity: {fileID: 1461971782293153505}
+  _input: {fileID: 342559742705791485}
 --- !u!1 &2252480666122037092
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +213,7 @@ GameObject:
   - component: {fileID: 4375523871547856432}
   - component: {fileID: 9080652144006767103}
   - component: {fileID: 1461971782293153505}
+  - component: {fileID: 8172514857511690920}
   m_Layer: 9
   m_Name: Character
   m_TagString: Character
@@ -312,10 +356,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Entity
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 8172514857511690920}
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
+--- !u!114 &8172514857511690920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3322474405303096178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dfd7d49fa64442a1081cb4a54de61c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.CharacterInstaller
+  _moveRequestSettings:
+    <Speed>k__BackingField: 4.5
+  _jumpRequestSettings:
+    <Cooldown>k__BackingField: 0.25
+    <Delay>k__BackingField: 0.05
+  _deathRequestSettings:
+    <Delay>k__BackingField: 1
+  _groundedSettings:
+    <Feet>k__BackingField: {fileID: 2136071814461247172}
+    <LayerMask>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 8
+    <GroundDistance>k__BackingField: 0.15
+  _jumpForce: 12
+  _rigidbody: {fileID: 2743180993930163208}
+  _transform: {fileID: 1040288790560490883}
+  _maxHealth: 5
 --- !u!1 &3661016561165312903
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +818,16 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7819384111349612409, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5562747507276943726}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8635467503404275170, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1204769555121511050}
+    - targetCorrespondingSourceObject: {fileID: 8635467503404275170, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7071706435204482509}
+    - targetCorrespondingSourceObject: {fileID: 8635467503404275170, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6611322799944146870}
   m_SourcePrefab: {fileID: 100100000, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
 --- !u!212 &807937440565741875 stripped
 SpriteRenderer:
@@ -821,6 +904,47 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 8583013788384967877, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
   m_PrefabInstance: {fileID: 589240006524367219}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9221737445006124177 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8635467503404275170, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
+  m_PrefabInstance: {fileID: 589240006524367219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1204769555121511050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221737445006124177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe7e7220537421f8d7bb18f8cb794b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveComponentView
+--- !u!114 &7071706435204482509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221737445006124177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e373817ca7479f880b2ede6f4e4fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GroundedComponentView
+--- !u!114 &6611322799944146870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221737445006124177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bbff9007f7a4dc8b7519487709d7169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.JumpComponentView
 --- !u!1001 &1509922481622574971
 PrefabInstance:
   m_ObjectHideFlags: 0

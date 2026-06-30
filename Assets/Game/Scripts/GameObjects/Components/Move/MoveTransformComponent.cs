@@ -13,9 +13,9 @@ namespace Game
         }
 
         private readonly Settings _settings;
-        private readonly TransformComponent _transform;
+        private readonly Transform _transform;
 
-        public MoveTransformComponent(Settings settings, TransformComponent transform)
+        public MoveTransformComponent(Settings settings, Transform transform)
         {
             _settings = settings;
             _transform = transform;

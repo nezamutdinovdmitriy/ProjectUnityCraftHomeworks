@@ -22,7 +22,7 @@ namespace Game.Target
         }
 
         private readonly Settings _settings;
-        private readonly TransformComponent _transform;
+        private readonly Transform _transform;
         
         [ShowInInspector, ReadOnly]
         private GameObject _currentTarget;
@@ -30,9 +30,7 @@ namespace Game.Target
         private Collider2D[] _colliderBuffer;
         private ContactFilter2D _filter;
 
-        public DetectTargetComponent(
-            Settings settings, 
-            TransformComponent transform)
+        public DetectTargetComponent(Settings settings, Transform transform)
         {
             _settings = settings;
             _transform = transform;
@@ -65,16 +63,18 @@ namespace Game.Target
             _currentTarget = null;
             
             int collidersCount = Physics2D.OverlapCircle(
-                _transform.Position, 
+                _transform.position, 
                 _settings.DetectRadius,
                 _filter,
                 _colliderBuffer);
             
             for (int i = 0; i < collidersCount; i++)
             {
-                if (_colliderBuffer[i].TryGetComponent(out IEntity entity))
+                Collider2D collider = _colliderBuffer[i];
+
+                if (collider.TryGetComponent(out Entity entity))
                 {
-                    _currentTarget = entity.Get<GameObject>();
+                    _currentTarget = entity.gameObject;
                     break;
                 }
             }

@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Game.Patrol
 {
-    public class PointProviderComponent : IInitializable, IFixedTickable
+    public class PointProviderComponent : IFixedTickable
     {
         [Serializable]
         public class Settings
@@ -32,13 +32,13 @@ namespace Game.Patrol
         private ICondition _condition;
         private IAction _action;
 
-        public PointProviderComponent(Settings settings) => _settings = settings;
-        
-        public void Initialize()
+        public PointProviderComponent(Settings settings)
         {
+            _settings = settings;
+            
             foreach (Transform patrolPoint in _settings.PatrolPoints)
                 _patrolPointsQueue.Enqueue(patrolPoint);
-
+            
             SwitchToNextPoint();
         }
 

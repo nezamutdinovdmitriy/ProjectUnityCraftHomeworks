@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using UnityEngine;
+using Zenject;
 
 namespace Game.Scripts.GameObjects
 {
@@ -9,7 +10,7 @@ namespace Game.Scripts.GameObjects
             get => name;
             set => name = value;
         }
-        
+
         public T Get<T>() where T : class => Container.Resolve<T>();
 
         public bool TryGet<T>(out T result) where T : class

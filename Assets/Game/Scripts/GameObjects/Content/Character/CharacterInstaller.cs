@@ -32,12 +32,12 @@ namespace Game
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<Character>().AsSingle().NonLazy();
+
+            Container.Bind<Transform>().FromInstance(_transform).AsSingle();
             
             Container.BindInterfacesAndSelfTo<MoveRequestComponent>().AsSingle();
             
             Container.Bind<MoveTransformComponent>().AsSingle().WithArguments(_moveRequestSettings);
-            
-            Container.Bind<TransformComponent>().AsSingle().WithArguments(_transform);
             
             Container.Bind<LookComponent>().AsSingle();
             

@@ -35,7 +35,7 @@ namespace Game
             JumpRequestComponent jumpRequestComponent,
             JumpRigidbodyComponent jumpRigidbodyComponent,
             HealthComponent healthComponent,
-            DeathRequestComponent _deathRequestComponent,
+            DeathRequestComponent deathRequestComponent,
             GroundedComponent groundedComponent)
         {
             _rigidbody = rigidbody;
@@ -45,7 +45,7 @@ namespace Game
             _jumpRequestComponent = jumpRequestComponent;
             _jumpRigidbodyComponent = jumpRigidbodyComponent;
             _healthComponent = healthComponent;
-            this._deathRequestComponent = _deathRequestComponent;
+            _deathRequestComponent = deathRequestComponent;
             _groundedComponent = groundedComponent;
         }
         

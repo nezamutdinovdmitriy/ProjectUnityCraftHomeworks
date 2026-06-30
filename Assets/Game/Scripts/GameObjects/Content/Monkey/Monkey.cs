@@ -1,68 +1,75 @@
 ﻿using System;
 using Game.Target;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Scripts.GameObjects.Content.Monkey
 {
-    [RequireComponent(typeof(JumpRequestComponent), typeof(JumpRigidbodyComponent))]
-    [RequireComponent(typeof(AttackRequestComponent), typeof(ForceAttackComponent))]
-    [RequireComponent(typeof(HealthComponent), typeof(DeathRequestComponent))]
-    [RequireComponent(typeof(GroundedComponent), typeof(LookComponent))]
-    [RequireComponent(typeof(DetectTargetComponent), typeof(CollisionComponent))]
-    public class Monkey : MonoBehaviour,
-        AttackRequestComponent.IAction,
-        AttackRequestComponent.ICondition,
+    public class Monkey : 
         JumpRequestComponent.IAction,
         JumpRequestComponent.ICondition,
         DeathRequestComponent.IAction,
-        DeathRequestComponent.ICondition
+        DeathRequestComponent.ICondition,
+        IInitializable,
+        IDisposable,
+        IFixedTickable
     {
-        [SerializeField]
-        private int _damage;
+        private readonly int _damage;
         
-        private JumpRequestComponent _jumpRequestComponent;
-        private JumpRigidbodyComponent _jumpRigidbodyComponent;
+        private readonly JumpRequestComponent _jumpRequestComponent;
+        private readonly JumpRigidbodyComponent _jumpRigidbodyComponent;
 
-        private AttackRequestComponent _attackRequestComponent;
-        private ForceAttackComponent _forceAttackComponent;
-
-        private HealthComponent _healthComponent;
-        private DeathRequestComponent _deathRequestComponent;
+        private readonly HealthComponent _healthComponent;
         
-        private GroundedComponent _groundedComponent;
-
-        private LookComponent _lookComponent;
-
-        private DetectTargetComponent _detectTargetComponent;
+        private readonly DeathRequestComponent _deathRequestComponent;
         
-        private CollisionComponent _collisionComponent;
+        private readonly GroundedComponent _groundedComponent;
 
-        private void Awake()
+        private readonly LookComponent _lookComponent;
+
+        private readonly DetectTargetComponent _detectTargetComponent;
+        
+        private readonly CollisionComponent _collisionComponent;
+
+        public Monkey(int damage,
+            JumpRequestComponent jumpRequestComponent,
+            JumpRigidbodyComponent jumpRigidbodyComponent,
+            HealthComponent healthComponent,
+            DeathRequestComponent deathRequestComponent,
+            GroundedComponent groundedComponent,
+            LookComponent lookComponent,
+            DetectTargetComponent detectTargetComponent,
+            CollisionComponent collisionComponent)
+        {
+            _damage = damage;
+            _jumpRequestComponent = jumpRequestComponent;
+            _jumpRigidbodyComponent = jumpRigidbodyComponent;
+            _healthComponent = healthComponent;
+            _deathRequestComponent = deathRequestComponent;
+            _groundedComponent = groundedComponent;
+            _lookComponent = lookComponent;
+            _detectTargetComponent = detectTargetComponent;
+            _collisionComponent = collisionComponent;
+        }
+
+        public void Initialize()
         {
             JumpBehaviourSetup();
-            AttackBehaviourSetup();
             LifeCycleBehaviourSetup();
-            TargetBehaviourSetup();
-
-            _groundedComponent = GetComponent<GroundedComponent>();
-            _collisionComponent = GetComponent<CollisionComponent>();
-        }
-        
-        private void OnEnable()
-        {
+            
             _collisionComponent.OnEntered += OnCollisionEntered;
             _groundedComponent.OnGrounded += OnGrounded;
             _healthComponent.OnDied += OnDied;
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
             _collisionComponent.OnEntered -= OnCollisionEntered;
             _groundedComponent.OnGrounded -= OnGrounded; 
             _healthComponent.OnDied -= OnDied;
         }
 
-        private void FixedUpdate()
+        public void FixedTick()
         {
             if (_detectTargetComponent.TryGetTarget(out GameObject target))
                 _lookComponent.Look(target.transform);
@@ -70,7 +77,8 @@ namespace Game.Scripts.GameObjects.Content.Monkey
 
         private void OnCollisionEntered(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out HealthComponent healthComponent))
+            if (collision.gameObject.TryGetComponent(out Entity entity)
+                && entity.TryGet(out HealthComponent healthComponent))
                 healthComponent.TakeDamage(_damage);
         }
 
@@ -81,55 +89,47 @@ namespace Game.Scripts.GameObjects.Content.Monkey
             if (isGrounded == false)
                 return;
             
-            _attackRequestComponent.RequestAttack();
             _jumpRequestComponent.RequestJump();
-        }
-        
-        private void TargetBehaviourSetup()
-        {
-            _lookComponent = GetComponent<LookComponent>();
-            _detectTargetComponent = GetComponent<DetectTargetComponent>();
         }
 
         private void LifeCycleBehaviourSetup()
         {
-            _healthComponent = GetComponent<HealthComponent>();
-            _deathRequestComponent = GetComponent<DeathRequestComponent>();
             _deathRequestComponent.SetAction(this);
             _deathRequestComponent.SetCondition(this);
         }
-
-        private void AttackBehaviourSetup()
-        {
-            _attackRequestComponent = GetComponent<AttackRequestComponent>();
-            _attackRequestComponent.SetAction(this);
-            _attackRequestComponent.SetCondition(this);
-            
-            _forceAttackComponent = GetComponent<ForceAttackComponent>();
-        }
-
+        
         private void JumpBehaviourSetup()
         {
-            _jumpRequestComponent = GetComponent<JumpRequestComponent>();
             _jumpRequestComponent.SetAction(this);
             _jumpRequestComponent.SetCondition(this);
-            
-            _jumpRigidbodyComponent = GetComponent<JumpRigidbodyComponent>();
         }
-
-        [Obsolete]
-        void AttackRequestComponent.IAction.Invoke() => _forceAttackComponent.Attack();
-
-        bool AttackRequestComponent.ICondition.Evaluate() 
-            => _healthComponent.IsAlive && _groundedComponent.IsGrounded;
 
         void JumpRequestComponent.IAction.Invoke() => _jumpRigidbodyComponent.Jump();
 
         bool JumpRequestComponent.ICondition.Evaluate() 
             => _healthComponent.IsAlive && _groundedComponent.IsGrounded;
 
-        void DeathRequestComponent.IAction.Invoke() => Destroy(gameObject);
+        void DeathRequestComponent.IAction.Invoke() => GameObject.Destroy(_collisionComponent.gameObject);
 
         bool DeathRequestComponent.ICondition.Evaluate() => _healthComponent.IsDied;
     }
 }
+
+// private void AttackBehaviourSetup()
+// {
+//     _attackRequestComponent = GetComponent<AttackRequestComponent>();
+//     _attackRequestComponent.SetAction(this);
+//     _attackRequestComponent.SetCondition(this);
+//     
+//     _forceAttackComponent = GetComponent<ForceAttackComponent>();
+// }
+
+// [Obsolete]
+// void AttackRequestComponent.IAction.Invoke() => _forceAttackComponent.Attack();
+//
+// bool AttackRequestComponent.ICondition.Evaluate() 
+//     => _healthComponent.IsAlive && _groundedComponent.IsGrounded;-
+
+
+// private readonly AttackRequestComponent _attackRequestComponent;
+// private readonly ForceAttackComponent _forceAttackComponent;

@@ -6,13 +6,11 @@ namespace Game
     public sealed class StandingPlatformComponent : IFixedTickable
     {
         private readonly GroundedComponent _groundedComponent;
-        private readonly TransformComponent _transform;
+        private readonly Transform _transform;
         
         private Transform _currentGround;
 
-        public StandingPlatformComponent(
-            GroundedComponent groundedComponent, 
-            TransformComponent transform)
+        public StandingPlatformComponent(GroundedComponent groundedComponent, Transform transform)
         {
             _groundedComponent = groundedComponent;
             _transform = transform;
@@ -25,13 +23,13 @@ namespace Game
 
             if (!standing && hasPlatform)
             {
-                _transform.Parent = platform;
+                _transform.parent = platform;
                 _currentGround = platform;
             }
 
             if (standing && !hasPlatform)
             {
-                _transform.Parent = null;
+                _transform.parent = null;
                 _currentGround = null;
             }
         }

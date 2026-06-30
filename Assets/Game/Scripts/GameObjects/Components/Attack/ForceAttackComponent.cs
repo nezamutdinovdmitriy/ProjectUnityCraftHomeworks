@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Zenject;
 
 namespace Game
 {
@@ -29,10 +28,10 @@ namespace Game
         }
 
         private readonly Settings _settings;
-        private readonly TransformComponent _transform;
+        private readonly Transform _transform;
         private readonly Collider2D[] _hits;
 
-        public ForceAttackComponent(Settings settings, TransformComponent transform)
+        public ForceAttackComponent(Settings settings, Transform transform)
         {
             _settings = settings;
             _transform = transform;
@@ -44,8 +43,8 @@ namespace Game
         public void Attack()
         {
             Vector2 center =
-                (Vector2) _transform.Position +
-                (Vector2) _transform.Right * _settings.Offset.x +
+                (Vector2) _transform.position +
+                (Vector2) _transform.right * _settings.Offset.x +
                 Vector2.up * _settings.Offset.y;
             
             int count = Physics2D.OverlapBoxNonAlloc(
@@ -62,7 +61,7 @@ namespace Game
                 if (rb == null)
                     continue;
 
-                Vector2 dir = (rb.position - (Vector2) _transform.Position).normalized;
+                Vector2 dir = (rb.position - (Vector2) _transform.position).normalized;
                 Vector2 force = new Vector2(
                     dir.x * _settings.ForceX,
                     _settings.ForceY);
