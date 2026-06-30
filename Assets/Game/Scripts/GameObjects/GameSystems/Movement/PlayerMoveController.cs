@@ -1,18 +1,22 @@
-﻿using UnityEngine;
+﻿using Game.Scripts.GameObjects;
+using UnityEngine;
 
 namespace Game
 {
     public class PlayerMoveController : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _object;
+        private Entity _entity;
 
         [SerializeField]
         private InputService _input;
 
         private MoveRequestComponent _moveRequest;
 
-        private void Awake() => _moveRequest = _object.GetComponent<MoveRequestComponent>();
+        private void Start()
+        {
+            _moveRequest = _entity.Get<MoveRequestComponent>();
+        }
 
         public void Update()
         {

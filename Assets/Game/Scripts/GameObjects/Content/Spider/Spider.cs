@@ -11,8 +11,8 @@ namespace Game
         MoveRequestComponent.ICondition,
         AttackRequestComponent.ICondition,
         AttackRequestComponent.IAction,
-        DeathComponent.IAction,
-        DeathComponent.ICondition,
+        DeathRequestComponent.IAction,
+        DeathRequestComponent.ICondition,
         PointProviderComponent.IAction,
         PointProviderComponent.ICondition
     {
@@ -27,7 +27,7 @@ namespace Game
         private PointProviderComponent pointProviderComponent;
 
         private HealthComponent _healthComponent;
-        private DeathComponent _deathComponent;
+        private DeathRequestComponent _deathRequestComponent;
 
         private AttackRequestComponent _attackRequestComponent;
         private ForceAttackComponent _attackComponent;
@@ -65,7 +65,7 @@ namespace Game
             => _moveRequestComponent.SetMoveDirection(
                 _followTargetComponent.GetDirectionToTarget());
 
-        private void OnDied() => _deathComponent.RequestDeath();
+        private void OnDied() => _deathRequestComponent.RequestDeath();
 
         private void OnCollisionEntered(Collision2D collision)
         {
@@ -95,9 +95,9 @@ namespace Game
         {
             _healthComponent = GetComponent<HealthComponent>();
 
-            _deathComponent = GetComponent<DeathComponent>();
-            _deathComponent.SetCondition(this);
-            _deathComponent.SetAction(this);
+            _deathRequestComponent = GetComponent<DeathRequestComponent>();
+            _deathRequestComponent.SetCondition(this);
+            _deathRequestComponent.SetAction(this);
         }
 
         private void AttackBehaviourSetup()
@@ -122,9 +122,9 @@ namespace Game
         void AttackRequestComponent.IAction.Invoke() 
             => _attackComponent.Attack();
 
-        void DeathComponent.IAction.Invoke() => Destroy(transform.parent.gameObject);
+        void DeathRequestComponent.IAction.Invoke() => Destroy(transform.parent.gameObject);
 
-        bool DeathComponent.ICondition.Evaluate() => _healthComponent.IsDied;
+        bool DeathRequestComponent.ICondition.Evaluate() => _healthComponent.IsDied;
 
         void PointProviderComponent.IAction.Invoke() 
             => _followTargetComponent.SetTargetPoint(pointProviderComponent.GetPoint());

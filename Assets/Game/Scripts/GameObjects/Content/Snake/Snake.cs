@@ -6,7 +6,7 @@ namespace Game
 {
     [RequireComponent(typeof(MoveRequestComponent), typeof(MoveTransformComponent))]
     [RequireComponent(typeof(DetectTargetComponent), typeof(FollowTargetComponent))]
-    [RequireComponent(typeof(HealthComponent), typeof(DeathComponent))]
+    [RequireComponent(typeof(HealthComponent), typeof(DeathRequestComponent))]
     [RequireComponent(typeof(AttackRequestComponent), typeof(ForceAttackComponent))]
     [RequireComponent(typeof(LookComponent), typeof(CollisionComponent))]
     public class Snake : MonoBehaviour,
@@ -14,8 +14,8 @@ namespace Game
         MoveRequestComponent.ICondition,
         AttackRequestComponent.IAction,
         AttackRequestComponent.ICondition,
-        DeathComponent.IAction,
-        DeathComponent.ICondition
+        DeathRequestComponent.IAction,
+        DeathRequestComponent.ICondition
     {
         [SerializeField]
         private int _damage;
@@ -27,7 +27,7 @@ namespace Game
         private FollowTargetComponent _followTargetComponent;
         
         private HealthComponent _healthComponent;
-        private DeathComponent _deathComponent;
+        private DeathRequestComponent _deathRequestComponent;
 
         private AttackRequestComponent _attackRequestComponent;
         private ForceAttackComponent _forceAttackComponent;
@@ -71,7 +71,7 @@ namespace Game
             }
         }
 
-        private void OnDied() => _deathComponent.RequestDeath();
+        private void OnDied() => _deathRequestComponent.RequestDeath();
 
         private void OnCollisionEntered(Collision2D collision)
         {
@@ -85,9 +85,9 @@ namespace Game
         private void LifeCycleBehaviourSetup()
         {
             _healthComponent = GetComponent<HealthComponent>();
-            _deathComponent = GetComponent<DeathComponent>();
-            _deathComponent.SetAction(this);
-            _deathComponent.SetCondition(this);
+            _deathRequestComponent = GetComponent<DeathRequestComponent>();
+            _deathRequestComponent.SetAction(this);
+            _deathRequestComponent.SetCondition(this);
         }
 
         private void AttackBehaviourSetup()
@@ -128,8 +128,8 @@ namespace Game
         bool AttackRequestComponent.ICondition.Evaluate() 
             => _healthComponent.IsAlive && _currentTargetToDamage != null;
 
-        void DeathComponent.IAction.Invoke() => Destroy(gameObject);
+        void DeathRequestComponent.IAction.Invoke() => Destroy(gameObject);
 
-        bool DeathComponent.ICondition.Evaluate() => _healthComponent.IsDied;
+        bool DeathRequestComponent.ICondition.Evaluate() => _healthComponent.IsDied;
     }
 }

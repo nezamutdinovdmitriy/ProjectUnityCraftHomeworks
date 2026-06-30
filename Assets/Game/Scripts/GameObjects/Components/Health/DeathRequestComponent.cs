@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Game
 {
-    public class DeathComponent : IFixedTickable
+    public class DeathRequestComponent : IFixedTickable
     {
         [Serializable]
         public class Settings
@@ -31,7 +31,7 @@ namespace Game
         private float _requestTime;
         private bool _isRequested;
 
-        public DeathComponent(Settings settings) => _settings = settings;
+        public DeathRequestComponent(Settings settings) => _settings = settings;
 
         public void SetAction(IAction action) => _action = action;
         public void SetCondition(ICondition condition) => _condition = condition;

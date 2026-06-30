@@ -1,4 +1,5 @@
 ﻿using System;
+using Game.Scripts.GameObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -71,9 +72,9 @@ namespace Game.Target
             
             for (int i = 0; i < collidersCount; i++)
             {
-                if (_colliderBuffer[i].TryGetComponent(out Character character))
+                if (_colliderBuffer[i].TryGetComponent(out IEntity entity))
                 {
-                    _currentTarget = character.gameObject;
+                    _currentTarget = entity.Get<GameObject>();
                     break;
                 }
             }

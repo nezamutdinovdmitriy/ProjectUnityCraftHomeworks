@@ -6,7 +6,7 @@ namespace Game.Scripts.GameObjects.Content.Monkey
 {
     [RequireComponent(typeof(JumpRequestComponent), typeof(JumpRigidbodyComponent))]
     [RequireComponent(typeof(AttackRequestComponent), typeof(ForceAttackComponent))]
-    [RequireComponent(typeof(HealthComponent), typeof(DeathComponent))]
+    [RequireComponent(typeof(HealthComponent), typeof(DeathRequestComponent))]
     [RequireComponent(typeof(GroundedComponent), typeof(LookComponent))]
     [RequireComponent(typeof(DetectTargetComponent), typeof(CollisionComponent))]
     public class Monkey : MonoBehaviour,
@@ -14,8 +14,8 @@ namespace Game.Scripts.GameObjects.Content.Monkey
         AttackRequestComponent.ICondition,
         JumpRequestComponent.IAction,
         JumpRequestComponent.ICondition,
-        DeathComponent.IAction,
-        DeathComponent.ICondition
+        DeathRequestComponent.IAction,
+        DeathRequestComponent.ICondition
     {
         [SerializeField]
         private int _damage;
@@ -27,7 +27,7 @@ namespace Game.Scripts.GameObjects.Content.Monkey
         private ForceAttackComponent _forceAttackComponent;
 
         private HealthComponent _healthComponent;
-        private DeathComponent _deathComponent;
+        private DeathRequestComponent _deathRequestComponent;
         
         private GroundedComponent _groundedComponent;
 
@@ -74,7 +74,7 @@ namespace Game.Scripts.GameObjects.Content.Monkey
                 healthComponent.TakeDamage(_damage);
         }
 
-        private void OnDied() => _deathComponent.RequestDeath();
+        private void OnDied() => _deathRequestComponent.RequestDeath();
 
         private void OnGrounded(bool isGrounded)
         {
@@ -94,9 +94,9 @@ namespace Game.Scripts.GameObjects.Content.Monkey
         private void LifeCycleBehaviourSetup()
         {
             _healthComponent = GetComponent<HealthComponent>();
-            _deathComponent = GetComponent<DeathComponent>();
-            _deathComponent.SetAction(this);
-            _deathComponent.SetCondition(this);
+            _deathRequestComponent = GetComponent<DeathRequestComponent>();
+            _deathRequestComponent.SetAction(this);
+            _deathRequestComponent.SetCondition(this);
         }
 
         private void AttackBehaviourSetup()
@@ -128,8 +128,8 @@ namespace Game.Scripts.GameObjects.Content.Monkey
         bool JumpRequestComponent.ICondition.Evaluate() 
             => _healthComponent.IsAlive && _groundedComponent.IsGrounded;
 
-        void DeathComponent.IAction.Invoke() => Destroy(gameObject);
+        void DeathRequestComponent.IAction.Invoke() => Destroy(gameObject);
 
-        bool DeathComponent.ICondition.Evaluate() => _healthComponent.IsDied;
+        bool DeathRequestComponent.ICondition.Evaluate() => _healthComponent.IsDied;
     }
 }
