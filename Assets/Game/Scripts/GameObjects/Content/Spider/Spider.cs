@@ -1,12 +1,13 @@
 ﻿using System;
 using Game.Patrol;
+using Game.Scripts.GameObjects;
 using Game.Target;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
     public class Spider : 
-        MonoBehaviour,
         MoveRequestComponent.IAction,
         MoveRequestComponent.ICondition,
         AttackRequestComponent.ICondition,
@@ -14,99 +15,114 @@ namespace Game
         DeathRequestComponent.IAction,
         DeathRequestComponent.ICondition,
         PointProviderComponent.IAction,
-        PointProviderComponent.ICondition
+        PointProviderComponent.ICondition,
+        IInitializable,
+        IDisposable,
+        IFixedTickable
     {
-        [SerializeField]
-        private float _damage;
+        private readonly int _damage;
         
-        private MoveRequestComponent _moveRequestComponent;
-        private MoveTransformComponent _moveTransformComponent;
+        private readonly MoveRequestComponent _moveRequestComponent;
+        private readonly MoveTransformComponent _moveTransformComponent;
         
-        private FollowTargetComponent _followTargetComponent;
+        private readonly FollowTargetComponent _followTargetComponent;
 
-        private PointProviderComponent pointProviderComponent;
+        private readonly PointProviderComponent _pointProviderComponent;
 
-        private HealthComponent _healthComponent;
-        private DeathRequestComponent _deathRequestComponent;
+        private readonly HealthComponent _healthComponent;
+        private readonly DeathRequestComponent _deathRequestComponent;
 
-        private AttackRequestComponent _attackRequestComponent;
-        private ForceAttackComponent _attackComponent;
+        private readonly AttackRequestComponent _attackRequestComponent;
+        private readonly ForceAttackComponent _attackComponent;
 
-        private GroundedComponent _groundedComponent;
+        private readonly GroundedComponent _groundedComponent;
         
-        private CollisionComponent _collisionComponent;
-        
-        private void Awake()
+        private readonly CollisionComponent _collisionComponent;
+
+        private readonly Transform _transform;
+
+        public Spider(
+            int damage, 
+            MoveRequestComponent moveRequestComponent, 
+            MoveTransformComponent moveTransformComponent, 
+            FollowTargetComponent followTargetComponent, 
+            PointProviderComponent pointProviderComponent, 
+            HealthComponent healthComponent, 
+            DeathRequestComponent deathRequestComponent, 
+            AttackRequestComponent attackRequestComponent, 
+            ForceAttackComponent attackComponent, 
+            GroundedComponent groundedComponent, 
+            CollisionComponent collisionComponent, 
+            Transform transform)
+        {
+            _damage = damage;
+            _moveRequestComponent = moveRequestComponent;
+            _moveTransformComponent = moveTransformComponent;
+            _followTargetComponent = followTargetComponent;
+            _pointProviderComponent = pointProviderComponent;
+            _healthComponent = healthComponent;
+            _deathRequestComponent = deathRequestComponent;
+            _attackRequestComponent = attackRequestComponent;
+            _attackComponent = attackComponent;
+            _groundedComponent = groundedComponent;
+            _collisionComponent = collisionComponent;
+            _transform = transform;
+        }
+
+        public void Initialize()
         {
             MovementBehaviourSetup();
             LifeCycleBehaviourSetup();
             AttackBehaviourSetup();
-
-            _collisionComponent = GetComponent<CollisionComponent>();
-            _groundedComponent = GetComponent<GroundedComponent>();
-        }
-
-        private void Start() 
-            => _followTargetComponent.SetTargetPoint(pointProviderComponent.GetPoint());
-
-        private void OnEnable()
-        {
+            
+            _followTargetComponent.SetTargetPoint(_pointProviderComponent.GetPoint());
+            
             _collisionComponent.OnEntered += OnCollisionEntered;
             _healthComponent.OnDied += OnDied;
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
             _healthComponent.OnDied -= OnDied;
             _collisionComponent.OnEntered -= OnCollisionEntered;
         }
 
-        private void FixedUpdate() 
-            => _moveRequestComponent.SetMoveDirection(
-                _followTargetComponent.GetDirectionToTarget());
+        public void FixedTick()
+        {
+            _moveRequestComponent.SetMoveDirection(_followTargetComponent.GetDirectionToTarget());
+        }
 
         private void OnDied() => _deathRequestComponent.RequestDeath();
 
         private void OnCollisionEntered(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out HealthComponent healthComponent))
+            if (collision.gameObject.TryGetComponent(out IEntity entity)
+                && entity.TryGet(out HealthComponent health))
             {
-                healthComponent.TakeDamage(_damage);
+                health.TakeDamage(_damage);
                 _attackRequestComponent.RequestAttack();
             }
         }
         
         private void MovementBehaviourSetup()
         {
-            _moveRequestComponent = GetComponent<MoveRequestComponent>();
             _moveRequestComponent.SetAction(this);
             _moveRequestComponent.SetCondition(this);
             
-            _moveTransformComponent = GetComponent<MoveTransformComponent>();
-            
-            _followTargetComponent = GetComponent<FollowTargetComponent>();
-
-            pointProviderComponent = GetComponent<PointProviderComponent>();
-            pointProviderComponent.SetAction(this);
-            pointProviderComponent.SetCondition(this);
+            _pointProviderComponent.SetAction(this);
+            _pointProviderComponent.SetCondition(this);
         }
 
         private void LifeCycleBehaviourSetup()
         {
-            _healthComponent = GetComponent<HealthComponent>();
-
-            _deathRequestComponent = GetComponent<DeathRequestComponent>();
             _deathRequestComponent.SetCondition(this);
             _deathRequestComponent.SetAction(this);
         }
 
         private void AttackBehaviourSetup()
         {
-            _attackRequestComponent = GetComponent<AttackRequestComponent>();
             _attackRequestComponent.SetAction(this);
             _attackRequestComponent.SetCondition(this);
-            
-            _attackComponent = GetComponent<ForceAttackComponent>();
         }
         
         void MoveRequestComponent.IAction.Invoke(Vector2 direction) 
@@ -122,12 +138,12 @@ namespace Game
         void AttackRequestComponent.IAction.Invoke() 
             => _attackComponent.Attack();
 
-        void DeathRequestComponent.IAction.Invoke() => Destroy(transform.parent.gameObject);
+        void DeathRequestComponent.IAction.Invoke() => GameObject.Destroy(_transform.parent.gameObject);
 
         bool DeathRequestComponent.ICondition.Evaluate() => _healthComponent.IsDied;
 
         void PointProviderComponent.IAction.Invoke() 
-            => _followTargetComponent.SetTargetPoint(pointProviderComponent.GetPoint());
+            => _followTargetComponent.SetTargetPoint(_pointProviderComponent.GetPoint());
 
         bool PointProviderComponent.ICondition.Evaluate() 
             => _followTargetComponent.IsDestinationReached();

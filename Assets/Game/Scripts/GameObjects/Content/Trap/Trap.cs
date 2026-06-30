@@ -1,20 +1,24 @@
-﻿using Game.Scripts.GameObjects;
+﻿using System;
+using Game.Scripts.GameObjects;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
-    [RequireComponent(typeof(CollisionComponent))]
-    public class Trap : MonoBehaviour
+    public class Trap : IInitializable, IDisposable
     {
-        [SerializeField]
-        private int _damage = 1;
-        
-        private CollisionComponent _collisionComponent;
-        
-        private void Awake() => _collisionComponent = GetComponent<CollisionComponent>();
+        private readonly int _damage;
+        private readonly CollisionComponent _collisionComponent;
 
-        private void OnEnable() => _collisionComponent.OnEntered += OnCollisionEntered;
-        private void OnDisable() => _collisionComponent.OnEntered -= OnCollisionEntered;
+        public Trap(int damage, CollisionComponent collisionComponent)
+        {
+            _damage = damage;
+            _collisionComponent = collisionComponent;
+        }
+
+        public void Initialize() => _collisionComponent.OnEntered += OnCollisionEntered;
+
+        public void Dispose() => _collisionComponent.OnEntered -= OnCollisionEntered;
 
         private void OnCollisionEntered(Collision2D collision)
         {
@@ -22,7 +26,7 @@ namespace Game
                 && entity.TryGet(out HealthComponent health))
             {
                 health.TakeDamage(_damage);
-                Destroy(gameObject);
+                GameObject.Destroy(_collisionComponent.gameObject);
             }
         }
     }

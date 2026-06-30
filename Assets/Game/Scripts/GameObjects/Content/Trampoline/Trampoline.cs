@@ -1,22 +1,29 @@
+using System;
+using Game.Scripts.GameObjects;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
-    public sealed class Trampoline : MonoBehaviour
+    public sealed class Trampoline : IInitializable, IDisposable
     {
-        [SerializeField]
-        private TriggerComponent _triggerComponent;
+        private readonly Vector2 _force;
+        private readonly TriggerComponent _triggerComponent;
 
-        [SerializeField]
-        private Vector2 _force;
+        public Trampoline(Vector2 force, TriggerComponent triggerComponent)
+        {
+            _force = force;
+            _triggerComponent = triggerComponent;
+        }
         
-        private void OnEnable() => _triggerComponent.OnEntered += this.OnEntered;
+        public void Initialize() => _triggerComponent.OnEntered += this.OnEntered;
 
-        private void OnDisable() => _triggerComponent.OnEntered -= this.OnEntered;
+        public void Dispose() => _triggerComponent.OnEntered -= this.OnEntered;
 
         private void OnEntered(Collider2D other)
         {
-            if (other.TryGetComponent(out Rigidbody2D rigidbody))
+            if (other.TryGetComponent(out Entity entity)
+                && entity.TryGet(out Rigidbody2D rigidbody))
             {
                 rigidbody.linearVelocityY = 0;
                 rigidbody.AddForce(_force, ForceMode2D.Impulse);

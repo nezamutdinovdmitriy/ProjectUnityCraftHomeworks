@@ -171,7 +171,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4979841302588641904}
   - component: {fileID: 2682617834291874480}
-  - component: {fileID: 2392427716072176944}
+  - component: {fileID: 5890836646947502568}
+  - component: {fileID: 8179727245645580647}
   - component: {fileID: 8741177940319584074}
   m_Layer: 6
   m_Name: Trampoline
@@ -243,7 +244,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 0.5}
   m_EdgeRadius: 0
---- !u!114 &2392427716072176944
+--- !u!114 &5890836646947502568
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -252,11 +253,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 8595837930061912479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d593a8a1f8b744bd8a7218744541ba68, type: 3}
+  m_Script: {fileID: 11500000, guid: e898e81540a94a789a14103bf62ef23f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Trampoline
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Entity
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 8179727245645580647}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &8179727245645580647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8595837930061912479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a59c514591a429e8891650c6e2125cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.TrampolineInstaller
+  _force: {x: 2, y: 20}
   _triggerComponent: {fileID: 8741177940319584074}
-  _force: {x: 3, y: 45}
 --- !u!114 &8741177940319584074
 MonoBehaviour:
   m_ObjectHideFlags: 0

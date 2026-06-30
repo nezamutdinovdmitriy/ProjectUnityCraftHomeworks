@@ -17,13 +17,19 @@ namespace Game
         private FollowTargetComponent.Settings _followTargetSettings;
 
         [SerializeField]
+        private GroundedComponent.Settings _groundedSettings;
+
+        [SerializeField]
         private Transform _transform;
         
         public override void InstallBindings()
         {
-            Container.Bind<Transform>().FromInstance(_transform).AsSingle();
-            
             Container.BindInterfacesAndSelfTo<Platform>().AsSingle().NonLazy();
+
+            Container.Bind<StandingPlatformComponent>().AsSingle();
+            Container.Bind<GroundedComponent>().AsSingle().WithArguments(_groundedSettings);
+            
+            Container.Bind<Transform>().FromInstance(_transform).AsSingle();
             
             Container.Bind<MoveTransformComponent>().AsSingle().WithArguments(_moveRequestSettings);
 

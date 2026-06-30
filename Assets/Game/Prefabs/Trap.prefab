@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 3794226191236126334}
   - component: {fileID: 2940493185476011704}
   - component: {fileID: 4089788546235685001}
-  - component: {fileID: 51633063150183177}
+  - component: {fileID: 2761185549672892076}
   - component: {fileID: 7787548348394232032}
   - component: {fileID: 1845446845991065078}
   m_Layer: 8
@@ -200,7 +200,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.4669671, y: 1.423512}
   m_EdgeRadius: 0
---- !u!114 &51633063150183177
+--- !u!114 &2761185549672892076
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -209,10 +209,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8940468643134046639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0433d3d123d04f19a7dc33fac5206b20, type: 3}
+  m_Script: {fileID: 11500000, guid: e898e81540a94a789a14103bf62ef23f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Trap
-  _damage: 1
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Entity
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1845446845991065078}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
 --- !u!114 &7787548348394232032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,4 +243,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.TrapInstaller
   _collisionComponent: {fileID: 7787548348394232032}
-  _trap: {fileID: 51633063150183177}
+  _damage: 1
