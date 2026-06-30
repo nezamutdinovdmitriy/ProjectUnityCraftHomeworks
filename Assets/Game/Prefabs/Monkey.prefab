@@ -141,28 +141,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedbd6de87db48bc8055cceaf0aea4f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Content.Monkey.MonkeyInstaller
-  _damage: 10
-  _transform: {fileID: 6915912117526977926}
-  _jumpForce: 30
-  _jumpRequestSettings:
-    <Cooldown>k__BackingField: 0.25
-    <Delay>k__BackingField: 0.05
-  _maxHealth: 5
-  _deathRequestSettings:
-    <Delay>k__BackingField: 1
-  _groundedSettings:
-    <Feet>k__BackingField: {fileID: 1149309935444057718}
-    <LayerMask>k__BackingField:
-      serializedVersion: 2
-      m_Bits: 8
-    <GroundDistance>k__BackingField: 0.15
-  _detectTargetSettings:
-    <DetectRadius>k__BackingField: 5
-    <TargetMask>k__BackingField:
-      serializedVersion: 2
-      m_Bits: 512
-    <ColliderBufferCount>k__BackingField: 5
-  _collisionComponent: {fileID: 6537506377311582467}
+  _contactDamage: 10
+  _attackInstaller:
+    _pushAttackRequestSettings:
+      <Cooldown>k__BackingField: 0
+      <Delay>k__BackingField: 0
+    _pushAttackSettings:
+      <ForceX>k__BackingField: 20
+      <ForceY>k__BackingField: 2
+      <BoxSize>k__BackingField: {x: 10, y: 2}
+      <Offset>k__BackingField: {x: 0, y: 0}
+      <TargetMask>k__BackingField:
+        serializedVersion: 2
+        m_Bits: 2147484671
+      <ColliderMaxCount>k__BackingField: 10
+  _commonComponentInstaller:
+    _rigidbody: {fileID: 4964224926931193953}
+    _transform: {fileID: 6915912117526977926}
+    _collisionComponent: {fileID: 6537506377311582467}
+    _groundedSettings:
+      <Feet>k__BackingField: {fileID: 1149309935444057718}
+      <LayerMask>k__BackingField:
+        serializedVersion: 2
+        m_Bits: 8
+      <GroundDistance>k__BackingField: 0.15
+    _detectTargetSettings:
+      <DetectRadius>k__BackingField: 8
+      <TargetMask>k__BackingField:
+        serializedVersion: 2
+        m_Bits: 512
+      <ColliderBufferCount>k__BackingField: 5
+  _lifeCycleInstaller:
+    _maxHealth: 5
+    _deathRequestSettings:
+      <Delay>k__BackingField: 1
+  _movementInstaller:
+    _jumpForce: 200
+    _jumpRequestSettings:
+      <Cooldown>k__BackingField: 1
+      <Delay>k__BackingField: 1
+    _extraGravitySettings:
+      <Gravity>k__BackingField: -7
 --- !u!114 &6537506377311582467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +354,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 114386703760417023, guid: ce7f63d0c8a9443bdbea77973710fe09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5010801280720325233}
+    - targetCorrespondingSourceObject: {fileID: 114386703760417023, guid: ce7f63d0c8a9443bdbea77973710fe09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5805452624319450187}
+    - targetCorrespondingSourceObject: {fileID: 114386703760417023, guid: ce7f63d0c8a9443bdbea77973710fe09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1799730647722999081}
   m_SourcePrefab: {fileID: 100100000, guid: ce7f63d0c8a9443bdbea77973710fe09, type: 3}
 --- !u!212 &78585179155959605 stripped
 SpriteRenderer:
@@ -378,6 +403,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bbff9007f7a4dc8b7519487709d7169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.JumpComponentView
+--- !u!114 &5805452624319450187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674842946715132921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e373817ca7479f880b2ede6f4e4fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GroundedComponentView
+--- !u!114 &1799730647722999081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674842946715132921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f61a3b3d79e1406d934e545df5577ad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.DeathComponentView
 --- !u!212 &2943190282608419829 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 4499114888897847539, guid: ce7f63d0c8a9443bdbea77973710fe09, type: 3}

@@ -17,8 +17,6 @@ namespace Game
         [Inject]
         public void Construct(HealthComponent healthComponent) 
             => _healthComponent = healthComponent;
-        
-        private void Awake() => _healthComponent = GetComponentInParent<HealthComponent>();
 
         private void OnEnable() => _healthComponent.OnHealthChanged += OnHealthChanged;
         private void OnDisable() => _healthComponent.OnHealthChanged += OnHealthChanged;

@@ -48,7 +48,7 @@ namespace Game
         {
             if (Time.time < _nextAllowedAttackTime)
                 return;
-
+            
             _requestTime = Time.time;
             _isRequested = true;
         }
@@ -65,7 +65,7 @@ namespace Game
                 _isRequested = false;
                 return;
             }
-            
+
             _action?.Invoke();
             Attacked?.Invoke();
 

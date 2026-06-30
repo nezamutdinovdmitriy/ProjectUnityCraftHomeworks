@@ -24,9 +24,14 @@ namespace Game
         
         private AttackRequestComponent _attackRequest;
 
+        [SerializeField]
+        private AttackType _attackType;
+
         [Inject]
-        public void Construct(AttackRequestComponent attackRequestComponent) 
-            => _attackRequest = attackRequestComponent;
+        public void Construct(DiContainer container)
+        {
+            _attackRequest = container.ResolveId<AttackRequestComponent>(_attackType);
+        }
 
         private void Awake() => AnimatorKeyHash = Animator.StringToHash(_animatorKeyString);
 

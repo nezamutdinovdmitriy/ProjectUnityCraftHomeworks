@@ -18,8 +18,6 @@ namespace Game
         public void Construct(JumpRequestComponent jumpRequestComponent) 
             => _jumpRequestComponent = jumpRequestComponent;
 
-        private void Awake() => _jumpRequestComponent = GetComponentInParent<JumpRequestComponent>();
-
         private void OnEnable() => _jumpRequestComponent.Jumped += OnJumped;
 
         private void OnDisable() => _jumpRequestComponent.Jumped -= OnJumped;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Scripts.GameObjects;
+using UnityEngine;
 
 namespace Game
 {
@@ -17,7 +18,8 @@ namespace Game
 
         private void OnCollisionEntered(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out HealthComponent health))
+            if (collision.gameObject.TryGetComponent(out Entity entity)
+                && entity.TryGet(out HealthComponent health))
             {
                 health.TakeDamage(_damage);
                 Destroy(gameObject);

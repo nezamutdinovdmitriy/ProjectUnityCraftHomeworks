@@ -12,9 +12,16 @@ namespace Game
         DeathRequestComponent.IAction,
         DeathRequestComponent.ICondition,
         IInitializable,
-        IDisposable
+        IDisposable,
+        IPlayerAttacks
     {
         private readonly Rigidbody2D _rigidbody;
+
+        private readonly AttackRequestComponent _pushAttackRequestComponent;
+        private readonly AttackRequestComponent _tossAttackRequestComponent;
+        
+        private readonly ForceAttackComponent _pushAttackComponent;
+        private readonly ForceAttackComponent _tossAttackComponent;
         
         private readonly MoveRequestComponent _moveRequestComponent;
         private readonly MoveTransformComponent _moveTransformComponent;
@@ -36,7 +43,11 @@ namespace Game
             JumpRigidbodyComponent jumpRigidbodyComponent,
             HealthComponent healthComponent,
             DeathRequestComponent deathRequestComponent,
-            GroundedComponent groundedComponent)
+            GroundedComponent groundedComponent, 
+            [Inject(Id = AttackType.Push)] AttackRequestComponent pushAttackRequestComponent, 
+            [Inject(Id = AttackType.Toss)] AttackRequestComponent tossAttackRequestComponent, 
+            [Inject(Id = AttackType.Push)] ForceAttackComponent pushAttackComponent, 
+            [Inject(Id = AttackType.Toss)] ForceAttackComponent tossAttackComponent)
         {
             _rigidbody = rigidbody;
             _moveRequestComponent = moveRequestComponent;
@@ -47,17 +58,26 @@ namespace Game
             _healthComponent = healthComponent;
             _deathRequestComponent = deathRequestComponent;
             _groundedComponent = groundedComponent;
+            _pushAttackRequestComponent = pushAttackRequestComponent;
+            _tossAttackRequestComponent = tossAttackRequestComponent;
+            _pushAttackComponent = pushAttackComponent;
+            _tossAttackComponent = tossAttackComponent;
         }
         
         public void Initialize()
         {
             LifeCycleBehaviourSetup();
             MovementBehaviourSetup();
+            AttackBehaviorSetup();
             
             _healthComponent.OnDied += OnDied;
         }
         
         public void Dispose() => _healthComponent.OnDied -= OnDied;
+
+        public void MainAttack() => _pushAttackRequestComponent.RequestAttack();
+
+        public void AdditionalAttack() => _tossAttackRequestComponent.RequestAttack();
 
         private void LifeCycleBehaviourSetup()
         {
@@ -65,6 +85,17 @@ namespace Game
             _deathRequestComponent.SetCondition(this);
         }
 
+        private void AttackBehaviorSetup()
+        {
+            PushAttack pushAttack = new(this);
+            _pushAttackRequestComponent.SetCondition(pushAttack);
+            _pushAttackRequestComponent.SetAction(pushAttack);
+        
+            TossAttack tossAttack = new(this);
+            _tossAttackRequestComponent.SetCondition(tossAttack);
+            _tossAttackRequestComponent.SetAction(tossAttack);
+        }
+        
         private void MovementBehaviourSetup()
         {
             _moveRequestComponent.SetAction(this);
@@ -95,65 +126,40 @@ namespace Game
 
         void DeathRequestComponent.IAction.Invoke() => GameObject.Destroy(_rigidbody.gameObject);
         bool DeathRequestComponent.ICondition.Evaluate() => _healthComponent.IsDied;
+        
+        private class PushAttack : AttackRequestComponent.IAction, AttackRequestComponent.ICondition
+        {
+            private readonly Character _parent;
+        
+            public PushAttack(Character parent) => _parent = parent;
+        
+            [Obsolete]
+            void AttackRequestComponent.IAction.Invoke()
+                => _parent._pushAttackComponent.Attack();
+        
+            bool AttackRequestComponent.ICondition.Evaluate()
+            {
+                return _parent._tossAttackRequestComponent.IsRequested == false
+                       && _parent._healthComponent.IsAlive;
+            }
+        }
+        
+        private class TossAttack : AttackRequestComponent.IAction, AttackRequestComponent.ICondition
+        {
+            private readonly Character _parent;
+        
+            public TossAttack(Character parent) => _parent = parent;
+        
+            [Obsolete]
+            void AttackRequestComponent.IAction.Invoke()
+                => _parent._tossAttackComponent.Attack();
+        
+            bool AttackRequestComponent.ICondition.Evaluate()
+            {
+                return _parent._pushAttackRequestComponent.IsRequested == false
+                       && _parent._healthComponent.IsAlive
+                       && _parent._groundedComponent.IsGrounded;
+            }
+        }
     }
 }
-// [Header("Attack")] [SerializeField]
-        // private GameObject _pushAttack;
-        // private AttackRequestComponent _pushAttackRequestComponent;
-        //
-        // [SerializeField]
-        // private GameObject _tossAttack;
-        // private AttackRequestComponent _tossAttackRequestComponent;
-        
-        // public void MainAttack() => _pushAttackRequestComponent.RequestAttack();
-        // public void AdditionalAttack() => _tossAttackRequestComponent.RequestAttack();
-        
-        // private void AttackBehaviorSetup()
-        // {
-        //     _pushAttackRequestComponent = _pushAttack.GetComponent<AttackRequestComponent>();
-        //
-        //     PushAttack pushAttack = new(this);
-        //     _pushAttackRequestComponent.SetCondition(pushAttack);
-        //     _pushAttackRequestComponent.SetAction(pushAttack);
-        //
-        //     _tossAttackRequestComponent = _tossAttack.GetComponent<AttackRequestComponent>();
-        //
-        //     TossAttack tossAttack = new(this);
-        //     _tossAttackRequestComponent.SetCondition(tossAttack);
-        //     _tossAttackRequestComponent.SetAction(tossAttack);
-        // }
-        
-        // private class PushAttack : AttackRequestComponent.IAction, AttackRequestComponent.ICondition
-        // {
-        //     private readonly Character _parent;
-        //
-        //     public PushAttack(Character parent) => _parent = parent;
-        //
-        //     [Obsolete]
-        //     void AttackRequestComponent.IAction.Invoke()
-        //         => _parent._pushAttack.GetComponent<ForceAttackComponent>().Attack();
-        //
-        //     bool AttackRequestComponent.ICondition.Evaluate()
-        //     {
-        //         return _parent._tossAttackRequestComponent.IsRequested == false
-        //                && _parent._healthComponent.IsAlive;
-        //     }
-        // }
-        //
-        // private class TossAttack : AttackRequestComponent.IAction, AttackRequestComponent.ICondition
-        // {
-        //     private readonly Character _parent;
-        //
-        //     public TossAttack(Character parent) => _parent = parent;
-        //
-        //     [Obsolete]
-        //     void AttackRequestComponent.IAction.Invoke()
-        //         => _parent._tossAttack.GetComponent<ForceAttackComponent>().Attack();
-        //
-        //     bool AttackRequestComponent.ICondition.Evaluate()
-        //     {
-        //         return _parent._pushAttackRequestComponent.IsRequested == false
-        //                && _parent._healthComponent.IsAlive
-        //                && _parent._groundedComponent.IsGrounded;
-        //     }
-        // }
