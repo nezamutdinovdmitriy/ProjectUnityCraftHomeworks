@@ -25,6 +25,8 @@ namespace Game
             Container.Bind<Rigidbody2D>().FromInstance(_rigidbody);
             
             Container.Bind<LookComponent>().AsSingle();
+
+            Container.BindInterfacesAndSelfTo<StandingPlatformComponent>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<GroundedComponent>()
                 .AsSingle()
