@@ -1,66 +1,84 @@
 ﻿using System;
+using Game.Scripts.GameObjects;
 using Game.Target;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
-    [RequireComponent(typeof(MoveRequestComponent), typeof(MoveTransformComponent))]
-    [RequireComponent(typeof(DetectTargetComponent), typeof(FollowTargetComponent))]
-    [RequireComponent(typeof(HealthComponent), typeof(DeathRequestComponent))]
-    [RequireComponent(typeof(AttackRequestComponent), typeof(ForceAttackComponent))]
-    [RequireComponent(typeof(LookComponent), typeof(CollisionComponent))]
-    public class Snake : MonoBehaviour,
+    public class Snake : 
         MoveRequestComponent.IAction,
         MoveRequestComponent.ICondition,
         AttackRequestComponent.IAction,
         AttackRequestComponent.ICondition,
         DeathRequestComponent.IAction,
-        DeathRequestComponent.ICondition
+        DeathRequestComponent.ICondition,
+        IInitializable,
+        IDisposable,
+        IFixedTickable
     {
-        [SerializeField]
-        private int _damage;
+        private readonly int _damage;
         
-        private MoveRequestComponent _moveRequestComponent;
-        private MoveTransformComponent _moveTransformComponent;
+        private readonly MoveRequestComponent _moveRequestComponent;
+        private readonly MoveTransformComponent _moveTransformComponent;
 
-        private DetectTargetComponent _detectTargetComponent;
-        private FollowTargetComponent _followTargetComponent;
+        private readonly DetectTargetComponent _detectTargetComponent;
+        private readonly FollowTargetComponent _followTargetComponent;
         
-        private HealthComponent _healthComponent;
-        private DeathRequestComponent _deathRequestComponent;
+        private readonly HealthComponent _healthComponent;
+        private readonly DeathRequestComponent _deathRequestComponent;
 
-        private AttackRequestComponent _attackRequestComponent;
-        private ForceAttackComponent _forceAttackComponent;
+        private readonly AttackRequestComponent _attackRequestComponent;
+        private readonly ForceAttackComponent _forceAttackComponent;
         
-        private LookComponent _lookComponent;
+        private readonly LookComponent _lookComponent;
         
-        private CollisionComponent _collisionComponent;
-
+        private readonly CollisionComponent _collisionComponent;
+        
         private HealthComponent _currentTargetToDamage;
-        
-        private void Awake()
+
+        public Snake(int damage,
+            MoveRequestComponent moveRequestComponent,
+            MoveTransformComponent moveTransformComponent,
+            DetectTargetComponent detectTargetComponent,
+            FollowTargetComponent followTargetComponent,
+            HealthComponent healthComponent,
+            DeathRequestComponent deathRequestComponent,
+            AttackRequestComponent attackRequestComponent,
+            ForceAttackComponent forceAttackComponent, 
+            LookComponent lookComponent,
+            CollisionComponent collisionComponent)
+        {
+            _damage = damage;
+            _moveRequestComponent = moveRequestComponent;
+            _moveTransformComponent = moveTransformComponent;
+            _detectTargetComponent = detectTargetComponent;
+            _followTargetComponent = followTargetComponent;
+            _healthComponent = healthComponent;
+            _deathRequestComponent = deathRequestComponent;
+            _attackRequestComponent = attackRequestComponent;
+            _forceAttackComponent = forceAttackComponent;
+            _lookComponent = lookComponent;
+            _collisionComponent = collisionComponent;
+        }
+
+        public void Initialize()
         {
             MovementBehaviourSetup();
             AttackBehaviourSetup();
             LifeCycleBehaviourSetup();
-
-            _collisionComponent = GetComponent<CollisionComponent>();
-            _lookComponent = GetComponent<LookComponent>();
-        }
-        
-        private void OnEnable()
-        {
+            
             _healthComponent.OnDied += OnDied;
             _collisionComponent.OnEntered += OnCollisionEntered;
         }
 
-        private void OnDisable()
+        public void Dispose()
         {
             _healthComponent.OnDied -= OnDied;
             _collisionComponent.OnEntered -= OnCollisionEntered;
         }
 
-        private void FixedUpdate()
+        public void FixedTick()
         {
             if (_detectTargetComponent.TryGetTarget(out GameObject target))
             {
@@ -75,39 +93,30 @@ namespace Game
 
         private void OnCollisionEntered(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out HealthComponent healthComponent))
+            if (collision.gameObject.TryGetComponent(out Entity entity)
+                && entity.TryGet(out HealthComponent health))
             {
-                _currentTargetToDamage = healthComponent;
+                _currentTargetToDamage = health;
                 _attackRequestComponent.RequestAttack();
             }
         }
         
         private void LifeCycleBehaviourSetup()
         {
-            _healthComponent = GetComponent<HealthComponent>();
-            _deathRequestComponent = GetComponent<DeathRequestComponent>();
             _deathRequestComponent.SetAction(this);
             _deathRequestComponent.SetCondition(this);
         }
 
         private void AttackBehaviourSetup()
         {
-            _attackRequestComponent = GetComponent<AttackRequestComponent>();
             _attackRequestComponent.SetAction(this);
             _attackRequestComponent.SetCondition(this);
-            
-            _forceAttackComponent = GetComponent<ForceAttackComponent>();
         }
 
         private void MovementBehaviourSetup()
         {
-            _moveRequestComponent = GetComponent<MoveRequestComponent>();
             _moveRequestComponent.SetAction(this);
             _moveRequestComponent.SetCondition(this);
-            
-            _moveTransformComponent = GetComponent<MoveTransformComponent>();
-            _detectTargetComponent = GetComponent<DetectTargetComponent>();
-            _followTargetComponent = GetComponent<FollowTargetComponent>();
         }
         
         void MoveRequestComponent.IAction.Invoke(Vector2 direction)
@@ -128,7 +137,7 @@ namespace Game
         bool AttackRequestComponent.ICondition.Evaluate() 
             => _healthComponent.IsAlive && _currentTargetToDamage != null;
 
-        void DeathRequestComponent.IAction.Invoke() => Destroy(gameObject);
+        void DeathRequestComponent.IAction.Invoke() => GameObject.Destroy(_collisionComponent.gameObject);
 
         bool DeathRequestComponent.ICondition.Evaluate() => _healthComponent.IsDied;
     }

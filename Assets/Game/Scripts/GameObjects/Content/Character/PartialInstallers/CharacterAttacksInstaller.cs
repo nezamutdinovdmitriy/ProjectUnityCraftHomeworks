@@ -32,8 +32,7 @@ namespace Game
                 .AsCached()
                 .WithArguments(_tossAttackRequestSettings);
             
-            Container.Bind<IFixedTickable>()
-                .To<AttackRequestComponent>()
+            Container.BindInterfacesAndSelfTo<AttackRequestComponent>()
                 .FromResolve(AttackType.Toss);
     
             Container.Bind<ForceAttackComponent>()
@@ -48,9 +47,8 @@ namespace Game
                 .WithId(AttackType.Push)
                 .AsCached()
                 .WithArguments(_pushAttackRequestSettings);
-            
-            Container.Bind<IFixedTickable>()
-                .To<AttackRequestComponent>()
+
+            Container.BindInterfacesAndSelfTo<AttackRequestComponent>()
                 .FromResolve(AttackType.Push);
             
             Container.Bind<ForceAttackComponent>()

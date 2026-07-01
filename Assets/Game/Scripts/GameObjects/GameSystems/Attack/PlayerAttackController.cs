@@ -1,20 +1,19 @@
-﻿using UnityEngine;
+﻿using Zenject;
 
 namespace Game.Scripts.GameObjects.GameSystems.Attack
 {
-    public class PlayerAttackController : MonoBehaviour
+    public class PlayerAttackController : ITickable
     {
-        [SerializeField]
-        private Entity _entity;
+        private readonly InputService _input;
+        private readonly IPlayerAttacks _playerAttacks;
 
-        [SerializeField]
-        private InputService _input;
-        
-        private IPlayerAttacks _playerAttacks;
+        public PlayerAttackController(InputService input, IPlayerAttacks playerAttacks)
+        {
+            _input = input;
+            _playerAttacks = playerAttacks;
+        }
 
-        private void Awake() => _playerAttacks = _entity.Get<IPlayerAttacks>();
-
-        private void Update()
+        public void Tick()
         {
             if(_input.IsMainAttacked)
                 _playerAttacks.MainAttack();

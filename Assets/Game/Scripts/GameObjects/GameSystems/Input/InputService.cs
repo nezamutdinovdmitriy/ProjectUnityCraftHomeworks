@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 namespace Game
 {
-    public class InputService : MonoBehaviour
+    public class InputService
     {
         private const string HorizontalAxisName = "Horizontal";
         

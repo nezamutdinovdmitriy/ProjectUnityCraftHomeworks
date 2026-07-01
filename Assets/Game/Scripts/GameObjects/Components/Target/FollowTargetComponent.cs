@@ -32,12 +32,5 @@ namespace Game.Target
 
         private float GetDistanceToTarget() 
             => (_targetPoint - (Vector2) _transform.position).magnitude;
-        
-        // private void OnDrawGizmosSelected()
-        // {
-        //     Gizmos.color = Color.rebeccaPurple;
-        //
-        //     Gizmos.DrawWireSphere(transform.position, _stoppingDistance);
-        // }
     }
 }

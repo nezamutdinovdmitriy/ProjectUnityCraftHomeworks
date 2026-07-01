@@ -23,8 +23,7 @@ namespace Game.Patrol
         {
             public void Invoke();
         }
-
-        private readonly Settings _settings;
+        
         private readonly Queue<Transform> _patrolPointsQueue = new();
         
         private Vector2 _point;
@@ -34,9 +33,7 @@ namespace Game.Patrol
 
         public PointProviderComponent(Settings settings)
         {
-            _settings = settings;
-            
-            foreach (Transform patrolPoint in _settings.PatrolPoints)
+            foreach (Transform patrolPoint in settings.PatrolPoints)
                 _patrolPointsQueue.Enqueue(patrolPoint);
             
             SwitchToNextPoint();

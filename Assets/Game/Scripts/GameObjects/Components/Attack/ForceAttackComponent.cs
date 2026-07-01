@@ -71,16 +71,3 @@ namespace Game
         }
     }
 }
-
-        
-// private void OnDrawGizmosSelected()
-// {
-//     Gizmos.color = Color.red;
-//     
-//     Vector2 center =
-//         (Vector2)transform.position +
-//         (Vector2)transform.right * _offset.x +
-//         Vector2.up * _offset.y;
-//
-//     Gizmos.DrawWireCube(center, _boxSize);
-// }

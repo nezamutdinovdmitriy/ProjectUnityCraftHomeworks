@@ -1,24 +1,19 @@
-﻿using Game.Scripts.GameObjects;
-using UnityEngine;
+﻿using Zenject;
 
 namespace Game
 {
-    public class PlayerJumpController : MonoBehaviour
+    public class PlayerJumpController : ITickable
     {
-        [SerializeField]
-        private Entity _entity;
+        private readonly InputService _input;
+        private readonly JumpRequestComponent _jumpRequestComponent;
 
-        [SerializeField]
-        private InputService _input;
-        
-        private JumpRequestComponent _jumpRequestComponent;
-
-        private void Awake()
+        public PlayerJumpController(InputService input, JumpRequestComponent jumpRequestComponent)
         {
-            _jumpRequestComponent = _entity.Get<JumpRequestComponent>();
+            _input = input;
+            _jumpRequestComponent = jumpRequestComponent;
         }
 
-        private void Update()
+        public void Tick()
         {
             if (_input.IsJumped)
                 _jumpRequestComponent.RequestJump();

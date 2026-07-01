@@ -1,24 +1,21 @@
-﻿using Game.Scripts.GameObjects;
-using UnityEngine;
+﻿using UnityEngine;
+using Zenject;
 
 namespace Game
 {
-    public class PlayerMoveController : MonoBehaviour
+    public class PlayerMoveController : ITickable
     {
-        [SerializeField]
-        private Entity _entity;
+        private readonly InputService _input;
 
-        [SerializeField]
-        private InputService _input;
+        private readonly MoveRequestComponent _moveRequest;
 
-        private MoveRequestComponent _moveRequest;
-
-        private void Start()
+        public PlayerMoveController(InputService input, MoveRequestComponent moveRequest)
         {
-            _moveRequest = _entity.Get<MoveRequestComponent>();
+            _input = input;
+            _moveRequest = moveRequest;
         }
-
-        public void Update()
+        
+        public void Tick()
         {
             if (_input.MoveDirection != Vector2.zero)
                 _moveRequest.SetMoveDirection(_input.MoveDirection);

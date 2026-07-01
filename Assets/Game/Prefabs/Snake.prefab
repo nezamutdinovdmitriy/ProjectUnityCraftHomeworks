@@ -73,19 +73,9 @@ GameObject:
   - component: {fileID: 709611253861642833}
   - component: {fileID: 1963976196817166939}
   - component: {fileID: 5141366192756041615}
-  - component: {fileID: 8325746520306836020}
-  - component: {fileID: 3148927463720482653}
-  - component: {fileID: 7474413170647013261}
-  - component: {fileID: 1975913984961778918}
-  - component: {fileID: 1567802343542321759}
-  - component: {fileID: 6625875236136456094}
+  - component: {fileID: 4777666141238929810}
+  - component: {fileID: 625194453551079392}
   - component: {fileID: 8501249737991596847}
-  - component: {fileID: 4267850205497375452}
-  - component: {fileID: 933684329201929830}
-  - component: {fileID: 3401350066701277063}
-  - component: {fileID: 7159923900500106356}
-  - component: {fileID: 6020754627138970339}
-  - component: {fileID: 6323208189953467358}
   m_Layer: 8
   m_Name: Snake
   m_TagString: Untagged
@@ -175,7 +165,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.6335461, y: 0.7340662}
   m_Size: {x: 3.8148298, y: 1.5181584}
   m_Direction: 1
---- !u!114 &8325746520306836020
+--- !u!114 &4777666141238929810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,11 +174,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6976110413071386817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03fefc62055b41ebb55110861ae476f6, type: 3}
+  m_Script: {fileID: 11500000, guid: e898e81540a94a789a14103bf62ef23f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Snake
-  _damage: 1
---- !u!114 &3148927463720482653
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.GameObjects.Entity
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 625194453551079392}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &625194453551079392
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,65 +192,47 @@ MonoBehaviour:
   m_GameObject: {fileID: 6976110413071386817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9369df0a692f4bbe93af48688a4a30bd, type: 3}
+  m_Script: {fileID: 11500000, guid: acaf3c950712471ea9951da08df92142, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Target.DetectTargetComponent
-  _detectRadius: 5
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 512
-  _currentTarget: {fileID: 0}
---- !u!114 &7474413170647013261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a3167382f374350b002992a1314d737, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveRequestComponent
---- !u!114 &1975913984961778918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44b4c715012943db9fdf26735a9e7876, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.MoveTransformComponent
-  _speed: 2
---- !u!114 &1567802343542321759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7246bdb0d9af44fa945f8bed8138ba95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.HealthComponent
-  _maxHealth: 2
---- !u!114 &6625875236136456094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 352f869d3ce944e88c7a72f173c1b652, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Target.FollowTargetComponent
-  _stoppingDistance: 1.2
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SnakeInstaller
+  _contactDamage: 1
+  _commonComponentsInstaller:
+    _transform: {fileID: 709611253861642833}
+    _collisionComponent: {fileID: 8501249737991596847}
+    _groundedSettings:
+      <Feet>k__BackingField: {fileID: 4295963407239164311}
+      <LayerMask>k__BackingField:
+        serializedVersion: 2
+        m_Bits: 8
+      <GroundDistance>k__BackingField: 0.15
+  _movementInstaller:
+    _moveTransformSettings:
+      <Speed>k__BackingField: 2
+    _detectTargetSettings:
+      <DetectRadius>k__BackingField: 5
+      <TargetMask>k__BackingField:
+        serializedVersion: 2
+        m_Bits: 512
+      <ColliderBufferCount>k__BackingField: 5
+    _followTargetSettings:
+      <StoppingDistance>k__BackingField: 1
+  _lifeCycleInstaller:
+    _maxHealth: 2
+    _deathRequestSettings:
+      <Delay>k__BackingField: 1
+  _attackInstaller:
+    _attackRequestSettings:
+      <Cooldown>k__BackingField: 1
+      <Delay>k__BackingField: 0.25
+    _forceAttackSettings:
+      <ForceX>k__BackingField: 3
+      <ForceY>k__BackingField: 10
+      <BoxSize>k__BackingField: {x: 2, y: 1}
+      <Offset>k__BackingField: {x: 1, y: 0}
+      <TargetMask>k__BackingField:
+        serializedVersion: 2
+        m_Bits: 512
+      <ColliderMaxCount>k__BackingField: 5
 --- !u!114 &8501249737991596847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,94 +245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16615f4fd9aa496686de7e8755045b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.CollisionComponent
---- !u!114 &4267850205497375452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15c37311b67a4508ae0b5657c827960e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.AttackRequestComponent
-  _cooldown: 0.35
-  _delay: 0
---- !u!114 &933684329201929830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edfae579496347e3b6e73fd0784f86e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.ForceAttackComponent
-  _forceX: 3
-  _forceY: 10
-  _boxSize: {x: 3.84, y: 2.93}
-  _offset: {x: -0.64, y: 0.63}
-  _targetMask:
-    serializedVersion: 2
-    m_Bits: 512
---- !u!114 &3401350066701277063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd8ed7bbf274eea99360b8b879f3cb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.LookComponent
---- !u!114 &7159923900500106356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef560812c9a1483c8053064d68926d69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GroundedComponent
-  _feet: {fileID: 4295963407239164311}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _groundDistance: 0.15
---- !u!114 &6020754627138970339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8e9c6873c214b3e9c13ab1f9fb92d07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.ExtraGravityComponent
-  _gravity: -7
---- !u!114 &6323208189953467358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6976110413071386817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00342d2a62f2442b9ec56c52e4e9ab4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.DeathComponent
-  _delay: 1
 --- !u!1 &7657161599582532624
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +470,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e373817ca7479f880b2ede6f4e4fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GroundedComponentView
-  _groundedComponent: {fileID: 7159923900500106356}
 --- !u!212 &3449857208236993421 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 5231195682645585227, guid: 8de6c8196ff844187a9cfad369c6a805, type: 3}

@@ -12,17 +12,12 @@ namespace Game
         private HealthComponent _healthComponent;
 
         [Inject]
-        public void Construct(HealthComponent healthComponent)
-        {
-            _healthComponent = healthComponent;
-        }
-        
+        public void Construct(HealthComponent healthComponent) 
+            => _healthComponent = healthComponent;
+
         private void Awake() => _animator = GetComponent<Animator>();
 
-        private void OnEnable()
-        {
-            _healthComponent.OnDied += OnDied;
-        }
+        private void OnEnable() => _healthComponent.OnDied += OnDied;
 
         private void OnDisable() => _healthComponent.OnDied -= OnDied;
 

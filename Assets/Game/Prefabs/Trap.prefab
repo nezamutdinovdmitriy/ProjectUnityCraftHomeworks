@@ -242,5 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13679000594046deb48eb539badb45e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.TrapInstaller
-  _collisionComponent: {fileID: 7787548348394232032}
+  _maxHealth: 1
   _damage: 1
+  _collisionComponent: {fileID: 7787548348394232032}

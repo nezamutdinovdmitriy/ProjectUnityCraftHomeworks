@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a59c514591a429e8891650c6e2125cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.TrampolineInstaller
-  _force: {x: 2, y: 20}
+  _force: {x: 2, y: 40}
   _triggerComponent: {fileID: 8741177940319584074}
 --- !u!114 &8741177940319584074
 MonoBehaviour:
