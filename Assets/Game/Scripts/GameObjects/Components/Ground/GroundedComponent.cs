@@ -19,6 +19,9 @@ namespace Game
         
             [field: SerializeField]
             public float GroundDistance { get; private set; } = 0.15f;
+            
+            [field: SerializeField]
+            public float RaycastDistance { get; private set; } = 5f;
         }
         
         public event Action<bool> OnGrounded;
@@ -42,10 +45,19 @@ namespace Game
             RaycastHit2D hit = Physics2D.Raycast(
                 _settings.Feet.position, 
                 Vector2.down, 
-                _settings.GroundDistance, 
+                _settings.RaycastDistance, 
                 _settings.LayerMask);
-
-            bool grounded = hit;
+            
+            float distanceToGround = ((Vector2)_settings.Feet.position - hit.point).magnitude;
+            
+            bool grounded = distanceToGround <= _settings.GroundDistance;
+            
+            Debug.DrawLine(
+                _settings.Feet.position, 
+                _settings.Feet.position + Vector3.down * _settings.RaycastDistance, 
+                grounded ? Color.green : Color.red);
+            
+            Debug.Log($"Distance to ground: {distanceToGround:F1} | IsGrounded: {grounded}");
             
             if (grounded != _isGrounded)
             {
