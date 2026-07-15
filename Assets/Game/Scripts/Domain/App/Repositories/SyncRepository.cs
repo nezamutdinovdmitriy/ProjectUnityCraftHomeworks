@@ -9,12 +9,12 @@ namespace Game.Scripts.Domain.Repositories
     public class SyncRepository : IRepository
     {
         private const string SaveTimeKey = "SaveTime";
-        
+
         private readonly IRepository[] _repositories;
 
-        public SyncRepository(params IRepository[] repositories) 
+        public SyncRepository(params IRepository[] repositories)
             => _repositories = repositories;
-        
+
         public async UniTask<bool> Save(string version, JObject saveData)
         {
             int repositoriesCount = _repositories.Length;
@@ -24,7 +24,7 @@ namespace Game.Scripts.Domain.Repositories
                 return false;
 
             UniTask<bool>[] saveTasks = new UniTask<bool>[repositoriesCount];
-            
+
             for (int i = 0; i < repositoriesCount; i++)
                 saveTasks[i] = _repositories[i].Save(version, saveData);
 
@@ -36,10 +36,10 @@ namespace Game.Scripts.Domain.Repositories
         public async UniTask<(bool, JObject)> Load(string version)
         {
             int repositoriesCount = _repositories.Length;
-            
+
             if (repositoriesCount == 0)
                 return (false, null);
-            
+
             UniTask<(bool, JObject)>[] loadTasks = new UniTask<(bool, JObject)>[repositoriesCount];
 
             for (int i = 0; i < repositoriesCount; i++)
@@ -62,20 +62,25 @@ namespace Game.Scripts.Domain.Repositories
 
                 if (saveData.TryGetValue(SaveTimeKey, out JToken token))
                     timestamp = token.Value<long>();
-                
+
                 if (timestamp > lastTimestamp)
                 {
                     lastTimestamp = timestamp;
                     lastSaveData = saveData;
                     lastRepositoryIndex = i;
-                    
+
                     Debug.Log(_repositories[i].GetType().Name);
                 }
             }
 
+            if (lastSaveData == null)
+                return (false, null);
+
+            lastSaveData.Remove(SaveTimeKey);
+
             Debug.Log($"Save loaded from {_repositories[lastRepositoryIndex].GetType().Name}");
-            
-            return lastSaveData != null ? (true, lastSaveData) : (false, null);
+
+            return (true, lastSaveData);
         }
     }
 }

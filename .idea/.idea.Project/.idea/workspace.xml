@@ -3,57 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="57197a8a-99b6-439e-a4a2-af49f65870e2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Resources/ProjectContext.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Resources/ProjectContext.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Countdown.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Countdown.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/DestinationPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/DestinationPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Health.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ProductionOrder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ProductionOrder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ResourceBag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/ResourceBag.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/EntityWorldSerializer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/EntityWorldSerializer.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentSavable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentSavable.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentVisitor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/IComponentVisitor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.Visits.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.Visits.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/JsonComponentVisitor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/VisitorMode.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/SaveLoad/VisitorMode.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/TargetObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/TargetObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Team.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/Components/Team.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/AesEncryptor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/IEncryptor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Encrypt/IEncryptor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/IRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/IRepository.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/ISaveSerializer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/ISaveSerializer.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/EncryptedRepositoryConfig.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/EncryptedRepositoryConfig.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/RemoteRepositoryConfig.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/Configs/RemoteRepositoryConfig.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/EncryptedRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/EncryptedRepository.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/FileRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/FileRepository.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RemoteRepository.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RepositoryInstaller.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/RepositoryInstaller.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/SyncRepository.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/Repositories/SyncRepository.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveSystemInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/Gameplay/SaveSystem/SaveSystemInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Settings/AppInstaller.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Settings/AppInstaller.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Settings/AppInstaller.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Settings/AppInstaller.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/App/Repositories/CheckSumRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/App/Repositories/CheckSumRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/App/Repositories/RepositoryInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/App/Repositories/RepositoryInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/App/Repositories/SyncRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Domain/App/Repositories/SyncRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,6 +183,7 @@
       <workItem from="1782228686912" duration="13820000" />
       <workItem from="1782286914293" duration="11873000" />
       <workItem from="1782301476366" duration="118000" />
+      <workItem from="1784104572342" duration="3063000" />
     </task>
     <servers />
   </component>

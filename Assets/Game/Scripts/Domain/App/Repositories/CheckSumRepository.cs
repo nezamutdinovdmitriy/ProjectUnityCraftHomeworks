@@ -50,6 +50,8 @@ namespace Game.Scripts.Domain.Repositories
             string rawJson = loadedData.ToString(Newtonsoft.Json.Formatting.Indented);
             byte[] rawDataBytes = Encoding.UTF8.GetBytes(rawJson);
 
+            Debug.Log($"RAW = FILE : {_hashProvider.VerifyHash(rawDataBytes, fileHashBytes)}");
+            
             if (_hashProvider.VerifyHash(rawDataBytes, fileHashBytes))
             {
                 Debug.Log($"[{_wrappedRepository.GetType().Name}] Data verified successfully.");

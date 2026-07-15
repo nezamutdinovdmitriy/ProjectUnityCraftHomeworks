@@ -36,18 +36,20 @@ namespace Game.Scripts.Domain.Repositories
                 .To<SyncRepository>()
                 .FromMethod(CreateSyncRepository)
                 .AsSingle();
+
+            Container.Decorate<IRepository>().With<CheckSumRepository>();
         }
 
         private SyncRepository CreateSyncRepository()
         {
             FileRepository fileRepository = Container.Resolve<FileRepository>();
             RemoteRepository remoteRepository = Container.Resolve<RemoteRepository>();
-            IHashProvider hashProvider = Container.Resolve<IHashProvider>();
             
-            IRepository securedFile = new CheckSumRepository(fileRepository, hashProvider);
-            IRepository securedRemote = new CheckSumRepository(remoteRepository, hashProvider);
+            // IHashProvider hashProvider = Container.Resolve<IHashProvider>();
+            // IRepository securedFile = new CheckSumRepository(fileRepository, hashProvider);
+            // IRepository securedRemote = new CheckSumRepository(remoteRepository, hashProvider);
         
-            return new SyncRepository(securedFile, securedRemote);
+            return new SyncRepository(fileRepository, remoteRepository);
         }
     }
 }
