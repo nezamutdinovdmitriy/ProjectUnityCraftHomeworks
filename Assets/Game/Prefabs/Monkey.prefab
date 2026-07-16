@@ -99,7 +99,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.25646305, y: 2.0517147}
+  m_Offset: {x: -0.25646305, y: 1.9786808}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -109,7 +109,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.074934, y: 4.362532}
+  m_Size: {x: 5.074934, y: 4.5085998}
   m_EdgeRadius: 0
 --- !u!114 &7304833380712043559
 MonoBehaviour:
@@ -160,11 +160,11 @@ MonoBehaviour:
     _transform: {fileID: 6915912117526977926}
     _collisionComponent: {fileID: 6537506377311582467}
     _groundedSettings:
-      <Feet>k__BackingField: {fileID: 1149309935444057718}
-      <LayerMask>k__BackingField:
+      <Collider>k__BackingField: {fileID: 6914819918122429636}
+      <GroundMask>k__BackingField:
         serializedVersion: 2
         m_Bits: 8
-      <GroundDistance>k__BackingField: 0.15
+      <GroundNormalThreshold>k__BackingField: 0.5
     _detectTargetSettings:
       <DetectRadius>k__BackingField: 8
       <TargetMask>k__BackingField:

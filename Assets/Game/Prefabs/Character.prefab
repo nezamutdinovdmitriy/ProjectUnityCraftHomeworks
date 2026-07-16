@@ -139,8 +139,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.2542764}
-  m_Radius: 0.2457236
+  m_Offset: {x: 0, y: 0.22046232}
+  m_Radius: 0.27953768
 --- !u!114 &1461971782293153505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,11 +175,11 @@ MonoBehaviour:
     _rigidbody: {fileID: 2743180993930163208}
     _transform: {fileID: 1040288790560490883}
     _groundedSettings:
-      <Feet>k__BackingField: {fileID: 2136071814461247172}
-      <LayerMask>k__BackingField:
+      <Collider>k__BackingField: {fileID: 9080652144006767103}
+      <GroundMask>k__BackingField:
         serializedVersion: 2
         m_Bits: 8
-      <GroundDistance>k__BackingField: 0.15
+      <GroundNormalThreshold>k__BackingField: 0.5
   _attacksInstaller:
     _pushAttackRequestSettings:
       <Cooldown>k__BackingField: 0.35
@@ -249,6 +249,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2135491237694915492}
+  - {fileID: 2284687169879633715}
+  - {fileID: 4216169589959255198}
   m_Father: {fileID: 1040288790560490883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4213341860267575370
@@ -375,6 +377,56 @@ Transform:
   - {fileID: 1299641981600869588}
   m_Father: {fileID: 1040288790560490883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7666225720940072907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4216169589959255198}
+  - component: {fileID: 6828082801818512522}
+  m_Layer: 0
+  m_Name: TossAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4216169589959255198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666225720940072907}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5715813271406747517}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6828082801818512522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7666225720940072907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7fb51fa47b4344b7eb3f8a51ab41aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.AttackComponentView
+  _animator: {fileID: 5219259647563851570}
+  _animatorKeyString: BlowUp
+  _particleSystem: {fileID: 7825429286214371121}
+  _audioSource: {fileID: 8589338179893557342}
+  _audioClip: {fileID: 8300000, guid: a2fb8d4706a16468592a6e50aa24de65, type: 3}
+  _attackType: 1
 --- !u!1 &7686709480564681426
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,6 +587,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1040288790560490883}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8722784282780318644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2284687169879633715}
+  - component: {fileID: 430165709452004880}
+  m_Layer: 0
+  m_Name: PushAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2284687169879633715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8722784282780318644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5715813271406747517}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &430165709452004880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8722784282780318644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7fb51fa47b4344b7eb3f8a51ab41aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.AttackComponentView
+  _animator: {fileID: 5219259647563851570}
+  _animatorKeyString: BlowForward
+  _particleSystem: {fileID: 6138593199860099477}
+  _audioSource: {fileID: 8589338179893557342}
+  _audioClip: {fileID: 8300000, guid: 3dbd84c2bfae847229cd1013f68c0da7, type: 3}
+  _attackType: 0
 --- !u!1001 &589240006524367219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -641,6 +743,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8635467503404275170, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4958675983976671088}
+    - targetCorrespondingSourceObject: {fileID: 8635467503404275170, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4049305713667713436}
   m_SourcePrefab: {fileID: 100100000, guid: f5290832d893c4833b391a956fd20bd1, type: 3}
 --- !u!212 &807937440565741875 stripped
 SpriteRenderer:
@@ -784,7 +889,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9221737445006124177}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b7fb51fa47b4344b7eb3f8a51ab41aa, type: 3}
   m_Name: 
@@ -802,7 +907,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9221737445006124177}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b7fb51fa47b4344b7eb3f8a51ab41aa, type: 3}
   m_Name: 
@@ -852,6 +957,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.TakeDamageComponentSFX
   _audioSource: {fileID: 8589338179893557342}
   _audioClip: {fileID: 8300000, guid: 32f565ba94f200f49adb407cce64e873, type: 3}
+--- !u!114 &4049305713667713436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9221737445006124177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e5a3f03c8e44b6993b16b450a1615e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.CharacterView
+  _pushView: {fileID: 430165709452004880}
+  _tossView: {fileID: 6828082801818512522}
 --- !u!1001 &1509922481622574971
 PrefabInstance:
   m_ObjectHideFlags: 0

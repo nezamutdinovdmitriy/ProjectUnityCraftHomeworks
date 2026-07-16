@@ -474,6 +474,7 @@ GameObject:
   m_Component:
   - component: {fileID: 357264276}
   - component: {fileID: 357264275}
+  - component: {fileID: 357264277}
   m_Layer: 0
   m_Name: <SceneContext>
   m_TagString: Untagged
@@ -494,7 +495,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Zenject::Zenject.SceneContext
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: 357264277}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -532,6 +534,18 @@ Transform:
   - {fileID: 894245317}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &357264277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357264274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619668732e3e459593496de3655677a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.SceneContext.SceneContextInstaller
 --- !u!1 &367392555
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,7 +921,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.0819778, y: 2.6799984, z: -5}
+  m_LocalPosition: {x: 2.0654526, y: 2.6799984, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

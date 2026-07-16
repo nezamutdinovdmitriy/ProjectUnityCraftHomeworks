@@ -162,8 +162,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.6335461, y: 0.7340662}
-  m_Size: {x: 3.8148298, y: 1.5181584}
+  m_Offset: {x: -0.6335461, y: 0.66429275}
+  m_Size: {x: 3.8148313, y: 1.657712}
   m_Direction: 1
 --- !u!114 &4777666141238929810
 MonoBehaviour:
@@ -200,11 +200,11 @@ MonoBehaviour:
     _transform: {fileID: 709611253861642833}
     _collisionComponent: {fileID: 8501249737991596847}
     _groundedSettings:
-      <Feet>k__BackingField: {fileID: 4295963407239164311}
-      <LayerMask>k__BackingField:
+      <Collider>k__BackingField: {fileID: 5141366192756041615}
+      <GroundMask>k__BackingField:
         serializedVersion: 2
         m_Bits: 8
-      <GroundDistance>k__BackingField: 0.15
+      <GroundNormalThreshold>k__BackingField: 0.5
   _movementInstaller:
     _moveTransformSettings:
       <Speed>k__BackingField: 2
