@@ -26658,6 +26658,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2685751539036889997, guid: 8cbeba1c3a3e447e284e93be1046efcb, type: 3}
   m_PrefabInstance: {fileID: 757640612756630599}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &757640612756630606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8421105565118841990, guid: 8cbeba1c3a3e447e284e93be1046efcb, type: 3}
+  m_PrefabInstance: {fileID: 757640612756630599}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80ba5a77675432408e5eeb0a1e5a225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.Joystick
 --- !u!1 &843494635982871222
 GameObject:
   m_ObjectHideFlags: 0
@@ -27316,6 +27327,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5764159610076527034}
+  - component: {fileID: 5764159610076527036}
+  - component: {fileID: 5764159610076527035}
   m_Layer: 0
   m_Name: '[UI]'
   m_TagString: Untagged
@@ -27341,6 +27354,47 @@ Transform:
   - {fileID: 8539559718434948107}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5764159610076527035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571916461013147395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5197483e70e24412a8e01f3afc5a28c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.JoystickInstaller
+  _movementJoystick: {fileID: 757640612756630606}
+  _fireJoystick: {fileID: 7919524849257179007}
+--- !u!114 &5764159610076527036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5571916461013147395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3051351a121aea445b78bb5c536d326b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.UIContext
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 5764159610076527035}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  initialBehaviourCapacity: 0
+  _isGlobal: 1
+  _dontDestroyOnLoad: 0
 --- !u!1001 &7160444056652517393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27594,6 +27648,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 766336123411657325, guid: 51e743c5740654af9aa773eb6f7af5d4, type: 3}
   m_PrefabInstance: {fileID: 3724358838330738570}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7919524849257179007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1322238229491861376, guid: 51e743c5740654af9aa773eb6f7af5d4, type: 3}
+  m_PrefabInstance: {fileID: 3724358838330738570}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80ba5a77675432408e5eeb0a1e5a225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.Joystick
 --- !u!4 &8264958231034587487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 765187070542819803, guid: 25ded69825984498db7dacfedbed37a1, type: 3}

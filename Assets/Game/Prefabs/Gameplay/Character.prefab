@@ -1352,6 +1352,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6992041410405490774}
   - component: {fileID: 956588022611877713}
+  - component: {fileID: 101284112202666386}
+  - component: {fileID: 8153969337594126801}
+  - component: {fileID: 849868776931160140}
   m_Layer: 9
   m_Name: Character
   m_TagString: Player
@@ -1407,6 +1410,66 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &101284112202666386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578180279390331970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8a2487543b91941a4f9ec88642b1db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityContext.EntityContext
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 8153969337594126801}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 11
+  initialBehaviourCapacity: 3
+--- !u!114 &8153969337594126801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578180279390331970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981131ef44f147978e4b00aabfdd5c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.EntityContext.Character.CharacterInstaller
+  _movementSpeed: 5
+  _rotationSpeed: 700
+  _transform: {fileID: 6992041410405490774}
+  _fireCooldown:
+    _duration: 2
+    _time: 2
+  _aimCooldown:
+    _duration: 2
+    _time: 2
+  _maxHealth: 100
+  _trigger: {fileID: 849868776931160140}
+--- !u!114 &849868776931160140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3578180279390331970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
 --- !u!1 &3818262767236408140
 GameObject:
   m_ObjectHideFlags: 0
