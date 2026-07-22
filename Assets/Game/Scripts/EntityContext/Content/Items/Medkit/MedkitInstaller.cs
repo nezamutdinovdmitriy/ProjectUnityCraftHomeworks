@@ -1,6 +1,7 @@
 using System;
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.EntityContext.Core.Health;
 using UnityEngine;
 
 namespace Game.EntityContext.Items.Medkit
@@ -22,6 +23,7 @@ namespace Game.EntityContext.Items.Medkit
                 .AddAction(interactor =>
                 {
                     interactor.CollectMedkit(_amount);
+                    interactor.ReduceHealth(101);
                     Destroy(gameObject);
                 }));
         }

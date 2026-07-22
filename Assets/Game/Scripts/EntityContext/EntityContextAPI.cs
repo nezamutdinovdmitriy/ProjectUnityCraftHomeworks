@@ -15,6 +15,7 @@ namespace Game.EntityContext
         public static readonly ValueKey<IEntityContext, IRequest<Vector3>> MovementRequest = new(nameof(MovementRequest));
         public static readonly ValueKey<IEntityContext, ICommand<Vector3, float>> MovementCommand = new(nameof(MovementCommand));
         public static readonly ValueKey<IEntityContext, IValue<float>> MovementSpeed = new(nameof(MovementSpeed));
+        public static readonly ValueKey<IEntityContext, IReactiveVariable<bool>> IsMoving = new(nameof(IsMoving));
         
         // Rotation
         public static readonly ValueKey<IEntityContext, IVariable<Quaternion>> Rotation = new(nameof(Rotation));
@@ -25,6 +26,7 @@ namespace Game.EntityContext
         public static readonly ValueKey<IEntityContext, IValue<float>> RotationSpeed = new(nameof(RotationSpeed));
         
         // Health
+        public static readonly ValueKey<IEntityContext, IReactiveVariable<bool>> IsDead = new(nameof(IsDead));
         public static readonly ValueKey<IEntityContext, IValue<float>> MaxHealth = new(nameof(MaxHealth));
         public static readonly ValueKey<IEntityContext, IReactiveVariable<float>> CurrentHealth = new(nameof(CurrentHealth));
         

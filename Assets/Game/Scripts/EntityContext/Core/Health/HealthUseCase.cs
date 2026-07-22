@@ -13,10 +13,14 @@ namespace Game.EntityContext.Core.Health
         {
             if (entity.IsDead())
                 return false;
+                
 
             IVariable<float> health = entity.GetValue(EntityContextAPI.CurrentHealth);
             health.Value = Mathf.Max(0, health.Value - damage);
 
+            if(health.Value <= 0)
+                entity.GetValue(EntityContextAPI.IsDead).Value = true;
+            
             return true;
         }
     }

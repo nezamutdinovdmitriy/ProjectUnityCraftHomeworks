@@ -57,6 +57,7 @@ namespace Game.EntityContext
         {
             entity.AddValue(EntityContextAPI.MaxHealth, new Const<float>(_maxHealth)); 
             entity.AddValue(EntityContextAPI.CurrentHealth, new ReactiveVariable<float>(_maxHealth));
+            entity.AddValue(EntityContextAPI.IsDead, new ReactiveVariable<bool>());
         }
 
         private void FireInstall(IEntityContext entity)
@@ -111,7 +112,8 @@ namespace Game.EntityContext
             entity.AddValue(EntityContextAPI.MovementCommand, new Command<Vector3, float>()
                 .AddCondition((_,_) => entity.IsDead() == false)
                 .AddAction(entity.MoveStep));
-            
+
+            entity.AddValue(EntityContextAPI.IsMoving, new ReactiveVariable<bool>());
             entity.AddValue(EntityContextAPI.MovementSpeed, new Const<float>(_movementSpeed));
             
             entity.AddBehaviour(new MovementBehaviour());
