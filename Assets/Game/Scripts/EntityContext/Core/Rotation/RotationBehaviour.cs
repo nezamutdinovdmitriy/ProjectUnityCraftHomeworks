@@ -17,8 +17,13 @@ namespace Game.EntityContext.Core.Rotation
 
         public void FixedTick(IEntityContext entity, float deltaTime)
         {
-            if(_request.Consume(out Vector3 direction))
-                _command.Invoke(direction, deltaTime);
+            // if(_request.Consume(out Vector3 direction))
+            //     _command.Invoke(direction, deltaTime);
+
+            if (_request.Consume(out Vector3 direction) == false)
+                return;
+            
+            entity.GetValue(EntityContextAPI.IsMoving).Value = _command.TryInvoke(direction, deltaTime);
         }
     }
 }

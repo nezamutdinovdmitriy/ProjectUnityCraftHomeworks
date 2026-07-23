@@ -34,6 +34,7 @@ namespace Game.EntityContext
         public static readonly ValueKey<IEntityContext, IRequest> FireRequest = new(nameof(FireRequest));
         public static readonly ValueKey<IEntityContext, ICommand> FireCommand = new(nameof(FireCommand));
         public static readonly ValueKey<IEntityContext, ICooldown> FireCooldown = new(nameof(FireCooldown));
+        public static readonly ValueKey<IEntityContext, IReactiveVariable<bool>> IsFiring;
         
         // Interact
         public static readonly TagKey InteractableTag = new(nameof(InteractableTag));

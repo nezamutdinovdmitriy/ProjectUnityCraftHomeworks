@@ -9,9 +9,9 @@ using UnityEngine;
 
 namespace Game.EntityContext
 {
-    
     public class CharacterInstaller : SceneEntityInstaller<IEntityContext>
     {
+        [Header("Character Settings")]
         [SerializeField]
         private float _movementSpeed;
 
@@ -22,23 +22,34 @@ namespace Game.EntityContext
         private Transform _transform;
 
         [SerializeField]
+        private float _maxHealth;
+
+        [SerializeField]
+        private TriggerEvents _trigger;
+        
+        #region Weapon
+
+        [Header("Weapon Settings")]
+        [SerializeField]
         private Cooldown _fireCooldown;
         
         [SerializeField]
         private Cooldown _aimCooldown;
 
         [SerializeField]
-        private float _maxHealth;
+        private EntityContext _bulletPrefab;
 
         [SerializeField]
-        private TriggerEvents _trigger;
+        private Transform _firePoint;
+
+        #endregion
         
         public override void Install(IEntityContext entity)
         {
             entity.AddValue(EntityContextAPI.Position, new TransformPositionVariable(_transform));
             
             HealthInstall(entity);
-            MovementInstall(entity);
+            //MovementInstall(entity);
             RotationInstall(entity);
             FireInstall(entity);
             InteractInstall(entity);
@@ -70,6 +81,7 @@ namespace Game.EntityContext
             entity.WhenFixedTick(_aimCooldown.Tick);
             
             entity.AddValue(EntityContextAPI.FireRequest, new Request());
+            entity.AddValue(EntityContextAPI.IsFiring, new ReactiveVariable<bool>());
            
             entity.AddValue(EntityContextAPI.FireCommand, new Command()
                 .AddCondition(() =>
@@ -88,7 +100,9 @@ namespace Game.EntityContext
                            && entity.IsDead() == false;
                 })
                 .AddAction(_fireCooldown.ResetTime)
-                .AddAction(entity.Fire));
+                .AddAction(entity.Fire)
+                .AddAction(() => entity.GetValue(EntityContextAPI.IsFiring).Value = true)
+                .AddAction(() => EntityContext.Create(_bulletPrefab, _firePoint.position, _firePoint.rotation)));
             
             entity.AddBehaviour(new FireBehaviour());
         }
@@ -102,6 +116,8 @@ namespace Game.EntityContext
                 .AddCondition((_,_) => entity.IsDead() == false)
                 .AddAction(entity.RotationStep));
             
+            entity.AddValue(EntityContextAPI.IsMoving, new ReactiveVariable<bool>());
+            
             entity.AddBehaviour(new RotationBehaviour());
         }
 
@@ -110,7 +126,8 @@ namespace Game.EntityContext
             entity.AddTag(EntityContextAPI.MovableTag);
             entity.AddValue(EntityContextAPI.MovementRequest, new Request<Vector3>());
             entity.AddValue(EntityContextAPI.MovementCommand, new Command<Vector3, float>()
-                .AddCondition((_,_) => entity.IsDead() == false)
+                .AddCondition((direction,_) => 
+                    entity.IsDead() == false && direction != Vector3.zero)
                 .AddAction(entity.MoveStep));
 
             entity.AddValue(EntityContextAPI.IsMoving, new ReactiveVariable<bool>());

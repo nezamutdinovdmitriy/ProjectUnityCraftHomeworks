@@ -167,6 +167,17 @@ namespace Atomic.Elements
             _action?.Invoke(arg1, arg2);
             OnEvent?.Invoke(arg1, arg2);
         }
+        
+        [Button]
+        public bool TryInvoke(T1 arg1, T2 arg2)
+        {
+            if (!CanInvoke(arg1, arg2))
+                return false;
+
+            _action?.Invoke(arg1, arg2);
+            OnEvent?.Invoke(arg1, arg2);
+            return true;
+        }
 
         public ICommand<T1, T2> AddCondition(Func<T1, T2, bool> condition)
         {

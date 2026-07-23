@@ -17,17 +17,13 @@ namespace Game.EntityContext.Core.Interact
             _triggerEvents.OnEntered += OnTriggerEntered;
         }
 
-        public void Dispose(IEntityContext entity)
-        {
-            _triggerEvents.OnEntered -= OnTriggerEntered;
-        }
+        public void Dispose(IEntityContext entity) 
+            => _triggerEvents.OnEntered -= OnTriggerEntered;
 
         private void OnTriggerEntered(Collider collider)
         {
             if (collider.TryGetComponent(out IEntityContext interactable))
-            {
                 _interactor.Interact(interactable);
-            }
         }
     }
 }
