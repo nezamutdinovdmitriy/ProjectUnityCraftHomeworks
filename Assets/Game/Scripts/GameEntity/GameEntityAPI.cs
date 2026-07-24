@@ -16,7 +16,9 @@ namespace Game.GameEntity
         public static ValueKey<IGameEntity, IValue<float>> MovementSpeed = new(nameof(MovementSpeed));
         
         // Rotation
-        public static ValueKey<IGameEntity, IValue<float>> RotationSpeed = new(nameof(RotationSpeed));
+        public static ValueKey<IGameEntity, IValue<float>> RotateSpeed = new(nameof(RotateSpeed));
+        public static ValueKey<IGameEntity, IRequest<Vector3>> RotateRequest = new(nameof(RotateRequest));
+        public static ValueKey<IGameEntity, ICommand<RotateArgs>> RotateCommand = new(nameof(RotateCommand));
         
         // Health
         public static ValueKey<IGameEntity, IValue<float>> MaxHealth = new(nameof(MaxHealth));

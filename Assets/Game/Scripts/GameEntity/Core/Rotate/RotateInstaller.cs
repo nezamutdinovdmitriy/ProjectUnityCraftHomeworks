@@ -9,11 +9,16 @@ namespace Game.GameEntity
     public class RotateInstaller : IEntityInstaller<IGameEntity>
     {
         [SerializeField]
-        private float _rotationSpeed;
+        private float _rotateSpeed;
         
         public void Install(IGameEntity entity)
         {
-            entity.AddValue(GameEntityAPI.RotationSpeed, new Const<float>(_rotationSpeed));
+            entity.AddValue(GameEntityAPI.RotateSpeed, new Const<float>(_rotateSpeed));
+            
+            entity.AddValue(GameEntityAPI.RotateRequest, new Request<Vector3>());
+            entity.AddValue(GameEntityAPI.RotateCommand, new Command<RotateArgs>());
+            
+            entity.AddBehaviour(new RotateBehaviour());
         }
     }
 }

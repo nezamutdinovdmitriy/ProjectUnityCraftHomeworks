@@ -27,6 +27,9 @@ namespace Game.GameEntity.Content.Character
             
             if(movementDirection != Vector3.zero)
                 entity.GetValue(GameEntityAPI.MovementRequest).Invoke(movementDirection);
+
+            if (aimDirection != Vector3.zero)
+                entity.GetValue(GameEntityAPI.RotateRequest).Invoke(aimDirection);
         }
     }
 }
