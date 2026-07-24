@@ -1,6 +1,6 @@
 using Atomic.Entities;
 
-namespace Game.UIContext
+namespace Game.UI
 {
     public static class UIContextAPI
     {

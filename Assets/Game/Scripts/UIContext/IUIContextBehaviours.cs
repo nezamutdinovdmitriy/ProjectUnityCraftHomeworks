@@ -4,7 +4,7 @@
  * Created by Entity Domain Generator.
  */
 
-namespace Game.UIContext
+namespace Game.UI
 {
     /// <summary>
     /// Provides initialization logic for the strongly-typed <see cref="IUIContext"/> entity.

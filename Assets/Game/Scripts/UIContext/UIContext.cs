@@ -1,11 +1,10 @@
 ﻿using Atomic.Entities;
-using System.Collections.Generic;
 
 /**
  * Created by Entity Domain Generator.
  */
 
-namespace Game.UIContext
+namespace Game.UI
 {
     /// <summary>
     /// A base class for singleton scene entities. Ensures a single instance of the entity exists

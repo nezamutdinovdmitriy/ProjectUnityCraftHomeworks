@@ -2,7 +2,7 @@ using System;
 using Atomic.Entities;
 using UnityEngine;
 
-namespace Game.UIContext
+namespace Game.UI
 {
     [Serializable]
     public class JoystickInstaller : IEntityInstaller<IUIContext>

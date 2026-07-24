@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UIContext
+namespace Game.UI
 {
     public sealed class HealthScreenView : MonoBehaviour
     {

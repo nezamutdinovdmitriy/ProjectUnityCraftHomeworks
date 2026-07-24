@@ -21099,6 +21099,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4531327130127798, guid: e26c904fc2ace3f478fb4b50f6340d53, type: 3}
   m_PrefabInstance: {fileID: 1629235911}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1632811621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7884378371530702000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1641018258
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24816,6 +24821,10 @@ MonoBehaviour:
     _rotateSpeed: 800
   _healthInstaller:
     _maxHealth: 100
+  _aimInstaller:
+    _aimCooldown:
+      _duration: 2
+      _time: 2
 --- !u!114 &2002911016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24835,6 +24844,7 @@ MonoBehaviour:
   scriptableInstallers: []
   sceneInstallers:
   - {fileID: 2002911015}
+  - {fileID: 8264958231034587489}
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
@@ -27722,6 +27732,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 765187070542819803, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
   m_PrefabInstance: {fileID: 9048405937420967252}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &8264958231034587488 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 676053041413999030, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8264958231034587489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632811621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6912093477fd41b5a163fedcbd7e18c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.Content.Character.CharacterViewInstaller
+  _animator: {fileID: 8264958231034587488}
 --- !u!4 &8502521728061544945
 Transform:
   m_ObjectHideFlags: 0
@@ -27874,6 +27902,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 676053041413999030, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676053041413999030, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3578180279390331970, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_Name
       value: '[Character]'
@@ -27928,6 +27964,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3578180279390331970, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2002911015}
+    - targetCorrespondingSourceObject: {fileID: 7884378371530702000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8264958231034587489}
   m_SourcePrefab: {fileID: 100100000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

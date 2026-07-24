@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UIContext
+namespace Game.UI
 {
     public sealed class StatView : MonoBehaviour
     {

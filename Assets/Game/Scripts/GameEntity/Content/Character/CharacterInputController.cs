@@ -1,23 +1,23 @@
 using Atomic.Entities;
-using Game.UIContext;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.GameEntity.Content.Character
 {
-    public class CharacterInputController : IGameEntityInit, IGameEntityTick
+    public class CharacterInputController : IGameEntityInit, IGameEntityFixedTick
     {
         private Joystick _movementJoystick;
         private Joystick _aimJoystick;
         
         public void Init(IGameEntity entity)
         {
-            UIContext.UIContext uiContext = UIContext.UIContext.Instance;
-            
+            UIContext uiContext = UIContext.Instance;
+
             _movementJoystick = uiContext.GetValue(UIContextAPI.MovementJoystick);
             _aimJoystick = uiContext.GetValue(UIContextAPI.AimJoystick);
         }
 
-        public void Tick(IGameEntity entity, float deltaTime)
+        public void FixedTick(IGameEntity entity, float deltaTime)
         {
             Vector3 movementDirection =
                 new Vector3(_movementJoystick.Direction.x, 0, _movementJoystick.Direction.y).normalized;
@@ -29,7 +29,10 @@ namespace Game.GameEntity.Content.Character
                 entity.GetValue(GameEntityAPI.MovementRequest).Invoke(movementDirection);
 
             if (aimDirection != Vector3.zero)
+            {
                 entity.GetValue(GameEntityAPI.RotateRequest).Invoke(aimDirection);
+                entity.GetValue(GameEntityAPI.FireRequest).Invoke();
+            }
         }
     }
 }

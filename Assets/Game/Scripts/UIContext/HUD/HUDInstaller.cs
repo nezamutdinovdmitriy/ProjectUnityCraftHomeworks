@@ -1,7 +1,7 @@
 using Atomic.Entities;
 using UnityEngine;
 
-namespace Game.UIContext.HUD
+namespace Game.UI
 {
     public class HUDInstaller : SceneEntityInstaller<IUIContext>
     {
