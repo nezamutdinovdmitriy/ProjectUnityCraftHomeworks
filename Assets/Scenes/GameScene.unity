@@ -24813,8 +24813,7 @@ MonoBehaviour:
   _movementInstaller:
     _movementSpeed: 4
   _rotateInstaller:
-    _rotationSpeed: 800
-  _rotationSpeed: 900
+    _rotateSpeed: 800
   _healthInstaller:
     _maxHealth: 100
 --- !u!114 &2002911016
