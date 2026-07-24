@@ -24812,6 +24812,9 @@ MonoBehaviour:
     _rotation: {fileID: 2002911014}
   _movementInstaller:
     _movementSpeed: 4
+  _rotateInstaller:
+    _rotationSpeed: 800
+  _rotationSpeed: 900
   _healthInstaller:
     _maxHealth: 100
 --- !u!114 &2002911016
