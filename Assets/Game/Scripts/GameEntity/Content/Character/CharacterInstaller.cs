@@ -72,11 +72,11 @@ namespace Game.GameEntity.Content.Character
         {
             entity.GetValue(GameEntityAPI.MovementCommand)
                 .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
-                .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime))
-                .AddAction(args => entity.RotateStep(
-                    args.Direction,
-                    entity.GetValue(GameEntityAPI.RotateSpeed).Value,
-                    args.DeltaTime));
+                .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
+                // .AddAction(args => entity.RotateStep(
+                //     args.Direction,
+                //     entity.GetValue(GameEntityAPI.RotateSpeed).Value,
+                //     args.DeltaTime));
         }
     }
 }

@@ -19,8 +19,6 @@ namespace Game.GameEntity
         {
             if (_request.Consume(out Vector3 direction))
             {
-                
-                
                 _command.Invoke(new RotateArgs(
                     direction,
                     entity.GetValue(GameEntityAPI.RotateSpeed).Value,

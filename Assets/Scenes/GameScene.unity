@@ -17487,11 +17487,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
---- !u!82 &1297688822 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 1996927140430359114, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-  m_PrefabInstance: {fileID: 9048405937420967252}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1307465733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17979,7 +17974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1379042641
 Transform:
   m_ObjectHideFlags: 0
@@ -19164,51 +19159,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.4999998, y: 0.27415082, z: 2.5000048}
   m_Center: {x: -1.2499853, y: 0.13707541, z: 1.25}
---- !u!1 &1472435497 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4719950750760165892, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-  m_PrefabInstance: {fileID: 9048405937420967252}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1472435500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472435497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3cf73378f4444e8a187a92393cc8dab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Weapon.Content.Pistol.PistolWeaponInstaller
-  _fireCooldown:
-    _duration: 2
-    _time: 2
---- !u!114 &1472435501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472435497}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9a1a753164182c42b731c9db935a160, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Weapon.WeaponEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 1472435500}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!1001 &1473913060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21148,11 +21098,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4531327130127798, guid: e26c904fc2ace3f478fb4b50f6340d53, type: 3}
   m_PrefabInstance: {fileID: 1629235911}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1632811621 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7884378371530702000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-  m_PrefabInstance: {fileID: 9048405937420967252}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1641018258
 PrefabInstance:
@@ -24839,69 +24784,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.509991, y: 3.0119958, z: 1}
   m_Center: {x: -1.2499998, y: 1.5, z: 0}
---- !u!1 &2002911013 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3578180279390331970, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-  m_PrefabInstance: {fileID: 9048405937420967252}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2002911014 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6992041410405490774, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-  m_PrefabInstance: {fileID: 9048405937420967252}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2002911015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002911013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c87b06ddf6540fe979aa63303d84e6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.Content.Character.CharacterInstaller
-  _positionInstaller:
-    _position: {fileID: 2002911014}
-  _rotationInstaller:
-    _rotation: {fileID: 2002911014}
-  _movementInstaller:
-    _movementSpeed: 4
-  _rotateInstaller:
-    _rotateSpeed: 800
-  _healthInstaller:
-    _maxHealth: 100
-  _aimInstaller:
-    _aimCooldown:
-      _duration: 2
-      _time: 2
-  _weaponInstaller: {}
---- !u!114 &2002911016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2002911013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9746fe30b3671bb48a5b4bf1629b7414, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 2002911015}
-  - {fileID: 8264958231034587489}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 6
-  initialBehaviourCapacity: 1
 --- !u!1001 &2007642166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27783,53 +27665,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 765187070542819803, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
   m_PrefabInstance: {fileID: 9048405937420967252}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &8264958231034587488 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 676053041413999030, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-  m_PrefabInstance: {fileID: 9048405937420967252}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8264958231034587489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632811621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6912093477fd41b5a163fedcbd7e18c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.Content.Character.CharacterViewInstaller
-  _animator: {fileID: 8264958231034587488}
-  _audioSource: {fileID: 1297688822}
-  _animationEvents: {fileID: 8264958231034587490}
-  _moveStepSounds:
-  - {fileID: 8300000, guid: c2e920c5e714d4c94a3609a0f440c584, type: 3}
-  - {fileID: 8300000, guid: 4cbb8723939a742fcb51cb82e1059928, type: 3}
-  - {fileID: 8300000, guid: 3d4e74a0e14cb44f8b06b86fc2811df6, type: 3}
-  - {fileID: 8300000, guid: bbb4b8eca821e43398bd4fd4c673a7e1, type: 3}
-  _painSounds:
-  - {fileID: 8300000, guid: 43cbbf4a3d9724d69ba13aebdb3f3f9c, type: 3}
-  - {fileID: 8300000, guid: 63ef68af7497d434aa8fc44c769a5367, type: 3}
-  - {fileID: 8300000, guid: 5c7c707ccbfad481bbbe9e90540d8905, type: 3}
-  - {fileID: 8300000, guid: d472871ff012d46d8a0d760428726fd1, type: 3}
-  - {fileID: 8300000, guid: 230240e083a8642d59aea01ac2b609fc, type: 3}
-  - {fileID: 8300000, guid: 24070ac39d7284393b44014722549551, type: 3}
-  - {fileID: 8300000, guid: 920a8e2cea6f14c4f82960115b29290f, type: 3}
-  - {fileID: 8300000, guid: 13b31af2aad724759a2073f7c82ec5a6, type: 3}
-  _deathSounds: {fileID: 8300000, guid: 234139ee661e84bc8a517d097ca63824, type: 3}
---- !u!114 &8264958231034587490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1632811621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbd08fcd85174a90b79e3f101ac134d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.AnimationEvents
 --- !u!4 &8502521728061544945
 Transform:
   m_ObjectHideFlags: 0
@@ -27973,7 +27808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1001 &9048405937420967252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27982,14 +27817,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 676053041413999030, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-      propertyPath: m_AnimatePhysics
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 676053041413999030, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3578180279390331970, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_Name
       value: '[Character]'
@@ -28034,28 +27861,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7236948478809662794, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _aimInstaller._aimCooldown._time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236948478809662794, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _aimInstaller._aimCooldown._duration
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3578180279390331970, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2002911016}
-    - targetCorrespondingSourceObject: {fileID: 3578180279390331970, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2002911015}
-    - targetCorrespondingSourceObject: {fileID: 7884378371530702000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8264958231034587489}
-    - targetCorrespondingSourceObject: {fileID: 7884378371530702000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8264958231034587490}
-    - targetCorrespondingSourceObject: {fileID: 4719950750760165892, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1472435501}
-    - targetCorrespondingSourceObject: {fileID: 4719950750760165892, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1472435500}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

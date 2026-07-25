@@ -22,6 +22,10 @@ namespace Game.GameEntity.Content.Character
             Vector3 movementDirection =
                 new Vector3(_movementJoystick.Direction.x, 0, _movementJoystick.Direction.y).normalized;
 
+            // // KeyboardInput
+            //  Vector3 movementDirection =
+            //      new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+            
             Vector3 aimDirection =
                 new Vector3(_aimJoystick.Direction.x, 0, _aimJoystick.Direction.y).normalized;
 
@@ -34,6 +38,10 @@ namespace Game.GameEntity.Content.Character
 
                 if (entity.GetValue(GameEntityAPI.AimCooldown).IsCompleted())
                     entity.GetValue(GameEntityAPI.FireRequest).Invoke();
+            }
+            else if (movementDirection != Vector3.zero)
+            {
+                entity.GetValue(GameEntityAPI.RotateRequest).Invoke(movementDirection);
             }
         }
     }
