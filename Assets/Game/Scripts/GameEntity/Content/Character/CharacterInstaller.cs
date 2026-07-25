@@ -51,11 +51,6 @@ namespace Game.GameEntity.Content.Character
             entity.AddBehaviour(new CharacterInputController());
         }
 
-        public override void Uninstall(IGameEntity entity)
-        {
-            _aimInstaller.Uninstall();
-        }
-
         private void SetupFireCommand(IGameEntity entity)
         {
             IReactiveVariable<IWeaponEntity> weapon = entity.GetValue(GameEntityAPI.Weapon);

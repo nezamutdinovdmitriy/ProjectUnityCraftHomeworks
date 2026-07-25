@@ -1,5 +1,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using UnityEngine;
 
 namespace Game.GameEntity.Core.Fire
 {
@@ -16,7 +17,7 @@ namespace Game.GameEntity.Core.Fire
 
         public void FixedTick(IGameEntity entity, float deltaTime)
         {
-            if(_request.Consume())
+            if (_request.Consume())
                 _command.Invoke();
         }
     }

@@ -27,8 +27,6 @@ namespace Game.GameEntity
         public static ValueKey<IGameEntity, IReactiveVariable<float>> CurrentHealth = new(nameof(CurrentHealth));
         
         // Aim
-        public static ValueKey<IGameEntity, IRequest> AimRequest = new(nameof(AimRequest));
-        public static ValueKey<IGameEntity, ICommand> AimCommand = new(nameof(AimCommand));
         public static ValueKey<IGameEntity, IVariable<bool>> HasAimingLastFrame = new(nameof(HasAimingLastFrame));
         public static ValueKey<IGameEntity, ICooldown> AimCooldown = new(nameof(AimCooldown));
 

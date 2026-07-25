@@ -8,7 +8,7 @@ namespace Game.GameEntity.Content.Character
     {
         private Joystick _movementJoystick;
         private Joystick _aimJoystick;
-        
+
         public void Init(IGameEntity entity)
         {
             UIContext uiContext = UIContext.Instance;
@@ -24,14 +24,16 @@ namespace Game.GameEntity.Content.Character
 
             Vector3 aimDirection =
                 new Vector3(_aimJoystick.Direction.x, 0, _aimJoystick.Direction.y).normalized;
-            
-            if(movementDirection != Vector3.zero)
+
+            if (movementDirection != Vector3.zero)
                 entity.GetValue(GameEntityAPI.MovementRequest).Invoke(movementDirection);
 
             if (aimDirection != Vector3.zero)
             {
                 entity.GetValue(GameEntityAPI.RotateRequest).Invoke(aimDirection);
-                entity.GetValue(GameEntityAPI.FireRequest).Invoke();
+
+                if (entity.GetValue(GameEntityAPI.AimCooldown).IsCompleted())
+                    entity.GetValue(GameEntityAPI.FireRequest).Invoke();
             }
         }
     }
