@@ -6,11 +6,12 @@ namespace Game.Weapon
 {
     public static class WeaponEntityAPI
     {
-        // Weapon
+        // Common
         public static TagKey WeaponTag = new(nameof(WeaponTag));
-        public static ValueKey<IGameEntity, IRequest> FireRequest = new(nameof(FireRequest));
-        public static ValueKey<IGameEntity, ICommand> FireCommand = new(nameof(FireCommand));
-        public static ValueKey<IGameEntity, ICooldown> FireCooldown = new(nameof(FireCooldown));
-        public static ValueKey<IGameEntity, IGameEntity> CurrentWeapon = new(nameof(CurrentWeapon));
+        public static ValueKey<IWeaponEntity, IReactiveVariable<IGameEntity>> Owner = new(nameof(Owner));
+        
+        // Fire
+        public static ValueKey<IWeaponEntity, ICommand> FireCommand = new(nameof(FireCommand));
+        public static ValueKey<IWeaponEntity, ICooldown> FireCooldown = new(nameof(FireCooldown));
     }
 }

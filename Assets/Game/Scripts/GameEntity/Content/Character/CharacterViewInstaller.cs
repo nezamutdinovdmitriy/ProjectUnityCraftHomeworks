@@ -1,5 +1,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.Weapon;
 using UnityEngine;
 
 namespace Game.GameEntity.Content.Character
@@ -35,8 +36,12 @@ namespace Game.GameEntity.Content.Character
         {
             entity.GetValue(GameEntityAPI.IsMoving).Subscribe(OnMoved).AddTo(_disposables);
             _animationEvents.Subscribe(MoveReceiveEventKey, OnMovedSFX);
-            
-            
+
+            if (entity.TryGetValue(GameEntityAPI.Weapon, out IReactiveVariable<IWeaponEntity> weaponEntity))
+            {
+                IWeaponEntity weapon = weaponEntity.Value;
+                weapon.GetValue(WeaponEntityAPI.FireCommand).Subscribe(OnFired).AddTo(_disposables);
+            }
         }
 
         public override void Uninstall(IGameEntity entity)
@@ -46,10 +51,9 @@ namespace Game.GameEntity.Content.Character
 
         #region Animation
 
-        private void OnMoved(bool isMoving)
-        {
-            _animator.SetBool(IsMovingKey, isMoving);
-        }
+        private void OnMoved(bool isMoving) => _animator.SetBool(IsMovingKey, isMoving);
+
+        private void OnFired() => _animator.SetTrigger(IsAttackKey);
 
         #endregion
 

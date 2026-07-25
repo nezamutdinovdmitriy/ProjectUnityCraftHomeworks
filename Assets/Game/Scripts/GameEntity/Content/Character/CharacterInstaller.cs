@@ -1,5 +1,8 @@
+using Atomic.Elements;
 using Atomic.Entities;
 using Game.GameEntity.Core.Aim;
+using Game.GameEntity.Core.Fire;
+using Game.Weapon;
 using UnityEngine;
 
 namespace Game.GameEntity.Content.Character
@@ -24,8 +27,11 @@ namespace Game.GameEntity.Content.Character
         [SerializeField]
         private AimInstaller _aimInstaller;
         
-        // [SerializeField]
-        // private FireInstaller _fireInstaller;
+        [SerializeField]
+        private WeaponInstaller _weaponInstaller;
+
+        [SerializeField]
+        private FireInstaller _fireInstaller;
 
         public override void Install(IGameEntity entity)
         {
@@ -34,9 +40,41 @@ namespace Game.GameEntity.Content.Character
             _movementInstaller.Install(entity);
             _rotateInstaller.Install(entity);
             _healthInstaller.Install(entity);
-            //_fireInstaller.Install(entity);
+            _fireInstaller.Install(entity);
+            _weaponInstaller.Install(entity);
             _aimInstaller.Install(entity);
 
+            SetupMovementCommand(entity);
+            SetupRotateCommand(entity);
+            SetupFireCommand(entity);
+            
+            entity.AddBehaviour(new CharacterInputController());
+        }
+
+        public override void Uninstall(IGameEntity entity)
+        {
+            _aimInstaller.Uninstall();
+        }
+
+        private void SetupFireCommand(IGameEntity entity)
+        {
+            IReactiveVariable<IWeaponEntity> weapon = entity.GetValue(GameEntityAPI.Weapon);
+            
+            entity.GetValue(GameEntityAPI.FireCommand)
+                .AddCondition(() 
+                    => entity.IsDead() == false && entity.GetValue(GameEntityAPI.AimCooldown).IsCompleted())
+                .AddAction(() => weapon.Value.GetValue(WeaponEntityAPI.FireCommand).Invoke());
+        }
+        
+        private void SetupRotateCommand(IGameEntity entity)
+        {
+            entity.GetValue(GameEntityAPI.RotateCommand)
+                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
+                .AddAction(args => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
+        }
+
+        private void SetupMovementCommand(IGameEntity entity)
+        {
             entity.GetValue(GameEntityAPI.MovementCommand)
                 .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
                 .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime))
@@ -44,22 +82,6 @@ namespace Game.GameEntity.Content.Character
                     args.Direction,
                     entity.GetValue(GameEntityAPI.RotateSpeed).Value,
                     args.DeltaTime));
-
-            entity.GetValue(GameEntityAPI.RotateCommand)
-                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
-                .AddAction(args => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
-
-            // entity.GetValue(GameEntityAPI.FireCommand)
-            //     .AddCondition(() 
-            //         => entity.IsDead() == false && entity.GetValue(GameEntityAPI.AimCooldown).IsCompleted())
-            //     .AddAction(() => Debug.Log("FIRED"));
-
-            entity.AddBehaviour(new CharacterInputController());
-        }
-
-        public override void Uninstall(IGameEntity entity)
-        {
-            _aimInstaller.Uninstall();
         }
     }
 }

@@ -1,5 +1,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.Weapon;
 using UnityEngine;
 
 namespace Game.GameEntity
@@ -30,5 +31,10 @@ namespace Game.GameEntity
         public static ValueKey<IGameEntity, ICommand> AimCommand = new(nameof(AimCommand));
         public static ValueKey<IGameEntity, IVariable<bool>> HasAimingLastFrame = new(nameof(HasAimingLastFrame));
         public static ValueKey<IGameEntity, ICooldown> AimCooldown = new(nameof(AimCooldown));
+
+        // Attack
+        public static ValueKey<IGameEntity, IReactiveVariable<IWeaponEntity>> Weapon = new(nameof(Weapon));
+        public static ValueKey<IGameEntity, IRequest> FireRequest = new(nameof(FireRequest));
+        public static ValueKey<IGameEntity, ICommand> FireCommand = new(nameof(FireCommand));
     }
 }
