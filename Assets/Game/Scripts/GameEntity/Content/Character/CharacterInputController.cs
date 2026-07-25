@@ -31,7 +31,7 @@ namespace Game.GameEntity.Content.Character
             if (aimDirection != Vector3.zero)
             {
                 entity.GetValue(GameEntityAPI.RotateRequest).Invoke(aimDirection);
-                entity.GetValue(GameEntityAPI.FireRequest).Invoke();
+                //entity.GetValue(GameEntityAPI.FireRequest).Invoke();
             }
         }
     }

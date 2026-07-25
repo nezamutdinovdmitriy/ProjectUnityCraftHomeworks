@@ -1,8 +1,5 @@
 using Atomic.Entities;
-using Atomic.Elements;
 using Game.GameEntity.Core.Aim;
-using Game.GameEntity.Core.Fire;
-using Game.UI;
 using UnityEngine;
 
 namespace Game.GameEntity.Content.Character
@@ -27,8 +24,8 @@ namespace Game.GameEntity.Content.Character
         [SerializeField]
         private AimInstaller _aimInstaller;
         
-        [SerializeField]
-        private FireInstaller _fireInstaller;
+        // [SerializeField]
+        // private FireInstaller _fireInstaller;
 
         public override void Install(IGameEntity entity)
         {
@@ -37,7 +34,7 @@ namespace Game.GameEntity.Content.Character
             _movementInstaller.Install(entity);
             _rotateInstaller.Install(entity);
             _healthInstaller.Install(entity);
-            _fireInstaller.Install(entity);
+            //_fireInstaller.Install(entity);
             _aimInstaller.Install(entity);
 
             entity.GetValue(GameEntityAPI.MovementCommand)
@@ -52,10 +49,10 @@ namespace Game.GameEntity.Content.Character
                 .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
                 .AddAction(args => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
 
-            entity.GetValue(GameEntityAPI.FireCommand)
-                .AddCondition(() 
-                    => entity.IsDead() == false && entity.GetValue(GameEntityAPI.AimCooldown).IsCompleted())
-                .AddAction(() => Debug.Log("FIRED"));
+            // entity.GetValue(GameEntityAPI.FireCommand)
+            //     .AddCondition(() 
+            //         => entity.IsDead() == false && entity.GetValue(GameEntityAPI.AimCooldown).IsCompleted())
+            //     .AddAction(() => Debug.Log("FIRED"));
 
             entity.AddBehaviour(new CharacterInputController());
         }

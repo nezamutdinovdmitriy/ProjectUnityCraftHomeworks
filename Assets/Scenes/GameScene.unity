@@ -17487,6 +17487,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+--- !u!82 &1297688822 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1996927140430359114, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1307465733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27750,6 +27755,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.Content.Character.CharacterViewInstaller
   _animator: {fileID: 8264958231034587488}
+  _audioSource: {fileID: 1297688822}
+  _animationEvents: {fileID: 8264958231034587490}
+  _moveStepSounds:
+  - {fileID: 8300000, guid: c2e920c5e714d4c94a3609a0f440c584, type: 3}
+  - {fileID: 8300000, guid: 4cbb8723939a742fcb51cb82e1059928, type: 3}
+  - {fileID: 8300000, guid: 3d4e74a0e14cb44f8b06b86fc2811df6, type: 3}
+  - {fileID: 8300000, guid: bbb4b8eca821e43398bd4fd4c673a7e1, type: 3}
+  _painSounds:
+  - {fileID: 8300000, guid: 43cbbf4a3d9724d69ba13aebdb3f3f9c, type: 3}
+  - {fileID: 8300000, guid: 63ef68af7497d434aa8fc44c769a5367, type: 3}
+  - {fileID: 8300000, guid: 5c7c707ccbfad481bbbe9e90540d8905, type: 3}
+  - {fileID: 8300000, guid: d472871ff012d46d8a0d760428726fd1, type: 3}
+  - {fileID: 8300000, guid: 230240e083a8642d59aea01ac2b609fc, type: 3}
+  - {fileID: 8300000, guid: 24070ac39d7284393b44014722549551, type: 3}
+  - {fileID: 8300000, guid: 920a8e2cea6f14c4f82960115b29290f, type: 3}
+  - {fileID: 8300000, guid: 13b31af2aad724759a2073f7c82ec5a6, type: 3}
+  _deathSounds: {fileID: 8300000, guid: 234139ee661e84bc8a517d097ca63824, type: 3}
+--- !u!114 &8264958231034587490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1632811621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd08fcd85174a90b79e3f101ac134d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.AnimationEvents
 --- !u!4 &8502521728061544945
 Transform:
   m_ObjectHideFlags: 0
@@ -27967,6 +28001,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7884378371530702000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8264958231034587489}
+    - targetCorrespondingSourceObject: {fileID: 7884378371530702000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8264958231034587490}
   m_SourcePrefab: {fileID: 100100000, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
