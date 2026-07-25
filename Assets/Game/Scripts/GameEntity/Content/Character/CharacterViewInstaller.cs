@@ -11,6 +11,7 @@ namespace Game.GameEntity.Content.Character
 
         private readonly int IsMovingKey = Animator.StringToHash("IsMoving");
         private readonly int IsAttackKey = Animator.StringToHash("Attack");
+        private readonly int TakeDamageKey = Animator.StringToHash("TakeDamage");
 
         private readonly DisposableComposite _disposables = new();
 
@@ -23,19 +24,25 @@ namespace Game.GameEntity.Content.Character
         [SerializeField]
         private AnimationEvents _animationEvents;
 
-        [Space] [Header("SFX")] [SerializeField]
-        private AudioClip[] _moveStepSounds;
-
-        [SerializeField]
+        [Space] [Header("Take Damage")] [SerializeField]
         private AudioClip[] _painSounds;
 
         [SerializeField]
+        private ParticleSystem _takeDamageParticle;
+
+        [Space] [Header("Movement")] [SerializeField]
+        private AudioClip[] _moveStepSounds;
+
+        [Space] [Header("Death")] [SerializeField]
         private AudioClip _deathSounds;
 
         public override void Install(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.IsMoving).Subscribe(OnMoved).AddTo(_disposables);
+            entity.GetValue(GameEntityAPI.CurrentHealth).Subscribe(OnTakeDamage).AddTo(_disposables);
+
             _animationEvents.Subscribe(MoveReceiveEventKey, OnMovedSFX);
+
 
             if (entity.TryGetValue(GameEntityAPI.Weapon, out IReactiveVariable<IWeaponEntity> weaponEntity))
             {
@@ -55,6 +62,13 @@ namespace Game.GameEntity.Content.Character
 
         private void OnFired() => _animator.SetTrigger(IsAttackKey);
 
+        private void OnTakeDamage(float value)
+        {
+            _animator.SetTrigger(TakeDamageKey);
+            _takeDamageParticle.Play();
+            OnTakeDamageSFX();
+        }
+
         #endregion
 
 
@@ -68,6 +82,8 @@ namespace Game.GameEntity.Content.Character
         }
 
         private void OnMovedSFX() => PlayRandomSound(_moveStepSounds);
+
+        private void OnTakeDamageSFX() => PlayRandomSound(_painSounds);
 
         #endregion
     }
