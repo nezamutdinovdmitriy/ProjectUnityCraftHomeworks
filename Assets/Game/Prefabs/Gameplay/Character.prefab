@@ -1506,8 +1506,8 @@ MonoBehaviour:
     _maxHealth: 100
   _aimInstaller:
     _aimCooldown:
-      _duration: 2
-      _time: 2
+      _duration: 0.5
+      _time: 0.5
   _weaponInstaller:
     _weapon: {fileID: 4042443341226284917}
 --- !u!1 &3818262767236408140
@@ -2384,11 +2384,6 @@ MonoBehaviour:
   _animator: {fileID: 676053041413999030}
   _audioSource: {fileID: 1996927140430359114}
   _animationEvents: {fileID: 8022139683562622879}
-  _moveStepSounds:
-  - {fileID: 8300000, guid: c2e920c5e714d4c94a3609a0f440c584, type: 3}
-  - {fileID: 8300000, guid: 4cbb8723939a742fcb51cb82e1059928, type: 3}
-  - {fileID: 8300000, guid: 3d4e74a0e14cb44f8b06b86fc2811df6, type: 3}
-  - {fileID: 8300000, guid: bbb4b8eca821e43398bd4fd4c673a7e1, type: 3}
   _painSounds:
   - {fileID: 8300000, guid: 43cbbf4a3d9724d69ba13aebdb3f3f9c, type: 3}
   - {fileID: 8300000, guid: 63ef68af7497d434aa8fc44c769a5367, type: 3}
@@ -2398,7 +2393,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 24070ac39d7284393b44014722549551, type: 3}
   - {fileID: 8300000, guid: 920a8e2cea6f14c4f82960115b29290f, type: 3}
   - {fileID: 8300000, guid: 13b31af2aad724759a2073f7c82ec5a6, type: 3}
+  _takeDamageParticle: {fileID: 9071718681963068158}
+  _moveStepSounds:
+  - {fileID: 8300000, guid: c2e920c5e714d4c94a3609a0f440c584, type: 3}
+  - {fileID: 8300000, guid: 4cbb8723939a742fcb51cb82e1059928, type: 3}
+  - {fileID: 8300000, guid: 3d4e74a0e14cb44f8b06b86fc2811df6, type: 3}
+  - {fileID: 8300000, guid: bbb4b8eca821e43398bd4fd4c673a7e1, type: 3}
   _deathSounds: {fileID: 8300000, guid: 234139ee661e84bc8a517d097ca63824, type: 3}
+  _bodyFallSounds:
+  - {fileID: 8300000, guid: 3352ade033aba4780b3044e404093b9a, type: 3}
+  - {fileID: 8300000, guid: 62cbe99b1eb804549a609de6169d9df4, type: 3}
+  _bodyFallParticle: {fileID: 2393186179124088127}
 --- !u!114 &8022139683562622879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2661,11 +2666,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825000338556674619, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4825000338556674619, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 4825000338556674619, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2700,6 +2705,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
+--- !u!198 &2393186179124088127 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4469893772459249764, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
+  m_PrefabInstance: {fileID: 2251252885624642907}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6758731700424261472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4825000338556674619, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
@@ -2778,6 +2788,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 220fddb66ac1f4585ad386b9662112c6, type: 3}
+--- !u!198 &9071718681963068158 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6414813866398062833, guid: 220fddb66ac1f4585ad386b9662112c6, type: 3}
+  m_PrefabInstance: {fileID: 2657342766207918607}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9166476878862413720 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6617222771454381463, guid: 220fddb66ac1f4585ad386b9662112c6, type: 3}

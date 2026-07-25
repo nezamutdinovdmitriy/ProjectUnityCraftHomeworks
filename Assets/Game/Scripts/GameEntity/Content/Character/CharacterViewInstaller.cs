@@ -8,10 +8,12 @@ namespace Game.GameEntity.Content.Character
     public class CharacterViewInstaller : SceneEntityInstaller<IGameEntity>
     {
         private const string MoveReceiveEventKey = "move_step_event";
+        private const string BodyFallReceiveEventKey = "body_fall_event";
 
         private readonly int IsMovingKey = Animator.StringToHash("IsMoving");
         private readonly int IsAttackKey = Animator.StringToHash("Attack");
         private readonly int TakeDamageKey = Animator.StringToHash("TakeDamage");
+        private readonly int DeathKey = Animator.StringToHash("Death");
 
         private readonly DisposableComposite _disposables = new();
 
@@ -36,13 +38,19 @@ namespace Game.GameEntity.Content.Character
         [Space] [Header("Death")] [SerializeField]
         private AudioClip _deathSounds;
 
+        [SerializeField]
+        private AudioClip[] _bodyFallSounds;
+
+        [SerializeField]
+        private ParticleSystem _bodyFallParticle;
+
         public override void Install(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.IsMoving).Subscribe(OnMoved).AddTo(_disposables);
             entity.GetValue(GameEntityAPI.CurrentHealth).Subscribe(OnTakeDamage).AddTo(_disposables);
 
             _animationEvents.Subscribe(MoveReceiveEventKey, OnMovedSFX);
-
+            _animationEvents.Subscribe(BodyFallReceiveEventKey, OnBodyFall);
 
             if (entity.TryGetValue(GameEntityAPI.Weapon, out IReactiveVariable<IWeaponEntity> weaponEntity))
             {
@@ -51,10 +59,7 @@ namespace Game.GameEntity.Content.Character
             }
         }
 
-        public override void Uninstall(IGameEntity entity)
-        {
-            _disposables.Dispose();
-        }
+        public override void Uninstall(IGameEntity entity) => _disposables.Dispose();
 
         #region Animation
 
@@ -62,11 +67,26 @@ namespace Game.GameEntity.Content.Character
 
         private void OnFired() => _animator.SetTrigger(IsAttackKey);
 
-        private void OnTakeDamage(float value)
+        private void OnDeath()
+        {
+            _animator.SetTrigger(DeathKey);
+            OnDeathSFX();
+        }
+
+        private void OnBodyFall()
+        {
+            _bodyFallParticle.Play();
+            OnBodyFallSFX();
+        }
+
+        private void OnTakeDamage(float health)
         {
             _animator.SetTrigger(TakeDamageKey);
             _takeDamageParticle.Play();
             OnTakeDamageSFX();
+
+            if (health <= 0)
+                OnDeath();
         }
 
         #endregion
@@ -84,6 +104,10 @@ namespace Game.GameEntity.Content.Character
         private void OnMovedSFX() => PlayRandomSound(_moveStepSounds);
 
         private void OnTakeDamageSFX() => PlayRandomSound(_painSounds);
+
+        private void OnDeathSFX() => _audioSource.PlayOneShot(_deathSounds);
+
+        private void OnBodyFallSFX() => PlayRandomSound(_bodyFallSounds);
 
         #endregion
     }

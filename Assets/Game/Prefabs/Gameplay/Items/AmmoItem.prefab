@@ -171,6 +171,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6979400397003836636}
   - component: {fileID: 4267398721809954443}
+  - component: {fileID: 536213241371362137}
+  - component: {fileID: 6467647934073232272}
   m_Layer: 11
   m_Name: AmmoItem
   m_TagString: Untagged
@@ -217,6 +219,44 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.48086452, y: 0.5, z: 0.6702087}
   m_Center: {x: -0.035928726, y: 0.25, z: 0.053168178}
+--- !u!114 &536213241371362137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332313712654455240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9746fe30b3671bb48a5b4bf1629b7414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 6467647934073232272}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 1
+  initialValueCapacity: 1
+  initialBehaviourCapacity: 0
+--- !u!114 &6467647934073232272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3332313712654455240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21fc219145304a0d9fe66d032307eb3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.Content.Items.Ammo.AmmoInstaller
+  _amountAmmo: 10
 --- !u!1 &7655232285111366949
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,12 +11,18 @@ namespace Game.Weapon
         
         [SerializeField]
         private Cooldown _fireCooldown;
+
+        [SerializeField]
+        private int _initialAmmoAmount;
         
         public override void Install(IWeaponEntity weapon)
         {
             weapon.AddTag(WeaponEntityAPI.WeaponTag);
             
             weapon.AddValue(WeaponEntityAPI.Owner, new ReactiveVariable<IGameEntity>());
+            
+            weapon.AddValue(WeaponEntityAPI.Ammo, new Variable<int>(_initialAmmoAmount));
+            
             weapon.AddValue(WeaponEntityAPI.FireCommand, new Command());
             
             weapon.AddValue(WeaponEntityAPI.FireCooldown, _fireCooldown);

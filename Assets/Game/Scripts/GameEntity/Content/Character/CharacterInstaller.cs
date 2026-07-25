@@ -33,6 +33,9 @@ namespace Game.GameEntity.Content.Character
         [SerializeField]
         private FireInstaller _fireInstaller;
 
+        [SerializeField]
+        private InteractorInstaller _interactorInstaller;
+
         public override void Install(IGameEntity entity)
         {
             _positionInstaller.Install(entity);
@@ -43,6 +46,7 @@ namespace Game.GameEntity.Content.Character
             _fireInstaller.Install(entity);
             _weaponInstaller.Install(entity);
             _aimInstaller.Install(entity);
+            _interactorInstaller.Install(entity);
 
             SetupMovementCommand(entity);
             SetupRotateCommand(entity);
