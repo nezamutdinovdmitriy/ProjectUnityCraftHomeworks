@@ -14,6 +14,9 @@ namespace Game.Weapon
 
         [SerializeField]
         private int _initialAmmoAmount;
+
+        [SerializeField]
+        private IGameEntity _bulletPrefab;
         
         public override void Install(IWeaponEntity weapon)
         {

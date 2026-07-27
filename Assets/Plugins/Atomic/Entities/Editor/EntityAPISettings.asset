@@ -11,6 +11,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7e30c77814e4f52842aefe4bec255d5, type: 3}
   m_Name: EntityAPISettings
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp-Editor-firstpass::Atomic.Entities.EntityAPISettings
   autoRefresh: 1
   autoRefreshPeriod: 1

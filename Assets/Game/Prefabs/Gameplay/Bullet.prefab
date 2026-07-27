@@ -43,6 +43,9 @@ GameObject:
   - component: {fileID: 6795422085097260040}
   - component: {fileID: 2293162354956507346}
   - component: {fileID: 2852948263122311593}
+  - component: {fileID: 3440788527751836574}
+  - component: {fileID: 3481534846932385176}
+  - component: {fileID: 2337329661280343470}
   m_Layer: 12
   m_Name: Bullet
   m_TagString: Bullet
@@ -108,12 +111,70 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3440788527751836574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829669804357326195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9746fe30b3671bb48a5b4bf1629b7414, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntity
+  useUnityLifecycle: 1
+  disposeValues: 1
+  installOnAwake: 1
+  uninstallOnDestroy: 1
+  scriptableInstallers: []
+  sceneInstallers:
+  - {fileID: 3481534846932385176}
+  onlySelectedGizmos: 0
+  onlyEditModeGizmos: 0
+  autoCompile: 0
+  initialTagCapacity: 0
+  initialValueCapacity: 8
+  initialBehaviourCapacity: 2
+--- !u!114 &3481534846932385176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829669804357326195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c54cef1a824649c6a505ba48c395393f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.Content.Bullet.BulletInstaller
+  _positionInstaller:
+    _position: {fileID: 6795422085097260040}
+  _rotationInstaller:
+    _rotation: {fileID: 6795422085097260040}
+  _movementInstaller:
+    _movementSpeed: 2
+  _damageInstaller:
+    _damage: 15
+    _triggerEvents: {fileID: 2337329661280343470}
+--- !u!114 &2337329661280343470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829669804357326195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
 --- !u!1001 &2426699191576222108
 PrefabInstance:
   m_ObjectHideFlags: 0

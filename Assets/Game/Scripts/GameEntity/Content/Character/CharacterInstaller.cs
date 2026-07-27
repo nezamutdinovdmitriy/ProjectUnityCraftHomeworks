@@ -36,6 +36,9 @@ namespace Game.GameEntity.Content.Character
         [SerializeField]
         private InteractorInstaller _interactorInstaller;
 
+        [SerializeField]
+        private DamageableInstaller _damageableInstaller;
+
         public override void Install(IGameEntity entity)
         {
             _positionInstaller.Install(entity);
@@ -47,10 +50,15 @@ namespace Game.GameEntity.Content.Character
             _weaponInstaller.Install(entity);
             _aimInstaller.Install(entity);
             _interactorInstaller.Install(entity);
+            _damageableInstaller.Install(entity);
 
             SetupMovementCommand(entity);
             SetupRotateCommand(entity);
             SetupFireCommand(entity);
+
+            entity.GetValue(GameEntityAPI.TakeDamageCommand)
+                .AddCondition(_ => entity.IsDead() == false)
+                .AddAction(damage => entity.TakeDamage(damage));
             
             entity.AddBehaviour(new CharacterInputController());
         }
@@ -77,10 +85,6 @@ namespace Game.GameEntity.Content.Character
             entity.GetValue(GameEntityAPI.MovementCommand)
                 .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
                 .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
-                // .AddAction(args => entity.RotateStep(
-                //     args.Direction,
-                //     entity.GetValue(GameEntityAPI.RotateSpeed).Value,
-                //     args.DeltaTime));
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Game.GameEntity
         public static ValueKey<IGameEntity, TransformPositionVariable> Position = new(nameof(Position));
         public static ValueKey<IGameEntity, TransformRotationVariable> Rotation = new(nameof(Rotation));
         public static ValueKey<IGameEntity, TriggerEvents> Trigger = new(nameof(Trigger));
+        public static ValueKey<IGameEntity, CollisionEvents> Collision = new(nameof(Collision));
         
         // Movement
         public static ValueKey<IGameEntity, IReactiveVariable<bool>> IsMoving = new(nameof(IsMoving));
@@ -40,5 +41,10 @@ namespace Game.GameEntity
         public static TagKey InteractableTag = new(nameof(InteractableTag));
         public static TagKey InteractorTag = new(nameof(InteractorTag));
         public static ValueKey<IGameEntity, ICommand<IGameEntity>> InteractCommand = new(nameof(InteractCommand));
+        
+        // Damage
+        public static TagKey DamageableTag = new(nameof(DamageableTag));
+        public static ValueKey<IGameEntity, IValue<float>> Damage = new(nameof(Damage));
+        public static ValueKey<IGameEntity, ICommand<float>> TakeDamageCommand = new(nameof(TakeDamageCommand));
     }
 }
