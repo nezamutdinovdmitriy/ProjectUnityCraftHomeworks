@@ -3,7 +3,7 @@ using Atomic.Entities;
 using Game.Weapon;
 using UnityEngine;
 
-namespace Game.GameEntity.Content.Character
+namespace Game.GameEntity
 {
     public class CharacterViewInstaller : SceneEntityInstaller<IGameEntity>
     {

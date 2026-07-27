@@ -1,11 +1,9 @@
 using Atomic.Elements;
 using Atomic.Entities;
-using Game.GameEntity.Core.Aim;
-using Game.GameEntity.Core.Fire;
 using Game.Weapon;
 using UnityEngine;
 
-namespace Game.GameEntity.Content.Character
+namespace Game.GameEntity
 {
     public class CharacterInstaller : SceneEntityInstaller<IGameEntity>
     {

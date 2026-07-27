@@ -3,7 +3,7 @@ using Atomic.Entities;
 using Game.UI;
 using UnityEngine;
 
-namespace Game.GameEntity.Core.Aim
+namespace Game.GameEntity
 {
     public class AimBehaviour : IGameEntityInit, IGameEntityFixedTick
     {

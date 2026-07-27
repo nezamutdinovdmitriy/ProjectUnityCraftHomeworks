@@ -3,7 +3,7 @@ using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
-namespace Game.GameEntity.Core.Aim
+namespace Game.GameEntity
 {
     [Serializable]
     public class AimInstaller : IEntityInstaller<IGameEntity>

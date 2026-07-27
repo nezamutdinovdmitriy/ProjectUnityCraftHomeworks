@@ -2,7 +2,7 @@ using Atomic.Entities;
 using Game.UI;
 using UnityEngine;
 
-namespace Game.GameEntity.Content.Character
+namespace Game.GameEntity
 {
     public class CharacterInputController : IGameEntityInit, IGameEntityFixedTick
     {

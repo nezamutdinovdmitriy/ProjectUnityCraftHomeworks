@@ -1,5 +1,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.Bullets;
 using Game.GameEntity;
 using UnityEngine;
 
@@ -16,10 +17,12 @@ namespace Game.Weapon
         private int _initialAmmoAmount;
 
         [SerializeField]
-        private IGameEntity _bulletPrefab;
+        private Transform _firePoint;
         
         public override void Install(IWeaponEntity weapon)
         {
+            IGameContext gameContext = GameContext.Instance;
+            
             weapon.AddTag(WeaponEntityAPI.WeaponTag);
             
             weapon.AddValue(WeaponEntityAPI.Owner, new ReactiveVariable<IGameEntity>());
@@ -31,12 +34,12 @@ namespace Game.Weapon
             weapon.AddValue(WeaponEntityAPI.FireCooldown, _fireCooldown);
             weapon.WhenFixedTick(_fireCooldown.Tick).AddTo(_disposables);
             
-            SetupFireCommand(weapon);
+            SetupFireCommand(weapon, gameContext);
         }
 
         public override void Uninstall(IWeaponEntity entity) => _disposables.Dispose();
 
-        private void SetupFireCommand(IWeaponEntity weapon)
+        private void SetupFireCommand(IWeaponEntity weapon, IGameContext gameContext)
         {
             ICommand command = weapon.GetValue(WeaponEntityAPI.FireCommand);
             
@@ -49,6 +52,8 @@ namespace Game.Weapon
             });
 
             command.AddAction(() => weapon.GetValue(WeaponEntityAPI.FireCooldown).ResetTime());
+
+            command.AddAction(() => gameContext.SpawnBullet(_firePoint.position, _firePoint.rotation));
         }
     }
 }

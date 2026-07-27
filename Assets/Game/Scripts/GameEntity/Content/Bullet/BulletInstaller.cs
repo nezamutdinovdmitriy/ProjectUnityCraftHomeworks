@@ -2,7 +2,7 @@ using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
-namespace Game.GameEntity.Content.Bullet
+namespace Game.GameEntity
 {
     public class BulletInstaller : SceneEntityInstaller<IGameEntity>
     {
@@ -34,7 +34,7 @@ namespace Game.GameEntity.Content.Bullet
         {
             IRequest<Vector3> movementRequest = entity.GetValue(GameEntityAPI.MovementRequest);
 
-            entity.WhenFixedTick(_ => movementRequest.Invoke(Vector3.forward));
+            entity.WhenFixedTick(_ => movementRequest.Invoke(entity.GetValue(GameEntityAPI.Rotation).Value * Vector3.forward));
             entity.GetValue(GameEntityAPI.MovementCommand)
                 .AddCondition(_ => true)
                 .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));

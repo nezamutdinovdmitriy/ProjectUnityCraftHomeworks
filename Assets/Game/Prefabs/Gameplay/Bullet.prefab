@@ -159,9 +159,9 @@ MonoBehaviour:
   _rotationInstaller:
     _rotation: {fileID: 6795422085097260040}
   _movementInstaller:
-    _movementSpeed: 2
+    _movementSpeed: 45
   _damageInstaller:
-    _damage: 15
+    _damage: 1
     _triggerEvents: {fileID: 2337329661280343470}
 --- !u!114 &2337329661280343470
 MonoBehaviour:

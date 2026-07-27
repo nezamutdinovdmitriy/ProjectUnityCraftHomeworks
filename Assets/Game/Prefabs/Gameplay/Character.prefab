@@ -1510,6 +1510,8 @@ MonoBehaviour:
       _time: 0.5
   _weaponInstaller:
     _weapon: {fileID: 4042443341226284917}
+  _interactorInstaller:
+    _triggerEvents: {fileID: 0}
 --- !u!1 &3818262767236408140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2919,9 +2921,16 @@ MonoBehaviour:
   _fireCooldown:
     _duration: 1
     _time: 1
+  _initialAmmoAmount: 5
+  _firePoint: {fileID: 7272988223813815378}
 --- !u!82 &7196453617052720464 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 2458806991490565756, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
+  m_PrefabInstance: {fileID: 4738243663061736236}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7272988223813815378 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2679439196154746750, guid: 8c9bfd0f9949b4ed0b1b7e6c4a039d83, type: 3}
   m_PrefabInstance: {fileID: 4738243663061736236}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7708566380249203598 stripped

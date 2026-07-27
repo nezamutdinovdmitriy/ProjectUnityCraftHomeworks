@@ -4,7 +4,7 @@ using Atomic.Entities;
 using Game.Weapon;
 using UnityEngine;
 
-namespace Game.GameEntity.Content.Items.Ammo
+namespace Game.GameEntity
 {
     [Serializable]
     public class AmmoInstaller : SceneEntityInstaller<IGameEntity>

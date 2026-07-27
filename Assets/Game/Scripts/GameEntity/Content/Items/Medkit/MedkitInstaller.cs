@@ -2,7 +2,7 @@ using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
-namespace Game.GameEntity.Content.Items.Medkit
+namespace Game.GameEntity
 {
     public class MedkitInstaller : SceneEntityInstaller<IGameEntity>
     {

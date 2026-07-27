@@ -2,7 +2,7 @@ using System;
 using Atomic.Elements;
 using Atomic.Entities;
 
-namespace Game.GameEntity.Core.Fire
+namespace Game.GameEntity
 {
     [Serializable]
     public class FireInstaller : IEntityInstaller<IGameEntity>
