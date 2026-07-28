@@ -21670,7 +21670,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntityPool
   _initOnAwake: 1
   _acceptExternalReturns: 1
-  _initialCount: 5
+  _initialCount: 4
   _prefab: {fileID: 3440788527751836574, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
   _container: {fileID: 1655322852}
   _dontDestroyOnLoad: 0

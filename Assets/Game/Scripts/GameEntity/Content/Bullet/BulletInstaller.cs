@@ -1,5 +1,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.GameEntity.Core.LifeTime;
 using UnityEngine;
 
 namespace Game.GameEntity
@@ -18,16 +19,33 @@ namespace Game.GameEntity
         [SerializeField]
         private DamageInstaller _damageInstaller;
 
+        [SerializeField]
+        private LifeTimeInstaller _lifetimeInstaller;
+
         public override void Install(IGameEntity entity)
         {
             _positionInstaller.Install(entity);
             _rotationInstaller.Install(entity);
             _movementInstaller.Install(entity);
             _damageInstaller.Install(entity);
+            _lifetimeInstaller.Install(entity);
             
             SetupMovementBehaviour(entity);
+            SetupLifetimeEndBehaviour(entity);
             
-            entity.AddBehaviour(new CollisionDamageBehaviour());
+            entity.AddBehaviour(new CollisionDamageBehaviour(GameContext.Instance));
+        }
+
+        public override void Uninstall(IGameEntity entity)
+        {
+            _lifetimeInstaller.Uninstall();
+        }
+        
+        private static void SetupLifetimeEndBehaviour(IGameEntity entity)
+        {
+            entity.GetValue(GameEntityAPI.LifetimeEndCommand)
+                .AddAction(() => 
+                    GameContext.Instance.GetValue(GameContextAPI.BulletPool).Return((GameEntity)entity));
         }
 
         private static void SetupMovementBehaviour(IGameEntity entity)

@@ -163,6 +163,10 @@ MonoBehaviour:
   _damageInstaller:
     _damage: 1
     _triggerEvents: {fileID: 2337329661280343470}
+  _lifetimeInstaller:
+    _lifetime:
+      _duration: 2
+      _time: 2
 --- !u!114 &2337329661280343470
 MonoBehaviour:
   m_ObjectHideFlags: 0

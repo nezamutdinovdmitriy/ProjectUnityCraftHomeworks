@@ -1,3 +1,4 @@
+using Atomic.Elements;
 using Atomic.Entities;
 using Game.GameEntity;
 using UnityEngine;
@@ -15,6 +16,12 @@ namespace Game.Bullets
             bullet.GetValue(GameEntityAPI.Rotation).Value = rotation;
             
             return bullet;
+        }
+
+        public static void DestroyBullet(this IGameContext gameContext, GameEntity.GameEntity bullet)
+        {
+            GameEntityPool pool = gameContext.GetValue(GameContextAPI.BulletPool);
+            pool.Return(bullet);
         }
     }
 }

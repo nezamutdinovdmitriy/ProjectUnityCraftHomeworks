@@ -46,5 +46,9 @@ namespace Game.GameEntity
         public static TagKey DamageableTag = new(nameof(DamageableTag));
         public static ValueKey<IGameEntity, IValue<float>> Damage = new(nameof(Damage));
         public static ValueKey<IGameEntity, ICommand<float>> TakeDamageCommand = new(nameof(TakeDamageCommand));
+        
+        // LifeTime
+        public static ValueKey<IGameEntity, ICooldown> Lifetime = new(nameof(Lifetime));
+        public static ValueKey<IGameEntity, ICommand> LifetimeEndCommand = new(nameof(LifetimeEndCommand));
     }
 }
