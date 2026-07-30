@@ -19,16 +19,12 @@ namespace Game.Weapon
         [SerializeField]
         private ParticleSystem _particleSystem;
         
-        public override void Install(IWeaponEntity entity)
-        {
-            _animationEvents.Subscribe(FireReceiveEventKey, OnFired);
-        }
+        public override void Install(IWeaponEntity entity) 
+            => _animationEvents.Subscribe(FireReceiveEventKey, OnFired);
 
-        public override void Uninstall(IWeaponEntity entity)
-        {
-            _disposables?.Dispose();
-        }
-        
+        public override void Uninstall(IWeaponEntity entity) 
+            => _disposables?.Dispose();
+
         private void OnFired()
         {
             PlaySFX();

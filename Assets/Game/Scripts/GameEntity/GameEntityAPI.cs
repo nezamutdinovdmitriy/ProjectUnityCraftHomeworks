@@ -28,6 +28,10 @@ namespace Game.GameEntity
         public static ValueKey<IGameEntity, IValue<float>> MaxHealth = new(nameof(MaxHealth));
         public static ValueKey<IGameEntity, IReactiveVariable<float>> CurrentHealth = new(nameof(CurrentHealth));
         
+        // Death
+        public static ValueKey<IGameEntity, ICooldown> DeathDelay = new(nameof(DeathDelay));
+        public static ValueKey<IGameEntity, ICommand> DeathCommand = new(nameof(DeathCommand));
+        
         // Aim
         public static ValueKey<IGameEntity, IVariable<bool>> HasAimingLastFrame = new(nameof(HasAimingLastFrame));
         public static ValueKey<IGameEntity, ICooldown> AimCooldown = new(nameof(AimCooldown));

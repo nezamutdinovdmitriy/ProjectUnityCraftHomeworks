@@ -36,11 +36,8 @@ namespace Game.GameEntity
             entity.AddBehaviour(new CollisionDamageBehaviour(GameContext.Instance));
         }
 
-        public override void Uninstall(IGameEntity entity)
-        {
-            _lifetimeInstaller.Uninstall();
-        }
-        
+        public override void Uninstall(IGameEntity entity) => _lifetimeInstaller.Uninstall();
+
         private static void SetupLifetimeEndBehaviour(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.LifetimeEndCommand)

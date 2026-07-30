@@ -56,7 +56,7 @@ namespace Game.GameEntity
 
             entity.GetValue(GameEntityAPI.TakeDamageCommand)
                 .AddCondition(_ => entity.IsDead() == false)
-                .AddAction(damage => entity.TakeDamage(damage));
+                .AddAction(damage => entity.GetValue(GameEntityAPI.CurrentHealth).Value -= damage);
             
             entity.AddBehaviour(new CharacterInputController());
         }

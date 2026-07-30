@@ -35,7 +35,7 @@ namespace Game.GameEntity
             if (obj.TryGetComponent(out IGameEntity targetEntity) == false)
                 return;
 
-            targetEntity.TakeDamage(_damage.Value);
+            targetEntity.TryTakeDamage(_damage.Value);
             
             _gameContext.DestroyBullet((GameEntity)_self);
         }
