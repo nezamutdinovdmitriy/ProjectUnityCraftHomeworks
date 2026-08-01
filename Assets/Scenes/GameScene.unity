@@ -23386,6 +23386,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 803416448}
     m_Modifications:
+    - target: {fileID: 1764289448919355322, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: initialTagCapacity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764289448919355322, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: initialValueCapacity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.43
@@ -23433,6 +23441,14 @@ PrefabInstance:
     - target: {fileID: 5282587029934180364, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: _takeDamageDelay
       value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282587029934180364, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: _takeDamageDelay._time
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282587029934180364, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+      propertyPath: _takeDamageDelay._duration
+      value: 0.51
       objectReference: {fileID: 0}
     - target: {fileID: 6355162821186015845, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_Name

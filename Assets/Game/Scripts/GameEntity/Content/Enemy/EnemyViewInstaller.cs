@@ -43,11 +43,7 @@ namespace Game.GameEntity.Content.Enemy
 
         private void OnMoved(bool isMoving) => _animator.SetBool(IsMovingKey, isMoving);
 
-        private void OnFired()
-        {
-            Debug.Log($"Trigger {Time.time}");
-            _animator.SetTrigger(IsAttackKey);
-        }
+        private void OnFired() => _animator.SetTrigger(IsAttackKey);
 
         #endregion
         

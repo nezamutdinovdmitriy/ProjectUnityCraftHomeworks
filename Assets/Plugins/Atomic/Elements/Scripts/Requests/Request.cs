@@ -32,11 +32,7 @@ namespace Atomic.Elements
 #if ODIN_INSPECTOR
         [Button, HideInEditorMode]
 #endif
-        public void Invoke()
-        {
-            Debug.Log($"Input {Time.time}");
-            _required = true;
-        }
+        public void Invoke() => _required = true;
 
         /// <inheritdoc />
 #if ODIN_INSPECTOR

@@ -49,7 +49,6 @@ namespace Game.Weapon.Content.Hand
             {
                 if (_inDelayProcess == false && fireRequest.Required && fireCommand.CanInvoke())
                 {
-                    Debug.Log($"Start timer {Time.time}");
                     _takeDamageDelay.ResetTime();
                     startAttackEvent.Invoke();
                     _inDelayProcess = true;

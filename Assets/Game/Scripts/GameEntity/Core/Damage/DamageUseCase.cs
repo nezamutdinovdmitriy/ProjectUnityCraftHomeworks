@@ -1,7 +1,4 @@
-using System;
 using Atomic.Entities;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
 
 namespace Game.GameEntity
 {
@@ -13,7 +10,6 @@ namespace Game.GameEntity
                 return false;
 
             entity.GetValue(GameEntityAPI.TakeDamageCommand).Invoke(damage);
-            Debug.Log($"Damage {Time.time}");
             return true;
         }
     }
