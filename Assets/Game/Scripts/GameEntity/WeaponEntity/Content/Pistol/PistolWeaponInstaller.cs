@@ -27,7 +27,7 @@ namespace Game.Weapon
 
             weapon.AddValue(WeaponEntityAPI.Owner, new ReactiveVariable<IGameEntity>());
 
-            weapon.AddValue(WeaponEntityAPI.Ammo, new Variable<int>(_initialAmmoAmount));
+            weapon.AddValue(WeaponEntityAPI.Ammo, new ReactiveVariable<int>(_initialAmmoAmount));
 
             weapon.AddValue(WeaponEntityAPI.FireCommand, new Command());
 

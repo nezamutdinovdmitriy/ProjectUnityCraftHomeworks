@@ -1,4 +1,6 @@
 using Atomic.Entities;
+using Game.GameEntity;
+using Game.Weapon;
 using UnityEngine;
 
 namespace Game.UI
@@ -7,10 +9,32 @@ namespace Game.UI
     {
         [SerializeField]
         private JoystickInstaller _joystickInstaller;
+
+        [SerializeField]
+        private HealthScreenView _healthScreenView;
+
+        [SerializeField]
+        private GameEntity.GameEntity _character;
+
+        [SerializeField]
+        private StatView _healthView;
+        
+        [SerializeField]
+        private StatView _ammoView;
         
         public override void Install(IUIContext entity)
         {
+            entity.AddValue(UIContextAPI.HealthScreenView, _healthScreenView);
+            entity.AddValue(UIContextAPI.HealthView, _healthView);
+            entity.AddValue(UIContextAPI.AmmoView, _ammoView);
+            
             _joystickInstaller.Install(entity);
+            
+            entity.AddBehaviour(new HealthScreenPresenter(_character));
+            entity.AddBehaviour(new HealthViewPresenter(_character));
+            entity.AddBehaviour(new AmmoViewPresenter(
+                _character.GetValue(GameEntityAPI.Weapon).Value
+                    .GetValue(WeaponEntityAPI.Ammo)));
         }
     }
 }

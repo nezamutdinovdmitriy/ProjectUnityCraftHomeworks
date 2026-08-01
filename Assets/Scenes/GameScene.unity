@@ -2869,6 +2869,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntityProxy
   _source: {fileID: 2002911021}
+--- !u!1 &217440996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 230523248208669166, guid: 69a29ff4468e6456e888262b30735f8c, type: 3}
+  m_PrefabInstance: {fileID: 2928555308454414446}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &217747325 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
@@ -19844,6 +19849,17 @@ Transform:
   - {fileID: 1257358949}
   m_Father: {fileID: 1676091983}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1521966094 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4794328611557280731, guid: 69a29ff4468e6456e888262b30735f8c, type: 3}
+  m_PrefabInstance: {fileID: 2928555308454414446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1525281453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25474,6 +25490,20 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5426925789724831932, guid: 69a29ff4468e6456e888262b30735f8c, type: 3}
   m_PrefabInstance: {fileID: 2928555308454414446}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2066230079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 217440996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f707c15d9c42428ca29ae1c5ed29e8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.UI.StatView
+  valueText: {fileID: 1521966094}
+  progressBar: {fileID: 0}
 --- !u!1001 &2074083449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27239,7 +27269,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 230523248208669166, guid: 69a29ff4468e6456e888262b30735f8c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2066230079}
   m_SourcePrefab: {fileID: 100100000, guid: 69a29ff4468e6456e888262b30735f8c, type: 3}
 --- !u!114 &3368907948363335244
 MonoBehaviour:
@@ -27638,6 +27671,10 @@ MonoBehaviour:
   _joystickInstaller:
     _movementJoystick: {fileID: 757640612756630604}
     _aimJoystick: {fileID: 7919524849257179010}
+  _healthScreenView: {fileID: 548561269895222117}
+  _character: {fileID: 2002911021}
+  _healthView: {fileID: 7160444056652517396}
+  _ammoView: {fileID: 7160444056652517395}
 --- !u!114 &5764159610076527036
 MonoBehaviour:
   m_ObjectHideFlags: 0

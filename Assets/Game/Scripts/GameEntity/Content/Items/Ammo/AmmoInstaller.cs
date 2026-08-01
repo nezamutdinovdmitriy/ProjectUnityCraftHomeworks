@@ -28,7 +28,7 @@ namespace Game.GameEntity
                 {
                     IReactiveVariable<IWeaponEntity> weapon = interactor.GetValue(GameEntityAPI.Weapon);
 
-                    if (weapon.Value.TryGetValue(WeaponEntityAPI.Ammo, out IVariable<int> ammo) == false)
+                    if (weapon.Value.TryGetValue(WeaponEntityAPI.Ammo, out IReactiveVariable<int> ammo) == false)
                         return;
 
                     ammo.Value += _amountAmmo;

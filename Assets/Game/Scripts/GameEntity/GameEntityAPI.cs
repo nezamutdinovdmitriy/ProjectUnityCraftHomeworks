@@ -11,7 +11,7 @@ namespace Game.GameEntity
         public static ValueKey<IGameEntity, TransformPositionVariable> Position = new(nameof(Position));
         public static ValueKey<IGameEntity, TransformRotationVariable> Rotation = new(nameof(Rotation));
         public static ValueKey<IGameEntity, TriggerEvents> Trigger = new(nameof(Trigger));
-        public static ValueKey<IGameEntity, CollisionEvents> Collision = new(nameof(Collision));
+        public static ValueKey<IGameEntity, IReactiveVariable<int>> Score = new(nameof(Score));
         
         // Movement
         public static ValueKey<IGameEntity, IReactiveVariable<bool>> IsMoving = new(nameof(IsMoving));

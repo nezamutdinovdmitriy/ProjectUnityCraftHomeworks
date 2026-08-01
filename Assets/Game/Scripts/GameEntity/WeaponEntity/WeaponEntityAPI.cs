@@ -9,7 +9,7 @@ namespace Game.Weapon
         // Common
         public static TagKey WeaponTag = new(nameof(WeaponTag));
         public static ValueKey<IWeaponEntity, IReactiveVariable<IGameEntity>> Owner = new(nameof(Owner));
-        public static ValueKey<IWeaponEntity, IVariable<int>> Ammo = new(nameof(Ammo));
+        public static ValueKey<IWeaponEntity, IReactiveVariable<int>> Ammo = new(nameof(Ammo));
         
         // Fire
         public static ValueKey<IWeaponEntity, ICommand> FireCommand = new(nameof(FireCommand));
