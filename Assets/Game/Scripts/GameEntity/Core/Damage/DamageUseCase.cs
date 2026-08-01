@@ -12,18 +12,9 @@ namespace Game.GameEntity
             if (entity.HasTag(GameEntityAPI.DamageableTag) == false)
                 return false;
 
-            Debug.Log($"{damage} applied!");
             entity.GetValue(GameEntityAPI.TakeDamageCommand).Invoke(damage);
+            Debug.Log($"Damage {Time.time}");
             return true;
-        }
-
-        public static async UniTaskVoid TryTakeDamageDelayed(
-            this IGameEntity entity,
-            float damage,
-            float delay)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(delay));
-            entity.TryTakeDamage(damage);
         }
     }
 }

@@ -4,6 +4,7 @@ using Atomic.Entities;
 using Cysharp.Threading.Tasks;
 using Game.GameEntity;
 using UnityEngine;
+using Event = Atomic.Elements.Event;
 
 namespace Game.Weapon.Content.Hand
 {
@@ -16,7 +17,7 @@ namespace Game.Weapon.Content.Hand
         private Cooldown _attackCooldown = 1;
 
         [SerializeField]
-        private float _takeDamageDelay = 1.0333f;
+        private Cooldown _takeDamageDelay = 1.0333f;
 
         [SerializeField]
         private float _damage = 1f;
@@ -24,21 +25,55 @@ namespace Game.Weapon.Content.Hand
         [SerializeField]
         private float _attackRadius = 1f;
 
+        private bool _inDelayProcess;
+
         public override void Install(IWeaponEntity weapon)
         {
-            weapon.WhenFixedTick(_attackCooldown.Tick).AddTo(_disposables);
-
             weapon.AddTag(WeaponEntityAPI.WeaponTag);
             weapon.AddValue(WeaponEntityAPI.Owner, new ReactiveVariable<IGameEntity>());
 
             weapon.AddValue(WeaponEntityAPI.FireCooldown, _attackCooldown);
-            weapon.AddValue(WeaponEntityAPI.FireCommand, new Command());
+
+            IEvent startAttackEvent = new Event();
+            weapon.AddValue(WeaponEntityAPI.FireStartEvent, startAttackEvent);
+            
+            IRequest fireRequest = new Request();
+            weapon.AddValue(WeaponEntityAPI.FireRequest, fireRequest);
+            
+            ICommand fireCommand = new Command();
+            weapon.AddValue(WeaponEntityAPI.FireCommand, fireCommand);
+
+            weapon.WhenFixedTick(_attackCooldown.Tick).AddTo(_disposables);
+            
+            weapon.WhenFixedTick(deltaTime =>
+            {
+                if (_inDelayProcess == false && fireRequest.Required && fireCommand.CanInvoke())
+                {
+                    Debug.Log($"Start timer {Time.time}");
+                    _takeDamageDelay.ResetTime();
+                    startAttackEvent.Invoke();
+                    _inDelayProcess = true;
+                }
+
+                if (_inDelayProcess)
+                    _takeDamageDelay.Tick(deltaTime);
+                
+                if (_takeDamageDelay.IsCompleted())
+                {
+                    _inDelayProcess = false;
+
+                    if (fireRequest.Consume() && fireCommand.CanInvoke())
+                    {
+                        weapon.GetValue(WeaponEntityAPI.FireCommand).Invoke();
+                    }
+                }
+            });
             
             SetupFireCommand(weapon);
         }
 
         public override void Uninstall(IWeaponEntity entity) => _disposables.Dispose();
-
+        
         private void SetupFireCommand(IWeaponEntity weapon)
         {
             ICommand command = weapon.GetValue(WeaponEntityAPI.FireCommand);
@@ -67,13 +102,13 @@ namespace Game.Weapon.Content.Hand
 
                 for (int i = 0; i < size; i++)
                 {
-                    if (_colliders[i].TryGetComponent(out IGameEntity entity) 
+                    if (_colliders[i].TryGetComponent(out IGameEntity entity)
                         && entity.Equals(owner) == false)
                     {
-                        if (entity.IsDead() == false)
-                            entity.TryTakeDamageDelayed(_damage, _takeDamageDelay).Forget();
-                        
-                        return;
+                        if (entity.IsDead())
+                            return;
+
+                        entity.TryTakeDamage(_damage);
                     }
                 }
             });

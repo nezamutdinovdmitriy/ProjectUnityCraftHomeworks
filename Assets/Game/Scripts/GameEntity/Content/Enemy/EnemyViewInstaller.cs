@@ -30,7 +30,7 @@ namespace Game.GameEntity.Content.Enemy
             if (entity.TryGetValue(GameEntityAPI.Weapon, out IReactiveVariable<IWeaponEntity> weaponEntity))
             {
                 IWeaponEntity weapon = weaponEntity.Value;
-                weapon.GetValue(WeaponEntityAPI.FireCommand).Subscribe(OnFired).AddTo(_disposables);
+                weapon.GetValue(WeaponEntityAPI.FireStartEvent).Subscribe(OnFired).AddTo(_disposables);
             }
         }
 
@@ -43,8 +43,12 @@ namespace Game.GameEntity.Content.Enemy
 
         private void OnMoved(bool isMoving) => _animator.SetBool(IsMovingKey, isMoving);
 
-        private void OnFired() => _animator.SetTrigger(IsAttackKey);
-        
+        private void OnFired()
+        {
+            Debug.Log($"Trigger {Time.time}");
+            _animator.SetTrigger(IsAttackKey);
+        }
+
         #endregion
         
         #region SFX
