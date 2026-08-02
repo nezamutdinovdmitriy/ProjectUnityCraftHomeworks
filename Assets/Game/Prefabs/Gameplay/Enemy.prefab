@@ -1728,7 +1728,7 @@ MonoBehaviour:
   _rotationInstaller:
     _rotation: {fileID: 4361596233082998913}
   _movementInstaller:
-    _movementSpeed: 2
+    _movementSpeed: 1
   _rotateInstaller:
     _rotateSpeed: 800
   _healthInstaller:
@@ -1739,6 +1739,9 @@ MonoBehaviour:
       _time: 2
   _weaponInstaller:
     _weapon: {fileID: 1764289448919355322}
+  _targetInstaller:
+    _triggerEvents: {fileID: 0}
+  _stoppingDistance: 0.8
 --- !u!1 &6519369982854541961
 GameObject:
   m_ObjectHideFlags: 0
@@ -2001,7 +2004,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: cb7def12ed591468ebdc46c5accc3cdb, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
@@ -2275,6 +2278,7 @@ GameObject:
   - component: {fileID: 1842272872912051803}
   - component: {fileID: 6539019232894893930}
   - component: {fileID: 6328100626447338775}
+  - component: {fileID: 4207667164763676742}
   m_Layer: 10
   m_Name: <Collider>
   m_TagString: Untagged
@@ -2341,6 +2345,19 @@ PositionConstraint:
   - sourceTransform: {fileID: 1383350002564321792}
     weight: 1
 --- !u!114 &6328100626447338775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8928404799372505036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e473771bc24874935db7a436eec166, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntityProxy
+  _source: {fileID: 5181151306857876359}
+--- !u!114 &4207667164763676742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2732,6 +2749,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3218769727446915816, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      propertyPath: initialTagCapacity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218769727446915816, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      propertyPath: initialValueCapacity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5379566684066028272, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
       propertyPath: _firePoint
       value: 
@@ -2746,7 +2771,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9050222108707118430, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
       propertyPath: _attackRadius
-      value: 0.4
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050222108707118430, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      propertyPath: _takeDamageDelay._time
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050222108707118430, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      propertyPath: _takeDamageDelay._duration
+      value: 0.51
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -36,7 +36,7 @@ namespace Game.GameEntity
                 _isMoving.Value = false;
                 return;
             }
-            
+
             _command.Invoke(args);
             _isMoving.Value = true;
         }

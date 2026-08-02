@@ -39,6 +39,8 @@ namespace Game.GameEntity
 
         public override void Install(IGameEntity entity)
         {
+            entity.AddTag(GameEntityAPI.CharacterTag);
+            
             _positionInstaller.Install(entity);
             _rotationInstaller.Install(entity);
             _movementInstaller.Install(entity);

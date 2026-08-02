@@ -102,12 +102,14 @@ namespace Game.Weapon.Content.Hand
                 for (int i = 0; i < size; i++)
                 {
                     if (_colliders[i].TryGetComponent(out IGameEntity entity)
-                        && entity.Equals(owner) == false)
+                        && entity.Equals(owner) == false
+                        && entity.HasTag(GameEntityAPI.CharacterTag))
                     {
                         if (entity.IsDead())
                             return;
 
                         entity.TryTakeDamage(_damage);
+                        return;
                     }
                 }
             });

@@ -1,5 +1,8 @@
+using Atomic.Elements;
 using Atomic.Entities;
 using Game.GameEntity.Core.Death;
+using Game.GameEntity.Core.Target;
+using Game.Weapon;
 using UnityEngine;
 
 namespace Game.GameEntity.Content.Enemy
@@ -33,6 +36,12 @@ namespace Game.GameEntity.Content.Enemy
         [SerializeField]
         private FireInstaller _fireInstaller;
 
+        [SerializeField]
+        private TargetInstaller _targetInstaller;
+
+        [SerializeField]
+        private float _stoppingDistance;
+
         public override void Install(IGameEntity entity)
         {
             _positionInstaller.Install(entity);
@@ -43,10 +52,7 @@ namespace Game.GameEntity.Content.Enemy
             _rotateInstaller.Install(entity);
             _deathInstaller.Install(entity);
             _weaponInstaller.Install(entity);
-
-            entity.GetValue(GameEntityAPI.TakeDamageCommand)
-                .AddCondition(_ => entity.IsDead() == false)
-                .AddAction(damage => entity.GetValue(GameEntityAPI.CurrentHealth).Value -= damage);
+            _targetInstaller.Install(entity);
 
             entity.WhenFixedTick((deltaTime) =>
             {
@@ -57,6 +63,43 @@ namespace Game.GameEntity.Content.Enemy
                 }
             });
 
+            entity.WhenFixedTick(_ =>
+            {
+                if (entity.TryGetValue(GameEntityAPI.Target, out IVariable<IGameEntity> target)
+                    && target.Value != null
+                    && target.Value.IsDead() == false)
+                {
+                    Vector3 targetPosition = target.Value.GetValue(GameEntityAPI.Position).Value;
+
+                    Vector3 selfPosition = entity.GetValue(GameEntityAPI.Position).Value;
+                    Vector3 moveDirection = (targetPosition - selfPosition).normalized;
+
+                    bool isReached = (targetPosition - selfPosition).magnitude <= _stoppingDistance;
+
+                    if (isReached == false)
+                        entity.GetValue(GameEntityAPI.MovementRequest).Invoke(moveDirection);
+
+                    entity.GetValue(GameEntityAPI.RotateRequest).Invoke(moveDirection);
+
+                    if (isReached)
+                        entity.GetValue(GameEntityAPI.Weapon).Value.GetValue(WeaponEntityAPI.FireRequest).Invoke();
+                }
+            });
+
+            entity.GetValue(GameEntityAPI.MovementCommand)
+                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
+                .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
+
+            entity.GetValue(GameEntityAPI.RotateCommand)
+                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
+                .AddAction(args => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
+
+            TakeDamageCommandSetup(entity);
+            DeathCommandSetup(entity);
+        }
+
+        private void DeathCommandSetup(IGameEntity entity)
+        {
             entity.GetValue(GameEntityAPI.DeathCommand)
                 .AddCondition(() => entity.IsDead() && entity.GetValue(GameEntityAPI.DeathDelay).IsCompleted())
                 .AddAction(() =>
@@ -64,6 +107,13 @@ namespace Game.GameEntity.Content.Enemy
                     entity.GetValue(GameEntityAPI.DeathDelay).ResetTime();
                     Destroy(gameObject);
                 });
+        }
+
+        private void TakeDamageCommandSetup(IGameEntity entity)
+        {
+            entity.GetValue(GameEntityAPI.TakeDamageCommand)
+                .AddCondition(_ => entity.IsDead() == false)
+                .AddAction(damage => entity.GetValue(GameEntityAPI.CurrentHealth).Value -= damage);
         }
     }
 }
