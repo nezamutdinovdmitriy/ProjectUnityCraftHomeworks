@@ -15,24 +15,38 @@ namespace Game.GameEntity
         [SerializeField]
         private int _amountAmmo;
 
+        [SerializeField]
+        private Cooldown _destroyTimer;
+
+        private bool _wasUsed;
+        
         public override void Install(IGameEntity entity)
         {
             _interactableInstaller.Install(entity);
 
+            entity.WhenFixedTick(deltaTime =>
+            {
+                if(_wasUsed)
+                    _destroyTimer.Tick(deltaTime);
+                
+                if(_destroyTimer.IsCompleted())
+                    Destroy(gameObject);
+            });
+            
             entity.GetValue(GameEntityAPI.InteractCommand)
                 .AddCondition(interactor =>
                     interactor.HasTag(GameEntityAPI.InteractorTag)
+                    && _wasUsed == false
                     && interactor.TryGetValue(GameEntityAPI.Weapon, out IReactiveVariable<IWeaponEntity> weapon)
-                    && weapon.Value != null)
+                    && weapon.Value?.GetValue(WeaponEntityAPI.Ammo) != null)
                 .AddAction(interactor =>
                 {
                     IReactiveVariable<IWeaponEntity> weapon = interactor.GetValue(GameEntityAPI.Weapon);
 
-                    if (weapon.Value.TryGetValue(WeaponEntityAPI.Ammo, out IReactiveVariable<int> ammo) == false)
-                        return;
-
+                    IReactiveVariable<int> ammo = weapon.Value.GetValue(WeaponEntityAPI.Ammo);
                     ammo.Value += _amountAmmo;
-                    Destroy(gameObject);
+
+                    _wasUsed = true;
                 });
         }
     }

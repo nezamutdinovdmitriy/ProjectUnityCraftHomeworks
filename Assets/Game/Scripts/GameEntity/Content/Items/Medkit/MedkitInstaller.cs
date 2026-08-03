@@ -12,13 +12,28 @@ namespace Game.GameEntity
         [SerializeField]
         private float _healAmount = 3;
         
+        [SerializeField]
+        private Cooldown _destroyTimer;
+
+        private bool _wasUsed;
+        
         public override void Install(IGameEntity entity)
         {
             _interactableInstaller.Install(entity);
             
+            entity.WhenFixedTick(deltaTime =>
+            {
+                if(_wasUsed)
+                    _destroyTimer.Tick(deltaTime);
+                
+                if(_destroyTimer.IsCompleted())
+                    Destroy(gameObject);
+            });
+            
             entity.GetValue(GameEntityAPI.InteractCommand)
                 .AddCondition(interactor =>
                     interactor.HasTag(GameEntityAPI.InteractorTag)
+                    && _wasUsed == false
                     && interactor.TryGetValue(GameEntityAPI.MaxHealth, out IValue<float> maxHealth)
                     && interactor.GetValue(GameEntityAPI.CurrentHealth).Value < maxHealth.Value)
                 .AddAction(interactor =>
@@ -27,7 +42,7 @@ namespace Game.GameEntity
                     IValue<float> maxHealth = interactor.GetValue(GameEntityAPI.MaxHealth);
 
                     currentHealth.Value = Mathf.Min(currentHealth.Value + _healAmount, maxHealth.Value);
-                    Destroy(gameObject);
+                    _wasUsed = true;
                 });
         }
     }

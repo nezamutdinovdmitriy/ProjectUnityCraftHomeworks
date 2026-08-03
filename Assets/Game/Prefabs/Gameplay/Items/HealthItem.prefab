@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2394311319583273948}
+  - component: {fileID: 3204462241307072405}
   m_Layer: 11
   m_Name: <Visual>
   m_TagString: Untagged
@@ -32,6 +33,20 @@ Transform:
   - {fileID: 9042308242965741927}
   m_Father: {fileID: 906204727706075558}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3204462241307072405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816155109594164265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a94d1ae949a418eb70ead593c9a8e80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.MedkitViewInstaller
+  _particle: {fileID: 3922024436423282089}
+  _audioSource: {fileID: 2298006360191853931}
 --- !u!1 &2582695631149681293
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +285,7 @@ MonoBehaviour:
   scriptableInstallers: []
   sceneInstallers:
   - {fileID: 1639259625498891739}
+  - {fileID: 3204462241307072405}
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
@@ -289,6 +305,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.Content.Items.Medkit.MedkitInstaller
   _healAmount: 3
+  _destroyTimer:
+    _duration: 1.5
+    _time: 1.5
 --- !u!1001 &7860753860947560585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -358,6 +377,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d02411e4e4440471cb7168a37d11464e, type: 3}
+--- !u!198 &3922024436423282089 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6591815806074881312, guid: d02411e4e4440471cb7168a37d11464e, type: 3}
+  m_PrefabInstance: {fileID: 7860753860947560585}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5525685001891314167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2429741230345695614, guid: d02411e4e4440471cb7168a37d11464e, type: 3}
