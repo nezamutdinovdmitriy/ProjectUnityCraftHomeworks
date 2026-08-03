@@ -90,6 +90,18 @@ namespace Atomic.Elements
             return true;
         }
 
+        public bool TryInvoke(T1 arg)
+        {
+            if (CanInvoke(arg))
+            {
+                _action?.Invoke(arg);
+                OnEvent?.Invoke(arg);
+                return true;
+            }
+
+            return false;
+        }
+
         [Button]
         public void Invoke(T1 arg1)
         {

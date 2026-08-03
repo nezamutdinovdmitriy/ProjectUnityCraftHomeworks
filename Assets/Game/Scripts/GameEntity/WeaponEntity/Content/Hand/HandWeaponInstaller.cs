@@ -94,8 +94,6 @@ namespace Game.Weapon.Content.Hand
 
                 int size = Physics.OverlapSphereNonAlloc(position, _attackRadius, _colliders);
 
-                Debug.Log($"Colliders in buffer: {size}");
-
                 if (size == 0)
                     return;
 

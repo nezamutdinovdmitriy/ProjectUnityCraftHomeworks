@@ -23,7 +23,7 @@ namespace Game.GameEntity
 
         public void FixedTick(IGameEntity entity, float deltaTime)
         {
-            if (_request.Consume(out var direction) == false)
+            if (_request.Consume(out Vector3 direction) == false)
             {
                 _isMoving.Value = false;
                 return;
@@ -31,14 +31,7 @@ namespace Game.GameEntity
             
             MovementArgs args = new MovementArgs(direction, _speed.Value, deltaTime);
 
-            if (_command.CanInvoke(args) == false)
-            {
-                _isMoving.Value = false;
-                return;
-            }
-
-            _command.Invoke(args);
-            _isMoving.Value = true;
+            _isMoving.Value = _command.TryInvoke(args);
         }
     }
 }

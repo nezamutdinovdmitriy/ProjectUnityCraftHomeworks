@@ -16,6 +16,7 @@ namespace Atomic.Elements
     public interface ICommand<T> : IAction<T>, ISignal<T>
     {
         bool CanInvoke(T arg);
+        bool TryInvoke(T arg);
 
         ICommand<T> AddCondition(Func<T, bool> condition);
         ICommand<T> RemoveCondition(Func<T, bool> condition);

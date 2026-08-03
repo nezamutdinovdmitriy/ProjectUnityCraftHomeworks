@@ -44,10 +44,15 @@ namespace Game.GameEntity
         [SerializeField]
         private ParticleSystem _bodyFallParticle;
 
+        private float _previousHealthAmount;
+        
         public override void Install(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.IsMoving).Subscribe(OnMoved).AddTo(_disposables);
-            entity.GetValue(GameEntityAPI.CurrentHealth).Subscribe(OnTakeDamage).AddTo(_disposables);
+            
+            IReactiveVariable<float> currentHealth = entity.GetValue(GameEntityAPI.CurrentHealth);
+            _previousHealthAmount = currentHealth.Value;
+            currentHealth.Subscribe(OnHealthChanged).AddTo(_disposables);
 
             _animationEvents.Subscribe(MoveReceiveEventKey, OnMovedSFX);
             _animationEvents.Subscribe(BodyFallReceiveEventKey, OnBodyFall);
@@ -79,14 +84,27 @@ namespace Game.GameEntity
             OnBodyFallSFX();
         }
 
-        private void OnTakeDamage(float health)
+        private void OnHealthChanged(float health)
+        {
+            if (health > _previousHealthAmount)
+                OnHealthRecovery();
+            
+            if (health < _previousHealthAmount)
+                OnTakeDamage();
+            
+            if (health <= 0)
+                OnDeath();
+
+            _previousHealthAmount = health;
+        }
+
+        private void OnHealthRecovery() => Debug.Log("HP Recovery");
+
+        private void OnTakeDamage()
         {
             _animator.SetTrigger(TakeDamageKey);
             _takeDamageParticle.Play();
             OnTakeDamageSFX();
-
-            if (health <= 0)
-                OnDeath();
         }
 
         #endregion
