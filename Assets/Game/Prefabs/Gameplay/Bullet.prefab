@@ -156,7 +156,7 @@ MonoBehaviour:
   onlyEditModeGizmos: 0
   autoCompile: 0
   initialTagCapacity: 0
-  initialValueCapacity: 8
+  initialValueCapacity: 10
   initialBehaviourCapacity: 2
 --- !u!114 &3481534846932385176
 MonoBehaviour:
@@ -320,6 +320,10 @@ PrefabInstance:
     - target: {fileID: 755427217659705437, guid: 034704f5139d94360bb441f0e3d7c2b5, type: 3}
       propertyPath: m_Name
       value: BulletTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 755427217659705437, guid: 034704f5139d94360bb441f0e3d7c2b5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1165342850250043447, guid: 034704f5139d94360bb441f0e3d7c2b5, type: 3}
       propertyPath: m_LocalPosition.x

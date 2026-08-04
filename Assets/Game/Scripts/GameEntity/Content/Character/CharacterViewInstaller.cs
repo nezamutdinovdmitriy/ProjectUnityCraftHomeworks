@@ -86,9 +86,6 @@ namespace Game.GameEntity
 
         private void OnHealthChanged(float health)
         {
-            if (health > _previousHealthAmount)
-                OnHealthRecovery();
-            
             if (health < _previousHealthAmount)
                 OnTakeDamage();
             
@@ -98,8 +95,6 @@ namespace Game.GameEntity
             _previousHealthAmount = health;
         }
 
-        private void OnHealthRecovery() => Debug.Log("HP Recovery");
-
         private void OnTakeDamage()
         {
             _animator.SetTrigger(TakeDamageKey);
@@ -108,8 +103,7 @@ namespace Game.GameEntity
         }
 
         #endregion
-
-
+        
         #region SFX
 
         private void PlayRandomSound(AudioClip[] clips)
