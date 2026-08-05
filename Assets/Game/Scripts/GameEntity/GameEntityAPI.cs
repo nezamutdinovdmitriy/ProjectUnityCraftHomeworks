@@ -9,6 +9,7 @@ namespace Game.GameEntity
     {
         // Common
         public static TagKey CharacterTag = new(nameof(CharacterTag));
+        public static ValueKey<IGameEntity, IVariable<IGameEntity>> Owner = new(nameof(Owner));
         
         public static ValueKey<IGameEntity, TransformPositionVariable> Position = new(nameof(Position));
         public static ValueKey<IGameEntity, TransformRotationVariable> Rotation = new(nameof(Rotation));

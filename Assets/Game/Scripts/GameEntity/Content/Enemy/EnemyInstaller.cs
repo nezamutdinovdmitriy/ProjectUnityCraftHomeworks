@@ -53,6 +53,7 @@ namespace Game.GameEntity.Content.Enemy
             _deathInstaller.Install(entity);
             _weaponInstaller.Install(entity);
             _targetInstaller.Install(entity);
+            _fireInstaller.Install(entity);
 
             entity.WhenFixedTick((deltaTime) =>
             {
@@ -82,7 +83,7 @@ namespace Game.GameEntity.Content.Enemy
                     entity.GetValue(GameEntityAPI.RotateRequest).Invoke(moveDirection);
 
                     if (isReached)
-                        entity.GetValue(GameEntityAPI.Weapon).Value.GetValue(WeaponEntityAPI.FireRequest).Invoke();
+                        entity.GetValue(GameEntityAPI.FireRequest).Invoke();
                 }
             });
 
@@ -94,8 +95,21 @@ namespace Game.GameEntity.Content.Enemy
                 .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
                 .AddAction(args => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
 
+            FireCommandSetup(entity);
             TakeDamageCommandSetup(entity);
             DeathCommandSetup(entity);
+        }
+
+        private static void FireCommandSetup(IGameEntity entity)
+        {
+            IWeaponEntity weapon = entity.GetValue(GameEntityAPI.Weapon).Value;
+            
+            entity.GetValue(GameEntityAPI.FireCommand)
+                .AddCondition(() =>
+                    entity.IsDead() == false
+                    && weapon != null)
+                .AddAction(() =>
+                    weapon.GetValue(WeaponEntityAPI.FireRequest).Invoke());
         }
 
         private void DeathCommandSetup(IGameEntity entity)

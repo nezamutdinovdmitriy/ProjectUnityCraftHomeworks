@@ -2050,7 +2050,7 @@ MonoBehaviour:
   _bodyFallSounds:
   - {fileID: 8300000, guid: 62cbe99b1eb804549a609de6169d9df4, type: 3}
   - {fileID: 8300000, guid: 3352ade033aba4780b3044e404093b9a, type: 3}
-  _bodyFallParticle: {fileID: 3066896116097995645}
+  _bodyFallParticle: {fileID: 3634830046846425720}
 --- !u!114 &5135918259915103532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2621,6 +2621,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
+--- !u!198 &3634830046846425720 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4469893772459249764, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
+  m_PrefabInstance: {fileID: 898963041085327900}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5659927560983144487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4825000338556674619, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
@@ -2772,11 +2777,6 @@ PrefabInstance:
 --- !u!4 &3066896116082742347 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1903088277095324807, guid: a9c2783e2b1eb4fb19f59f3af3977f50, type: 3}
-  m_PrefabInstance: {fileID: 3523764827083835596}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &3066896116097995645 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 1903088277109529521, guid: a9c2783e2b1eb4fb19f59f3af3977f50, type: 3}
   m_PrefabInstance: {fileID: 3523764827083835596}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3807615246241092946

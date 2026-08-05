@@ -54,7 +54,10 @@ namespace Game.Weapon
 
             command.AddAction(() =>
             {
-                gameContext.SpawnBullet(_firePoint.position, _firePoint.rotation);
+                gameContext.SpawnBullet(
+                    _firePoint.position, 
+                    _firePoint.rotation, 
+                    weapon.GetValue(WeaponEntityAPI.Owner).Value);
                 
                 weapon.GetValue(WeaponEntityAPI.FireCooldown).ResetTime();
                 weapon.GetValue(WeaponEntityAPI.Ammo).Value--;

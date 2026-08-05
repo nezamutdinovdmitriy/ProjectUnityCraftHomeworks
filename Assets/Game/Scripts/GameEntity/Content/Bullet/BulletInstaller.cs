@@ -24,6 +24,8 @@ namespace Game.GameEntity
 
         public override void Install(IGameEntity entity)
         {
+            entity.AddValue(GameEntityAPI.Owner, new Variable<IGameEntity>());
+            
             _positionInstaller.Install(entity);
             _rotationInstaller.Install(entity);
             _movementInstaller.Install(entity);

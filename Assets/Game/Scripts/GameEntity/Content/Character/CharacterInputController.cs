@@ -21,8 +21,12 @@ namespace Game.GameEntity
         {
             DebugInput(entity);
             
-            Vector3 movementDirection =
-                new Vector3(_movementJoystick.Direction.x, 0, _movementJoystick.Direction.y).normalized;
+            // KeyboardInput
+             Vector3 movementDirection =
+                 new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+            
+            // Vector3 movementDirection =
+            //     new Vector3(_movementJoystick.Direction.x, 0, _movementJoystick.Direction.y).normalized;
             
             Vector3 aimDirection =
                 new Vector3(_aimJoystick.Direction.x, 0, _aimJoystick.Direction.y).normalized;

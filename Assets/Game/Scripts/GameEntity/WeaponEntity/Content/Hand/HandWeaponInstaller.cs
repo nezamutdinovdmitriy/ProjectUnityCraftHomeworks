@@ -80,9 +80,10 @@ namespace Game.Weapon.Content.Hand
             command.AddCondition(() =>
             {
                 bool hasOwner = weapon.GetValue(WeaponEntityAPI.Owner).Value != null;
+                bool isOwnerAlive = weapon.GetValue(WeaponEntityAPI.Owner).Value.IsDead() == false;
                 bool isCooldownCompleted = weapon.GetValue(WeaponEntityAPI.FireCooldown).IsCompleted();
 
-                return hasOwner && isCooldownCompleted;
+                return hasOwner && isOwnerAlive && isCooldownCompleted;
             });
 
             command.AddAction(() =>
