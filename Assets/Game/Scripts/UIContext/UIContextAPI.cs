@@ -11,5 +11,7 @@ namespace Game.UI
         
         public static ValueKey<IUIContext, StatView> HealthView = new(nameof(HealthView));
         public static ValueKey<IUIContext, StatView> AmmoView = new(nameof(AmmoView));
+        
+        public static ValueKey<IUIContext, StatView> KillsView = new(nameof(KillsView));
     }
 }

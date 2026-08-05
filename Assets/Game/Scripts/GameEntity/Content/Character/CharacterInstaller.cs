@@ -40,6 +40,7 @@ namespace Game.GameEntity
         public override void Install(IGameEntity entity)
         {
             entity.AddTag(GameEntityAPI.CharacterTag);
+            entity.AddValue(GameEntityAPI.Score, new ReactiveVariable<int>());
             
             _positionInstaller.Install(entity);
             _rotationInstaller.Install(entity);

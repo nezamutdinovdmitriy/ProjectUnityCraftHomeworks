@@ -21,12 +21,16 @@ namespace Game.UI
         
         [SerializeField]
         private StatView _ammoView;
+
+        [SerializeField]
+        private StatView _killsView;
         
         public override void Install(IUIContext entity)
         {
             entity.AddValue(UIContextAPI.HealthScreenView, _healthScreenView);
             entity.AddValue(UIContextAPI.HealthView, _healthView);
             entity.AddValue(UIContextAPI.AmmoView, _ammoView);
+            entity.AddValue(UIContextAPI.KillsView, _killsView);
             
             _joystickInstaller.Install(entity);
             
@@ -35,6 +39,8 @@ namespace Game.UI
             entity.AddBehaviour(new AmmoViewPresenter(
                 _character.GetValue(GameEntityAPI.Weapon).Value
                     .GetValue(WeaponEntityAPI.Ammo)));
+            entity.AddBehaviour(new KillsViewPresenter(
+                _character.GetValue(GameEntityAPI.Score)));
         }
     }
 }

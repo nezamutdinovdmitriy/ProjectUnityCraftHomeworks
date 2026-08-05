@@ -28116,9 +28116,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3509800379246012445, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: initialTagCapacity
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509800379246012445, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: initialValueCapacity
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509800379246012445, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: initialBehaviourCapacity
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3578180279390331970, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_Name
       value: '[Character]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042443341226284917, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: initialValueCapacity
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5168095568867884736, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_Enabled

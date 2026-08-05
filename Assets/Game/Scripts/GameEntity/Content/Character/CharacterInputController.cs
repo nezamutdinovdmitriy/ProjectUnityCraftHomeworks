@@ -49,9 +49,13 @@ namespace Game.GameEntity
             //  Vector3 movementDirection =
             //      new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
 
-            // TakeDamage
-            if (Input.GetKeyDown(KeyCode.T))
-                entity.GetValue(GameEntityAPI.CurrentHealth).Value -= 1;
+            // // TakeDamage
+            // if (Input.GetKeyDown(KeyCode.T))
+            //     entity.GetValue(GameEntityAPI.CurrentHealth).Value -= 1;
+            
+            // // Add Score
+            // if(Input.GetKeyDown(KeyCode.S))
+            //     entity.GetValue(GameEntityAPI.Score).Value++;
         }
     }
 }
