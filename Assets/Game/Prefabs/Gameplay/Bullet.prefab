@@ -181,8 +181,8 @@ MonoBehaviour:
     _triggerEvents: {fileID: 2337329661280343470}
   _lifetimeInstaller:
     _lifetime:
-      _duration: 3
-      _time: 3
+      _duration: 6
+      _time: 6
 --- !u!114 &2337329661280343470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 755427217659705437, guid: 034704f5139d94360bb441f0e3d7c2b5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1165342850250043447, guid: 034704f5139d94360bb441f0e3d7c2b5, type: 3}
       propertyPath: m_LocalPosition.x

@@ -61,7 +61,7 @@ namespace Game.GameEntity
                 .AddCondition(_ => entity.IsDead() == false)
                 .AddAction(damage => entity.GetValue(GameEntityAPI.CurrentHealth).Value -= damage);
             
-            entity.AddBehaviour(new CharacterInputController());
+            Debug.Log("CHARACTER INSTALLED");
         }
 
         private void SetupFireCommand(IGameEntity entity)

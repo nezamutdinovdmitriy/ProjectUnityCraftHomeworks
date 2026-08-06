@@ -14164,6 +14164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameContextInstaller
   _bulletPool: {fileID: 1655322853}
+  _character: {fileID: 2002911021}
 --- !u!1001 &1102254444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21695,7 +21696,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntityPool
   _initOnAwake: 1
   _acceptExternalReturns: 1
-  _initialCount: 4
+  _initialCount: 2
   _prefab: {fileID: 3440788527751836574, guid: fc383e20fc5b342059ed5ab71e30da44, type: 3}
   _container: {fileID: 1655322852}
   _dontDestroyOnLoad: 0
@@ -28148,6 +28149,10 @@ PrefabInstance:
     - target: {fileID: 5168095568867884736, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6852825789230178484, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _initialAmmoAmount
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6992041410405490774, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_LocalPosition.x

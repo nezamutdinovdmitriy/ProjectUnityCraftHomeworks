@@ -10,11 +10,13 @@ namespace Game.GameEntity
         private Joystick _joystick;
         private ICooldown _cooldown;
         private IVariable<bool> _hasAimingLastFrame;
+        private IRequest _fireRequest;
         
         public void Init(IGameEntity entity)
         {
             _cooldown = entity.GetValue(GameEntityAPI.AimCooldown);
             _hasAimingLastFrame = entity.GetValue(GameEntityAPI.HasAimingLastFrame);
+            _fireRequest = entity.GetValue(GameEntityAPI.FireRequest);
         }
         
         public void FixedTick(IGameEntity entity, float deltaTime)
@@ -24,12 +26,27 @@ namespace Game.GameEntity
             
             bool isAiming = _joystick.Direction != Vector2.zero;
 
-            _cooldown.Tick(deltaTime);
+            if (isAiming)
+            {
+                if (!_hasAimingLastFrame.Value)
+                    _cooldown.ResetTime();
 
-            if (isAiming && _hasAimingLastFrame.Value == false)
-                _cooldown.ResetTime();
+                _cooldown.Tick(deltaTime);
 
+                if (_cooldown.IsCompleted())
+                    _fireRequest.Invoke();
+            }
+            
             _hasAimingLastFrame.Value = isAiming;
+            
+            // _cooldown.Tick(deltaTime);
+            //
+            // if (isAiming && _hasAimingLastFrame.Value == false)
+            //     _cooldown.ResetTime();
+            //
+            // _hasAimingLastFrame.Value = isAiming;
+            
+            Debug.Log(isAiming);
         }
 
         private bool TryGetJoystick()

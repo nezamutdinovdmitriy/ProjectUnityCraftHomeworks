@@ -29,6 +29,6 @@ namespace Game.GameEntity.Core.LifeTime
             }).AddTo(_disposables);
         }
 
-        public void Uninstall() => _disposables.Dispose();
+        public void Dispose() => _disposables.Dispose();
     }
 }
