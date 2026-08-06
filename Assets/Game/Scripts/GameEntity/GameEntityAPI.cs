@@ -39,7 +39,8 @@ namespace Game.GameEntity
         // Aim
         public static ValueKey<IGameEntity, IVariable<bool>> HasAimingLastFrame = new(nameof(HasAimingLastFrame));
         public static ValueKey<IGameEntity, ICooldown> AimCooldown = new(nameof(AimCooldown));
-
+        public static ValueKey<IGameEntity, IVariable<Vector3>> AimDirection = new(nameof(AimDirection));
+        
         // Attack
         public static ValueKey<IGameEntity, IReactiveVariable<IWeaponEntity>> Weapon = new(nameof(Weapon));
         public static ValueKey<IGameEntity, IRequest> FireRequest = new(nameof(FireRequest));
@@ -49,6 +50,7 @@ namespace Game.GameEntity
         public static TagKey InteractableTag = new(nameof(InteractableTag));
         public static TagKey InteractorTag = new(nameof(InteractorTag));
         public static ValueKey<IGameEntity, ICommand<IGameEntity>> InteractCommand = new(nameof(InteractCommand));
+        public static ValueKey<IGameEntity, IVariable<bool>> WasUsed = new(nameof(WasUsed));
         
         // Damage
         public static TagKey DamageableTag = new(nameof(DamageableTag));
@@ -58,5 +60,8 @@ namespace Game.GameEntity
         // LifeTime
         public static ValueKey<IGameEntity, ICooldown> Lifetime = new(nameof(Lifetime));
         public static ValueKey<IGameEntity, ICommand> LifetimeEndCommand = new(nameof(LifetimeEndCommand));
+        
+        // AI
+        public static ValueKey<IGameEntity, IVariable<bool>> TargetIsReached = new(nameof(TargetIsReached));
     }
 }

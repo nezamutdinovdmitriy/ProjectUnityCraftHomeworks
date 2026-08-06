@@ -272,10 +272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21fc219145304a0d9fe66d032307eb3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.Content.Items.Ammo.AmmoInstaller
+  _consumablePickupInstaller:
+    _destroyAfterUseInstaller:
+      _destroyTimer:
+        _duration: 1.25
+        _time: 1.25
   _amountAmmo: 10
-  _destroyTimer:
-    _duration: 1.5
-    _time: 1.5
 --- !u!1 &7655232285111366949
 GameObject:
   m_ObjectHideFlags: 0

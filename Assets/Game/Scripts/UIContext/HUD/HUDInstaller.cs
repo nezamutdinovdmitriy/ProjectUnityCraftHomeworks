@@ -27,20 +27,35 @@ namespace Game.UI
         
         public override void Install(IUIContext entity)
         {
-            entity.AddValue(UIContextAPI.HealthScreenView, _healthScreenView);
-            entity.AddValue(UIContextAPI.HealthView, _healthView);
-            entity.AddValue(UIContextAPI.AmmoView, _ammoView);
-            entity.AddValue(UIContextAPI.KillsView, _killsView);
-            
             _joystickInstaller.Install(entity);
             
+            AddValues(entity);
+            AddBehaviours(entity);
+        }
+
+        private void AddBehaviours(IUIContext entity)
+        {
             entity.AddBehaviour(new HealthScreenPresenter(_character));
+            
             entity.AddBehaviour(new HealthViewPresenter(_character));
+            
             entity.AddBehaviour(new AmmoViewPresenter(
                 _character.GetValue(GameEntityAPI.Weapon).Value
                     .GetValue(WeaponEntityAPI.Ammo)));
+            
             entity.AddBehaviour(new KillsViewPresenter(
                 _character.GetValue(GameEntityAPI.Score)));
+        }
+
+        private void AddValues(IUIContext entity)
+        {
+            entity.AddValue(UIContextAPI.HealthScreenView, _healthScreenView);
+            
+            entity.AddValue(UIContextAPI.HealthView, _healthView);
+            
+            entity.AddValue(UIContextAPI.AmmoView, _ammoView);
+            
+            entity.AddValue(UIContextAPI.KillsView, _killsView);
         }
     }
 }

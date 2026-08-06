@@ -181,8 +181,8 @@ MonoBehaviour:
     _triggerEvents: {fileID: 2337329661280343470}
   _lifetimeInstaller:
     _lifetime:
-      _duration: 6
-      _time: 6
+      _duration: 3
+      _time: 3
 --- !u!114 &2337329661280343470
 MonoBehaviour:
   m_ObjectHideFlags: 0

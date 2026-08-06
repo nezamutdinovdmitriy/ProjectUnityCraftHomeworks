@@ -63,10 +63,7 @@ namespace Game.GameEntity
 
             entity.GetValue(GameEntityAPI.MovementCommand)
                 .AddCondition(_ => true)
-                .AddAction(args =>
-                {
-                    entity.MoveStep(args.Direction, args.Speed, args.DeltaTime);
-                });
+                .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
         }
     }
 }

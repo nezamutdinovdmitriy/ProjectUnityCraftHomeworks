@@ -15,6 +15,7 @@ namespace Game.GameEntity
                 _bulletTrail.emitting = true;
                 _bulletTrail.Clear();
             });
+            
             entity.WhenDisable(() =>
             {
                 _bulletTrail.Clear();

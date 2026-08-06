@@ -18081,7 +18081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1379042641
 Transform:
   m_ObjectHideFlags: 0
@@ -28152,7 +28152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6852825789230178484, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: _initialAmmoAmount
-      value: 100
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6992041410405490774, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28199,9 +28199,17 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7236948478809662794, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _aimInstaller._aimCooldown._time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236948478809662794, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: _interactorInstaller._triggerEvents
       value: 
       objectReference: {fileID: 2002911018}
+    - target: {fileID: 7236948478809662794, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _aimInstaller._aimCooldown._duration
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

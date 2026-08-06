@@ -15,6 +15,7 @@ namespace Game.GameEntity
         {
             entity.AddValue(GameEntityAPI.AimCooldown, _aimCooldown);
             entity.AddValue(GameEntityAPI.HasAimingLastFrame, new Variable<bool>());
+            entity.AddValue(GameEntityAPI.AimDirection, new Variable<Vector3>());
             
             entity.AddBehaviour(new AimBehaviour());
         }

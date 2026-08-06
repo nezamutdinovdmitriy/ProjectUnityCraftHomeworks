@@ -55,49 +55,28 @@ namespace Game.GameEntity.Content.Enemy
             _targetInstaller.Install(entity);
             _fireInstaller.Install(entity);
 
-            entity.WhenFixedTick((deltaTime) =>
-            {
-                if (entity.IsDead())
-                {
-                    entity.GetValue(GameEntityAPI.DeathDelay).Tick(deltaTime);
-                    entity.GetValue(GameEntityAPI.DeathCommand).Invoke();
-                }
-            });
-
-            entity.WhenFixedTick(_ =>
-            {
-                if (entity.TryGetValue(GameEntityAPI.Target, out IVariable<IGameEntity> target)
-                    && target.Value != null
-                    && target.Value.IsDead() == false)
-                {
-                    Vector3 targetPosition = target.Value.GetValue(GameEntityAPI.Position).Value;
-
-                    Vector3 selfPosition = entity.GetValue(GameEntityAPI.Position).Value;
-                    Vector3 moveDirection = (targetPosition - selfPosition).normalized;
-
-                    bool isReached = (targetPosition - selfPosition).magnitude <= _stoppingDistance;
-
-                    if (isReached == false)
-                        entity.GetValue(GameEntityAPI.MovementRequest).Invoke(moveDirection);
-
-                    entity.GetValue(GameEntityAPI.RotateRequest).Invoke(moveDirection);
-
-                    if (isReached)
-                        entity.GetValue(GameEntityAPI.FireRequest).Invoke();
-                }
-            });
-
-            entity.GetValue(GameEntityAPI.MovementCommand)
-                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
-                .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
-
-            entity.GetValue(GameEntityAPI.RotateCommand)
-                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
-                .AddAction(args => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
-
+            MovementCommandSetup(entity);
+            RotateCommandSetup(entity);
             FireCommandSetup(entity);
             TakeDamageCommandSetup(entity);
             DeathCommandSetup(entity);
+            
+            entity.AddBehaviour(new FollowTargetBehaviour(_stoppingDistance));
+            entity.AddBehaviour(new AttackTargetBehaviour());
+        }
+
+        private static void RotateCommandSetup(IGameEntity entity)
+        {
+            entity.GetValue(GameEntityAPI.RotateCommand)
+                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
+                .AddAction(args => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
+        }
+
+        private static void MovementCommandSetup(IGameEntity entity)
+        {
+            entity.GetValue(GameEntityAPI.MovementCommand)
+                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
+                .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
         }
 
         private static void FireCommandSetup(IGameEntity entity)

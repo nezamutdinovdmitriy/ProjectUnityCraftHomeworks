@@ -15,6 +15,8 @@ namespace Game.GameEntity.Core.Death
         {
             entity.AddValue(GameEntityAPI.DeathDelay, _deathDelay);
             entity.AddValue(GameEntityAPI.DeathCommand, new Command());
+            
+            entity.AddBehaviour(new DeathBehaviour());
         }
     }
 }

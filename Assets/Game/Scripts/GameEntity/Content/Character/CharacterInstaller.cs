@@ -60,8 +60,6 @@ namespace Game.GameEntity
             entity.GetValue(GameEntityAPI.TakeDamageCommand)
                 .AddCondition(_ => entity.IsDead() == false)
                 .AddAction(damage => entity.GetValue(GameEntityAPI.CurrentHealth).Value -= damage);
-            
-            Debug.Log("CHARACTER INSTALLED");
         }
 
         private void SetupFireCommand(IGameEntity entity)

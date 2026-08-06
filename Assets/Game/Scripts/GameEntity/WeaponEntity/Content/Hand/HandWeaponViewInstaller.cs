@@ -6,7 +6,6 @@ namespace Game.Weapon.Content.Hand
 {
     public class HandWeaponViewInstaller : SceneEntityInstaller<IWeaponEntity>
     {
-        private const string FireReceiveEventKey = "fire_event";
         private const string StartAttackReceiveEventKey = "start_attack_event";
         
         private readonly DisposableComposite _disposables;

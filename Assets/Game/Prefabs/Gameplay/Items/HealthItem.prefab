@@ -304,10 +304,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5be167cfb649b3beebe183bbd6d216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.Content.Items.Medkit.MedkitInstaller
+  _consumablePickupInstaller:
+    _destroyAfterUseInstaller:
+      _destroyTimer:
+        _duration: 1.25
+        _time: 1.25
   _healAmount: 3
-  _destroyTimer:
-    _duration: 1.5
-    _time: 1.5
 --- !u!1001 &7860753860947560585
 PrefabInstance:
   m_ObjectHideFlags: 0

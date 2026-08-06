@@ -15,7 +15,7 @@ namespace Game.GameEntity.Core.Target
         {
             entity.AddValue(GameEntityAPI.Target, new Variable<IGameEntity>());
             entity.AddValue(GameEntityAPI.Trigger, _triggerEvents);
-            
+            entity.AddValue(GameEntityAPI.TargetIsReached, new Variable<bool>());
             
             entity.AddBehaviour(new DetectTargetBehaviour());
         }

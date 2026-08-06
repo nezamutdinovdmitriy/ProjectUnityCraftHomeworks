@@ -2257,60 +2257,6 @@ Transform:
   - {fileID: 6262046257774591443}
   m_Father: {fileID: 1659238359099357127}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8790207233252635289
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3382220288820516040}
-  - component: {fileID: 4800672727127661529}
-  m_Layer: 0
-  m_Name: View
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3382220288820516040
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8790207233252635289}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2845756347370805700}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4800672727127661529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8790207233252635289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49ca88fdc18e435680db1763b056274d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Weapon.Content.Hand.HandWeaponViewInstaller
-  _animationEvents: {fileID: 5135918259915103532}
-  _audioSource: {fileID: 8082205103597057941}
-  _attackSound:
-  - {fileID: 8300000, guid: 02cdb67c7396c44beb54e44fb1519751, type: 3}
-  - {fileID: 8300000, guid: 88355b2555076420bb57ed334e93fbb7, type: 3}
-  - {fileID: 8300000, guid: 4d1eacb11fd684ab694580c45d2e76c9, type: 3}
-  - {fileID: 8300000, guid: e48126a6fb7c04e3aa8d386db67db486, type: 3}
-  - {fileID: 8300000, guid: 334c4d0608efc42aa88667693c9b7e90, type: 3}
-  - {fileID: 8300000, guid: 8ce8dafae325b4173abb2a9756d41d43, type: 3}
-  - {fileID: 8300000, guid: e1da5f6fdea4749e6ba86cdad0602f73, type: 3}
 --- !u!1 &8822830644718413694
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,7 +2528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4825000338556674619, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4
+      value: 0.097
       objectReference: {fileID: 0}
     - target: {fileID: 4825000338556674619, guid: af35156758e864d44887fd5541d6dfe4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2787,10 +2733,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7405375498600190727}
     m_Modifications:
-    - target: {fileID: 18664128666544965, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: meleePoint
-      value: 
-      objectReference: {fileID: 1192478768667321649}
     - target: {fileID: 1416792984943742102, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2831,56 +2773,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3218769727446915816, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: initialTagCapacity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3218769727446915816, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: initialValueCapacity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3218769727446915816, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: sceneInstallers.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3218769727446915816, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: 'sceneInstallers.Array.data[0]'
-      value: 
-      objectReference: {fileID: 4800672727127661529}
-    - target: {fileID: 3218769727446915816, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: 'sceneInstallers.Array.data[1]'
-      value: 
-      objectReference: {fileID: 5282587029934180364}
-    - target: {fileID: 5379566684066028272, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: _firePoint
-      value: 
-      objectReference: {fileID: 1192478768667321649}
-    - target: {fileID: 5379566684066028272, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: _cooldown._duration
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7223745350942996134, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
       propertyPath: m_Name
       value: Hand
       objectReference: {fileID: 0}
-    - target: {fileID: 9050222108707118430, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: _attackRadius
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9050222108707118430, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: _takeDamageDelay._time
-      value: 0.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 9050222108707118430, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      propertyPath: _takeDamageDelay._duration
-      value: 0.51
-      objectReference: {fileID: 0}
+    - target: {fileID: 7536808437054671415, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      propertyPath: _audioSource
+      value: 
+      objectReference: {fileID: 8082205103597057941}
+    - target: {fileID: 7536808437054671415, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      propertyPath: _animationEvents
+      value: 
+      objectReference: {fileID: 5135918259915103532}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1416792984943742102, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3382220288820516040}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
 --- !u!114 &1764289448919355322 stripped
@@ -2899,17 +2806,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1416792984943742102, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
   m_PrefabInstance: {fileID: 3807615246241092946}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5282587029934180364 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9050222108707118430, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-  m_PrefabInstance: {fileID: 3807615246241092946}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8b348ca1f244b2297110f5e4bf928e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Weapon.Content.Hand.HandWeaponInstaller
 --- !u!1001 &4012628793975234114
 PrefabInstance:
   m_ObjectHideFlags: 0

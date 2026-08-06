@@ -30,6 +30,8 @@ namespace Game.GameEntity
             Vector3 aimDirection =
                 new Vector3(_aimJoystick.Direction.x, 0, _aimJoystick.Direction.y).normalized;
 
+            _character.Value.GetValue(GameEntityAPI.AimDirection).Value = aimDirection;
+                
             if (movementDirection != Vector3.zero)
                 _character.Value.GetValue(GameEntityAPI.MovementRequest).Invoke(movementDirection);
 

@@ -19,8 +19,6 @@ namespace Game
             context.AddValue(GameContextAPI.Character, new Variable<IGameEntity>(_character));
             
             context.AddBehaviour(new CharacterInputController());
-            
-            Debug.Log("GAME CONTEXT INSTALLED");
         }
     }
 }

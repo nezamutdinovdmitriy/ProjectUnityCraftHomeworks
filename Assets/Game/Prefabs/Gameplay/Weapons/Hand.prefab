@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6390303288566782266
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2674576088902851687}
+  - component: {fileID: 7536808437054671415}
+  m_Layer: 0
+  m_Name: View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2674576088902851687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390303288566782266}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1416792984943742102}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7536808437054671415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390303288566782266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49ca88fdc18e435680db1763b056274d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Weapon.Content.Hand.HandWeaponViewInstaller
+  _animationEvents: {fileID: 0}
+  _audioSource: {fileID: 0}
+  _attackSound:
+  - {fileID: 8300000, guid: 02cdb67c7396c44beb54e44fb1519751, type: 3}
+  - {fileID: 8300000, guid: 88355b2555076420bb57ed334e93fbb7, type: 3}
+  - {fileID: 8300000, guid: 4d1eacb11fd684ab694580c45d2e76c9, type: 3}
+  - {fileID: 8300000, guid: e48126a6fb7c04e3aa8d386db67db486, type: 3}
+  - {fileID: 8300000, guid: 334c4d0608efc42aa88667693c9b7e90, type: 3}
+  - {fileID: 8300000, guid: 8ce8dafae325b4173abb2a9756d41d43, type: 3}
+  - {fileID: 8300000, guid: e1da5f6fdea4749e6ba86cdad0602f73, type: 3}
 --- !u!1 &7223745350942996134
 GameObject:
   m_ObjectHideFlags: 0
@@ -26,11 +80,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7223745350942996134}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2674576088902851687}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3218769727446915816
@@ -51,12 +106,13 @@ MonoBehaviour:
   uninstallOnDestroy: 1
   scriptableInstallers: []
   sceneInstallers:
+  - {fileID: 7536808437054671415}
   - {fileID: 9050222108707118430}
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
-  initialTagCapacity: 0
-  initialValueCapacity: 3
+  initialTagCapacity: 1
+  initialValueCapacity: 5
   initialBehaviourCapacity: 0
 --- !u!114 &9050222108707118430
 MonoBehaviour:
@@ -73,5 +129,8 @@ MonoBehaviour:
   _attackCooldown:
     _duration: 1
     _time: 1
+  _takeDamageDelay:
+    _duration: 0.51
+    _time: 0.51
   _damage: 1
-  _attackRadius: 0.2
+  _attackRadius: 0.8
