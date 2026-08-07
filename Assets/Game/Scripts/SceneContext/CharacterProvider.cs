@@ -6,6 +6,11 @@ namespace Game.Scripts.SceneContext
     {
         private IEntity _character;
 
+        public CharacterProvider(IEntity character)
+        {
+            _character = character;
+        }
+
         public void Register(IEntity character) => _character = character;
         public void Unregister() => _character = null;
 

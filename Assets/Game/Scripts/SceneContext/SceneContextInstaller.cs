@@ -1,4 +1,6 @@
-﻿using Zenject;
+﻿using Game.Scripts.GameObjects;
+using UnityEngine;
+using Zenject;
 
 namespace Game.Scripts.SceneContext
 {
@@ -6,9 +8,12 @@ namespace Game.Scripts.SceneContext
     {
         private readonly CharacterSystemsInstaller _characterSystemInstaller = new();
 
+        [SerializeField]
+        private Entity _character;
+        
         public override void InstallBindings()
         {
-            Container.Bind<CharacterProvider>().AsSingle();
+            Container.Bind<CharacterProvider>().AsSingle().WithArguments(_character);
             
             Container.Install(_characterSystemInstaller);
         }

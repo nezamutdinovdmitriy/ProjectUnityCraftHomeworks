@@ -39,8 +39,6 @@ namespace Game
         
         private readonly GroundedComponent _groundedComponent;
 
-        private readonly CharacterProvider _characterProvider;
-
         public Character(Rigidbody2D rigidbody, 
             MoveRequestComponent moveRequestComponent,
             MoveTransformComponent moveTransformComponent,
@@ -53,8 +51,7 @@ namespace Game
             [Inject(Id = AttackType.Push)] AttackRequestComponent pushAttackRequestComponent, 
             [Inject(Id = AttackType.Toss)] AttackRequestComponent tossAttackRequestComponent, 
             [Inject(Id = AttackType.Push)] ForceAttackComponent pushAttackComponent, 
-            [Inject(Id = AttackType.Toss)] ForceAttackComponent tossAttackComponent, 
-            CharacterProvider characterProvider)
+            [Inject(Id = AttackType.Toss)] ForceAttackComponent tossAttackComponent)
         {
             _rigidbody = rigidbody;
             _moveRequestComponent = moveRequestComponent;
@@ -69,7 +66,6 @@ namespace Game
             _tossAttackRequestComponent = tossAttackRequestComponent;
             _pushAttackComponent = pushAttackComponent;
             _tossAttackComponent = tossAttackComponent;
-            _characterProvider = characterProvider;
         }
         
         public void Initialize()
@@ -79,14 +75,11 @@ namespace Game
             AttackBehaviorSetup();
             
             _healthComponent.OnDied += OnDied;
-            
-            _characterProvider.Register(_rigidbody.GetComponent<Entity>());
         }
         
         public void Dispose()
         {
             _healthComponent.OnDied -= OnDied;
-            _characterProvider.Unregister();
         }
 
         public void Push() => _pushAttackRequestComponent.RequestAttack();
