@@ -25,7 +25,7 @@ namespace Game
         
         private readonly FollowTargetComponent _followTargetComponent;
 
-        private readonly PatrolComponent _pointProviderComponent;
+        private readonly PatrolComponent _patrolComponent;
 
         private readonly HealthComponent _healthComponent;
         private readonly DeathRequestComponent _deathRequestComponent;
@@ -44,7 +44,7 @@ namespace Game
             MoveRequestComponent moveRequestComponent, 
             MoveTransformComponent moveTransformComponent, 
             FollowTargetComponent followTargetComponent, 
-            PatrolComponent pointProviderComponent, 
+            PatrolComponent patrolComponent, 
             HealthComponent healthComponent, 
             DeathRequestComponent deathRequestComponent, 
             AttackRequestComponent attackRequestComponent, 
@@ -57,7 +57,7 @@ namespace Game
             _moveRequestComponent = moveRequestComponent;
             _moveTransformComponent = moveTransformComponent;
             _followTargetComponent = followTargetComponent;
-            _pointProviderComponent = pointProviderComponent;
+            _patrolComponent = patrolComponent;
             _healthComponent = healthComponent;
             _deathRequestComponent = deathRequestComponent;
             _attackRequestComponent = attackRequestComponent;
@@ -101,7 +101,7 @@ namespace Game
             _moveRequestComponent.SetAction(this);
             _moveRequestComponent.SetCondition(this);
             
-            _pointProviderComponent.SetCondition(this);
+            _patrolComponent.SetCondition(this);
         }
 
         private void LifeCycleBehaviourSetup()
@@ -135,6 +135,6 @@ namespace Game
             => _healthComponent.IsDied;
 
         bool PatrolComponent.ICondition.Evaluate() 
-            => _followTargetComponent.IsDestinationReached();
+            => _followTargetComponent.IsDestinationReached();   
     }
 }
