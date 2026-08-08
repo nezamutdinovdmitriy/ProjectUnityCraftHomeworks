@@ -14,30 +14,30 @@ namespace Game.Patrol
             [field: SerializeField]
             public List<Transform> PatrolPoints { get; private set; }
         }
-        
+
         public interface ICondition
         {
             public bool Evaluate();
         }
-        
+
         public interface IAction
         {
             public void Invoke();
         }
-        
-        private readonly Queue<Transform> _patrolPointsQueue = new();
+
+        private readonly Transform[] _patrolPoints;
         private readonly TargetComponent _targetComponent;
 
         private ICondition _condition;
         private IAction _action;
 
+        private int _currentPointIndex = -1;
+
         public PatrolComponent(Settings settings, TargetComponent targetComponent)
         {
             _targetComponent = targetComponent;
-            
-            foreach (Transform patrolPoint in settings.PatrolPoints)
-                _patrolPointsQueue.Enqueue(patrolPoint);
-            
+            _patrolPoints = settings.PatrolPoints.ToArray();
+
             SwitchToNextPoint();
         }
 
@@ -55,9 +55,10 @@ namespace Game.Patrol
 
         private void SwitchToNextPoint()
         {
-            Transform point = _patrolPointsQueue.Dequeue();
-            _patrolPointsQueue.Enqueue(point);
-            
+            _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
+
+            Transform point = _patrolPoints[_currentPointIndex];
+
             _targetComponent.Target = point.gameObject;
         }
     }
