@@ -26,7 +26,7 @@ namespace Game
                 .AsSingle()
                 .WithArguments(_moveTransformSettings);
             
-            Container.Bind<FollowTargetComponent>()
+            Container.BindInterfacesAndSelfTo<FollowTargetComponent>()
                 .AsSingle()
                 .WithArguments(_followTargetSettings);
             

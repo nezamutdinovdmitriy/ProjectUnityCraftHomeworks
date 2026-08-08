@@ -30,7 +30,7 @@ namespace Game
                 .AsSingle()
                 .WithArguments(_detectTargetSettings);
             
-            Container.Bind<FollowTargetComponent>()
+            Container.BindInterfacesAndSelfTo<FollowTargetComponent>()
                 .AsSingle()
                 .WithArguments(_followTargetSettings);
         }

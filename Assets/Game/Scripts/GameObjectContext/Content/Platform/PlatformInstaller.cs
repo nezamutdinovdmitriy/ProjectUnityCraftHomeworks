@@ -24,6 +24,8 @@ namespace Game
         
         public override void InstallBindings()
         {
+            Container.BindInterfacesAndSelfTo<MoveRequestComponent>().AsSingle();
+            
             Container.Bind<TargetComponent>().FromInstance(_targetComponent).AsSingle();
             
             Container.BindInterfacesAndSelfTo<Platform>().AsSingle().NonLazy();
@@ -34,7 +36,7 @@ namespace Game
 
             Container.BindInterfacesAndSelfTo<PatrolComponent>().AsSingle().WithArguments(_pointProviderSettings);
 
-            Container.Bind<FollowTargetComponent>().AsSingle().WithArguments(_followTargetSettings);
+            Container.BindInterfacesAndSelfTo<FollowTargetComponent>().AsSingle().WithArguments(_followTargetSettings);
         }
     }
 }

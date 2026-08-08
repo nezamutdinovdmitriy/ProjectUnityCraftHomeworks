@@ -1,9 +1,10 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Target
 {
-    public class FollowTargetComponent
+    public class FollowTargetComponent : IFixedTickable
     {
         [Serializable]
         public class Settings
@@ -15,27 +16,27 @@ namespace Game.Target
         private readonly Settings _settings;
         private readonly Transform _transform;
         private readonly TargetComponent _targetComponent;
+        private readonly MoveRequestComponent _moveRequestComponent;
 
         public FollowTargetComponent(
             Settings settings, 
             Transform transform, 
-            TargetComponent targetComponent)
+            TargetComponent targetComponent, 
+            MoveRequestComponent moveRequestComponent)
         {
             _settings = settings;
             _transform = transform;
             _targetComponent = targetComponent;
+            _moveRequestComponent = moveRequestComponent;
         }
         
-        public bool TryGetFollowDirection(out Vector2 direction)
+        public void FixedTick()
         {
             if (_targetComponent.Target == null || IsDestinationReached())
-            {
-                direction = Vector2.zero;
-                return false;
-            }
-
-            direction = GetDirectionToTarget();
-            return true;
+                return;
+            
+            Vector2 directionToTarget = GetDirectionToTarget();
+            _moveRequestComponent.RequestMove(directionToTarget);
         }
         
         public bool IsDestinationReached() => GetDistanceToTarget() <= _settings.StoppingDistance;

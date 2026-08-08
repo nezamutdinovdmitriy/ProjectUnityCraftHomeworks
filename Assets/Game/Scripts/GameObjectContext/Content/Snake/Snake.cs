@@ -14,8 +14,8 @@ namespace Game
         DeathRequestComponent.IAction,
         DeathRequestComponent.ICondition,
         IInitializable,
-        IDisposable,
-        IFixedTickable
+        IDisposable
+        //IFixedTickable
     {
         private readonly int _damage;
         
@@ -74,11 +74,11 @@ namespace Game
             _collisionComponent.OnEntered -= OnCollisionEntered;
         }
 
-        public void FixedTick()
-        {
-            if(_followTargetComponent.TryGetFollowDirection(out Vector2 direction))
-                _moveRequestComponent.RequestMove(direction);
-        }
+        // public void FixedTick()
+        // {
+        //     if(_followTargetComponent.TryGetFollowDirection(out Vector2 direction))
+        //         _moveRequestComponent.RequestMove(direction);
+        // }
 
         private void OnDied() 
             => _deathRequestComponent.RequestDeath();

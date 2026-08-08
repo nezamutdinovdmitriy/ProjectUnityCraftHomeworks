@@ -16,8 +16,8 @@ namespace Game
         DeathRequestComponent.ICondition,
         PatrolComponent.ICondition,
         IInitializable,
-        IDisposable,
-        IFixedTickable
+        IDisposable
+        //IFixedTickable
     {
         private readonly int _damage;
         
@@ -52,8 +52,7 @@ namespace Game
             ForceAttackComponent attackComponent, 
             GroundedComponent groundedComponent, 
             CollisionComponent collisionComponent, 
-            Transform transform, 
-            TargetComponent targetComponent)
+            Transform transform)
         {
             _damage = damage;
             _moveRequestComponent = moveRequestComponent;
@@ -85,11 +84,11 @@ namespace Game
             _collisionComponent.OnEntered -= OnCollisionEntered;
         }
 
-        public void FixedTick()
-        {
-            if(_followTargetComponent.TryGetFollowDirection(out Vector2 direction))
-                _moveRequestComponent.RequestMove(direction);
-        }
+        // public void FixedTick()
+        // {
+        //     if(_followTargetComponent.TryGetFollowDirection(out Vector2 direction))
+        //         _moveRequestComponent.RequestMove(direction);
+        // }
 
         private void OnDied() 
             => _deathRequestComponent.RequestDeath();
