@@ -16,8 +16,6 @@ namespace Game
 
         [SerializeField]
         private CharacterMovementInstaller _movementInstaller;
-
-        //private readonly CharacterSystemsInstaller _systemsInstaller = new();
         
         public override void InstallBindings()
         {
@@ -27,7 +25,6 @@ namespace Game
             Container.Install(_attacksInstaller);
             Container.Install(_lifeCycleInstaller);
             Container.Install(_movementInstaller);
-            //Container.Install(_systemsInstaller);
         }
     }
 }

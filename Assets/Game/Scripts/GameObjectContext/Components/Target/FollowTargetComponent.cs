@@ -36,7 +36,7 @@ namespace Game.Target
                 return;
             
             Vector2 directionToTarget = GetDirectionToTarget();
-            _moveRequestComponent.RequestMove(directionToTarget);
+            _moveRequestComponent.RequestMove(directionToTarget);   
         }
         
         public bool IsDestinationReached() => GetDistanceToTarget() <= _settings.StoppingDistance;

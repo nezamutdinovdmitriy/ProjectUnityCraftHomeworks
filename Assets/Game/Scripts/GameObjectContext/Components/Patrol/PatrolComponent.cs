@@ -19,16 +19,10 @@ namespace Game.Patrol
             public bool Evaluate();
         }
 
-        public interface IAction
-        {
-            public void Invoke();
-        }
-
         private readonly Transform[] _patrolPoints;
         private readonly TargetComponent _targetComponent;
 
         private ICondition _condition;
-        private IAction _action;
 
         private int _currentPointIndex = -1;
 
@@ -40,16 +34,12 @@ namespace Game.Patrol
             SwitchToNextPoint();
         }
 
-        public void SetAction(IAction action) => _action = action;
         public void SetCondition(ICondition condition) => _condition = condition;
 
         public void FixedTick()
         {
             if (_condition.Evaluate())
-            {
                 SwitchToNextPoint();
-                _action?.Invoke();
-            }
         }
 
         private void SwitchToNextPoint()
@@ -57,7 +47,6 @@ namespace Game.Patrol
             _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
 
             Transform point = _patrolPoints[_currentPointIndex];
-
             _targetComponent.Target = point.gameObject;
         }
     }
