@@ -12,7 +12,7 @@ namespace Game.Patrol
         public class Settings
         {
             [field: SerializeField]
-            public List<Transform> PatrolPoints { get; private set; }
+            public Transform[] PatrolPoints { get; private set; }
         }
 
         public interface ICondition
@@ -36,7 +36,7 @@ namespace Game.Patrol
         public PatrolComponent(Settings settings, TargetComponent targetComponent)
         {
             _targetComponent = targetComponent;
-            _patrolPoints = settings.PatrolPoints.ToArray();
+            _patrolPoints = settings.PatrolPoints;
 
             SwitchToNextPoint();
         }
