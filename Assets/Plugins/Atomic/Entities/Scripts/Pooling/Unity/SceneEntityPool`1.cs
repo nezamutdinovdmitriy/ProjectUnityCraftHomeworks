@@ -121,6 +121,7 @@ namespace Atomic.Entities
             if (_rentEntities.Remove(entity) || _acceptExternalReturns)
             {
                 this.OnReturn(entity);
+                entity.transform.SetParent(_container);
                 _pooledEntities.Push(entity);
             }
             else
@@ -176,11 +177,8 @@ namespace Atomic.Entities
         /// Called when an entity is returned to the pool.
         /// </summary>
         /// <param name="entity">The entity being returned.</param>
-        protected virtual void OnReturn(E entity)
-        {
-            entity.gameObject.SetActive(false);
-            entity.transform.SetParent(_container);
-        }
+        protected virtual void OnReturn(E entity) 
+            => entity.gameObject.SetActive(false);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private E CreateEntity()
