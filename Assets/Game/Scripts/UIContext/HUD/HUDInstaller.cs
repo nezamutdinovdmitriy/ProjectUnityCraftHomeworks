@@ -1,7 +1,5 @@
-using Atomic.Elements;
 using Atomic.Entities;
 using Game.GameEntity;
-using Game.Weapon;
 using UnityEngine;
 
 namespace Game.UI

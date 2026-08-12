@@ -53,17 +53,13 @@ namespace Game.GameEntity
 
         private static void SetupMovementBehaviour(IGameEntity entity)
         {
-            IRequest<Vector3> movementRequest = entity.GetValue(GameEntityAPI.MovementRequest);
-
-            entity.WhenFixedTick(_ =>
+            entity.WhenFixedTick(deltaTime =>
             {
-                Quaternion rotation = entity.GetValue(GameEntityAPI.Rotation).Value;
-                movementRequest.Invoke(rotation * Vector3.forward);
+                Quaternion bulletRotation = entity.GetValue(GameEntityAPI.Rotation).Value;
+                float movementSpeed = entity.GetValue(GameEntityAPI.MovementSpeed).Value;
+                
+                entity.MoveStep(bulletRotation * Vector3.forward, movementSpeed, deltaTime);
             });
-
-            entity.GetValue(GameEntityAPI.MovementCommand)
-                .AddCondition(_ => true)
-                .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
         }
     }
 }

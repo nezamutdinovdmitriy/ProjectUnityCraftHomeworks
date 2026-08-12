@@ -9288,6 +9288,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.4999998, y: 0.27415082, z: 2.5000048}
   m_Center: {x: -1.2499853, y: 0.13707541, z: 1.25}
+--- !u!4 &637988519 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2815904118600261014, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
+  m_PrefabInstance: {fileID: 761039289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &644349185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10040,10 +10045,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 803416448}
     m_Modifications:
-    - target: {fileID: 3596807987023879197, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: _targetInstaller._triggerEvents
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.5
@@ -10083,10 +10084,6 @@ PrefabInstance:
     - target: {fileID: 4361596233082998913, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6213630575608684104, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
-      propertyPath: _initialTarget
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6355162821186015845, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_Name
@@ -11023,7 +11020,7 @@ PrefabInstance:
     - target: {fileID: 5282587029934180364, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: _firePoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 637988519}
     - target: {fileID: 6355162821186015845, guid: 851e3fe164bba47c9ac1c74a9fc885ff, type: 3}
       propertyPath: m_Name
       value: Zombie (5)
