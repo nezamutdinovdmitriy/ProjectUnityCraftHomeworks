@@ -22,6 +22,7 @@ namespace Game.GameEntity
         public static ValueKey<IGameEntity, IRequest<Vector3>> MovementRequest = new(nameof(MovementRequest));
         public static ValueKey<IGameEntity, ICommand<MovementArgs>> MovementCommand = new(nameof(MovementCommand));
         public static ValueKey<IGameEntity, IValue<float>> MovementSpeed = new(nameof(MovementSpeed));
+        public static ValueKey<IGameEntity, IVariable<Vector3>> MovementDirection = new(nameof(MovementDirection));
         
         // Rotation
         public static ValueKey<IGameEntity, IValue<float>> RotateSpeed = new(nameof(RotateSpeed));

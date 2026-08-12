@@ -18,6 +18,7 @@ namespace Game.GameEntity
             
             entity.AddValue(GameEntityAPI.MovementRequest, new Request<Vector3>());
             entity.AddValue(GameEntityAPI.MovementCommand, new Command<MovementArgs>());
+            entity.AddValue(GameEntityAPI.MovementDirection, new Variable<Vector3>());
             
             entity.AddBehaviour(new MovementBehaviour());
         }

@@ -45,6 +45,10 @@ namespace Game.UI
             
             entity.AddBehaviour(new KillsViewPresenter(
                 _character.GetValue(GameEntityAPI.Score)));
+            
+            entity.AddBehaviour(new CharacterMovementController());
+            entity.AddBehaviour(new CharacterAimController());
+            entity.AddBehaviour(new CharacterRotateController());
         }
 
         private void AddValues(IUIContext entity)

@@ -17,8 +17,6 @@ namespace Game
         {
             context.AddValue(GameContextAPI.BulletPool, _bulletPool);
             context.AddValue(GameContextAPI.Character, new Variable<IGameEntity>(_character));
-            
-            context.AddBehaviour(new CharacterInputController());
         }
     }
 }
