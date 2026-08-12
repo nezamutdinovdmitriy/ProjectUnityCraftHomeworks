@@ -1,6 +1,5 @@
 using Atomic.Elements;
 using Atomic.Entities;
-using Game.GameEntity;
 
 namespace Game.UI
 {

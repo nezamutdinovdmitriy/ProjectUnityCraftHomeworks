@@ -1,14 +1,19 @@
 using Atomic.Entities;
-using Game.GameEntity;
+using Game.GameEntities;
 using UnityEngine;
 
-namespace Game.Bullets
+namespace Game
 {
     public static class BulletsUseCase
     {
-        public static IGameEntity SpawnBullet(this IGameContext gameContext, Vector3 position, Quaternion rotation, IGameEntity owner, float spreadAngle = 0.25f)
+        public static IGameEntity SpawnBullet(
+            this IGameContext gameContext,
+            Vector3 position, 
+            Quaternion rotation, 
+            IGameEntity owner, 
+            float spreadAngle = 0.25f)
         {
-            GameEntity.GameEntity bullet = gameContext.GetValue(GameContextAPI.BulletPool).Rent();
+            GameEntity bullet = gameContext.GetValue(GameContextAPI.BulletPool).Rent();
             
             bullet.GetValue(GameEntityAPI.Owner).Value = owner;
             bullet.GetValue(GameEntityAPI.Position).Value = position;
@@ -19,7 +24,7 @@ namespace Game.Bullets
             return bullet;
         }
 
-        public static void DestroyBullet(this IGameContext gameContext, GameEntity.GameEntity bullet)
+        public static void DestroyBullet(this IGameContext gameContext, GameEntity bullet)
         {
             BulletEntityPool pool = gameContext.GetValue(GameContextAPI.BulletPool);
 

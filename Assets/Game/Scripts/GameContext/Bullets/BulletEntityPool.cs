@@ -1,6 +1,6 @@
 using Atomic.Entities;
 
-namespace Game.GameEntity
+namespace Game.GameEntities
 {
     public class BulletEntityPool : SceneEntityPool<GameEntity>, IEntityPool<IGameEntity>
     {

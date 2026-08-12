@@ -1,6 +1,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
-using Game.GameEntity;
+using Game.GameEntities;
 using UnityEngine;
 
 namespace Game.UI

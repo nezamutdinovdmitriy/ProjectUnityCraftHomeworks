@@ -1,6 +1,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
-using Game.GameEntity;
+using Game.GameEntities;
 using UnityEngine;
 
 namespace Game
@@ -11,7 +11,7 @@ namespace Game
         private BulletEntityPool _bulletPool;
 
         [SerializeField]
-        private GameEntity.GameEntity _character;
+        private GameEntity _character;
         
         public override void Install(IGameContext context)
         {

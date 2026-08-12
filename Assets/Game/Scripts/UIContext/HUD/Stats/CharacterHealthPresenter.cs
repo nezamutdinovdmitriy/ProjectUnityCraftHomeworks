@@ -1,7 +1,7 @@
 using System.Globalization;
 using Atomic.Elements;
 using Atomic.Entities;
-using Game.GameEntity;
+using Game.GameEntities;
 
 namespace Game.UI
 {

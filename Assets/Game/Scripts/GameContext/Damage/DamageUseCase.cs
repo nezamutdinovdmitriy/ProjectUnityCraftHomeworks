@@ -1,4 +1,4 @@
-using Game.GameEntity;
+using Game.GameEntities;
 using Game.Score;
 
 namespace Game

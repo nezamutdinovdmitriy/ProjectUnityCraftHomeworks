@@ -1,9 +1,9 @@
 using Atomic.Elements;
 using Atomic.Entities;
-using Game.UI;
+using Game.GameEntities;
 using UnityEngine;
 
-namespace Game.GameEntity
+namespace Game.UI
 {
     public class CharacterMovementController : IUIContextInit, IUIContextFixedTick
     {
