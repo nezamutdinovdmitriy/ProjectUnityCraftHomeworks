@@ -8,7 +8,7 @@ namespace Game
     public class GameContextInstaller : SceneEntityInstaller<IGameContext>
     {
         [SerializeField]
-        private GameEntityPool _bulletPool;
+        private BulletEntityPool _bulletPool;
 
         [SerializeField]
         private GameEntity.GameEntity _character;
