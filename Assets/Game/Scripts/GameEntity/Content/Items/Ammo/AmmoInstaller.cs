@@ -1,7 +1,9 @@
 using System;
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.GameEntity.Content.Items;
 using Game.Weapon;
+using Game.Weapon.Content;
 using UnityEngine;
 
 namespace Game.GameEntity
@@ -20,16 +22,10 @@ namespace Game.GameEntity
             _consumablePickupInstaller.Install(entity);
 
             entity.GetValue(GameEntityAPI.InteractCommand)
-                .AddCondition(interactor =>
-                    interactor.TryGetValue(GameEntityAPI.Weapon, out IReactiveVariable<IWeaponEntity> weapon)
-                    && weapon.Value?.GetValue(WeaponEntityAPI.Ammo) != null)
-                .AddAction(interactor =>
-                {
-                    IReactiveVariable<IWeaponEntity> weapon = interactor.GetValue(GameEntityAPI.Weapon);
-                    IReactiveVariable<int> ammo = weapon.Value.GetValue(WeaponEntityAPI.Ammo);
-                    
-                    ammo.Value += _amountAmmo;
-                });
+                .AddCondition(interactor
+                    => interactor.TryGetWeapon(out IReactiveVariable<IWeaponEntity> weapon)
+                       && weapon.Value.HasAmmo())
+                .AddAction(interactor => interactor.PickupAmmo(_amountAmmo));
         }
     }
 }

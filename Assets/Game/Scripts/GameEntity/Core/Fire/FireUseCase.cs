@@ -9,11 +9,26 @@ namespace Game.GameEntity
         public static bool HasWeapon(this IGameEntity entity)
         {
             if (entity.TryGetValue(
-                    GameEntityAPI.Weapon, 
+                    GameEntityAPI.Weapon,
                     out IReactiveVariable<IWeaponEntity> weapon)
                 && weapon.Value != null)
                 return true;
             
+            return false;
+        }
+        
+        public static bool TryGetWeapon(this IGameEntity entity, out IReactiveVariable<IWeaponEntity> weaponEntity)
+        {
+            if (entity.TryGetValue(
+                    GameEntityAPI.Weapon,
+                    out IReactiveVariable<IWeaponEntity> weapon)
+                && weapon.Value != null)
+            {
+                weaponEntity = weapon;
+                return true;
+            }
+
+            weaponEntity = null;
             return false;
         }
 

@@ -17,16 +17,8 @@ namespace Game.GameEntity
             _consumablePickupInstaller.Install(entity);
             
             entity.GetValue(GameEntityAPI.InteractCommand)
-                .AddCondition(interactor =>
-                    interactor.TryGetValue(GameEntityAPI.MaxHealth, out IValue<float> maxHealth)
-                    && interactor.GetValue(GameEntityAPI.CurrentHealth).Value < maxHealth.Value)
-                .AddAction(interactor =>
-                {
-                    IReactiveVariable<float> currentHealth = interactor.GetValue(GameEntityAPI.CurrentHealth);
-                    IValue<float> maxHealth = interactor.GetValue(GameEntityAPI.MaxHealth);
-
-                    currentHealth.Value = Mathf.Min(currentHealth.Value + _healAmount, maxHealth.Value);
-                });
+                .AddCondition(interactor => interactor.IsHealthNotFull())
+                .AddAction(interactor => interactor.HealthRestore(_healAmount));
         }
     }
 }
