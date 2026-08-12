@@ -11,7 +11,7 @@ namespace Game.GameEntity
         private IVariable<Vector3> _aimDirection;
 
         private IRequest<Vector3> _rotateRequest;
-        
+
         public void Init(IUIContext context)
         {
             GameContext gameContext = GameContext.Instance;
@@ -22,14 +22,15 @@ namespace Game.GameEntity
 
             _rotateRequest = character.GetValue(GameEntityAPI.RotateRequest);
         }
-        
+
         public void FixedTick(IUIContext context, float deltaTime)
         {
-            if (_aimDirection.Value != Vector3.zero)
-                _rotateRequest.Invoke(_aimDirection.Value );
-            
-            else if (_movementDirection.Value != Vector3.zero)
-                _rotateRequest.Invoke(_movementDirection.Value);
+            Vector3 direction = _aimDirection.Value != Vector3.zero
+                ? _aimDirection.Value
+                : _movementDirection.Value;
+
+            if (direction != Vector3.zero)
+                _rotateRequest.Invoke(direction);
         }
     }
 }

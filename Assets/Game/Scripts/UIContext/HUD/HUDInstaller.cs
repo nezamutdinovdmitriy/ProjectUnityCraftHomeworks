@@ -1,3 +1,4 @@
+using Atomic.Elements;
 using Atomic.Entities;
 using Game.GameEntity;
 using Game.Weapon;
@@ -14,9 +15,6 @@ namespace Game.UI
         private HealthScreenView _healthScreenView;
 
         [SerializeField]
-        private GameEntity.GameEntity _character;
-
-        [SerializeField]
         private StatView _healthView;
         
         [SerializeField]
@@ -27,24 +25,22 @@ namespace Game.UI
         
         public override void Install(IUIContext entity)
         {
+            GameContext gameContext = GameContext.Instance;
+
             _joystickInstaller.Install(entity);
             
             AddValues(entity);
-            AddBehaviours(entity);
+            AddBehaviours(entity, gameContext);
         }
 
-        private void AddBehaviours(IUIContext entity)
+        private void AddBehaviours(IUIContext entity, GameContext gameContext)
         {
-            entity.AddBehaviour(new HealthScreenPresenter(_character));
-            
-            entity.AddBehaviour(new HealthViewPresenter(_character));
-            
-            entity.AddBehaviour(new AmmoViewPresenter(
-                _character.GetValue(GameEntityAPI.Weapon).Value
-                    .GetValue(WeaponEntityAPI.Ammo)));
-            
-            entity.AddBehaviour(new KillsViewPresenter(
-                _character.GetValue(GameEntityAPI.Score)));
+            IGameEntity character = gameContext.GetValue(GameContextAPI.Character).Value;
+
+            entity.AddBehaviour(new HealthScreenPresenter(character));
+            entity.AddBehaviour(new CharacterHealthPresenter(character));
+            entity.AddBehaviour(new CharacterAmmoPresenter(character));
+            entity.AddBehaviour(new CharacterKillsPresenter(character));
             
             entity.AddBehaviour(new CharacterMovementController());
             entity.AddBehaviour(new CharacterAimController());

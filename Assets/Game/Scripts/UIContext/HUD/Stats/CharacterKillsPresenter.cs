@@ -1,24 +1,25 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.GameEntity;
 
 namespace Game.UI
 {
-    public class KillsViewPresenter : IUIContextInit, IUIContextDispose
+    public class CharacterKillsPresenter : IUIContextInit, IUIContextDispose
     {
         private readonly DisposableComposite _disposables = new();
-        private readonly IReactiveVariable<int> _score;
+        private readonly IGameEntity _character;
         
         private StatView _view;
 
-        public KillsViewPresenter(IReactiveVariable<int> score)
-        {
-            _score = score;
-        }
+        public CharacterKillsPresenter(IGameEntity character) 
+            => _character = character;
 
         public void Init(IUIContext context)
         {
             _view = context.GetValue(UIContextAPI.KillsView);
-            _score.Observe(OnScoreChanged).AddTo(_disposables);
+
+            IReactiveVariable<int> score = _character.GetValue(GameEntityAPI.Score);
+            score.Observe(OnScoreChanged);
         }
 
         public void Dispose(IUIContext context) => _disposables?.Dispose();
