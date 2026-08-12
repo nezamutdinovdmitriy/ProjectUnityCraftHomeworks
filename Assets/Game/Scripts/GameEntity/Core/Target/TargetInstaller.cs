@@ -8,16 +8,10 @@ namespace Game.GameEntity.Core.Target
     [Serializable]
     public class TargetInstaller : IEntityInstaller<IGameEntity>
     {
-        [SerializeField]
-        private TriggerEvents _triggerEvents;
-        
         public void Install(IGameEntity entity)
         {
             entity.AddValue(GameEntityAPI.Target, new Variable<IGameEntity>());
-            entity.AddValue(GameEntityAPI.Trigger, _triggerEvents);
             entity.AddValue(GameEntityAPI.TargetIsReached, new Variable<bool>());
-            
-            entity.AddBehaviour(new DetectTargetBehaviour());
         }
     }
 }

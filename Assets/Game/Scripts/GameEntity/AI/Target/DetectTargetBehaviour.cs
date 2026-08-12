@@ -6,14 +6,19 @@ namespace Game.GameEntity.Core.Target
 {
     public class DetectTargetBehaviour : IGameEntityInit, IGameEntityDispose
     {
-        private TriggerEvents _triggerEvents;
-        private IVariable<IGameEntity> _target;
+        private readonly GameEntity[] _enemies;
         
+        private TriggerEvents _triggerEvents;
+        
+        private IGameEntity _currentTarget;
+        
+        public DetectTargetBehaviour(GameEntity[] enemies) 
+            => _enemies = enemies;
+
         public void Init(IGameEntity entity)
         {
             _triggerEvents = entity.GetValue(GameEntityAPI.Trigger);
-            _target = entity.GetValue(GameEntityAPI.Target);
-
+            
             _triggerEvents.OnEntered += OnTriggerEntered;
             _triggerEvents.OnExited += OnTriggerExit;
         }
@@ -26,19 +31,32 @@ namespace Game.GameEntity.Core.Target
         
         private void OnTriggerEntered(Collider obj)
         {
-            if (obj.TryGetComponent(out IGameEntity target) 
-                && target.HasTag(GameEntityAPI.CharacterTag))
-                _target.Value = target;
+            if (obj.TryGetComponent(out IGameEntity entity)
+                && entity.HasTag(GameEntityAPI.CharacterTag))
+            {
+                _currentTarget = entity;
+                SetTarget(_currentTarget);
+            }
         }
         
         private void OnTriggerExit(Collider obj)
         {
             if (obj == null)
                 return;
-            
-            if (obj.TryGetComponent(out IGameEntity target) 
-                && _target.Value.Equals(target))
-                _target.Value = null;
+
+            if (obj.TryGetComponent(out IGameEntity entity)
+                && _currentTarget.Equals(entity))
+            {
+                _currentTarget = null;
+                SetTarget(null);
+            }
+        }
+        
+        private void SetTarget(IGameEntity entity)
+        {
+            foreach (GameEntity enemy in _enemies)
+                if (enemy.TryGetValue(GameEntityAPI.Target, out IVariable<IGameEntity> target))
+                    target.Value = entity;
         }
     }
 }
