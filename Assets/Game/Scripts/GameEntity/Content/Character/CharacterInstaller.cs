@@ -40,7 +40,6 @@ namespace Game.GameEntity
         public override void Install(IGameEntity entity)
         {
             entity.AddTag(GameEntityAPI.CharacterTag);
-            entity.AddValue(GameEntityAPI.Score, new ReactiveVariable<int>());
             
             _positionInstaller.Install(entity);
             _rotationInstaller.Install(entity);
@@ -59,30 +58,33 @@ namespace Game.GameEntity
 
             entity.GetValue(GameEntityAPI.TakeDamageCommand)
                 .AddCondition(_ => entity.IsDead() == false)
-                .AddAction(damage => entity.GetValue(GameEntityAPI.CurrentHealth).Value -= damage);
+                .AddAction(entity.HealthReduce);
         }
 
         private void SetupFireCommand(IGameEntity entity)
         {
-            IReactiveVariable<IWeaponEntity> weapon = entity.GetValue(GameEntityAPI.Weapon);
-            
             entity.GetValue(GameEntityAPI.FireCommand)
                 .AddCondition(() 
-                    => entity.IsDead() == false && entity.GetValue(GameEntityAPI.AimCooldown).IsCompleted())
-                .AddAction(() => weapon.Value.GetValue(WeaponEntityAPI.FireCommand).Invoke());
+                    => entity.IsDead() == false 
+                       && entity.HasWeapon()
+                       && entity.IsAimDelayCompleted())
+                .AddAction(entity.InvokeFireRequest);
         }
         
         private void SetupRotateCommand(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.RotateCommand)
-                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
-                .AddAction(args => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
+                .AddCondition(args 
+                    => entity.IsDead() == false 
+                       && entity.HasDirection(args.Direction))
+                .AddAction(args 
+                    => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
         }
 
         private void SetupMovementCommand(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.MovementCommand)
-                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
+                .AddCondition(args => entity.IsDead() == false && entity.HasDirection(args.Direction))
                 .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
         }
     }

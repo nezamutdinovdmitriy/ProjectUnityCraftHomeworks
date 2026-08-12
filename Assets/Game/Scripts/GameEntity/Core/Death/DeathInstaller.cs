@@ -14,7 +14,7 @@ namespace Game.GameEntity.Core.Death
         public void Install(IGameEntity entity)
         {
             entity.AddValue(GameEntityAPI.DeathDelay, _deathDelay);
-            entity.AddValue(GameEntityAPI.DeathCommand, new Command());
+            entity.AddValue(GameEntityAPI.DeathAction, new CompositeAction());
             
             entity.AddBehaviour(new DeathBehaviour());
         }

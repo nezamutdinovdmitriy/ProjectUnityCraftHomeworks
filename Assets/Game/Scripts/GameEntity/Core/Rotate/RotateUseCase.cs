@@ -17,5 +17,13 @@ namespace Game.GameEntity
                 targetRotation,
                 speed * deltaTime);
         }
+
+        public static bool HasDirection(this IGameEntity entity, Vector3 direction)
+        {
+            if (direction == Vector3.zero)
+                return false;
+
+            return true;
+        }
     }
 }

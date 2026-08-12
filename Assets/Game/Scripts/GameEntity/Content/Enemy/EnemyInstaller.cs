@@ -59,7 +59,12 @@ namespace Game.GameEntity.Content.Enemy
             RotateCommandSetup(entity);
             FireCommandSetup(entity);
             TakeDamageCommandSetup(entity);
-            DeathCommandSetup(entity);
+            
+            entity.GetValue(GameEntityAPI.DeathAction).Add(() =>
+            {
+                entity.GetValue(GameEntityAPI.DeathDelay).ResetTime();
+                Destroy(gameObject);
+            });
             
             entity.AddBehaviour(new FollowTargetBehaviour(_stoppingDistance));
             entity.AddBehaviour(new AttackTargetBehaviour());
@@ -68,45 +73,37 @@ namespace Game.GameEntity.Content.Enemy
         private static void RotateCommandSetup(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.RotateCommand)
-                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
-                .AddAction(args => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
+                .AddCondition(args 
+                    => entity.IsDead() == false 
+                       && entity.HasDirection(args.Direction))
+                .AddAction(args 
+                    => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
         }
 
         private static void MovementCommandSetup(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.MovementCommand)
-                .AddCondition(args => entity.IsDead() == false && args.Direction != Vector3.zero)
-                .AddAction(args => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
+                .AddCondition(args 
+                    => entity.IsDead() == false 
+                       && entity.HasDirection(args.Direction))
+                .AddAction(args 
+                    => entity.MoveStep(args.Direction, args.Speed, args.DeltaTime));
         }
 
         private static void FireCommandSetup(IGameEntity entity)
         {
-            IWeaponEntity weapon = entity.GetValue(GameEntityAPI.Weapon).Value;
-            
             entity.GetValue(GameEntityAPI.FireCommand)
                 .AddCondition(() =>
                     entity.IsDead() == false
-                    && weapon != null)
-                .AddAction(() =>
-                    weapon.GetValue(WeaponEntityAPI.FireRequest).Invoke());
-        }
-
-        private void DeathCommandSetup(IGameEntity entity)
-        {
-            entity.GetValue(GameEntityAPI.DeathCommand)
-                .AddCondition(() => entity.IsDead() && entity.GetValue(GameEntityAPI.DeathDelay).IsCompleted())
-                .AddAction(() =>
-                {
-                    entity.GetValue(GameEntityAPI.DeathDelay).ResetTime();
-                    Destroy(gameObject);
-                });
+                    && entity.HasWeapon())
+                .AddAction(entity.InvokeFireRequest);
         }
 
         private void TakeDamageCommandSetup(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.TakeDamageCommand)
                 .AddCondition(_ => entity.IsDead() == false)
-                .AddAction(damage => entity.GetValue(GameEntityAPI.CurrentHealth).Value -= damage);
+                .AddAction(entity.HealthReduce);
         }
     }
 }

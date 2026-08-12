@@ -1,7 +1,5 @@
-using System;
 using Atomic.Elements;
 using Atomic.Entities;
-using Cysharp.Threading.Tasks;
 using Game.GameEntity;
 using UnityEngine;
 using Event = Atomic.Elements.Event;
@@ -48,30 +46,9 @@ namespace Game.Weapon.Content.Hand
 
             weapon.WhenFixedTick(_attackCooldown.Tick).AddTo(_disposables);
             
-            weapon.WhenFixedTick(deltaTime =>
-            {
-                if (_inDelayProcess == false && fireRequest.Required && fireCommand.CanInvoke())
-                {
-                    _takeDamageDelay.ResetTime();
-                    startAttackEvent.Invoke();
-                    _inDelayProcess = true;
-                }
-
-                if (_inDelayProcess)
-                    _takeDamageDelay.Tick(deltaTime);
-                
-                if (_takeDamageDelay.IsCompleted())
-                {
-                    _inDelayProcess = false;
-
-                    if (fireRequest.Consume() && fireCommand.CanInvoke())
-                    {
-                        weapon.GetValue(WeaponEntityAPI.FireCommand).Invoke();
-                    }
-                }
-            });
-            
             SetupFireCommand(weapon);
+            
+            weapon.AddBehaviour(new HandAttackBehaviour(_takeDamageDelay));
         }
 
         public override void Uninstall(IWeaponEntity entity) => _disposables.Dispose();
@@ -94,7 +71,6 @@ namespace Game.Weapon.Content.Hand
                 weapon.GetValue(WeaponEntityAPI.FireCooldown).ResetTime();
 
                 IGameEntity owner = weapon.GetValue(WeaponEntityAPI.Owner).Value;
-                Vector3 position = owner.GetValue(GameEntityAPI.Position).Value;
 
                 int size = Physics.OverlapSphereNonAlloc(_firePoint.position, _attackRadius, _colliders);
 
@@ -110,7 +86,7 @@ namespace Game.Weapon.Content.Hand
                         if (entity.IsDead())
                             return;
 
-                        entity.TryTakeDamage(_damage);
+                        entity.TryInvokeTakeDamageCommand(_damage);
                         return;
                     }
                 }

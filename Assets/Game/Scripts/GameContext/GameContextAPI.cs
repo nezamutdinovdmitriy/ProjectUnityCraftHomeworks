@@ -8,6 +8,9 @@ namespace Game
     {
         // Bullets
         public static ValueKey<IGameContext, BulletEntityPool> BulletPool = new(nameof(BulletPool));
+        
         public static ValueKey<IGameContext, IVariable<IGameEntity>> Character = new(nameof(Character));
+        
+        public static ValueKey<IGameContext, IReactiveVariable<int>> Score = new(nameof(Score));
     }
 }

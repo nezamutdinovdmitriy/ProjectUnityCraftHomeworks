@@ -4,7 +4,7 @@ namespace Game.GameEntity
 {
     public static class DamageUseCase
     {
-        public static bool TryTakeDamage(this IGameEntity entity, float damage)
+        public static bool TryInvokeTakeDamageCommand(this IGameEntity entity, float damage)
         {
             if (entity.HasTag(GameEntityAPI.DamageableTag) == false)
                 return false;

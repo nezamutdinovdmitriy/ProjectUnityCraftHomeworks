@@ -4,22 +4,21 @@ using Game.GameEntity;
 
 namespace Game.UI
 {
-    public class CharacterKillsPresenter : IUIContextInit, IUIContextDispose
+    public class CharacterScorePresenter : IUIContextInit, IUIContextDispose
     {
         private readonly DisposableComposite _disposables = new();
-        private readonly IGameEntity _character;
+        private readonly IReactiveVariable<int> _score;
         
         private StatView _view;
 
-        public CharacterKillsPresenter(IGameEntity character) 
-            => _character = character;
+        public CharacterScorePresenter(IReactiveVariable<int> score) 
+            => _score = score;
 
         public void Init(IUIContext context)
         {
             _view = context.GetValue(UIContextAPI.KillsView);
 
-            IReactiveVariable<int> score = _character.GetValue(GameEntityAPI.Score);
-            score.Observe(OnScoreChanged);
+            _score.Observe(OnScoreChanged);
         }
 
         public void Dispose(IUIContext context) => _disposables?.Dispose();

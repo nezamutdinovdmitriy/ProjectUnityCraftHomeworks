@@ -8,6 +8,8 @@ namespace Game.GameEntity
 {
     public class BulletInstaller : SceneEntityInstaller<IGameEntity>
     {
+        private readonly DisposableComposite _disposables = new();
+
         [Space] [Header("Installers")] [SerializeField]
         private PositionInstaller _positionInstaller;
 
@@ -33,33 +35,18 @@ namespace Game.GameEntity
             _damageInstaller.Install(entity);
             _lifetimeInstaller.Install(entity);
 
-            SetupMovementBehaviour(entity);
-            SetupLifetimeEndBehaviour(entity);
+            entity.WhenFixedTick(entity.MoveStepForward).AddTo(_disposables);
 
-            entity.AddBehaviour(new CollisionDamageBehaviour(GameContext.Instance));
+            entity.GetValue(GameEntityAPI.DestroyAction).Add(() 
+                => GameContext.Instance.DestroyBullet((GameEntity) entity));
+
+            entity.AddBehaviour(new BulletDamageBehaviour(GameContext.Instance));
         }
 
         public override void Uninstall(IGameEntity entity)
         {
+            _disposables.Dispose();
             _lifetimeInstaller.Dispose();
-            entity.Clear();
-        }
-
-        private static void SetupLifetimeEndBehaviour(IGameEntity entity)
-        {
-            entity.GetValue(GameEntityAPI.LifetimeEndCommand)
-                .AddAction(() => GameContext.Instance.DestroyBullet((GameEntity) entity));
-        }
-
-        private static void SetupMovementBehaviour(IGameEntity entity)
-        {
-            entity.WhenFixedTick(deltaTime =>
-            {
-                Quaternion bulletRotation = entity.GetValue(GameEntityAPI.Rotation).Value;
-                float movementSpeed = entity.GetValue(GameEntityAPI.MovementSpeed).Value;
-                
-                entity.MoveStep(bulletRotation * Vector3.forward, movementSpeed, deltaTime);
-            });
         }
     }
 }

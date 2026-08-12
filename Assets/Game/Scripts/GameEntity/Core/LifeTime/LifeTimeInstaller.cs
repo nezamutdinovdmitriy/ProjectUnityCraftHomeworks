@@ -16,15 +16,16 @@ namespace Game.GameEntity.Core.LifeTime
         public void Install(IGameEntity entity)
         {
             entity.AddValue(GameEntityAPI.Lifetime, _lifetime);
-            entity.AddValue(GameEntityAPI.LifetimeEndCommand, new Command());
-
-            entity.WhenFixedTick(_lifetime.Tick).AddTo(_disposables);
-            entity.WhenFixedTick(_ =>
+            entity.AddValue(GameEntityAPI.DestroyAction, new CompositeAction());
+            
+            entity.WhenFixedTick(deltaTime =>
             {
+                _lifetime.Tick(deltaTime);
+                
                 if (_lifetime.IsCompleted())
                 {
                     entity.GetValue(GameEntityAPI.Lifetime).ResetTime();
-                    entity.GetValue(GameEntityAPI.LifetimeEndCommand).Invoke();
+                    entity.GetValue(GameEntityAPI.DestroyAction).Invoke();
                 }
             }).AddTo(_disposables);
         }

@@ -1,3 +1,4 @@
+using Atomic.Elements;
 using Atomic.Entities;
 using Game.GameEntity;
 using UnityEngine;
@@ -34,11 +35,12 @@ namespace Game.UI
         private void AddBehaviours(IUIContext entity, GameContext gameContext)
         {
             IGameEntity character = gameContext.GetValue(GameContextAPI.Character).Value;
+            IReactiveVariable<int> score = gameContext.GetValue(GameContextAPI.Score);
 
             entity.AddBehaviour(new HealthScreenPresenter(character));
             entity.AddBehaviour(new CharacterHealthPresenter(character));
             entity.AddBehaviour(new CharacterAmmoPresenter(character));
-            entity.AddBehaviour(new CharacterKillsPresenter(character));
+            entity.AddBehaviour(new CharacterScorePresenter(score));
             
             entity.AddBehaviour(new CharacterMovementController());
             entity.AddBehaviour(new CharacterAimController());

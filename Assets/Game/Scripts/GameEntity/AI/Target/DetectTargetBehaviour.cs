@@ -9,7 +9,6 @@ namespace Game.GameEntity.Core.Target
         private readonly GameEntity[] _enemies;
         
         private TriggerEvents _triggerEvents;
-        
         private IGameEntity _currentTarget;
         
         public DetectTargetBehaviour(GameEntity[] enemies) 
@@ -35,7 +34,7 @@ namespace Game.GameEntity.Core.Target
                 && entity.HasTag(GameEntityAPI.CharacterTag))
             {
                 _currentTarget = entity;
-                SetTarget(_currentTarget);
+                TargetUseCase.SetTarget(_enemies, _currentTarget);
             }
         }
         
@@ -48,15 +47,8 @@ namespace Game.GameEntity.Core.Target
                 && _currentTarget.Equals(entity))
             {
                 _currentTarget = null;
-                SetTarget(null);
+                TargetUseCase.SetTarget(_enemies, null);
             }
-        }
-        
-        private void SetTarget(IGameEntity entity)
-        {
-            foreach (GameEntity enemy in _enemies)
-                if (enemy.TryGetValue(GameEntityAPI.Target, out IVariable<IGameEntity> target))
-                    target.Value = entity;
         }
     }
 }

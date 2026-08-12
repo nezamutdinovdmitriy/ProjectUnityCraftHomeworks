@@ -6,11 +6,12 @@ namespace Game.GameEntity.Core.Death
     public class DeathBehaviour : IGameEntityInit, IGameEntityFixedTick
     {
         private ICooldown _delay;
-        private ICommand _command;
+        private IAction _action;
+        
         public void Init(IGameEntity entity)
         {
             _delay = entity.GetValue(GameEntityAPI.DeathDelay);
-            _command = entity.GetValue(GameEntityAPI.DeathCommand);
+            _action = entity.GetValue(GameEntityAPI.DeathAction);
         }
 
         public void FixedTick(IGameEntity entity, float deltaTime)
@@ -19,7 +20,7 @@ namespace Game.GameEntity.Core.Death
                 _delay.Tick(deltaTime);
             
             if(_delay.IsCompleted())
-                _command.Invoke();
+                _action.Invoke();
         }
     }
 }

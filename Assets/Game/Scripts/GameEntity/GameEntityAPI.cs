@@ -14,7 +14,6 @@ namespace Game.GameEntity
         public static ValueKey<IGameEntity, TransformPositionVariable> Position = new(nameof(Position));
         public static ValueKey<IGameEntity, TransformRotationVariable> Rotation = new(nameof(Rotation));
         public static ValueKey<IGameEntity, TriggerEvents> Trigger = new(nameof(Trigger));
-        public static ValueKey<IGameEntity, IReactiveVariable<int>> Score = new(nameof(Score));
         public static ValueKey<IGameEntity, IVariable<IGameEntity>> Target = new(nameof(Target));
         
         // Movement
@@ -35,7 +34,7 @@ namespace Game.GameEntity
         
         // Death
         public static ValueKey<IGameEntity, ICooldown> DeathDelay = new(nameof(DeathDelay));
-        public static ValueKey<IGameEntity, ICommand> DeathCommand = new(nameof(DeathCommand));
+        public static ValueKey<IGameEntity, ICompositeAction> DeathAction = new(nameof(DeathAction));
         
         // Aim
         public static ValueKey<IGameEntity, IVariable<bool>> HasAimingLastFrame = new(nameof(HasAimingLastFrame));
@@ -60,8 +59,10 @@ namespace Game.GameEntity
         
         // LifeTime
         public static ValueKey<IGameEntity, ICooldown> Lifetime = new(nameof(Lifetime));
-        public static ValueKey<IGameEntity, ICommand> LifetimeEndCommand = new(nameof(LifetimeEndCommand));
-        
+        public static ValueKey<IGameEntity, ICompositeAction> DestroyAction = new(nameof(DestroyAction));
+
+        //public static ValueKey<IGameEntity, ICommand> LifetimeEndCommand = new(nameof(LifetimeEndCommand));
+
         // AI
         public static ValueKey<IGameEntity, IVariable<bool>> TargetIsReached = new(nameof(TargetIsReached));
     }

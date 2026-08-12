@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game.GameEntity
 {
-    public class CollisionDamageBehaviour : IGameEntityInit, IGameEntityDispose
+    public class BulletDamageBehaviour : IGameEntityInit, IGameEntityDispose
     {
         private readonly IGameContext _gameContext;
 
@@ -13,10 +13,8 @@ namespace Game.GameEntity
         private TriggerEvents _triggerEvents;
         private IGameEntity _self;
 
-        public CollisionDamageBehaviour(IGameContext gameContext)
-        {
-            _gameContext = gameContext;
-        }
+        public BulletDamageBehaviour(IGameContext gameContext) 
+            => _gameContext = gameContext;
 
         public void Init(IGameEntity entity)
         {
@@ -28,20 +26,16 @@ namespace Game.GameEntity
             _triggerEvents.OnEntered += OnTriggerEntered;
         }
 
-        public void Dispose(IGameEntity entity) => _triggerEvents.OnEntered -= OnTriggerEntered;
+        public void Dispose(IGameEntity entity) 
+            => _triggerEvents.OnEntered -= OnTriggerEntered;
 
         private void OnTriggerEntered(Collider obj)
         {
             if (obj.TryGetComponent(out IGameEntity targetEntity) == false)
                 return;
-
-            if (targetEntity.TryTakeDamage(_damage.Value))
-                if (targetEntity.IsDead())
-                    if (_self.TryGetValue(GameEntityAPI.Owner, out IVariable<IGameEntity> owner))
-                        if (owner.Value.TryGetValue(GameEntityAPI.Score, out IReactiveVariable<int> score))
-                            score.Value++;
-
-            _gameContext.DestroyBullet((GameEntity) _self);
+            
+            if (_gameContext.TryInvokeTakeDamageCommand(targetEntity, _damage.Value))
+                _gameContext.DestroyBullet((GameEntity) _self);
         }
     }
 }
