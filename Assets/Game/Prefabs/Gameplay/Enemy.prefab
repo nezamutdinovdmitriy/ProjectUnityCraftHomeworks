@@ -1954,37 +1954,6 @@ Transform:
   - {fileID: 2048510377137511702}
   m_Father: {fileID: 7138523494638558908}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7125555180822119565
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7132139865714278828}
-  m_Layer: 0
-  m_Name: FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7132139865714278828
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7125555180822119565}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.081, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2845756347370805700}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7158363685665035492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2802,6 +2771,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1424056695297247428, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.532
+      objectReference: {fileID: 0}
     - target: {fileID: 7223745350942996134, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
       propertyPath: m_Name
       value: Hand
@@ -2815,11 +2788,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5135918259915103532}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1416792984943742102, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7132139865714278828}
+    m_RemovedGameObjects:
+    - {fileID: 4907870237102836696, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d8166845e4d241e8afd28e8a9249ace, type: 3}
 --- !u!114 &1764289448919355322 stripped

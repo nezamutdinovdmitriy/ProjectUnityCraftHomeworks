@@ -14,6 +14,9 @@ namespace Game.Weapon.Content.Hand
         private readonly Collider[] _colliders = new Collider[5];
 
         [SerializeField]
+        private Transform _firePoint;
+        
+        [SerializeField]
         private Cooldown _attackCooldown = 1;
 
         [SerializeField]
@@ -93,7 +96,7 @@ namespace Game.Weapon.Content.Hand
                 IGameEntity owner = weapon.GetValue(WeaponEntityAPI.Owner).Value;
                 Vector3 position = owner.GetValue(GameEntityAPI.Position).Value;
 
-                int size = Physics.OverlapSphereNonAlloc(position, _attackRadius, _colliders);
+                int size = Physics.OverlapSphereNonAlloc(_firePoint.position, _attackRadius, _colliders);
 
                 if (size == 0)
                     return;
