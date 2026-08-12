@@ -2,6 +2,7 @@ using Atomic.Elements;
 using Atomic.Entities;
 using Game.Bullets;
 using Game.GameEntity;
+using Game.Weapon.Content;
 using UnityEngine;
 
 namespace Game.Weapon
@@ -46,25 +47,8 @@ namespace Game.Weapon
         {
             ICommand command = weapon.GetValue(WeaponEntityAPI.FireCommand);
 
-            command.AddCondition(() =>
-            {
-                bool hasOwner = weapon.GetValue(WeaponEntityAPI.Owner).Value != null;
-                bool isCooldownCompleted = weapon.GetValue(WeaponEntityAPI.FireCooldown).IsCompleted();
-                bool hasAmmo = weapon.GetValue(WeaponEntityAPI.Ammo).Value > 0;
-
-                return hasOwner && hasAmmo && isCooldownCompleted;
-            });
-
-            command.AddAction(() =>
-            {
-                gameContext.SpawnBullet(
-                    _firePoint.position, 
-                    _firePoint.rotation, 
-                    weapon.GetValue(WeaponEntityAPI.Owner).Value);
-                
-                weapon.GetValue(WeaponEntityAPI.FireCooldown).ResetTime();
-                weapon.GetValue(WeaponEntityAPI.Ammo).Value--;
-            });
+            command.AddCondition(() => weapon.HasOwner() && weapon.HasAmmo() && weapon.IsFireCooldownCompleted());
+            command.AddAction(() => weapon.Fire(gameContext, _firePoint));
         }
     }
 }

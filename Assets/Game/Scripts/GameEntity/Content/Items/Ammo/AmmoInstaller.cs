@@ -23,7 +23,7 @@ namespace Game.GameEntity
             entity.GetValue(GameEntityAPI.InteractCommand)
                 .AddCondition(interactor
                     => interactor.TryGetWeapon(out IReactiveVariable<IWeaponEntity> weapon)
-                       && weapon.Value.HasAmmo())
+                       && weapon.Value.GetValue(WeaponEntityAPI.Ammo) != null)
                 .AddAction(interactor => interactor.PickupAmmo(_amountAmmo));
         }
     }

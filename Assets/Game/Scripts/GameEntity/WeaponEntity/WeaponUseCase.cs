@@ -1,5 +1,5 @@
-using Atomic.Elements;
 using Atomic.Entities;
+using Game.Bullets;
 using Game.GameEntity;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Game.Weapon.Content
     public static class WeaponUseCase
     {
         public static bool HasAmmo(this IWeaponEntity weapon) 
-            => weapon.GetValue(WeaponEntityAPI.Ammo) != null;
+            => weapon.GetValue(WeaponEntityAPI.Ammo).Value > 0;
 
         public static bool HasOwner(this IWeaponEntity weapon)
         {
@@ -23,6 +23,17 @@ namespace Game.Weapon.Content
         public static bool IsFireCooldownCompleted(this IWeaponEntity weapon) 
             => weapon.GetValue(WeaponEntityAPI.FireCooldown).IsCompleted();
 
+        public static void Fire(this IWeaponEntity weapon, IGameContext gameContext, Transform firePoint)
+        {
+            gameContext.SpawnBullet(
+                firePoint.position, 
+                firePoint.rotation, 
+                weapon.GetValue(WeaponEntityAPI.Owner).Value);
+                
+            weapon.GetValue(WeaponEntityAPI.FireCooldown).ResetTime();
+            weapon.GetValue(WeaponEntityAPI.Ammo).Value--;
+        }
+        
         public static void MeleeAttack(
             this IWeaponEntity weapon, 
             Vector3 position, 
