@@ -21,20 +21,12 @@ namespace Game.GameEntity
         
         public void FixedTick(IGameEntity entity, float deltaTime)
         {
-            bool isAiming = _aimDirection.Value != Vector3.zero;
-
-            if (isAiming)
-            {
-                if (_hasAimingLastFrame.Value == false)
-                    _cooldown.ResetTime();
-
-                _cooldown.Tick(deltaTime);
-
-                if (_cooldown.IsCompleted())
-                    _fireRequest.Invoke();
-            }
-            
-            _hasAimingLastFrame.Value = isAiming;
+            entity.AimProcess(
+                _aimDirection,
+                _hasAimingLastFrame,
+                _cooldown,
+                _fireRequest,
+                deltaTime);
         }
     }
 }

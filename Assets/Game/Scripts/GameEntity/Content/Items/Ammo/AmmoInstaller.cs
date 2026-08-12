@@ -1,7 +1,6 @@
 using System;
 using Atomic.Elements;
 using Atomic.Entities;
-using Game.GameEntity.Content.Items;
 using Game.Weapon;
 using Game.Weapon.Content;
 using UnityEngine;

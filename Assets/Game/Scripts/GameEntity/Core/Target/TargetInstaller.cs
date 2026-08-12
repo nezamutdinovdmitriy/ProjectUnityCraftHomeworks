@@ -1,7 +1,6 @@
 using System;
 using Atomic.Elements;
 using Atomic.Entities;
-using UnityEngine;
 
 namespace Game.GameEntity.Core.Target
 {

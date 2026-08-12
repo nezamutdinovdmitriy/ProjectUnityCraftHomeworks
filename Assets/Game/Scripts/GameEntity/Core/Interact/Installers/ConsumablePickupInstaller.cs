@@ -15,18 +15,18 @@ namespace Atomic.Entities
         [SerializeField]
         private DestroyAfterUseInstaller _destroyAfterUseInstaller;
         
-        public void Install(IGameEntity entity)
+        public void Install(IGameEntity item)
         {
-            _interactableInstaller.Install(entity);
-            _destroyAfterUseInstaller.Install(entity);
+            _interactableInstaller.Install(item);
+            _destroyAfterUseInstaller.Install(item);
             
-            entity.GetValue(GameEntityAPI.InteractCommand)
+            item.GetValue(GameEntityAPI.InteractCommand)
                 .AddCondition(interactor =>
                     interactor.HasTag(GameEntityAPI.InteractorTag)
-                    && entity.GetValue(GameEntityAPI.WasUsed).Value == false)
+                    && item.GetValue(GameEntityAPI.WasUsed).Value == false)
                 .AddAction(interactor =>
                 {
-                    entity.GetValue(GameEntityAPI.WasUsed).Value = true;
+                    item.GetValue(GameEntityAPI.WasUsed).Value = true;
                 });
         }
     }

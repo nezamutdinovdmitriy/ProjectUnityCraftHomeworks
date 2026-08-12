@@ -56,41 +56,11 @@ namespace Game.Weapon.Content.Hand
         private void SetupFireCommand(IWeaponEntity weapon)
         {
             ICommand command = weapon.GetValue(WeaponEntityAPI.FireCommand);
-
-            command.AddCondition(() =>
-            {
-                bool hasOwner = weapon.GetValue(WeaponEntityAPI.Owner).Value != null;
-                bool isOwnerAlive = weapon.GetValue(WeaponEntityAPI.Owner).Value.IsDead() == false;
-                bool isCooldownCompleted = weapon.GetValue(WeaponEntityAPI.FireCooldown).IsCompleted();
-
-                return hasOwner && isOwnerAlive && isCooldownCompleted;
-            });
-
-            command.AddAction(() =>
-            {
-                weapon.GetValue(WeaponEntityAPI.FireCooldown).ResetTime();
-
-                IGameEntity owner = weapon.GetValue(WeaponEntityAPI.Owner).Value;
-
-                int size = Physics.OverlapSphereNonAlloc(_firePoint.position, _attackRadius, _colliders);
-
-                if (size == 0)
-                    return;
-
-                for (int i = 0; i < size; i++)
-                {
-                    if (_colliders[i].TryGetComponent(out IGameEntity entity)
-                        && entity.Equals(owner) == false
-                        && entity.HasTag(GameEntityAPI.CharacterTag))
-                    {
-                        if (entity.IsDead())
-                            return;
-
-                        entity.TryInvokeTakeDamageCommand(_damage);
-                        return;
-                    }
-                }
-            });
+            
+            command.AddCondition(() 
+                => weapon.HasOwner() && weapon.IsFireCooldownCompleted());
+            command.AddAction(() 
+                => weapon.MeleeAttack(_firePoint.position, _attackRadius, _colliders, _damage));
         }
     }
 }

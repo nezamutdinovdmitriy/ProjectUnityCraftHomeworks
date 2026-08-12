@@ -43,10 +43,7 @@ namespace Game.GameEntity
             entity.AddBehaviour(new BulletDamageBehaviour(GameContext.Instance));
         }
 
-        public override void Uninstall(IGameEntity entity)
-        {
-            _disposables.Dispose();
-            _lifetimeInstaller.Dispose();
-        }
+        public override void Uninstall(IGameEntity entity) 
+            => _disposables.Dispose();
     }
 }

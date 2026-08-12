@@ -1,4 +1,6 @@
+using Atomic.Elements;
 using Game.GameEntity;
+using Game.Weapon;
 
 namespace Atomic.Entities
 {
@@ -12,6 +14,14 @@ namespace Atomic.Entities
                 return;
             
             interactable.GetValue(GameEntityAPI.InteractCommand).Invoke(interactor);
+        }
+        
+        public static void PickupAmmo(this IGameEntity entity, int value)
+        {
+            IReactiveVariable<IWeaponEntity> weapon = entity.GetValue(GameEntityAPI.Weapon);
+            IReactiveVariable<int> ammo = weapon.Value.GetValue(WeaponEntityAPI.Ammo);
+            
+            ammo.Value += value;
         }
     }
 }

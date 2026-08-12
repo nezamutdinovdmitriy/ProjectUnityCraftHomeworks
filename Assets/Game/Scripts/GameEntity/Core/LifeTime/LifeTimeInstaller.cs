@@ -8,8 +8,6 @@ namespace Game.GameEntity.Core.LifeTime
     [Serializable]
     public class LifeTimeInstaller : IEntityInstaller<IGameEntity>
     {
-        private DisposableComposite _disposables = new();
-        
         [SerializeField]
         private Cooldown _lifetime;
         
@@ -17,19 +15,8 @@ namespace Game.GameEntity.Core.LifeTime
         {
             entity.AddValue(GameEntityAPI.Lifetime, _lifetime);
             entity.AddValue(GameEntityAPI.DestroyAction, new CompositeAction());
-            
-            entity.WhenFixedTick(deltaTime =>
-            {
-                _lifetime.Tick(deltaTime);
-                
-                if (_lifetime.IsCompleted())
-                {
-                    entity.GetValue(GameEntityAPI.Lifetime).ResetTime();
-                    entity.GetValue(GameEntityAPI.DestroyAction).Invoke();
-                }
-            }).AddTo(_disposables);
-        }
 
-        public void Dispose() => _disposables.Dispose();
+            entity.AddBehaviour(new LifeTimeBehaviour());
+        }
     }
 }

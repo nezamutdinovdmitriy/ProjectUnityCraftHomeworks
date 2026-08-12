@@ -11,9 +11,7 @@ namespace Game.GameEntity
         [SerializeField]
         private Transform _rotation;
         
-        public void Install(IGameEntity entity)
-        {
-            entity.AddValue(GameEntityAPI.Rotation, new TransformRotationVariable(_rotation));
-        }
+        public void Install(IGameEntity entity) 
+            => entity.AddValue(GameEntityAPI.Rotation, new TransformRotationVariable(_rotation));
     }
 }
