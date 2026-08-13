@@ -10,15 +10,12 @@ namespace GameObjects.Content
     {
         private readonly MoveRequestComponent _moveRequestComponent;
         private readonly MoveTransformComponent _moveTransformComponent;
-        private readonly PatrolComponent _patrolComponent;
 
         public Platform(
-            MoveTransformComponent transform, 
-            PatrolComponent patrolComponent,
+            MoveTransformComponent transform,
             MoveRequestComponent moveRequestComponent)
         {
             _moveTransformComponent = transform;
-            _patrolComponent = patrolComponent;
             _moveRequestComponent = moveRequestComponent;
         }
 

@@ -20,8 +20,6 @@ namespace GameObjects.Content
         private readonly MoveRequestComponent _moveRequestComponent;
         private readonly MoveTransformComponent _moveTransformComponent;
 
-        private readonly PatrolComponent _patrolComponent;
-
         private readonly HealthComponent _healthComponent;
         private readonly DeathRequestComponent _deathRequestComponent;
 
@@ -50,7 +48,6 @@ namespace GameObjects.Content
             _damage = damage;
             _moveRequestComponent = moveRequestComponent;
             _moveTransformComponent = moveTransformComponent;
-            _patrolComponent = patrolComponent;
             _healthComponent = healthComponent;
             _deathRequestComponent = deathRequestComponent;
             _attackRequestComponent = attackRequestComponent;
