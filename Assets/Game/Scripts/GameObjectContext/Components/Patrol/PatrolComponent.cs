@@ -11,42 +11,48 @@ namespace GameObjects.Components
         {
             [field: SerializeField]
             public Transform[] PatrolPoints { get; private set; }
-        }
 
-        public interface ICondition
-        {
-            public bool Evaluate();
+            [field: SerializeField]
+            public float StoppingDistance { get; private set; }
         }
 
         private readonly Transform[] _patrolPoints;
-        private readonly TargetComponent _targetComponent;
-
-        private ICondition _condition;
+        private readonly MoveRequestComponent _moveRequestComponent;
+        private readonly Transform _transformSelf;
+        private readonly float _stoppingDistance;
 
         private int _currentPointIndex = -1;
 
-        public PatrolComponent(Settings settings, TargetComponent targetComponent)
+        private Vector3 CurrentPointPosition => _patrolPoints[_currentPointIndex].position;
+
+        public PatrolComponent(
+            Settings settings, 
+            Transform transformSelf, 
+            MoveRequestComponent moveRequestComponent)
         {
-            _targetComponent = targetComponent;
+            _transformSelf = transformSelf;
+            _moveRequestComponent = moveRequestComponent;
+            _stoppingDistance = settings.StoppingDistance;
             _patrolPoints = settings.PatrolPoints;
 
             SwitchToNextPoint();
         }
 
-        public void SetCondition(ICondition condition) => _condition = condition;
-
         public void FixedTick()
         {
-            if (_condition.Evaluate())
+            bool isReached = MoveUseCase.IsReached(
+                _transformSelf.position,
+                CurrentPointPosition,
+                _stoppingDistance);
+
+            if (isReached)
                 SwitchToNextPoint();
+
+            Vector3 direction = MoveUseCase.GetDirection(_transformSelf.position, CurrentPointPosition);
+            _moveRequestComponent.RequestMove(direction);
         }
 
         private void SwitchToNextPoint()
-        {
-            _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
-
-            Transform point = _patrolPoints[_currentPointIndex];
-            _targetComponent.Target = point.gameObject;
-        }
+            => _currentPointIndex = (_currentPointIndex + 1) % _patrolPoints.Length;
     }
 }

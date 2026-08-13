@@ -1,4 +1,4 @@
-﻿using Game.Scripts.GameObjects;
+﻿using GameObjects.Components;
 
 namespace GameContexts
 {
@@ -6,7 +6,7 @@ namespace GameContexts
     {
         private readonly IEntity _character;
 
-        public CharacterProvider(IEntity character) 
+        public CharacterProvider(IEntity character)
             => _character = character;
 
         public IEntity GetCharacter() => _character;

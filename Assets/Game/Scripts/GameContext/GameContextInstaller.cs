@@ -1,7 +1,7 @@
-﻿using Game.Scripts.GameObjects;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 using Game;
+using GameObjects.Components;
 
 namespace GameContexts
 {

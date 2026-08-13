@@ -13,11 +13,18 @@ namespace GameObjects.Components
             public float StoppingDistance { get; private set; }
         }
 
+        public interface ICondition
+        {
+            public bool Evaluate();
+        }
+        
         private readonly Settings _settings;
         private readonly Transform _transform;
         private readonly TargetComponent _targetComponent;
         private readonly MoveRequestComponent _moveRequestComponent;
 
+        private ICondition _condition;
+        
         public FollowTargetComponent(
             Settings settings, 
             Transform transform, 
@@ -29,22 +36,28 @@ namespace GameObjects.Components
             _targetComponent = targetComponent;
             _moveRequestComponent = moveRequestComponent;
         }
+
+        public void SetCondition(ICondition condition) 
+            => _condition = condition;
         
         public void FixedTick()
         {
-            if (_targetComponent.Target == null || IsDestinationReached())
+            if (_condition.Evaluate() == false)
                 return;
             
-            Vector2 directionToTarget = GetDirectionToTarget();
+            bool IsReached = MoveUseCase.IsReached(
+                _targetComponent.Target.transform.position,
+                _transform.position,
+                _settings.StoppingDistance);
+            
+            if (IsReached)
+                return;
+            
+            Vector2 directionToTarget = MoveUseCase.GetDirection(
+                _transform.position,
+                _targetComponent.Target.transform.position);
+            
             _moveRequestComponent.RequestMove(directionToTarget);   
         }
-        
-        public bool IsDestinationReached() => GetDistanceToTarget() <= _settings.StoppingDistance;
-
-        private Vector2 GetDirectionToTarget() 
-            => ((Vector2) _targetComponent.Target.transform.position - (Vector2) _transform.position).normalized;
-
-        private float GetDistanceToTarget() 
-            => ((Vector2) _targetComponent.Target.transform.position - (Vector2) _transform.position).magnitude;
     }
 }

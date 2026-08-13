@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.Scripts.GameObjects;
 using GameObjects.Components;
 using UnityEngine;
 using Zenject;
@@ -13,6 +12,7 @@ namespace GameObjects.Content
         AttackRequestComponent.ICondition,
         DeathRequestComponent.IAction,
         DeathRequestComponent.ICondition,
+        FollowTargetComponent.ICondition,
         IInitializable,
         IDisposable
     {
@@ -20,6 +20,8 @@ namespace GameObjects.Content
         
         private readonly MoveRequestComponent _moveRequestComponent;
         private readonly MoveTransformComponent _moveTransformComponent;
+
+        private readonly TargetComponent _targetComponent;
         private readonly FollowTargetComponent _followTargetComponent;
         
         private readonly HealthComponent _healthComponent;
@@ -43,7 +45,8 @@ namespace GameObjects.Content
             AttackRequestComponent attackRequestComponent,
             ForceAttackComponent forceAttackComponent, 
             LookComponent lookComponent,
-            CollisionComponent collisionComponent)
+            CollisionComponent collisionComponent,
+            TargetComponent targetComponent)
         {
             _damage = damage;
             _moveRequestComponent = moveRequestComponent;
@@ -55,10 +58,13 @@ namespace GameObjects.Content
             _forceAttackComponent = forceAttackComponent;
             _lookComponent = lookComponent;
             _collisionComponent = collisionComponent;
+            _targetComponent = targetComponent;
         }
 
         public void Initialize()
         {
+            _followTargetComponent.SetCondition(this);
+            
             MovementBehaviourSetup();
             AttackBehaviourSetup();
             LifeCycleBehaviourSetup();
@@ -127,5 +133,8 @@ namespace GameObjects.Content
 
         bool DeathRequestComponent.ICondition.Evaluate() 
             => _healthComponent.IsDied;
+
+        bool FollowTargetComponent.ICondition.Evaluate() 
+            => _targetComponent.Target != null;
     }
 }

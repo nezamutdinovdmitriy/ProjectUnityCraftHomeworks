@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.Scripts.GameObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;

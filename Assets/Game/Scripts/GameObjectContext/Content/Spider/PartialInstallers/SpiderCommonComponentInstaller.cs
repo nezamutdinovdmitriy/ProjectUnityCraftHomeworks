@@ -10,9 +10,6 @@ namespace GameObjects.Content
     {
         [SerializeField]
         private Transform _transform;
-
-        [SerializeField]
-        private TargetComponent _targetComponent;
         
         [SerializeField]
         private CollisionComponent _collisionComponent;
@@ -22,8 +19,6 @@ namespace GameObjects.Content
         
         public override void InstallBindings()
         {
-            Container.Bind<TargetComponent>().FromInstance(_targetComponent).AsSingle();
-            
             Container.Bind<Transform>()
                 .FromInstance(_transform)
                 .AsSingle();

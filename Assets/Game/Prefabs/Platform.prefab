@@ -141,11 +141,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.PlatformInstaller
   _moveRequestSettings:
     <Speed>k__BackingField: 2
-  _pointProviderSettings:
+  _patrolComponentSettings:
     <PatrolPoints>k__BackingField:
     - {fileID: 5434138037557620653}
     - {fileID: 7441270365842623162}
-  _followTargetSettings:
     <StoppingDistance>k__BackingField: 0.25
   _transform: {fileID: 7845036276167105276}
 --- !u!1 &2402534428499199933

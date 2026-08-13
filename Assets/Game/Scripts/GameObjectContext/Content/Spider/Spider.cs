@@ -1,5 +1,4 @@
 ﻿using System;
-using Game.Scripts.GameObjects;
 using GameObjects.Components;
 using UnityEngine;
 using Zenject;
@@ -13,7 +12,6 @@ namespace GameObjects.Content
         AttackRequestComponent.IAction,
         DeathRequestComponent.IAction,
         DeathRequestComponent.ICondition,
-        PatrolComponent.ICondition,
         IInitializable,
         IDisposable
     {
@@ -21,8 +19,6 @@ namespace GameObjects.Content
         
         private readonly MoveRequestComponent _moveRequestComponent;
         private readonly MoveTransformComponent _moveTransformComponent;
-        
-        private readonly FollowTargetComponent _followTargetComponent;
 
         private readonly PatrolComponent _patrolComponent;
 
@@ -41,8 +37,7 @@ namespace GameObjects.Content
         public Spider(
             int damage, 
             MoveRequestComponent moveRequestComponent, 
-            MoveTransformComponent moveTransformComponent, 
-            FollowTargetComponent followTargetComponent, 
+            MoveTransformComponent moveTransformComponent,
             PatrolComponent patrolComponent, 
             HealthComponent healthComponent, 
             DeathRequestComponent deathRequestComponent, 
@@ -55,7 +50,6 @@ namespace GameObjects.Content
             _damage = damage;
             _moveRequestComponent = moveRequestComponent;
             _moveTransformComponent = moveTransformComponent;
-            _followTargetComponent = followTargetComponent;
             _patrolComponent = patrolComponent;
             _healthComponent = healthComponent;
             _deathRequestComponent = deathRequestComponent;
@@ -99,8 +93,6 @@ namespace GameObjects.Content
         {
             _moveRequestComponent.SetAction(this);
             _moveRequestComponent.SetCondition(this);
-            
-            _patrolComponent.SetCondition(this);
         }
 
         private void LifeCycleBehaviourSetup()
@@ -132,8 +124,5 @@ namespace GameObjects.Content
 
         bool DeathRequestComponent.ICondition.Evaluate() 
             => _healthComponent.IsDied;
-
-        bool PatrolComponent.ICondition.Evaluate() 
-            => _followTargetComponent.IsDestinationReached();   
     }
 }

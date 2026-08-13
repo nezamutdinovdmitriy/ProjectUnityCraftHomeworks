@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Game.Scripts.GameObjects
+﻿namespace GameObjects.Components
 {
     public interface IEntity
     {

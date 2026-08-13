@@ -174,12 +174,11 @@ MonoBehaviour:
   _movementInstaller:
     _moveTransformSettings:
       <Speed>k__BackingField: 2
-    _followTargetSettings:
-      <StoppingDistance>k__BackingField: 0.25
-    _pointProviderSettings:
+    _patrolComponentSettings:
       <PatrolPoints>k__BackingField:
       - {fileID: 330482538772977516}
       - {fileID: 5737562046146701280}
+      <StoppingDistance>k__BackingField: 0.25
 --- !u!1 &802556461432274881
 GameObject:
   m_ObjectHideFlags: 0

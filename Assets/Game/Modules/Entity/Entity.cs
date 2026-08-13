@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using Zenject;
+﻿using Zenject;
 
-namespace Game.Scripts.GameObjects
+namespace GameObjects.Components
 {
     public class Entity : GameObjectContext, IEntity
     {

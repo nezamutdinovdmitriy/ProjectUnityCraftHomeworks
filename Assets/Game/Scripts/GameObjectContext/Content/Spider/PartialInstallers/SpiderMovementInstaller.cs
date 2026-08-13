@@ -10,12 +10,9 @@ namespace GameObjects.Content
     {
         [SerializeField]
         private MoveTransformComponent.Settings _moveTransformSettings;
-        
-        [SerializeField]
-        private FollowTargetComponent.Settings _followTargetSettings;
 
         [SerializeField]
-        private PatrolComponent.Settings _pointProviderSettings;
+        private PatrolComponent.Settings _patrolComponentSettings;
         
         public override void InstallBindings()
         {
@@ -25,13 +22,9 @@ namespace GameObjects.Content
                 .AsSingle()
                 .WithArguments(_moveTransformSettings);
             
-            Container.BindInterfacesAndSelfTo<FollowTargetComponent>()
-                .AsSingle()
-                .WithArguments(_followTargetSettings);
-            
             Container.BindInterfacesAndSelfTo<PatrolComponent>()
                 .AsSingle()
-                .WithArguments(_pointProviderSettings);
+                .WithArguments(_patrolComponentSettings);
         }
     }
 }
