@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Game
+namespace GameObjects.Components
 {
     public sealed class MoveTransformComponent
     {

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using Zenject;
+using Game;
 
-namespace Game
+namespace GameObjects.Content
 {
     public class CharacterInstaller : MonoInstaller
     {

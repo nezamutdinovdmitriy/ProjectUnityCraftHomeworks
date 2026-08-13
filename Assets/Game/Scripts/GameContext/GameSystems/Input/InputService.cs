@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Game
+namespace GameContexts
 {
     public class InputService
     {

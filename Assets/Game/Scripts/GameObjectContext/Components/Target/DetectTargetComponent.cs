@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Target
+namespace GameObjects.Components
 {
     public class DetectTargetComponent : IInitializable, IFixedTickable
     {

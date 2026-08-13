@@ -1,6 +1,7 @@
+using GameObjects.Components;
 using UnityEngine;
 
-namespace Game
+namespace GameObjects.Content
 {
     public sealed class LavaView : MonoBehaviour
     {

@@ -1,7 +1,6 @@
-﻿using Game.Scripts.SceneContext;
-using Zenject;
+﻿using Zenject;
 
-namespace Game.Scripts.GameObjects.GameSystems.Attack
+namespace GameContexts
 {
     public class PlayerAttackController : ITickable
     {

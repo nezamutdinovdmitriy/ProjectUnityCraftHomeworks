@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Game.Target
+namespace GameObjects.Components
 {
     [Serializable]
     public class TargetComponent

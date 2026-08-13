@@ -1,7 +1,7 @@
-﻿using Game.Scripts.SceneContext;
+﻿using GameObjects.Components;
 using Zenject;
 
-namespace Game
+namespace GameContexts
 {
     public class PlayerJumpController : ITickable
     {

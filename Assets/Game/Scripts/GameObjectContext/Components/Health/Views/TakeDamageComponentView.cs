@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace GameObjects.Components
 {
     public class TakeDamageComponentView : MonoBehaviour
     {

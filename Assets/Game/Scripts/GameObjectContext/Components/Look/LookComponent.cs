@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game
+namespace GameObjects.Components
 {
     public sealed class LookComponent
     {

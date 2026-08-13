@@ -1,9 +1,10 @@
 ﻿using System;
-using Game.Target;
+using Game.Scripts.GameObjects;
+using GameObjects.Components;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Scripts.GameObjects.Content.Monkey
+namespace GameObjects.Content
 {
     public class Monkey :
         JumpRequestComponent.IAction,

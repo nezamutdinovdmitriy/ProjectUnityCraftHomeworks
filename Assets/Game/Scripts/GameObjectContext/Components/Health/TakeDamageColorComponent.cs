@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Game
+namespace GameObjects.Components
 {
     public sealed class TakeDamageColorComponent : MonoBehaviour
     {

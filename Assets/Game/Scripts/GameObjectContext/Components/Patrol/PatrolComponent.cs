@@ -1,9 +1,8 @@
 ﻿using System;
-using Game.Target;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Patrol
+namespace GameObjects.Components
 {
     public class PatrolComponent : IFixedTickable
     {

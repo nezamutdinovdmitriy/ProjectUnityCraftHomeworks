@@ -1,4 +1,4 @@
-﻿namespace Game
+﻿namespace GameObjects.Components
 {
     public enum AttackType
     {

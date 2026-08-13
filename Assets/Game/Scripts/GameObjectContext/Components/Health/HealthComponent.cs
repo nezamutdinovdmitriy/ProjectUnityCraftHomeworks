@@ -2,7 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Game
+namespace GameObjects.Components
 {
     public sealed class HealthComponent
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using Zenject;
 
-namespace Game
+namespace GameObjects.Components
 {
     [Serializable]
     public sealed class GroundedComponent : IFixedTickable

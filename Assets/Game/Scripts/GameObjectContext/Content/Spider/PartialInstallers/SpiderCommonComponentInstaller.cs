@@ -1,9 +1,9 @@
 ﻿using System;
-using Game.Target;
+using GameObjects.Components;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace GameObjects.Content
 {
     [Serializable]
     public class SpiderCommonComponentInstaller : Installer

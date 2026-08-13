@@ -1,11 +1,10 @@
 ﻿using System;
-using Game.Scripts.GameObjects;
-using Game.Scripts.GameObjects.GameSystems.Attack;
-using Game.Scripts.SceneContext;
+using GameContexts;
+using GameObjects.Components;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace GameObjects.Content
 {
     public class Character :
         MoveRequestComponent.IAction,

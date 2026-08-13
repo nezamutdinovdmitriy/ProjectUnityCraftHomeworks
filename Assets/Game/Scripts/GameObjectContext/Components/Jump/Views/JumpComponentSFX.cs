@@ -2,7 +2,7 @@
 using Zenject;
 using Random = UnityEngine.Random;
 
-namespace Game
+namespace GameObjects.Components
 {
     public class JumpComponentSFX : MonoBehaviour
     {

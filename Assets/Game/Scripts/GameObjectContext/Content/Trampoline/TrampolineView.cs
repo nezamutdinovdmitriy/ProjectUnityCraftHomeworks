@@ -1,8 +1,9 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using DG.Tweening;
+using GameObjects.Components;
 
-namespace Game
+namespace GameObjects.Content
 {
     public sealed class TrampolineView : MonoBehaviour
     {

@@ -1,8 +1,9 @@
 ﻿using System;
+using GameObjects.Components;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace GameObjects.Content
 {
     [Serializable]
     public class SnakeAttackInstaller : Installer

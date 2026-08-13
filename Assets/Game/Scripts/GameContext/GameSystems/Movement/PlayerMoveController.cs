@@ -1,8 +1,8 @@
-﻿using Game.Scripts.SceneContext;
+﻿using GameObjects.Components;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace GameContexts
 {
     public class PlayerMoveController : ITickable
     {

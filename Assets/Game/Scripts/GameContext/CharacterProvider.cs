@@ -1,6 +1,6 @@
 ﻿using Game.Scripts.GameObjects;
 
-namespace Game.Scripts.SceneContext
+namespace GameContexts
 {
     public class CharacterProvider
     {

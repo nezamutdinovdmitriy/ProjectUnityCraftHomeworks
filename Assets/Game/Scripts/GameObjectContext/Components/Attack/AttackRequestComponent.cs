@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace GameObjects.Components
 {
     public class AttackRequestComponent : IFixedTickable
     {

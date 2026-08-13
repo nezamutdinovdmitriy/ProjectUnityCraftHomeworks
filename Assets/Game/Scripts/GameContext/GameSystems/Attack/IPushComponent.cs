@@ -1,4 +1,4 @@
-﻿namespace Game.Scripts.GameObjects.GameSystems.Attack
+﻿namespace GameContexts
 {
     public interface IPushComponent
     {

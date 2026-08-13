@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using Zenject;
+using Game;
 
-namespace Game.Scripts.GameObjects.Content.Monkey
+namespace GameObjects.Content
 {
     public class MonkeyInstaller : MonoInstaller
     {

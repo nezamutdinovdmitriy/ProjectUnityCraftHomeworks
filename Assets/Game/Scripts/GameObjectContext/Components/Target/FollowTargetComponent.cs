@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Game.Target
+namespace GameObjects.Components
 {
     public class FollowTargetComponent : IFixedTickable
     {

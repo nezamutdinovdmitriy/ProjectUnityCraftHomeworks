@@ -1,10 +1,11 @@
 ﻿using Game.Scripts.GameObjects;
 using UnityEngine;
 using Zenject;
+using Game;
 
-namespace Game.Scripts.SceneContext
+namespace GameContexts
 {
-    public class SceneContextInstaller : MonoInstaller
+    public class GameContextInstaller : MonoInstaller
     {
         private readonly CharacterSystemsInstaller _characterSystemInstaller = new();
 

@@ -1,9 +1,10 @@
 ﻿using System;
 using Game.Scripts.GameObjects;
+using GameObjects.Components;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace GameObjects.Content
 {
     public class Trap : IInitializable, IDisposable
     {

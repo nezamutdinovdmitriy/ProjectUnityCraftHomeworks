@@ -1,7 +1,6 @@
-﻿using Game.Scripts.GameObjects.GameSystems.Attack;
-using Zenject;
+﻿using Zenject;
 
-namespace Game
+namespace GameContexts
 {
     public class CharacterSystemsInstaller : Installer
     {

@@ -1,11 +1,10 @@
 ﻿using System;
-using Game.Patrol;
 using Game.Scripts.GameObjects;
-using Game.Target;
+using GameObjects.Components;
 using UnityEngine;
 using Zenject;
 
-namespace Game
+namespace GameObjects.Content
 {
     public class Spider : 
         MoveRequestComponent.IAction,
