@@ -7,7 +7,7 @@ namespace GameContexts
 {
     public class GameContextInstaller : MonoInstaller
     {
-        private readonly CharacterSystemsInstaller _characterSystemInstaller = new();
+        private readonly PlayerInputInstaller _playerInputInstaller = new();
 
         [SerializeField]
         private Entity _character;
@@ -16,7 +16,7 @@ namespace GameContexts
         {
             Container.Bind<CharacterProvider>().AsSingle().WithArguments(_character);
             
-            Container.Install(_characterSystemInstaller);
+            Container.Install(_playerInputInstaller);
         }
     }
 }

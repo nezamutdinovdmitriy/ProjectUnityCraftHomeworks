@@ -1,4 +1,4 @@
-﻿namespace GameContexts
+﻿namespace GameObjects.Components
 {
     public interface IPushComponent
     {

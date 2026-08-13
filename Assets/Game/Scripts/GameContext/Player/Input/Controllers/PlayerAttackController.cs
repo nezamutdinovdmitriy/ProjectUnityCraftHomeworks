@@ -1,4 +1,5 @@
-﻿using Zenject;
+﻿using GameObjects.Components;
+using Zenject;
 
 namespace GameContexts
 {

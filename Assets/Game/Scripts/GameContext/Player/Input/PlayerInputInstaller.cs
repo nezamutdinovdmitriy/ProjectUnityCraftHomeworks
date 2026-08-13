@@ -2,7 +2,7 @@
 
 namespace GameContexts
 {
-    public class CharacterSystemsInstaller : Installer
+    public class PlayerInputInstaller : Installer
     {
         public override void InstallBindings()
         {
