@@ -1,0 +1,321 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using static Modules.AI.InternalUtils;
+
+namespace Modules.AI
+{
+    public partial class Blackboard
+    {
+        public event Action<int> OnTagAdded;
+        public event Action<int> OnTagDeleted;
+
+        public int TagCount => _tagCount;
+
+        internal struct TagSlot
+        {
+            public int key;
+            public int next;
+            public bool exists;
+        }
+
+        private TagSlot[] _tagSlots;
+        private int _tagCapacity;
+        private int _tagCount;
+        private int _tagPrimeIndex;
+
+        private int[] _tagBuckets;
+        private int _tagFreeList;
+        private int _tagLastIndex;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void ConstructTags(int capacity)
+        {
+            if (capacity < 0)
+                throw new ArgumentOutOfRangeException(nameof(capacity));
+
+            _tagCapacity = CeilToPrime(capacity, out _tagPrimeIndex);
+
+            _tagSlots = new TagSlot[_tagCapacity];
+            _tagBuckets = new int[_tagCapacity];
+            Array.Fill(_tagBuckets, UNDEFINED_INDEX);
+
+            _tagCount = 0;
+            _tagLastIndex = 0;
+            _tagFreeList = UNDEFINED_INDEX;
+        }
+
+        public bool HasTag(int key)
+        {
+            if (_tagCount > 0)
+            {
+                int hash = key & 0x7FFFFFFF;
+                int bucket = hash % _tagCapacity;
+                int index = _tagBuckets[bucket];
+
+                while (index >= 0)
+                {
+                    ref readonly TagSlot slot = ref _tagSlots[index];
+                    if (slot.exists && slot.key == key)
+                        return true;
+
+                    index = slot.next;
+                }
+            }
+
+            return false;
+        }
+
+        public bool AddTag(int key)
+        {
+            int hash = key & 0x7FFFFFFF;
+            int bucket = hash % _tagCapacity;
+            int index;
+
+            if (_tagCount > 0)
+            {
+                bucket = hash % _tagCapacity;
+                index = _tagBuckets[bucket];
+
+                while (index >= 0)
+                {
+                    ref readonly TagSlot slot = ref _tagSlots[index];
+                    if (slot.exists && slot.key == key)
+                        return false;
+
+                    index = slot.next;
+                }
+            }
+
+            if (_tagFreeList >= 0)
+            {
+                index = _tagFreeList;
+                _tagFreeList = _tagSlots[index].next;
+            }
+            else
+            {
+                if (_tagLastIndex == _tagCapacity)
+                {
+                    this.IncreaseTagCapacity();
+                    bucket = hash % _tagCapacity;
+                }
+
+                index = _tagLastIndex;
+                _tagLastIndex++;
+            }
+
+            ref int next = ref _tagBuckets[bucket];
+
+            _tagSlots[index] = new TagSlot
+            {
+                key = key,
+                next = next,
+                exists = true
+            };
+
+            next = index;
+
+            _tagCount++;
+
+            this.OnTagAdded?.Invoke(key);
+            this.OnStateChanged?.Invoke();
+            return true;
+        }
+
+        /// <summary>
+        /// Deletes a tag from the entity.
+        /// </summary>
+        public bool DelTag(int key)
+        {
+            if (_tagCount > 0)
+            {
+                int hash = key & 0x7FFFFFFF;
+                int bucket = hash % _tagCapacity;
+                ref int next = ref _tagBuckets[bucket];
+
+                int index = next;
+                int last = UNDEFINED_INDEX;
+
+                while (index >= 0)
+                {
+                    ref TagSlot slot = ref _tagSlots[index];
+                    if (slot.key == key)
+                    {
+                        if (last == UNDEFINED_INDEX)
+                            next = slot.next;
+                        else
+                            _tagSlots[last].next = slot.next;
+
+                        slot.next = _tagFreeList;
+                        slot.exists = false;
+
+                        _tagCount--;
+
+                        if (_tagCount == 0)
+                        {
+                            _tagLastIndex = 0;
+                            _tagFreeList = UNDEFINED_INDEX;
+                        }
+                        else
+                        {
+                            _tagFreeList = index;
+                        }
+
+                        this.OnTagDeleted?.Invoke(key);
+                        this.OnStateChanged?.Invoke();
+                        return true;
+                    }
+
+                    last = index;
+                    index = slot.next;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Returns an array containing all tag keys associated with the entity.
+        /// </summary>
+        public int[] GetTags()
+        {
+            int[] results = new int[_tagCount];
+            int index = 0;
+
+            for (int i = 0; i < _tagLastIndex; i++)
+            {
+                ref readonly TagSlot slot = ref _tagSlots[i];
+                if (slot.exists)
+                    results[index++] = slot.key;
+            }
+
+            return results;
+        }
+
+        /// <summary>
+        /// Fills the provided array with all tag keys.
+        /// </summary>
+        public int CopyTags(int[] results)
+        {
+            if (results == null)
+                throw new ArgumentNullException(nameof(results));
+
+            int count = 0;
+
+            for (int i = 0; i < _tagLastIndex; i++)
+            {
+                ref readonly TagSlot slot = ref _tagSlots[i];
+                if (slot.exists)
+                    results[count++] = slot.key;
+            }
+
+            return count;
+        }
+
+        /// <summary>
+        /// Clears all tags from the entity.
+        /// </summary>
+        public void ClearTags()
+        {
+            if (_tagCount == 0)
+                return;
+
+            int removeCount = 0;
+            Span<int> removedTags = stackalloc int[_tagCount];
+
+            for (int i = 0; i < _tagLastIndex; i++)
+            {
+                _tagBuckets[i] = UNDEFINED_INDEX;
+
+                ref TagSlot slot = ref _tagSlots[i];
+                if (!slot.exists)
+                    continue;
+
+                slot.exists = false;
+                slot.next = UNDEFINED_INDEX;
+                removedTags[removeCount++] = slot.key;
+            }
+
+            _tagCount = 0;
+            _tagFreeList = UNDEFINED_INDEX;
+            _tagLastIndex = 0;
+
+            for (int i = 0; i < removeCount; i++)
+                this.OnTagDeleted?.Invoke(removedTags[i]);
+
+            this.OnStateChanged?.Invoke();
+        }
+
+        public TagEnumerator GetTagEnumerator()
+        {
+            return new TagEnumerator(this);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void IncreaseTagCapacity()
+        {
+            _tagCapacity = PrimeTable[++_tagPrimeIndex];
+            Array.Resize(ref _tagSlots, _tagCapacity);
+            Array.Resize(ref _tagBuckets, _tagCapacity);
+            Array.Fill(_tagBuckets, UNDEFINED_INDEX);
+
+            for (int i = 0; i < _tagLastIndex; i++)
+            {
+                ref TagSlot slot = ref _tagSlots[i];
+                if (!slot.exists)
+                    continue;
+
+                int hash = slot.key & 0x7FFFFFFF;
+                int bucket = hash % _tagCapacity;
+                ref int next = ref _tagBuckets[bucket];
+                slot.next = next;
+                next = i;
+            }
+        }
+
+        public struct TagEnumerator : IEnumerator<int>
+        {
+            private readonly Blackboard _entity;
+            private int _index;
+            private int _current;
+
+            public int Current => _current;
+            object IEnumerator.Current => _current;
+
+            public TagEnumerator(Blackboard entity)
+            {
+                _entity = entity;
+                _index = 0;
+                _current = 0;
+            }
+
+            public bool MoveNext()
+            {
+                while (_index < _entity._tagLastIndex)
+                {
+                    ref readonly TagSlot slot = ref _entity._tagSlots[_index++];
+                    if (slot.exists)
+                    {
+                        _current = slot.key;
+                        return true;
+                    }
+                }
+
+                _current = 0;
+                return false;
+            }
+
+            public void Reset()
+            {
+                _index = 0;
+                _current = 0;
+            }
+
+            public void Dispose()
+            {
+                //Do nothing...
+            }
+        }
+    }
+}
