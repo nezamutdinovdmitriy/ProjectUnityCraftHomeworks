@@ -1,3 +1,5 @@
+using Modules.AI;
+using SampleGame.AI;
 using UnityEngine;
 
 namespace SampleGame
@@ -17,12 +19,17 @@ namespace SampleGame
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
+                Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+                
                 if (context.point != null)
                 {
                     // TODO: Follow point
                 }
                 else if (context.target != null && context.target != _character)
                 {
+                    blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, 
+                        new FollowCommandData(context.target));
+                    Debug.Log("+++");
                     // TODO: Follow target
                 }
             }
