@@ -10,5 +10,6 @@ namespace SampleGame.AI
 
         public static readonly BlackboardValueKey<CommandType> CurrentCommandType = new(nameof(CurrentCommandType));
         public static readonly BlackboardValueKey<ICommandData> CurrentCommand = new(nameof(CurrentCommand));
+        public static readonly BlackboardValueKey<int> PatrolPointIndex = new(nameof(PatrolPointIndex));
     }
 }

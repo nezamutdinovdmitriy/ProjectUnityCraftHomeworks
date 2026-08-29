@@ -1,3 +1,5 @@
+using Modules.AI;
+using SampleGame.AI;
 using UnityEngine;
 
 namespace SampleGame
@@ -17,8 +19,10 @@ namespace SampleGame
         {
             if (Input.GetKeyDown(_keyCode))
             {
+                _character
+                    .GetComponentInChildren<Blackboard>()
+                    .SetReferenceValue(BlackboardAPI.CurrentCommand, new HoldPositionCommandData());
                 // TODO: Hold Position
-
             }
             else if (_next) 
                 _next.Handle(ref context);

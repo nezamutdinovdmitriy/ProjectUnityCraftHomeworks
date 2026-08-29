@@ -6,6 +6,9 @@ namespace SampleGame.AI
         Default,
         Move,
         Follow,
-        
+        Attack,
+        Hold,
+        Patrol,
+        Stop
     }
 }

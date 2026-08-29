@@ -29,7 +29,8 @@ namespace SampleGame
                 {
                     blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, 
                         new FollowCommandData(context.target));
-                    Debug.Log("+++");
+
+                    // Тут возможно стоит сразу проставлять таргета в blackboard'е.
                     // TODO: Follow target
                 }
             }
