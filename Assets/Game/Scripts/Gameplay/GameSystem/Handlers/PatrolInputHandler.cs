@@ -8,7 +8,7 @@ namespace SampleGame
     {
         [SerializeField]
         private KeyCode _keyCode = KeyCode.P;
-        
+
         [SerializeField]
         private GameObject _character;
 
@@ -20,35 +20,51 @@ namespace SampleGame
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
                 Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
-                ICommandData commandData = blackboard.GetValue(BlackboardAPI.CurrentCommand);
+                ICommandData currentCommand = blackboard.GetValue(BlackboardAPI.CurrentCommand);
 
-                if (commandData is not PatrolCommandData patrolData)
-                {
-                    patrolData = new PatrolCommandData(_character.transform.position);
-                    blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, patrolData);
-                }
-                
+                PatrolCommandData.Point? point = null;
+
                 if (context.point != null)
                 {
-                    patrolData.Points.Add(new PatrolCommandData.Point(context.point));
-                    
+                    point = new PatrolCommandData.Point(context.point);
+
                     // TODO: Point destination
                 }
                 else if (context.target != null && context.target != _character)
                 {
-                    patrolData.Points.Add(new PatrolCommandData.Point(context.target));
-                    
+                    point = new PatrolCommandData.Point(context.target);
+
                     // TODO: Target destination
                 }
 
-                // if (context.enqueueCommand)
-                // {
-                //     // TODO: If current command is patrol the add waypoint else enqueue command
-                // }
-                // else
-                // {
-                //     // TODO: Switch to patrol
-                // }
+                if (point == null)
+                    return;
+                
+                if (context.enqueueCommand)
+                {
+                    if (currentCommand is PatrolCommandData currentPatrol)
+                    {
+                        currentPatrol.Points.Add(point.Value);
+                        blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, currentPatrol);
+                    }
+                    else
+                    {
+                        PatrolCommandData newPatrolCommand = new PatrolCommandData(_character.transform.position);
+                        newPatrolCommand.Points.Add(point.Value);
+                        
+                        blackboard.GetValue(BlackboardAPI.CommandQueue).Enqueue(newPatrolCommand);
+                    }
+
+                    // TODO: If current command is patrol the add waypoint else enqueue command
+                }
+                else
+                {
+                    PatrolCommandData newPatrolCommand = new PatrolCommandData(_character.transform.position);
+                    newPatrolCommand.Points.Add(point.Value);
+                    
+                    blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, newPatrolCommand);
+                    // TODO: Switch to patrol
+                }
             }
             else if (_next)
                 _next.Handle(ref context);

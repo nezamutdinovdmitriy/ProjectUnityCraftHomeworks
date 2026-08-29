@@ -16,12 +16,18 @@ namespace SampleGame
         private InputHandler _next;
 
         public override void Handle(ref InputContext context)
-        {
+        {              
+            Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+            
             if (Input.GetKeyDown(_keyCode))
             {
-                _character
-                    .GetComponentInChildren<Blackboard>()
-                    .SetReferenceValue(BlackboardAPI.CurrentCommand, new HoldPositionCommandData());
+                if (context.enqueueCommand)
+                {
+                    blackboard.GetValue(BlackboardAPI.CommandQueue).Enqueue(new HoldPositionCommandData());
+                    return;
+                }
+                
+                blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, new HoldPositionCommandData());
                 // TODO: Hold Position
             }
             else if (_next) 

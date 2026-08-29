@@ -21,12 +21,26 @@ namespace SampleGame
                 
                 if (context.target != null && context.target != _character)
                 {
+                    if (context.enqueueCommand)
+                    {
+                        blackboard.GetValue(BlackboardAPI.CommandQueue)
+                            .Enqueue(new MoveCommandData(context.target));
+                        return;
+                    }
+                    
                     blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, 
                         new MoveCommandData(context.target));
                     // TODO: Move to target
                 }
                 else if (context.point != null)
                 {
+                    if (context.enqueueCommand)
+                    {
+                        blackboard.GetValue(BlackboardAPI.CommandQueue)
+                            .Enqueue(new MoveCommandData(context.point));
+                        return;
+                    }
+                    
                     blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, new MoveCommandData(context.point));
                     // TODO: Move to point
                 }

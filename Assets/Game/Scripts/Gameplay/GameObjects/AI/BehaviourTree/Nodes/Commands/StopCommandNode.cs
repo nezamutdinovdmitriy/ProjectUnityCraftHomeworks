@@ -14,8 +14,7 @@ namespace SampleGame.AI
                 || commandData is not StopCommandData)
                 return BehaviourResult.Failure;
             
-            // TODO: Добавить отчистку очереди.
-            
+            _blackboard.GetValue(BlackboardAPI.CommandQueue).Clear();
             _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, new DefaultCommandData());
             return BehaviourResult.Success;
         }

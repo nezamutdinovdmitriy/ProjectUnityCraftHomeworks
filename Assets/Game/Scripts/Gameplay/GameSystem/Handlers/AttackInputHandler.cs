@@ -20,18 +20,28 @@ namespace SampleGame
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
                 Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
+
+                AttackCommandData? attackCommand = null; 
                 
                 if (context.point != null)
                 {
-                    blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, new AttackCommandData(context.point));   
+                    attackCommand = new AttackCommandData(context.point);
                     // TODO: Attack Position
                 }
                 else if (context.target != null && context.target != _character)
                 {
-                    blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, new AttackCommandData(context.target));
+                    attackCommand = new AttackCommandData(context.target);
                     // Тут возможно стоит сразу проставлять таргета в blackboard'е.
                     // TODO: Attack Target
                 }
+
+                if (attackCommand == null)
+                    return;
+
+                if (context.enqueueCommand)
+                    blackboard.GetValue(BlackboardAPI.CommandQueue).Enqueue(attackCommand);
+                else
+                    blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, attackCommand);
             }
             else if (_next)
                 _next.Handle(ref context);

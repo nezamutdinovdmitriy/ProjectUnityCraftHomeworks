@@ -21,18 +21,29 @@ namespace SampleGame
             {
                 Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
                 
+                FollowCommandData? followCommand = null;
+                
                 if (context.point != null)
                 {
+                    // Тут не понял, по ТЗ про точку ничего не сказано, только приследование цели.
+                    // Так как точка неподвижна, то получается дублирование команды перемещения
                     // TODO: Follow point
                 }
                 else if (context.target != null && context.target != _character)
                 {
-                    blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, 
-                        new FollowCommandData(context.target));
+                    followCommand = new FollowCommandData(context.target);
 
                     // Тут возможно стоит сразу проставлять таргета в blackboard'е.
                     // TODO: Follow target
                 }
+
+                if (followCommand == null)
+                    return;
+
+                if (context.enqueueCommand)
+                    blackboard.GetValue(BlackboardAPI.CommandQueue).Enqueue(followCommand);
+                else
+                    blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, followCommand);
             }
             else if (_next) 
                 _next.Handle(ref context);
