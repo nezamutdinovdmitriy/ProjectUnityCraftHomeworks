@@ -25,12 +25,12 @@ namespace SampleGame
                 
                 if (context.point != null)
                 {
-                    attackCommand = new AttackCommandData(context.point);
+                    attackCommand = new AttackCommandData(new CommandPoint(context.point));
                     // TODO: Attack Position
                 }
                 else if (context.target != null && context.target != _character)
                 {
-                    attackCommand = new AttackCommandData(context.target);
+                    attackCommand = new AttackCommandData(new CommandPoint(context.target));
                     // Тут возможно стоит сразу проставлять таргета в blackboard'е.
                     // TODO: Attack Target
                 }

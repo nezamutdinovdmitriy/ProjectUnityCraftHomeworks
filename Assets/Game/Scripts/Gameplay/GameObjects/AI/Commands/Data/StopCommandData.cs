@@ -2,6 +2,6 @@ namespace SampleGame.AI
 {
     public struct StopCommandData : ICommandData
     {
-        public CommandType CommandType => CommandType.Stop;
+        public CommandType Type => CommandType.Stop;
     }
 }

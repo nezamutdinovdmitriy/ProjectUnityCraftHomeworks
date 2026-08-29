@@ -7,7 +7,7 @@ namespace SampleGame.AI
         Move,
         Follow,
         Attack,
-        Hold,
+        HoldPosition,
         Patrol,
         Stop
     }

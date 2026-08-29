@@ -22,17 +22,17 @@ namespace SampleGame
                 Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
                 ICommandData currentCommand = blackboard.GetValue(BlackboardAPI.CurrentCommand);
 
-                PatrolCommandData.Point? point = null;
+                CommandPoint? point = null;
 
                 if (context.point != null)
                 {
-                    point = new PatrolCommandData.Point(context.point);
+                    point = new CommandPoint(context.point);
 
                     // TODO: Point destination
                 }
                 else if (context.target != null && context.target != _character)
                 {
-                    point = new PatrolCommandData.Point(context.target);
+                    point = new CommandPoint(context.target);
 
                     // TODO: Target destination
                 }

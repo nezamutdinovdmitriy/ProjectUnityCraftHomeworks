@@ -2,6 +2,6 @@ namespace SampleGame.AI
 {
     public interface ICommandData
     {
-        public CommandType CommandType { get; }
+        public CommandType Type { get; }
     }
 }

@@ -113,7 +113,7 @@ namespace SampleGame.AI
                 _blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, index);
             }
             
-            PatrolCommandData.Point point = commandData.Points[index];
+            CommandPoint point = commandData.Points[index];
             
             if (point.Position.HasValue)
             {

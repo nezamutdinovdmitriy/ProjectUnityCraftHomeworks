@@ -29,9 +29,9 @@ namespace SampleGame.AI
             
             Vector3 selfPosition = character.transform.position;
             
-            if (attackCommandData.Target != null)
+            if (attackCommandData.Point.Target != null)
             {
-                GameObject target = attackCommandData.Target;
+                GameObject target = attackCommandData.Point.Target;
                 if (target.TryGetComponent(out TeamComponent enemyTeam) == false 
                     || enemyTeam.Team == teamComponent.Team)
                 {
@@ -42,9 +42,9 @@ namespace SampleGame.AI
                 return ProcessTargetAttack(character, target, moveComponent, attackComponent, deltaTime);
             }
 
-            if (attackCommandData.Point.HasValue)
+            if (attackCommandData.Point.Position.HasValue)
             {
-                Vector3 targetPoint = attackCommandData.Point.Value;
+                Vector3 targetPoint = attackCommandData.Point.Position.Value;
                 
                 GameObject visibleEnemy = FindNearestEnemyInRadius(selfPosition, teamComponent.Team);
 

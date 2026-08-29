@@ -4,19 +4,19 @@ namespace SampleGame.AI
 {
     public struct CommandPoint
     {
-        public readonly Vector3? Point;
+        public readonly Vector3? Position;
         public readonly GameObject Target;
         
-        public CommandPoint(Vector3? point)
+        public CommandPoint(Vector3? position)
         {
-            Point = point;
+            Position = position;
             Target = null;
         }
         
         public CommandPoint(GameObject target)
         {
             Target = target;
-            Point = null;
+            Position = null;
         }
     }
 }

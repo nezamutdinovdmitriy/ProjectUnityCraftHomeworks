@@ -1,24 +1,12 @@
-using UnityEngine;
-
 namespace SampleGame.AI
 {
     public readonly struct MoveCommandData : ICommandData
     {
-        public CommandType CommandType => CommandType.Move;
+        public readonly CommandPoint Point;
 
-        public readonly Vector3? Point;
-        public readonly GameObject Target;
-        
-        public MoveCommandData(Vector3? point)
-        {
-            Point = point;
-            Target = null;
-        }
+        public MoveCommandData(CommandPoint point) 
+            => Point = point;
 
-        public MoveCommandData(GameObject target)
-        {
-            Target = target;
-            Point = null;
-        }
+        public CommandType Type => CommandType.Move;
     }
 }

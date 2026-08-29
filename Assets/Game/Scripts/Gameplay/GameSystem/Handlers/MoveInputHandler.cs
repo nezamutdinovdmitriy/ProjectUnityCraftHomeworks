@@ -24,12 +24,12 @@ namespace SampleGame
                     if (context.enqueueCommand)
                     {
                         blackboard.GetValue(BlackboardAPI.CommandQueue)
-                            .Enqueue(new MoveCommandData(context.target));
+                            .Enqueue(new MoveCommandData(new CommandPoint(context.target)));
                         return;
                     }
                     
                     blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, 
-                        new MoveCommandData(context.target));
+                        new MoveCommandData(new CommandPoint(context.target)));
                     // TODO: Move to target
                 }
                 else if (context.point != null)
@@ -37,11 +37,13 @@ namespace SampleGame
                     if (context.enqueueCommand)
                     {
                         blackboard.GetValue(BlackboardAPI.CommandQueue)
-                            .Enqueue(new MoveCommandData(context.point));
+                            .Enqueue(new MoveCommandData(new CommandPoint(context.point)));
                         return;
                     }
                     
-                    blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, new MoveCommandData(context.point));
+                    blackboard.SetReferenceValue(
+                        BlackboardAPI.CurrentCommand, 
+                        new MoveCommandData(new CommandPoint(context.point)));
                     // TODO: Move to point
                 }
             }

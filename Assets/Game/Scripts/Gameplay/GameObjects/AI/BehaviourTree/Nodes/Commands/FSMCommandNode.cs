@@ -41,7 +41,7 @@ namespace SampleGame.AI
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
             if(_blackboard.TryGetValue(BlackboardAPI.CurrentCommand, out _currentCommand)
-               && _nodeMapping.TryGetValue(_currentCommand.CommandType, out _currentNode)
+               && _nodeMapping.TryGetValue(_currentCommand.Type, out _currentNode)
                && _currentNode != null)
                 return _currentNode.Run(deltaTime);
 

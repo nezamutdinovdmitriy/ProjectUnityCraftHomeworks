@@ -48,15 +48,15 @@ namespace SampleGame.AI
 
         private bool TryExtractPosition(in MoveCommandData commandData, out Vector3 position)
         {
-            if (commandData.Point.HasValue)
+            if (commandData.Point.Position.HasValue)
             {
-                position = commandData.Point.Value;
+                position = commandData.Point.Position.Value;
                 return true;
             }
             
-            if (commandData.Target != null) 
+            if (commandData.Point.Target != null) 
             {
-                position = commandData.Target.transform.position;
+                position = commandData.Point.Target.transform.position;
                 return true;
             }
 
