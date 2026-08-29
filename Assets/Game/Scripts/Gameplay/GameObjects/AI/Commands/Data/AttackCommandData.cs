@@ -6,9 +6,9 @@ namespace SampleGame.AI
     {
         public CommandType CommandType => CommandType.Attack;
 
-        // public readonly PatrolCommandData.Point _point;
+        // public readonly CommandPoint _point;
         //
-        // public AttackCommandData(PatrolCommandData.Point point)
+        // public AttackCommandData(CommandPoint point)
         // {
         //     _point = point;
         // }
