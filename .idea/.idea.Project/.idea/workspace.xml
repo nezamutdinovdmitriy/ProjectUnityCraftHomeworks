@@ -2,38 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4db75db7-a697-4678-b6bb-1a40ab16a19a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/IsSubtreeSuccessfulCondition.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/IsSubtreeSuccessfulCondition.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/TargetIsReachedCondition.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/TargetIsReachedCondition.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/AssignTargetPositionNode.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/AssignTargetPositionNode.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/AttackTargetNode.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/AttackTargetNode.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/FindNearestEnemyNode.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/FindNearestEnemyNode.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/MoveToPositionNode.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/MoveToPositionNode.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CharacterInstaller.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CharacterInstaller.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/IHasCommandPoint.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/IHasCommandPoint.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/IncreasePatrolIndexNode.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/IncreasePatrolIndexNode.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Sensors/FindNearestEnemySensor.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Sensors/FindNearestEnemySensor.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/CommandsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CommandsInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/CommandsInstaller.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CommandsInstaller.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/EndCommandNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/EndCommandNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/EndCommandNode.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/EndCommandNode.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/FollowCommandNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/FollowCommandNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BlackboardAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/BlackboardAPI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BlackboardAPI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/BlackboardAPI.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/AttackCommandData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/AttackCommandData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/FollowCommandData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/FollowCommandData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/MoveCommandData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/MoveCommandData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameSystem/Handlers/FollowInputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameSystem/Handlers/FollowInputHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/AttackTargetNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/AttackTargetNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/FindNearestEnemyNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/FindNearestEnemyNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CharacterInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CharacterInstaller.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +26,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/AttackTargetNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/EndCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/FindNearestEnemyNode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/IncreasePatrolIndexNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/CommonNode/MoveToPositionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/FSMCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/FollowCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
@@ -57,6 +34,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/MoveCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/PatrolCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/StopCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Sensors/FindNearestEnemySensor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/BlackboardAPI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CharacterInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CommandsInstaller.cs" root0="FORCE_HIGHLIGHTING" />
@@ -162,7 +140,7 @@
       <workItem from="1787996419820" duration="36603000" />
       <workItem from="1788076289766" duration="3799000" />
       <workItem from="1788080685173" duration="10099000" />
-      <workItem from="1788094638859" duration="15467000" />
+      <workItem from="1788094638859" duration="21454000" />
     </task>
     <servers />
   </component>

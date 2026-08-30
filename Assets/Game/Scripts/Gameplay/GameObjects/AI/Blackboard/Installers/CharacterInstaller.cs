@@ -11,7 +11,7 @@ namespace SampleGame.AI
         
         [ShowInInspector, HideInEditorMode]
         private Vector3 _targetPosition;
-
+        
         [SerializeField]
         private int _colliderBufferSize = 5;
         

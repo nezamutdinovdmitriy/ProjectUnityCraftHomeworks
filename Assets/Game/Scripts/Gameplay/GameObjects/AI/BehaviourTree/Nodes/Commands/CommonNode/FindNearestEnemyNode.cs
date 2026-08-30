@@ -16,10 +16,9 @@ namespace SampleGame.AI
         {
             if (_blackboard.TryGetValue(BlackboardAPI.ColliderBuffer, out Collider[] buffer) == false
                 || _blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) == false
-                || _blackboard.TryGetValue(BlackboardAPI.Target, out GameObject target) == false
                 || character.TryGetComponent(out TeamComponent selfTeamComponent) == false)
                 return BehaviourResult.Failure;
-
+            
             int size = Physics.OverlapSphereNonAlloc(character.transform.position, _detectRadius, buffer);
 
             float minSqrDistance = float.MaxValue;
@@ -49,7 +48,7 @@ namespace SampleGame.AI
                 return BehaviourResult.Success;
             }
             
-            _blackboard.SetReferenceValue(BlackboardAPI.Target, null);
+            _blackboard.DelValue(BlackboardAPI.Target);
             return BehaviourResult.Failure;
         }
     }

@@ -16,6 +16,7 @@ namespace SampleGame.AI
             if (_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) == false
                 || _blackboard.TryGetValue(BlackboardAPI.Target, out GameObject target) == false
                 || target == null
+                || target.TryGetComponent(out HealthComponent healthComponent) == false
                 || character.TryGetComponent(out AttackComponent attackComponent) == false)
                 return BehaviourResult.Failure;
 
@@ -27,12 +28,16 @@ namespace SampleGame.AI
             
             float sqrAttackDistance = _attackDistance * _attackDistance;
             
-            if (vector.sqrMagnitude <= sqrAttackDistance)
+            if (vector.sqrMagnitude <= sqrAttackDistance
+                && healthComponent.IsAlive)
             {
                 attackComponent.Attack(target);
                 return BehaviourResult.Running;
             }
 
+            if (healthComponent.IsDead)
+                return BehaviourResult.Success;
+            
             return BehaviourResult.Failure;
         }
     }
