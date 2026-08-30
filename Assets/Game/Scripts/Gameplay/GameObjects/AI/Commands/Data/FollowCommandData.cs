@@ -1,17 +1,13 @@
-using UnityEngine;
-
 namespace SampleGame.AI
 {
-    public readonly struct FollowCommandData : ICommandData
+    public readonly struct FollowCommandData : ICommandData, IHasCommandPoint
     {
-        public readonly GameObject Target;
+        private readonly CommandPoint _point;
 
-        public FollowCommandData(GameObject target) 
-            => Target = target;
-
-        public bool IsValid 
-            => Target != null;
+        public FollowCommandData(CommandPoint point) 
+            => _point = point;
 
         public CommandType Type => CommandType.Follow;
+        public CommandPoint Point => _point;
     }
 }

@@ -1,12 +1,13 @@
 namespace SampleGame.AI
 {
-    public struct AttackCommandData : ICommandData
+    public readonly struct AttackCommandData : ICommandData, IHasCommandPoint
     {
-        public readonly CommandPoint Point;
+        private readonly CommandPoint _point;
         
         public AttackCommandData(CommandPoint point) 
-            => Point = point;
+            => _point = point;
 
         public CommandType Type => CommandType.Attack;
+        public CommandPoint Point => _point;
     }
 }
