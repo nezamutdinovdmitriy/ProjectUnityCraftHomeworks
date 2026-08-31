@@ -56,7 +56,9 @@ namespace SampleGame.AI
                 _currentNode.Abort();
         
             _currentNode = null;
-            _currentCommand = new DefaultCommandData();
+
+            Vector3 currentPosition = _blackboard.GetValue(BlackboardAPI.Character).transform.position;
+            _currentCommand = new DefaultCommandData(new CommandPoint(currentPosition));
         }
 
         private void BuildNodeMapping()

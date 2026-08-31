@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SampleGame.AI
 {
-    public class StopCommandNode : BehaviourNode
+    public class CleanupAllCommandNode : BehaviourNode
     {
         [SerializeField]
         private Blackboard _blackboard;
@@ -15,7 +15,10 @@ namespace SampleGame.AI
                 return BehaviourResult.Failure;
             
             _blackboard.GetValue(BlackboardAPI.CommandQueue).Clear();
-            _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, new DefaultCommandData());
+            _blackboard.SetReferenceValue(
+                BlackboardAPI.CurrentCommand, 
+                new DefaultCommandData(
+                    new CommandPoint(_blackboard.GetValue(BlackboardAPI.Character).transform.position)));
             return BehaviourResult.Success;
         }
     }

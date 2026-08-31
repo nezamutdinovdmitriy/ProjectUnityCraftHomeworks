@@ -11,8 +11,9 @@ namespace SampleGame.AI
         
         public void Install(Blackboard blackboard)
         {
-            blackboard.AddPrimitiveValue(BlackboardAPI.CurrentCommandType, CommandType.None);
-            blackboard.AddReferenceValue(BlackboardAPI.CurrentCommand, new DefaultCommandData());
+            blackboard.AddReferenceValue(BlackboardAPI.CurrentCommand, 
+                new DefaultCommandData(
+                    new CommandPoint(blackboard.GetValue(BlackboardAPI.Character).transform.position)));
             blackboard.AddReferenceValue(BlackboardAPI.CommandQueue, commandQueue);
         }
     }

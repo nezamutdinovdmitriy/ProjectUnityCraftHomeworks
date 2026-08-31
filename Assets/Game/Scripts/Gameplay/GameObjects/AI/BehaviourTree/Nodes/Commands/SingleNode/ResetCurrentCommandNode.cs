@@ -15,10 +15,11 @@ namespace SampleGame.AI
                 && queueCommand.Count > 0)
                 _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, queueCommand.Dequeue());
             else
-                _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, new DefaultCommandData());
+                _blackboard.SetReferenceValue(
+                    BlackboardAPI.CurrentCommand,
+                    new DefaultCommandData(
+                        new CommandPoint(_blackboard.GetValue(BlackboardAPI.Character).transform.position)));
             
-            
-            Debug.Log("END COMMAND NODE INVOKE");
             return BehaviourResult.Success;
         }
     }
