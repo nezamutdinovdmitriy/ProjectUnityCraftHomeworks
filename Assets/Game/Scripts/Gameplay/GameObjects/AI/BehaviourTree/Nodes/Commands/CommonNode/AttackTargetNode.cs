@@ -36,7 +36,10 @@ namespace SampleGame.AI
             }
 
             if (healthComponent.IsDead)
+            {
+                _blackboard.DelValue(BlackboardAPI.Target);
                 return BehaviourResult.Success;
+            }
             
             return BehaviourResult.Failure;
         }

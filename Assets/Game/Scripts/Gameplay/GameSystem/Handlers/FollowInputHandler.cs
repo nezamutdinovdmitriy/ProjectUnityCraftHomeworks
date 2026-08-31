@@ -32,8 +32,7 @@ namespace SampleGame
                 else if (context.target != null && context.target != _character)
                 {
                     followCommand = new FollowCommandData(new CommandPoint(context.target));
-
-                    // Тут возможно стоит сразу проставлять таргета в blackboard'е.
+                    
                     // TODO: Follow target
                 }
 

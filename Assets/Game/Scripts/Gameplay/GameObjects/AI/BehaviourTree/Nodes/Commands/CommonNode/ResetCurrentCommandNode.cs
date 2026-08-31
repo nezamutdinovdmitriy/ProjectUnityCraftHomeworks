@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SampleGame.AI
 {
-    public class EndCommandNode : BehaviourNode
+    public class ResetCurrentCommandNode : BehaviourNode
     {
         [SerializeField]
         private Blackboard _blackboard;
