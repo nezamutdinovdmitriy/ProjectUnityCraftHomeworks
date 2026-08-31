@@ -2051,11 +2051,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844960895}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1304352257}
   - {fileID: 353529510}
   - {fileID: 1165449164}
   - {fileID: 540967255}
@@ -2077,6 +2078,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _nodes:
+  - {fileID: 1304352259}
   - {fileID: 353529511}
   - {fileID: 1165449165}
   - {fileID: 540967258}
@@ -2855,6 +2857,71 @@ MonoBehaviour:
   _updateMode: 0
   _blackboard: {fileID: 240965039}
   _stoppingDistance: 2
+--- !u!1 &1304352256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1304352257}
+  - component: {fileID: 1304352259}
+  - component: {fileID: 1304352258}
+  m_Layer: 0
+  m_Name: <DequeueCommandNode>
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1304352257
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304352256}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 844960896}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1304352258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304352256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3cb620695be46d3bcc601e8b42042c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SampleGame.AI.DequeueCommand
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _blackboard: {fileID: 240965039}
+--- !u!114 &1304352259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304352256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7891a80c912b43fe8344afd528d8903d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeOverride
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _origin: {fileID: 1304352258}
+  _successPolicy: 0
+  _failurePolicy: 1
 --- !u!1 &1310731461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4324,7 +4391,6 @@ MonoBehaviour:
       data:
         conditions:
         - rid: 8876397662645780585
-        - rid: 8876397662645780587
     - rid: 8876397662645780585
       type: {class: NotCondition, ns: Modules.AI, asm: Modules.AI.Elements}
       data:
@@ -4335,12 +4401,6 @@ MonoBehaviour:
       data:
         _blackboard: {fileID: 240965039}
         _stoppingDistance: 0.5
-    - rid: 8876397662645780587
-      type: {class: IsSubtreeSuccessfulCondition, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
-      data:
-        _nodes:
-        - {fileID: 534956082}
-        - {fileID: 410550722}
 --- !u!114 &2140230096
 MonoBehaviour:
   m_ObjectHideFlags: 0
