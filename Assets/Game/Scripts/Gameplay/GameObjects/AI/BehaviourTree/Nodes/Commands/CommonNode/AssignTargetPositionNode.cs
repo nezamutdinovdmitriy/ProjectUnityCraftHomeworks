@@ -29,58 +29,57 @@ namespace SampleGame.AI
                 _blackboard.DelValue(BlackboardAPI.TargetPosition);
                 return BehaviourResult.Failure;
             }
-            
+
             if (_blackboard.TryGetValue(BlackboardAPI.PatrolPointIndex, out int index) == false)
                 index = 0;
-            
+
             while (command.Points.Count > 0)
             {
                 index %= command.Points.Count;
                 CommandPoint point = command.Points[index];
 
-                if (point.Position.HasValue)
+                if (TryGetPosition(point, out Vector3 position))
                 {
-                    _blackboard.SetPrimitiveValue(BlackboardAPI.TargetPosition, point.Position.Value);
-                    _blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, index);
-                    return BehaviourResult.Success;
-                }
-
-                if (point.Target != null)
-                {
-                    _blackboard.SetPrimitiveValue(BlackboardAPI.TargetPosition, point.Target.transform.position);
+                    _blackboard.SetPrimitiveValue(BlackboardAPI.TargetPosition, position);
                     _blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, index);
                     return BehaviourResult.Success;
                 }
                 
                 command.Points.RemoveAt(index);
             }
-            
+
             _blackboard.DelValue(BlackboardAPI.TargetPosition);
             return BehaviourResult.Failure;
         }
 
         private BehaviourResult AssignPosition(IHasCommandPoint command)
         {
-            if (command.Point.Position.HasValue)
+            if (TryGetPosition(command.Point, out Vector3 position))
             {
-                _blackboard.SetPrimitiveValue(
-                    BlackboardAPI.TargetPosition,
-                    command.Point.Position.Value);
-
-                return BehaviourResult.Success;
-            }
-
-            if (command.Point.Target != null)
-            {
-                _blackboard.SetPrimitiveValue(
-                    BlackboardAPI.TargetPosition,
-                    command.Point.Target.transform.position);
-
+                _blackboard.SetPrimitiveValue(BlackboardAPI.TargetPosition, position);
                 return BehaviourResult.Success;
             }
 
             _blackboard.DelValue(BlackboardAPI.TargetPosition);
             return BehaviourResult.Failure;
+        }
+        
+        private bool TryGetPosition(CommandPoint point, out Vector3 position)
+        {
+            if (point.Position.HasValue)
+            {
+                position = point.Position.Value;
+                return true;
+            }
+            
+            if (point.Target != null)
+            {
+                position = point.Target.transform.position;
+                return true;
+            }
+
+            position = default;
+            return false;
         }
     }
 }
