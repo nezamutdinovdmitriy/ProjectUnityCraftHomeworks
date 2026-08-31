@@ -7,37 +7,79 @@ namespace SampleGame.AI
     {
         [SerializeField]
         private Blackboard _blackboard;
-        
+
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (_blackboard.HasValue(BlackboardAPI.TargetPosition) == false
-                || _blackboard.TryGetValue(BlackboardAPI.CurrentCommand, out ICommandData command) == false
-                || command is not IHasCommandPoint validCommand)
+            if (_blackboard.TryGetValue(BlackboardAPI.CurrentCommand, out ICommandData commandData) == false)
                 return BehaviourResult.Failure;
+
+            if (commandData is IHasCommandPoint commandPoint)
+                return AssignPosition(commandPoint);
+
+            if (commandData is PatrolCommandData patrolCommandData)
+                return AssignPosition(patrolCommandData);
+
+            return BehaviourResult.Failure;
+        }
+
+        private BehaviourResult AssignPosition(PatrolCommandData command)
+        {
+            if (command.Points == null || command.Points.Count == 0)
+            {
+                _blackboard.DelValue(BlackboardAPI.TargetPosition);
+                return BehaviourResult.Failure;
+            }
             
-            return AssignPosition(validCommand);
+            if (_blackboard.TryGetValue(BlackboardAPI.PatrolPointIndex, out int index) == false)
+                index = 0;
+            
+            while (command.Points.Count > 0)
+            {
+                index %= command.Points.Count;
+                CommandPoint point = command.Points[index];
+
+                if (point.Position.HasValue)
+                {
+                    _blackboard.SetPrimitiveValue(BlackboardAPI.TargetPosition, point.Position.Value);
+                    _blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, index);
+                    return BehaviourResult.Success;
+                }
+
+                if (point.Target != null)
+                {
+                    _blackboard.SetPrimitiveValue(BlackboardAPI.TargetPosition, point.Target.transform.position);
+                    _blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, index);
+                    return BehaviourResult.Success;
+                }
+                
+                command.Points.RemoveAt(index);
+            }
+            
+            _blackboard.DelValue(BlackboardAPI.TargetPosition);
+            return BehaviourResult.Failure;
         }
 
         private BehaviourResult AssignPosition(IHasCommandPoint command)
         {
             if (command.Point.Position.HasValue)
-            { 
+            {
                 _blackboard.SetPrimitiveValue(
                     BlackboardAPI.TargetPosition,
                     command.Point.Position.Value);
-                
+
                 return BehaviourResult.Success;
             }
-            
+
             if (command.Point.Target != null)
             {
                 _blackboard.SetPrimitiveValue(
                     BlackboardAPI.TargetPosition,
                     command.Point.Target.transform.position);
-                
+
                 return BehaviourResult.Success;
             }
 
+            _blackboard.DelValue(BlackboardAPI.TargetPosition);
             return BehaviourResult.Failure;
         }
     }
