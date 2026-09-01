@@ -1,5 +1,4 @@
 using Modules.AI;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace SampleGame.AI
@@ -10,7 +9,7 @@ namespace SampleGame.AI
         private float _stoppingDistance;
         
         [SerializeField]
-        private int _colliderBufferSize = 5;
+        private int _colliderBufferSize;
         
         public void Install(Blackboard blackboard)
         {

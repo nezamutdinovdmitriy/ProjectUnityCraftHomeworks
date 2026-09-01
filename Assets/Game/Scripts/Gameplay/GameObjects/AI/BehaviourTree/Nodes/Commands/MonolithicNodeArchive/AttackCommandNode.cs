@@ -100,15 +100,15 @@ namespace SampleGame.AI
             GameObject nearestEnemy = null;
             float minSqrDistance = float.MaxValue;
 
-            foreach (var col in colliders)
+            foreach (var collider in colliders)
             {
-                if (col.TryGetComponent(out TeamComponent team) && team.Team != selfTeam)
+                if (collider.TryGetComponent(out TeamComponent team) && team.Team != selfTeam)
                 {
-                    float sqrDist = (col.transform.position - center).sqrMagnitude;
+                    float sqrDist = (collider.transform.position - center).sqrMagnitude;
                     if (sqrDist < minSqrDistance)
                     {
                         minSqrDistance = sqrDist;
-                        nearestEnemy = col.gameObject;
+                        nearestEnemy = collider.gameObject;
                     }
                 }
             }

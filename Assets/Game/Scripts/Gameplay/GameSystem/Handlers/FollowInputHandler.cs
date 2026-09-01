@@ -15,6 +15,9 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
 
+        [SerializeField]
+        private CommandMarkerView _markersView;
+        
         public override void Handle(ref InputContext context)
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
@@ -25,14 +28,13 @@ namespace SampleGame
                 
                 if (context.point != null)
                 {
-                    // Тут не понял, по ТЗ про точку ничего не сказано, только приследование цели.
-                    // Так как точка неподвижна, то получается дублирование команды перемещения
+                    // ???
                     // TODO: Follow point
                 }
                 else if (context.target != null && context.target != _character)
                 {
                     followCommand = new FollowCommandData(new CommandPoint(context.target));
-                    
+                    _markersView.ShowFollowMarker(context.target.transform);
                     // TODO: Follow target
                 }
 

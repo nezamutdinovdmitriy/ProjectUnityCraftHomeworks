@@ -15,6 +15,9 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
 
+        [SerializeField]
+        private CommandMarkerView _markersView;
+        
         public override void Handle(ref InputContext context)
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
@@ -27,13 +30,13 @@ namespace SampleGame
                 if (context.point != null)
                 {
                     point = new CommandPoint(context.point);
-
+                    _markersView.ShowPatrolMarker(context.point.Value);
                     // TODO: Point destination
                 }
                 else if (context.target != null && context.target != _character)
                 {
                     point = new CommandPoint(context.target);
-
+                    _markersView.ShowPatrolMarker(context.target.transform);
                     // TODO: Target destination
                 }
 

@@ -15,12 +15,16 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
 
+        [SerializeField]
+        private CommandMarkerView _markersView;
+        
         public override void Handle(ref InputContext context)
         {              
             Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
             
             if (Input.GetKeyDown(_keyCode))
             {
+                _markersView.ShowHoldPositionMarker(_character.transform.position);
                 if (context.enqueueCommand)
                 {
                     blackboard.GetValue(BlackboardAPI.CommandQueue).Enqueue(new HoldPositionCommandData());

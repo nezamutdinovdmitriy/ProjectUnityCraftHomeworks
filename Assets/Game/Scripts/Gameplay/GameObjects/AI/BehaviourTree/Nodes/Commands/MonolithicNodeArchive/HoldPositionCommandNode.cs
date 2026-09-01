@@ -20,12 +20,13 @@ namespace SampleGame.AI
                 || command is not HoldPositionCommandData commandData
                 || _blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) == false
                 || character.TryGetComponent(out AttackComponent attackComponent) == false
-                || character.TryGetComponent(out TeamComponent selfTeamComponent) == false)
+                || character.TryGetComponent(out TeamComponent selfTeamComponent) == false
+                || _blackboard.TryGetValue(BlackboardAPI.ColliderBuffer, out Collider[] buffer))
                 return BehaviourResult.Failure;
 
             Vector3 selfPosition = character.transform.position;
             
-            GameObject target = FindNearestEnemyInRadius(selfPosition, selfTeamComponent.Team);
+            GameObject target = FindNearestEnemyInRadius(selfPosition, selfTeamComponent.Team, buffer);
             
             if (target != null)
             {
@@ -41,26 +42,33 @@ namespace SampleGame.AI
             return BehaviourResult.Running;
         }
         
-        private GameObject FindNearestEnemyInRadius(Vector3 center, TeamType selfTeam)
+        private GameObject FindNearestEnemyInRadius(Vector3 center, TeamType selfTeam, Collider[] buffer)
         {
-            Collider[] colliders = Physics.OverlapSphere(center, _detectRadius);
+            var size = Physics.OverlapSphereNonAlloc(center, _detectRadius, buffer);
+            
             GameObject nearestEnemy = null;
             float minSqrDistance = float.MaxValue;
 
-            foreach (var col in colliders)
+            GameObject nearestTarget = null;
+
+            for (int i = 0; i < size; i++)
             {
-                if (col.TryGetComponent(out TeamComponent team) && team.Team != selfTeam)
+                Collider collider = buffer[i];
+
+                if (collider.TryGetComponent(out TeamComponent teamComponent)
+                    && selfTeam != teamComponent.Team)
                 {
-                    float sqrDist = (col.transform.position - center).sqrMagnitude;
-                    if (sqrDist < minSqrDistance)
+                    float sqrDistance = (collider.transform.position - center).sqrMagnitude;
+                    
+                    if (sqrDistance < minSqrDistance)
                     {
-                        minSqrDistance = sqrDist;
-                        nearestEnemy = col.gameObject;
+                        minSqrDistance = sqrDistance;
+                        nearestTarget = collider.gameObject;
                     }
                 }
             }
 
-            return nearestEnemy;
+            return nearestTarget;
         }
     }
 }

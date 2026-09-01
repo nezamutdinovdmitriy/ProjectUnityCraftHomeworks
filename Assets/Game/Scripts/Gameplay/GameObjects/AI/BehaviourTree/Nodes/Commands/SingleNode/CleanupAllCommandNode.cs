@@ -19,6 +19,7 @@ namespace SampleGame.AI
                 BlackboardAPI.CurrentCommand, 
                 new DefaultCommandData(
                     new CommandPoint(_blackboard.GetValue(BlackboardAPI.Character).transform.position)));
+           
             return BehaviourResult.Success;
         }
     }

@@ -73,7 +73,7 @@ namespace SampleGame
             Instantiate(_patrolMarkerPrefab, position, Quaternion.identity, _container);
         }
         
-        private void ShowHoldPositionMarker(Vector3 position)
+        public void ShowHoldPositionMarker(Vector3 position)
         {
             Vector3 spawnPosition = position + new Vector3(0, offsetY, 0);
             Instantiate(_holdPositionPrefab, spawnPosition, Quaternion.identity, _container);

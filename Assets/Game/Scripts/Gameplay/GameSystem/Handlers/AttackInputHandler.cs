@@ -15,6 +15,9 @@ namespace SampleGame
         [SerializeField]
         private InputHandler _next;
 
+        [SerializeField]
+        private CommandMarkerView _markersView;
+        
         public override void Handle(ref InputContext context)
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
@@ -26,12 +29,14 @@ namespace SampleGame
                 if (context.point != null)
                 {
                     attackCommand = new AttackCommandData(new CommandPoint(context.point));
+                    _markersView.ShowAttackMarker(context.point.Value);
                     // TODO: Attack Position
                 }
                 else if (context.target != null && context.target != _character)
                 {
                     attackCommand = new AttackCommandData(new CommandPoint(context.target));
-                    // Тут возможно стоит сразу проставлять таргета в blackboard'е.
+                    _markersView.ShowAttackMarker(context.target.transform);
+                    // Тут возможно стоит сразу проставлять таргета в blackboard?.
                     // TODO: Attack Target
                 }
 
