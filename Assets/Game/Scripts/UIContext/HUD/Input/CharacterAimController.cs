@@ -7,14 +7,18 @@ namespace Game.UI
 {
     public class CharacterAimController : IUIContextInit, IUIContextFixedTick
     {
+        private readonly GameContext _gameContext;
+        
         private Joystick _aimJoystick;
         
         private IVariable<Vector3> _aimDirection;
-        
+
+        public CharacterAimController(GameContext gameContext)
+            => _gameContext = gameContext;
+
         public void Init(IUIContext context)
         {
-            GameContext gameContext = GameContext.Instance;
-            IGameEntity character = gameContext.GetValue(GameContextAPI.Character).Value;
+            IGameEntity character = _gameContext.GetValue(GameContextAPI.Character).Value;
 
             _aimDirection = character.GetValue(GameEntityAPI.AimDirection);
             

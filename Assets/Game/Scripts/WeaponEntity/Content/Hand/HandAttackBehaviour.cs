@@ -1,5 +1,6 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using Cysharp.Threading.Tasks;
 
 namespace Game.GameEntities.Weapon
 {
@@ -15,7 +16,7 @@ namespace Game.GameEntities.Weapon
 
         public HandAttackBehaviour(Cooldown takeDamageDelay) 
             => _takeDamageDelay = takeDamageDelay;
-
+        
         public void Init(IWeaponEntity weapon)
         {
             _request = weapon.GetValue(WeaponEntityAPI.FireRequest);

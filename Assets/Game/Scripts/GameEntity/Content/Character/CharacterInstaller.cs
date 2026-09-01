@@ -56,7 +56,7 @@ namespace Game.GameEntities
 
             entity.GetValue(GameEntityAPI.TakeDamageCommand)
                 .AddCondition(_ => entity.IsDead() == false)
-                .AddAction(entity.HealthReduce);
+                .AddAction(entity.ReduceHealth);
         }
 
         private void SetupFireCommand(IGameEntity entity)
@@ -77,6 +77,8 @@ namespace Game.GameEntities
                        && entity.HasDirection(args.Direction))
                 .AddAction(args 
                     => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
+            
+            entity.AddBehaviour(new CharacterRotateBehaviour(GameContext.Instance));
         }
 
         private void SetupMovementCommand(IGameEntity entity)

@@ -7,20 +7,23 @@ namespace Game.UI
     public class HealthScreenPresenter : IUIContextInit, IUIContextDispose
     {
         private readonly DisposableComposite _disposables = new();
-        private readonly IGameEntity _entity;
-        
-        private HealthScreenView _view;
-        
-        public HealthScreenPresenter(IGameEntity entity) 
-            => _entity = entity;
+        private readonly GameContext _gameContext;
 
-        public void Init(IUIContext entity)
+        private HealthScreenView _view;
+        private IGameEntity _entity;
+        
+        public HealthScreenPresenter(GameContext gameContext) 
+            => _gameContext = gameContext;
+
+        public void Init(IUIContext context)
         {
-            _view = entity.GetValue(UIContextAPI.HealthScreenView);
+            _view = context.GetValue(UIContextAPI.HealthScreenView);
+            _entity = _gameContext.GetValue(GameContextAPI.Character).Value;
+            
             _entity.GetValue(GameEntityAPI.CurrentHealth).Observe(OnHealthChanged).AddTo(_disposables);
         }
 
-        public void Dispose(IUIContext entity) 
+        public void Dispose(IUIContext context) 
             => _disposables?.Dispose();
 
         private void OnHealthChanged(float health)

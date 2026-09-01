@@ -6,18 +6,19 @@ namespace Game.UI
     public class CharacterScorePresenter : IUIContextInit, IUIContextDispose
     {
         private readonly DisposableComposite _disposables = new();
-        private readonly IReactiveVariable<int> _score;
+        private readonly GameContext _gameContext;
         
         private StatView _view;
 
-        public CharacterScorePresenter(IReactiveVariable<int> score) 
-            => _score = score;
+        public CharacterScorePresenter(GameContext gameContext) 
+            => _gameContext = gameContext;
 
         public void Init(IUIContext context)
         {
             _view = context.GetValue(UIContextAPI.KillsView);
 
-            _score.Observe(OnScoreChanged);
+            IReactiveVariable<int> score = _gameContext.GetValue(GameContextAPI.Score);
+            score.Observe(OnScoreChanged);
         }
 
         public void Dispose(IUIContext context) => _disposables?.Dispose();

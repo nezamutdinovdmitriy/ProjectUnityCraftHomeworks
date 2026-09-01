@@ -99,7 +99,7 @@ namespace Game.GameEntities
         {
             entity.GetValue(GameEntityAPI.TakeDamageCommand)
                 .AddCondition(_ => entity.IsDead() == false)
-                .AddAction(entity.HealthReduce);
+                .AddAction(entity.ReduceHealth);
         }
     }
 }

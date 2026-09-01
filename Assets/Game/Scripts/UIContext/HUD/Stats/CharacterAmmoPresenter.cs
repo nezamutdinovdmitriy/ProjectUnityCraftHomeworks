@@ -8,22 +8,23 @@ namespace Game.UI
     public class CharacterAmmoPresenter : IUIContextInit, IUIContextDispose
     {
         private readonly DisposableComposite _disposables = new();
-        private readonly IGameEntity _character;
+        private readonly GameContext _gameContext;
         
         private StatView _view;
 
-        public CharacterAmmoPresenter(IGameEntity character) 
-            => _character = character;
+        public CharacterAmmoPresenter(GameContext gameContext) 
+            => _gameContext = gameContext;
 
-        public void Init(IUIContext entity)
+        public void Init(IUIContext context)
         {
-            _view = entity.GetValue(UIContextAPI.AmmoView);
-
-            IReactiveVariable<IWeaponEntity> weapon = _character.GetValue(GameEntityAPI.Weapon);
+            _view = context.GetValue(UIContextAPI.AmmoView);
+            IGameEntity entity = _gameContext.GetValue(GameContextAPI.Character).Value;
+            
+            IReactiveVariable<IWeaponEntity> weapon = entity.GetValue(GameEntityAPI.Weapon);
             weapon.Value.GetValue(WeaponEntityAPI.Ammo).Observe(OnAmmoChanged).AddTo(_disposables);
         }
 
-        public void Dispose(IUIContext entity) => _disposables?.Dispose();
+        public void Dispose(IUIContext context) => _disposables?.Dispose();
 
         private void OnAmmoChanged(int amount) => _view.SetText(amount.ToString());
     }

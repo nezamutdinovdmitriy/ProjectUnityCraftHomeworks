@@ -9,14 +9,14 @@ namespace Game.GameEntities
         public static bool IsDead(this IGameEntity entity) 
             => entity.GetValue(GameEntityAPI.CurrentHealth).Value <= 0;
 
-        public static void HealthReduce(this IGameEntity entity, float value)
+        public static void ReduceHealth(this IGameEntity entity, float value)
         {
             IReactiveVariable<float> currentHealth = entity.GetValue(GameEntityAPI.CurrentHealth);
             
             currentHealth.Value = Mathf.Max(0, currentHealth.Value - value);
         }
 
-        public static void HealthRestore(this IGameEntity entity, float value)
+        public static void RestoreHealth(this IGameEntity entity, float value)
         {
             IReactiveVariable<float> currentHealth = entity.GetValue(GameEntityAPI.CurrentHealth);
             float maxHealth = entity.GetValue(GameEntityAPI.MaxHealth).Value;

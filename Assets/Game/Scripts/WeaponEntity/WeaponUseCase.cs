@@ -32,7 +32,7 @@ namespace Game.GameEntities.Weapon
             weapon.GetValue(WeaponEntityAPI.Ammo).Value--;
         }
         
-        public static void MeleeAttack(
+        public static void AttackMelee(
             this IWeaponEntity weapon, 
             Vector3 position, 
             float attackRadius, 

@@ -17,7 +17,7 @@ namespace Game.GameEntities
             
             entity.GetValue(GameEntityAPI.InteractCommand)
                 .AddCondition(interactor => interactor.IsHealthNotFull())
-                .AddAction(interactor => interactor.HealthRestore(_healAmount));
+                .AddAction(interactor => interactor.RestoreHealth(_healAmount));
         }
     }
 }

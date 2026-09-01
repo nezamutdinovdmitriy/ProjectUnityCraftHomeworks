@@ -1,6 +1,4 @@
-using Atomic.Elements;
 using Atomic.Entities;
-using Game.GameEntities;
 using UnityEngine;
 
 namespace Game.UI
@@ -34,27 +32,20 @@ namespace Game.UI
 
         private void AddBehaviours(IUIContext entity, GameContext gameContext)
         {
-            IGameEntity character = gameContext.GetValue(GameContextAPI.Character).Value;
-            IReactiveVariable<int> score = gameContext.GetValue(GameContextAPI.Score);
-
-            entity.AddBehaviour(new HealthScreenPresenter(character));
-            entity.AddBehaviour(new CharacterHealthPresenter(character));
-            entity.AddBehaviour(new CharacterAmmoPresenter(character));
-            entity.AddBehaviour(new CharacterScorePresenter(score));
+            entity.AddBehaviour(new HealthScreenPresenter(gameContext));
+            entity.AddBehaviour(new CharacterHealthPresenter(gameContext));
+            entity.AddBehaviour(new CharacterAmmoPresenter(gameContext));
+            entity.AddBehaviour(new CharacterScorePresenter(gameContext));
             
-            entity.AddBehaviour(new CharacterMovementController());
-            entity.AddBehaviour(new CharacterAimController());
-            entity.AddBehaviour(new CharacterRotateController());
+            entity.AddBehaviour(new CharacterMovementController(gameContext));
+            entity.AddBehaviour(new CharacterAimController(gameContext));
         }
 
         private void AddValues(IUIContext entity)
         {
             entity.AddValue(UIContextAPI.HealthScreenView, _healthScreenView);
-            
             entity.AddValue(UIContextAPI.HealthView, _healthView);
-            
             entity.AddValue(UIContextAPI.AmmoView, _ammoView);
-            
             entity.AddValue(UIContextAPI.KillsView, _killsView);
         }
     }

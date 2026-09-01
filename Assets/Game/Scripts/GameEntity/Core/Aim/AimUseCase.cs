@@ -12,7 +12,7 @@ namespace Game.GameEntities
         public static bool IsAiming(this IGameEntity entity, Vector3 direction) 
             => direction != Vector3.zero;
 
-        public static void AimProcess(
+        public static void AimingProcess(
             this IGameEntity entity, 
             IVariable<Vector3> aimDirection, 
             IVariable<bool> hasAimingLastFrame, 

@@ -21,7 +21,7 @@ namespace Game.GameEntities
         
         public void FixedTick(IGameEntity entity, float deltaTime)
         {
-            entity.AimProcess(
+            entity.AimingProcess(
                 _aimDirection,
                 _hasAimingLastFrame,
                 _cooldown,

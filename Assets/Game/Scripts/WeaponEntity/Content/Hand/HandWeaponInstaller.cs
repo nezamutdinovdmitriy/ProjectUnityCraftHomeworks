@@ -57,7 +57,7 @@ namespace Game.GameEntities.Weapon
             command.AddCondition(() 
                 => weapon.HasOwner() && weapon.IsFireCooldownCompleted());
             command.AddAction(() 
-                => weapon.MeleeAttack(_firePoint.position, _attackRadius, _colliders, _damage));
+                => weapon.AttackMelee(_firePoint.position, _attackRadius, _colliders, _damage));
         }
     }
 }
