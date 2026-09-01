@@ -2008,7 +2008,6 @@ GameObject:
   m_Component:
   - component: {fileID: 844960896}
   - component: {fileID: 844960897}
-  - component: {fileID: 844960898}
   m_Layer: 0
   m_Name: <Default>
   m_TagString: Untagged
@@ -2056,19 +2055,6 @@ MonoBehaviour:
   - {fileID: 1165449165}
   - {fileID: 540967258}
   - {fileID: 1062952678}
---- !u!114 &844960898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 844960895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5078a9d4724670893d80ea9ec1d7d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeDebugger
-  _root: {fileID: 844960897}
 --- !u!1 &906546670
 GameObject:
   m_ObjectHideFlags: 0
@@ -3237,7 +3223,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1412529511}
   - component: {fileID: 1412529512}
-  - component: {fileID: 1412529513}
   m_Layer: 0
   m_Name: <Move>
   m_TagString: Untagged
@@ -3281,19 +3266,6 @@ MonoBehaviour:
   - {fileID: 753958245}
   - {fileID: 2140230096}
   - {fileID: 2130165185}
---- !u!114 &1412529513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1412529510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5078a9d4724670893d80ea9ec1d7d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeDebugger
-  _root: {fileID: 1412529512}
 --- !u!1001 &1515189632
 PrefabInstance:
   m_ObjectHideFlags: 0
