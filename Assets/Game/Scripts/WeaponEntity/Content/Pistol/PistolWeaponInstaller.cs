@@ -46,7 +46,17 @@ namespace Game.Weapon
             ICommand command = weapon.GetValue(WeaponEntityAPI.FireCommand);
 
             command.AddCondition(() => weapon.HasOwner() && weapon.HasAmmo() && weapon.IsFireCooldownCompleted());
-            command.AddAction(() => weapon.Fire(gameContext, _firePoint));
+            command.AddAction(() =>
+            {
+                // gameContext.SpawnBullet(_firePoint.position, 
+                //     _firePoint.rotation, 
+                //     weapon.GetValue(WeaponEntityAPI.Owner).Value);
+                //
+                // weapon.ResetFireCooldown();
+                // weapon.ConsumeAmmo();
+
+                weapon.Fire(gameContext, _firePoint);
+            });
         }
     }
 }
