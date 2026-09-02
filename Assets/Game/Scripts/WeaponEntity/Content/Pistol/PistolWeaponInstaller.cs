@@ -1,8 +1,9 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.GameEntities;
 using UnityEngine;
 
-namespace Game.GameEntities.Weapon
+namespace Game.Weapon
 {
     public class PistolWeaponInstaller : SceneEntityInstaller<IWeaponEntity>
     {

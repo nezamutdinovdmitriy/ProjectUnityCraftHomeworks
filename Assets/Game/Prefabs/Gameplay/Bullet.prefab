@@ -174,8 +174,6 @@ MonoBehaviour:
     _position: {fileID: 6795422085097260040}
   _rotationInstaller:
     _rotation: {fileID: 6795422085097260040}
-  _movementInstaller:
-    _movementSpeed: 45
   _damageInstaller:
     _damage: 1
     _triggerEvents: {fileID: 2337329661280343470}
@@ -183,6 +181,7 @@ MonoBehaviour:
     _lifetime:
       _duration: 3
       _time: 3
+  _moveSpeed: 45
 --- !u!114 &2337329661280343470
 MonoBehaviour:
   m_ObjectHideFlags: 0

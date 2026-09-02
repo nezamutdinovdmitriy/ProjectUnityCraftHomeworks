@@ -1,7 +1,7 @@
 using Atomic.Elements;
 using Atomic.Entities;
 using Game.GameEntities;
-using Game.GameEntities.Weapon;
+using Game.Weapon;
 
 namespace Game.UI
 {

@@ -1,9 +1,10 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.GameEntities;
 using UnityEngine;
 using Event = Atomic.Elements.Event;
 
-namespace Game.GameEntities.Weapon
+namespace Game.Weapon
 {
     public class HandWeaponInstaller : SceneEntityInstaller<IWeaponEntity>
     {

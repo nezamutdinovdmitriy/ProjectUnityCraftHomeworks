@@ -11,6 +11,13 @@ namespace Game.GameEntities
             entity.GetValue(GameEntityAPI.Position).Value += direction * speed * deltaTime;
         }
 
+        public static void MoveStepForward(this IGameEntity entity, float speed, float deltaTime)
+        {
+            Quaternion rotation = entity.GetValue(GameEntityAPI.Rotation).Value;
+
+            entity.MoveStep(rotation * Vector3.forward, speed, deltaTime);
+        }
+        
         public static void MoveStepForward(this IGameEntity entity, float deltaTime)
         {
             Quaternion rotation = entity.GetValue(GameEntityAPI.Rotation).Value;

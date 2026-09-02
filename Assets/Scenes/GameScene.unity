@@ -1282,8 +1282,6 @@ GameObject:
   m_Component:
   - component: {fileID: 76841824}
   - component: {fileID: 76841826}
-  - component: {fileID: 76841829}
-  - component: {fileID: 76841828}
   - component: {fileID: 76841827}
   m_Layer: 0
   m_Name: Trigger4
@@ -1337,53 +1335,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 76841823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Script: {fileID: 11500000, guid: 959fac89f48a430d9d2d03f679720afd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
---- !u!114 &76841828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76841823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a9b87d8e254744b404911a75c79f37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.EnemyTriggerInstaller
-  _triggerEvents: {fileID: 76841827}
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntities.EnemyTrigger
   _enemies:
   - {fileID: 1293016459}
   - {fileID: 683460839}
   - {fileID: 1293755591}
   - {fileID: 131314611}
   - {fileID: 256725172}
---- !u!114 &76841829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76841823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9746fe30b3671bb48a5b4bf1629b7414, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 76841828}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!1001 &91586453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9857,8 +9817,6 @@ GameObject:
   m_Component:
   - component: {fileID: 680947262}
   - component: {fileID: 680947264}
-  - component: {fileID: 680947267}
-  - component: {fileID: 680947266}
   - component: {fileID: 680947265}
   m_Layer: 0
   m_Name: Trigger2
@@ -9912,50 +9870,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 680947261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Script: {fileID: 11500000, guid: 959fac89f48a430d9d2d03f679720afd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
---- !u!114 &680947266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680947261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a9b87d8e254744b404911a75c79f37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.EnemyTriggerInstaller
-  _triggerEvents: {fileID: 680947265}
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntities.EnemyTrigger
   _enemies:
   - {fileID: 912174563}
   - {fileID: 1295137805}
---- !u!114 &680947267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 680947261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9746fe30b3671bb48a5b4bf1629b7414, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 680947266}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!1001 &683460838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26283,8 +26203,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2117813608}
   - component: {fileID: 2117813610}
-  - component: {fileID: 2117813613}
-  - component: {fileID: 2117813612}
   - component: {fileID: 2117813611}
   m_Layer: 0
   m_Name: Trigger3
@@ -26338,49 +26256,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2117813607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Script: {fileID: 11500000, guid: 959fac89f48a430d9d2d03f679720afd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
---- !u!114 &2117813612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117813607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a9b87d8e254744b404911a75c79f37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.EnemyTriggerInstaller
-  _triggerEvents: {fileID: 2117813611}
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntities.EnemyTrigger
   _enemies:
   - {fileID: 761039290}
---- !u!114 &2117813613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2117813607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9746fe30b3671bb48a5b4bf1629b7414, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 2117813612}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!1 &2125758030
 GameObject:
   m_ObjectHideFlags: 0
@@ -27894,8 +27774,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1146665911448847004}
   - component: {fileID: 6213934968884953636}
-  - component: {fileID: 7039316091810692803}
-  - component: {fileID: 7039316091810692802}
   - component: {fileID: 7039316091810692801}
   m_Layer: 0
   m_Name: Trigger1
@@ -27913,50 +27791,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7039316091810692800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c11f7caf293d4158bfbb8855eade79be, type: 3}
+  m_Script: {fileID: 11500000, guid: 959fac89f48a430d9d2d03f679720afd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Atomic.Elements::Atomic.Elements.TriggerEvents
---- !u!114 &7039316091810692802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7039316091810692800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a9b87d8e254744b404911a75c79f37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.EnemyTriggerInstaller
-  _triggerEvents: {fileID: 7039316091810692801}
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntities.EnemyTrigger
   _enemies:
   - {fileID: 2074083451}
   - {fileID: 691415260}
---- !u!114 &7039316091810692803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7039316091810692800}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9746fe30b3671bb48a5b4bf1629b7414, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.GameEntity.GameEntity
-  useUnityLifecycle: 1
-  disposeValues: 1
-  installOnAwake: 1
-  uninstallOnDestroy: 1
-  scriptableInstallers: []
-  sceneInstallers:
-  - {fileID: 7039316091810692802}
-  onlySelectedGizmos: 0
-  onlyEditModeGizmos: 0
-  autoCompile: 0
-  initialTagCapacity: 1
-  initialValueCapacity: 1
-  initialBehaviourCapacity: 0
 --- !u!1001 &7160444056652517393
 PrefabInstance:
   m_ObjectHideFlags: 0

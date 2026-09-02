@@ -15,25 +15,26 @@ namespace Game.GameEntities
         private RotationInstaller _rotationInstaller;
 
         [SerializeField]
-        private MovementInstaller _movementInstaller;
-
-        [SerializeField]
         private DamageInstaller _damageInstaller;
 
         [SerializeField]
         private LifeTimeInstaller _lifetimeInstaller;
 
+        [SerializeField]
+        private float _moveSpeed;
+        
         public override void Install(IGameEntity entity)
         {
             entity.AddValue(GameEntityAPI.Owner, new Variable<IGameEntity>());
 
             _positionInstaller.Install(entity);
             _rotationInstaller.Install(entity);
-            _movementInstaller.Install(entity);
             _damageInstaller.Install(entity);
             _lifetimeInstaller.Install(entity);
 
-            entity.WhenFixedTick(entity.MoveStepForward).AddTo(_disposables);
+            entity.WhenFixedTick( deltaTime 
+                => entity.MoveStepForward(_moveSpeed, deltaTime))
+                .AddTo(_disposables);
 
             entity.GetValue(GameEntityAPI.DestroyAction).Add(() 
                 => GameContext.Instance.DestroyBullet((GameEntity) entity));

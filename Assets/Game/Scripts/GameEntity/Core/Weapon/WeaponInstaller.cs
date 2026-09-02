@@ -1,7 +1,7 @@
 using System;
 using Atomic.Elements;
 using Atomic.Entities;
-using Game.GameEntities.Weapon;
+using Game.Weapon;
 using UnityEngine;
 
 namespace Game.GameEntities

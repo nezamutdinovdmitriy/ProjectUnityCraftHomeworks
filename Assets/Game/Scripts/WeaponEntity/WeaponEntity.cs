@@ -4,7 +4,7 @@
  * Created by Entity Domain Generator.
  */
 
-namespace Game.GameEntities.Weapon
+namespace Game.Weapon
 {
     /// <summary>
     /// Represents a Unity <see cref="SceneEntity"/> implementation for <see cref="IWeaponEntity"/>.

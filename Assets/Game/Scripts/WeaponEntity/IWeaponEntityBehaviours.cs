@@ -4,7 +4,7 @@
  * Created by Entity Domain Generator.
  */
 
-namespace Game.GameEntities.Weapon
+namespace Game.Weapon
 {
     /// <summary>
     /// Provides initialization logic for the strongly-typed <see cref="IWeaponEntity"/> entity.

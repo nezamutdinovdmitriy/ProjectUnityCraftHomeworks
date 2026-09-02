@@ -1,7 +1,7 @@
 using Atomic.Elements;
 using Atomic.Entities;
 
-namespace Game.GameEntities.Weapon
+namespace Game.Weapon
 {
     public class PistolFireBehaviour : IWeaponEntityInit, IWeaponEntityFixedTick
     {

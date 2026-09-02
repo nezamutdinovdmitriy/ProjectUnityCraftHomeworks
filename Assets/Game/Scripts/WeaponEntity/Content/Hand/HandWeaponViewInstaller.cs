@@ -2,7 +2,7 @@ using Atomic.Elements;
 using Atomic.Entities;
 using UnityEngine;
 
-namespace Game.GameEntities.Weapon
+namespace Game.Weapon
 {
     public class HandWeaponViewInstaller : SceneEntityInstaller<IWeaponEntity>
     {

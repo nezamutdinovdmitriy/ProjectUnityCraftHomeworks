@@ -1,7 +1,8 @@
 using Atomic.Elements;
 using Atomic.Entities;
+using Game.GameEntities;
 
-namespace Game.GameEntities.Weapon
+namespace Game.Weapon
 {
     public static class WeaponEntityAPI
     {
