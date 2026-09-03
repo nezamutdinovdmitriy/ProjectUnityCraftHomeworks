@@ -1739,6 +1739,10 @@ MonoBehaviour:
       _time: 5
   _weaponInstaller:
     _weapon: {fileID: 1764289448919355322}
+  _fireInstaller:
+    _fireDelay:
+      _duration: 0.51
+      _time: 0.51
   _stoppingDistance: 0.8
 --- !u!1 &6519369982854541961
 GameObject:

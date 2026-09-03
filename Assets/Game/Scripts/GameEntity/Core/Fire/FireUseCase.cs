@@ -32,10 +32,18 @@ namespace Game.GameEntities
             return false;
         }
 
+        public static bool CanFireWeapon(this IGameEntity entity)
+        {
+            if (entity.TryGetWeapon(out IReactiveVariable<IWeaponEntity> weaponEntity))
+                return weaponEntity.Value.GetValue(WeaponEntityAPI.FireCommand).CanInvoke();
+
+            return false;
+        }
+        
         public static void InvokeFireRequest(this IGameEntity entity)
         {
             IReactiveVariable<IWeaponEntity> weapon = entity.GetValue(GameEntityAPI.Weapon);
-            weapon.Value.GetValue(WeaponEntityAPI.FireRequest).Invoke();
+            weapon.Value.GetValue(WeaponEntityAPI.FireCommand).Invoke();
         }
     }
 }

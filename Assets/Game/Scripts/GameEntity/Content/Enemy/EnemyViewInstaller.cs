@@ -45,19 +45,13 @@ namespace Game.GameEntities
         public override void Install(IGameEntity entity)
         {
             entity.GetValue(GameEntityAPI.IsMoving).Subscribe(OnMoved).AddTo(_disposables);
+            entity.GetValue(GameEntityAPI.FireStartEvent).Subscribe(OnFired).AddTo(_disposables);
             
             IReactiveVariable<float> currentHealth = entity.GetValue(GameEntityAPI.CurrentHealth);
             _previousHealthAmount = currentHealth.Value;
             currentHealth.Subscribe(OnHealthChanged).AddTo(_disposables);
             
             _animationEvents.Subscribe(BodyFallReceiveEventKey, OnBodyFall);
-
-            
-            if (entity.TryGetValue(GameEntityAPI.Weapon, out IReactiveVariable<IWeaponEntity> weaponEntity))
-            {
-                IWeaponEntity weapon = weaponEntity.Value;
-                weapon.GetValue(WeaponEntityAPI.FireStartEvent).Subscribe(OnFired).AddTo(_disposables);
-            }
         }
         
         public override void Uninstall(IGameEntity entity) => _disposables?.Dispose();

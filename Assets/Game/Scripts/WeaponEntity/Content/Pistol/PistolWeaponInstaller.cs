@@ -27,16 +27,12 @@ namespace Game.Weapon
             weapon.AddValue(WeaponEntityAPI.Owner, new ReactiveVariable<IGameEntity>());
 
             weapon.AddValue(WeaponEntityAPI.Ammo, new ReactiveVariable<int>(_initialAmmoAmount));
-
-            weapon.AddValue(WeaponEntityAPI.FireRequest, new Request());
             weapon.AddValue(WeaponEntityAPI.FireCommand, new Command());
 
             weapon.AddValue(WeaponEntityAPI.FireCooldown, _fireCooldown);
             weapon.WhenFixedTick(_fireCooldown.Tick).AddTo(_disposables);
 
             SetupFireCommand(weapon, gameContext);
-            
-            weapon.AddBehaviour(new PistolFireBehaviour());
         }
 
         public override void Uninstall(IWeaponEntity entity) => _disposables.Dispose();

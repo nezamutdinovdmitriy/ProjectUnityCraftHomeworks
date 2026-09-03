@@ -45,6 +45,7 @@ namespace Game.GameEntities
         public static ValueKey<IGameEntity, IReactiveVariable<IWeaponEntity>> Weapon = new(nameof(Weapon));
         public static ValueKey<IGameEntity, IRequest> FireRequest = new(nameof(FireRequest));
         public static ValueKey<IGameEntity, ICommand> FireCommand = new(nameof(FireCommand));
+        public static ValueKey<IGameEntity, IEvent> FireStartEvent = new(nameof(FireStartEvent));
         
         // Interact
         public static TagKey InteractableTag = new(nameof(InteractableTag));

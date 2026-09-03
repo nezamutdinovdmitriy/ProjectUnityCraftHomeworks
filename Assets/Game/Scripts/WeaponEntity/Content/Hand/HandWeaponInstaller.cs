@@ -32,12 +32,6 @@ namespace Game.Weapon
             weapon.AddValue(WeaponEntityAPI.Owner, new ReactiveVariable<IGameEntity>());
 
             weapon.AddValue(WeaponEntityAPI.FireCooldown, _attackCooldown);
-
-            IEvent startAttackEvent = new Event();
-            weapon.AddValue(WeaponEntityAPI.FireStartEvent, startAttackEvent);
-            
-            IRequest fireRequest = new Request();
-            weapon.AddValue(WeaponEntityAPI.FireRequest, fireRequest);
             
             ICommand fireCommand = new Command();
             weapon.AddValue(WeaponEntityAPI.FireCommand, fireCommand);
@@ -45,8 +39,6 @@ namespace Game.Weapon
             weapon.WhenFixedTick(_attackCooldown.Tick).AddTo(_disposables);
             
             SetupFireCommand(weapon);
-            
-            weapon.AddBehaviour(new HandAttackBehaviour(_takeDamageDelay));
         }
 
         public override void Uninstall(IWeaponEntity entity) => _disposables.Dispose();
