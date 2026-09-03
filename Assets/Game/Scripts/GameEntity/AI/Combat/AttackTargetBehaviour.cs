@@ -21,7 +21,8 @@ namespace Game.GameEntities
             if (_target.Value == null)
                 return;
             
-            if (_target.Value.IsDead() == false
+            if (_request.Required == false
+                && _target.Value.IsDead() == false
                 && _isReached.Value)
                 _request.Invoke();
         }
