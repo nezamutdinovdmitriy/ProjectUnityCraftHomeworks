@@ -342,38 +342,33 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _condition:
-    rid: 8876397646433484976
+    rid: 6645919133923803227
   _child: {fileID: 167154956}
   references:
     version: 2
     RefIds:
-    - rid: 8876397646433484976
-      type: {class: OrCondition, ns: Modules.AI, asm: Modules.AI.Elements}
-      data:
-        conditions:
-        - rid: 8876397646433484993
-    - rid: 8876397646433484993
+    - rid: 6645919133923803227
       type: {class: AndCondition, ns: Modules.AI, asm: Modules.AI.Elements}
       data:
         conditions:
-        - rid: 8876397646433484994
-        - rid: 8876397646433484996
-    - rid: 8876397646433484994
+        - rid: 6645919133923803228
+        - rid: 6645919133923803230
+    - rid: 6645919133923803228
       type: {class: NotCondition, ns: Modules.AI, asm: Modules.AI.Elements}
       data:
         condition:
-          rid: 8876397646433484995
-    - rid: 8876397646433484995
+          rid: 6645919133923803229
+    - rid: 6645919133923803229
       type: {class: TargetIsReachedCondition, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 240965039}
         _stoppingDistance: 0.5
-    - rid: 8876397646433484996
+    - rid: 6645919133923803230
       type: {class: NotCondition, ns: Modules.AI, asm: Modules.AI.Elements}
       data:
         condition:
-          rid: 8876397646433484997
-    - rid: 8876397646433484997
+          rid: 6645919133923803231
+    - rid: 6645919133923803231
       type: {class: HasTargetCondition, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 240965039}
