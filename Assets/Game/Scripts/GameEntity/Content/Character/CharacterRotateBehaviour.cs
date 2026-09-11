@@ -6,24 +6,17 @@ namespace Game.GameEntities
 {
     public class CharacterRotateBehaviour : IGameEntityInit, IGameEntityFixedTick
     {
-        private readonly GameContext _gameContext;
-        
         private IVariable<Vector3> _movementDirection;
         private IVariable<Vector3> _aimDirection;
 
         private IRequest<Vector3> _rotateRequest;
 
-        public CharacterRotateBehaviour(GameContext gameContext) 
-            => _gameContext = gameContext;
-
         public void Init(IGameEntity entity)
         {
-            IGameEntity character = _gameContext.GetValue(GameContextAPI.Character).Value;
+            _movementDirection = entity.GetValue(GameEntityAPI.MovementDirection);
+            _aimDirection = entity.GetValue(GameEntityAPI.AimDirection);
 
-            _movementDirection = character.GetValue(GameEntityAPI.MovementDirection);
-            _aimDirection = character.GetValue(GameEntityAPI.AimDirection);
-
-            _rotateRequest = character.GetValue(GameEntityAPI.RotateRequest);
+            _rotateRequest = entity.GetValue(GameEntityAPI.RotateRequest);
         }
 
         public void FixedTick(IGameEntity entity, float deltaTime)

@@ -107,8 +107,8 @@ MonoBehaviour:
   uninstallOnDestroy: 1
   scriptableInstallers: []
   sceneInstallers:
-  - {fileID: 7536808437054671415}
   - {fileID: 9050222108707118430}
+  - {fileID: 7536808437054671415}
   onlySelectedGizmos: 0
   onlyEditModeGizmos: 0
   autoCompile: 0
@@ -131,9 +131,6 @@ MonoBehaviour:
   _attackCooldown:
     _duration: 1
     _time: 1
-  _takeDamageDelay:
-    _duration: 0.51
-    _time: 0.51
   _damage: 1
   _attackRadius: 0.2
 --- !u!1 &8279701636020033038
@@ -161,7 +158,7 @@ Transform:
   m_GameObject: {fileID: 8279701636020033038}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0.532}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

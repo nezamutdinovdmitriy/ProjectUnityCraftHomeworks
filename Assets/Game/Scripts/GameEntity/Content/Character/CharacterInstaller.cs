@@ -66,7 +66,7 @@ namespace Game.GameEntities
                     => entity.IsDead() == false 
                        && entity.HasWeapon()
                        && entity.IsAimDelayCompleted())
-                .AddAction(entity.InvokeFireRequest);
+                .AddAction(entity.FireWithWeapon);
         }
         
         private void SetupRotateCommand(IGameEntity entity)
@@ -78,7 +78,7 @@ namespace Game.GameEntities
                 .AddAction(args 
                     => entity.RotateStep(args.Direction, args.Speed, args.DeltaTime));
             
-            entity.AddBehaviour(new CharacterRotateBehaviour(GameContext.Instance));
+            entity.AddBehaviour(new CharacterRotateBehaviour());
         }
 
         private void SetupMovementCommand(IGameEntity entity)

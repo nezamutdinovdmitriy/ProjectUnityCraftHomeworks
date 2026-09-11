@@ -92,7 +92,7 @@ namespace Game.GameEntities
                 .AddCondition(() =>
                     entity.IsDead() == false
                     && entity.HasWeapon())
-                .AddAction(entity.InvokeFireRequest);
+                .AddAction(entity.FireWithWeapon);
         }
 
         private void TakeDamageCommandSetup(IGameEntity entity)

@@ -40,9 +40,9 @@ namespace Game.GameEntities
             return false;
         }
         
-        public static void InvokeFireRequest(this IGameEntity entity)
+        public static void FireWithWeapon(this IGameEntity entity)
         {
-            IReactiveVariable<IWeaponEntity> weapon = entity.GetValue(GameEntityAPI.Weapon);
+            IValue<IWeaponEntity> weapon = entity.GetValue(GameEntityAPI.Weapon);
             weapon.Value.GetValue(WeaponEntityAPI.FireCommand).Invoke();
         }
     }

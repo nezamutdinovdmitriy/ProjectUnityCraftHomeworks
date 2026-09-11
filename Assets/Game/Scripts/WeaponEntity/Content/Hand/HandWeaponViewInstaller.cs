@@ -6,9 +6,7 @@ namespace Game.Weapon
 {
     public class HandWeaponViewInstaller : SceneEntityInstaller<IWeaponEntity>
     {
-        private const string StartAttackReceiveEventKey = "start_attack_event";
-        
-        private readonly DisposableComposite _disposables;
+        private readonly DisposableComposite _disposables = new();
         
         [SerializeField]
         private AnimationEvents _animationEvents;
@@ -19,13 +17,18 @@ namespace Game.Weapon
         [SerializeField]
         private AudioClip[] _attackSound;
         
-        public override void Install(IWeaponEntity entity) 
-            => _animationEvents.Subscribe(StartAttackReceiveEventKey, OnFired);
+        public override void Install(IWeaponEntity entity)
+        {
+            entity.GetValue(WeaponEntityAPI.FireCommand)
+                .Subscribe(OnFired)
+                .AddTo(_disposables);
+        }
 
         public override void Uninstall(IWeaponEntity entity) 
             => _disposables?.Dispose();
         
-        private void OnFired() => PlayRandomSound(_attackSound);
+        private void OnFired() 
+            => PlayRandomSound(_attackSound);
         
         private void PlayRandomSound(AudioClip[] clips)
         {

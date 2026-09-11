@@ -6,7 +6,7 @@ namespace Game.Weapon
 {
     public static class WeaponUseCase
     {
-        public static bool HasAmmo(this IWeaponEntity weapon) 
+        public static bool HasAmmo(this IWeaponEntity weapon)
             => weapon.GetValue(WeaponEntityAPI.Ammo).Value > 0;
 
         public static bool HasOwner(this IWeaponEntity weapon)
@@ -19,48 +19,57 @@ namespace Game.Weapon
             return hasOwner && isOwnerAlive;
         }
 
-        public static bool IsFireCooldownCompleted(this IWeaponEntity weapon) 
+        public static IGameEntity GetOwner(this IWeaponEntity weapon)
+            => weapon.GetValue(WeaponEntityAPI.Owner).Value;
+
+        public static bool IsFireCooldownCompleted(this IWeaponEntity weapon)
             => weapon.GetValue(WeaponEntityAPI.FireCooldown).IsCompleted();
 
-        public static void Fire(this IWeaponEntity weapon, IGameContext gameContext, Transform firePoint)
+        public static void ConsumeAmmo(this IWeaponEntity weapon)
+            => weapon.GetValue(WeaponEntityAPI.Ammo).Value--;
+
+        public static void ResetCooldown(this IWeaponEntity weapon)
+            => weapon.GetValue(WeaponEntityAPI.FireCooldown).ResetTime();
+
+        public static bool TryFindFirstMeleeHit(
+            this IWeaponEntity weapon,
+            Vector3 position,
+            float attackRadius,
+            Collider[] buffer,
+            out IGameEntity targetHit)
         {
-            gameContext.SpawnBullet(
-                firePoint.position, 
-                firePoint.rotation, 
-                weapon.GetValue(WeaponEntityAPI.Owner).Value);
-                
-            weapon.GetValue(WeaponEntityAPI.FireCooldown).ResetTime();
-            weapon.GetValue(WeaponEntityAPI.Ammo).Value--;
-        }
-        
-        public static void AttackMelee(
-            this IWeaponEntity weapon, 
-            Vector3 position, 
-            float attackRadius, 
-            Collider[] buffer, 
-            float damage)
-        {
-            weapon.GetValue(WeaponEntityAPI.FireCooldown).ResetTime();
+            var hitsCount = Physics.OverlapSphereNonAlloc(position, attackRadius, buffer);
+            IGameEntity owner = weapon.GetOwner();
 
-            IGameEntity owner = weapon.GetValue(WeaponEntityAPI.Owner).Value;
-
-            int size = Physics.OverlapSphereNonAlloc(position, attackRadius, buffer);
-
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < hitsCount; i++)
             {
-                if (buffer[i].TryGetComponent(out IGameEntity entity)
-                    && entity.Equals(owner) == false
-                    && entity.HasTag(GameEntityAPI.CharacterTag))
+                if (weapon.TryGetValidTarget(buffer[i], owner, out IGameEntity target))
                 {
-                    if (entity.IsDead())
-                        continue;
-
-                    bool success = entity.TryInvokeTakeDamageCommand(damage);
-                    
-                    if (success)
-                        return;
+                    targetHit = target;
+                    return true;
                 }
             }
+            
+            targetHit = null;
+            return false;
+        }
+
+        public static bool TryGetValidTarget(
+            this IWeaponEntity weapon,
+            Collider collider,
+            IGameEntity owner,
+            out IGameEntity target)
+        {
+            target = null;
+
+            if (collider.TryGetComponent(out IGameEntity entity) == false
+                || entity.Equals(owner)
+                || entity.HasTag(GameEntityAPI.CharacterTag) == false
+                || entity.IsDead())
+                return false;
+
+            target = entity;
+            return true;
         }
     }
 }

@@ -18,9 +18,6 @@ namespace Game.Weapon
         private Cooldown _attackCooldown = 1;
 
         [SerializeField]
-        private Cooldown _takeDamageDelay = 1.0333f;
-
-        [SerializeField]
         private float _damage = 1f;
 
         [SerializeField]
@@ -49,8 +46,16 @@ namespace Game.Weapon
             
             command.AddCondition(() 
                 => weapon.HasOwner() && weapon.IsFireCooldownCompleted());
-            command.AddAction(() 
-                => weapon.AttackMelee(_firePoint.position, _attackRadius, _colliders, _damage));
+            command.AddAction(weapon.ResetCooldown)
+                .AddAction(() =>
+                {
+                    if (weapon.TryFindFirstMeleeHit(
+                            _firePoint.position,
+                            _attackRadius,
+                            _colliders,
+                            out IGameEntity hit))
+                        hit.TryInvokeTakeDamageCommand(_damage);
+                });
         }
     }
 }

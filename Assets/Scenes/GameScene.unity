@@ -17358,6 +17358,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4531327130127798, guid: e26c904fc2ace3f478fb4b50f6340d53, type: 3}
   m_PrefabInstance: {fileID: 1282364275}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1282784872 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6852825789230178484, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3cf73378f4444e8a187a92393cc8dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Weapon.PistolWeaponInstaller
 --- !u!1001 &1284120591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23143,6 +23154,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.4999998, y: 0.27415082, z: 2.5000048}
   m_Center: {x: -1.2499853, y: 0.13707541, z: 1.25}
+--- !u!114 &1851438243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7888311074063336351, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+  m_PrefabInstance: {fileID: 9048405937420967252}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f749b93e7bc4d0ab32b49b78c00e55b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Weapon.PistolWeaponViewInstaller
 --- !u!1001 &1863301892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28242,6 +28264,14 @@ PrefabInstance:
       propertyPath: initialValueCapacity
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4042443341226284917, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: 'sceneInstallers.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1282784872}
+    - target: {fileID: 4042443341226284917, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: 'sceneInstallers.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1851438243}
     - target: {fileID: 5168095568867884736, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -28299,8 +28329,16 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7236948478809662794, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _fireInstaller._fireDelay._time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236948478809662794, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: _aimInstaller._aimCooldown._time
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7236948478809662794, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
+      propertyPath: _fireInstaller._fireDelay._duration
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7236948478809662794, guid: 25ded69825984498db7dacfedbed37a1, type: 3}
       propertyPath: _interactorInstaller._triggerEvents

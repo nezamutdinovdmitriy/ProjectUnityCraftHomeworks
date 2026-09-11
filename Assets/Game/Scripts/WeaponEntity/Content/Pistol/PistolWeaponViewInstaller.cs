@@ -6,12 +6,7 @@ namespace Game.Weapon
 {
     public class PistolWeaponViewInstaller : SceneEntityInstaller<IWeaponEntity>
     {
-        private const string FireReceiveEventKey = "fire_event";
-        
-        private readonly DisposableComposite _disposables;
-        
-        [SerializeField]
-        private AnimationEvents _animationEvents;
+        private readonly DisposableComposite _disposables = new();
 
         [SerializeField]
         private AudioSource _audioSource;
@@ -19,8 +14,12 @@ namespace Game.Weapon
         [SerializeField]
         private ParticleSystem _particleSystem;
         
-        public override void Install(IWeaponEntity entity) 
-            => _animationEvents.Subscribe(FireReceiveEventKey, OnFired);
+        public override void Install(IWeaponEntity entity)
+        {
+            entity.GetValue(WeaponEntityAPI.FireCommand)
+                .Subscribe(OnFired)
+                .AddTo(_disposables);
+        }
 
         public override void Uninstall(IWeaponEntity entity) 
             => _disposables?.Dispose();

@@ -23,23 +23,37 @@ namespace Game.GameEntities
 
         public void FixedTick(IGameEntity entity, float deltaTime)
         {
-            if (_takeDamageDelay.IsCompleted() 
-                && _command.CanInvoke() 
-                && _request.Required
-                && entity.CanFireWeapon())
+            if (_takeDamageDelay.Duration <= 0 && _request.Consume())
             {
-                _takeDamageDelay.ResetTime();
-                _fireStartEvent?.Invoke();
+                _command.Invoke();
+                return;
             }
+            
+            ProcessRequest(entity);
+            ProcessDelay(deltaTime);
+        }
 
+        private void ProcessDelay(float deltaTime)
+        {
             if (_takeDamageDelay.IsPlaying())
-                _takeDamageDelay.Tick(deltaTime);
-
-            if (_takeDamageDelay.IsCompleted())
             {
-                if (_request.Consume())
-                {
+                _takeDamageDelay.Tick(deltaTime);
+                
+                if(_takeDamageDelay.IsCompleted())
                     _command.Invoke();
+            }
+        }
+
+        private void ProcessRequest(IGameEntity entity)
+        {
+            if (_request.Consume())
+            {
+                if (_takeDamageDelay.IsCompleted()
+                    && _command.CanInvoke()
+                    && entity.CanFireWeapon())
+                {
+                    _takeDamageDelay.ResetTime();
+                    _fireStartEvent?.Invoke();
                 }
             }
         }
