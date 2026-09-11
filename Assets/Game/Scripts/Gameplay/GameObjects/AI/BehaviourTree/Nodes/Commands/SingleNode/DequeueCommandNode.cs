@@ -8,19 +8,24 @@ namespace SampleGame.AI
     {
         [SerializeField]
         private Blackboard _blackboard;
-        
+
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (_blackboard.TryGetValue(BlackboardAPI.CommandQueue, out Queue<ICommandData> queue)
-                && queue.Count > 0)
-            {
-                ICommandData nextCommand = queue.Dequeue();
-                _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, nextCommand);
+            Queue<ICommandData> queue = _blackboard.GetValue(BlackboardAPI.CommandQueue);
+            
+            _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, queue.Dequeue());
 
-                return BehaviourResult.Success;
-            }
-
-            return BehaviourResult.Failure;
+            return BehaviourResult.Success;
+            
+            // if (_blackboard.TryGetValue(BlackboardAPI.CommandQueue, out Queue<ICommandData> queue))
+            // {
+            //     ICommandData nextCommand = queue.Dequeue();
+            //     _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, nextCommand);
+            //
+            //     return BehaviourResult.Success;
+            // }
+            //
+            // return BehaviourResult.Failure;
         }
     }
 }

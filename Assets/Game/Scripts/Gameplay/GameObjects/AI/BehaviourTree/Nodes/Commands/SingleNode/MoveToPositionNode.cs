@@ -33,6 +33,9 @@ namespace SampleGame.AI
                 return BehaviourResult.Success;
             
             moveComponent.MoveStep(direction, deltaTime);
+            
+            Debug.Log($"MoveToPositionNode Invoked!");
+            
             return BehaviourResult.Running;
         }
     }

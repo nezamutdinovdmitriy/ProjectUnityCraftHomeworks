@@ -15,10 +15,8 @@ namespace SampleGame.AI
                 return BehaviourResult.Failure;
             
             _blackboard.GetValue(BlackboardAPI.CommandQueue).Clear();
-            _blackboard.SetReferenceValue(
-                BlackboardAPI.CurrentCommand, 
-                new DefaultCommandData(
-                    new CommandPoint(_blackboard.GetValue(BlackboardAPI.Character).transform.position)));
+            
+            _blackboard.DelValue(BlackboardAPI.CurrentCommand);
            
             return BehaviourResult.Success;
         }

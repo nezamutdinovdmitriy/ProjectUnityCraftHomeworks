@@ -21,6 +21,9 @@ namespace SampleGame.AI
         [Space]
         [SerializeField]
         private Blackboard _blackboard;
+
+        [SerializeField]
+        private BehaviourNode _defaultNode;
         
         [Space]
         [SerializeField, HideInPlayMode]
@@ -36,38 +39,81 @@ namespace SampleGame.AI
         [ShowInInspector, HideInEditorMode]
         private ICommandData _currentCommand;
 
-        private void Start() => BuildNodeMapping();
+        private bool _init;
         
+        protected override void OnStart()
+        {
+            if (_init == false)
+            {
+                BuildNodeMapping();
+                _init = true;
+            }
+        }
+
+        protected override void OnStop(BehaviourResult result) 
+            => StopCurrentNode();
+
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if(_blackboard.TryGetValue(BlackboardAPI.CurrentCommand, out _currentCommand)
-               && _nodeMapping.TryGetValue(_currentCommand.Type, out _currentNode)
-               && _currentNode != null)
-                return _currentNode.Run(deltaTime);
+            if (_blackboard.HasValue(BlackboardAPI.CurrentCommand) == false)
+            {
+                CommandPoint commandPoint = new CommandPoint(_blackboard.GetValue(BlackboardAPI.Character).transform.position);
+                _currentCommand = new DefaultCommandData(commandPoint);
+                _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, _currentCommand);
+                
+                SwitchCurrentNode(_defaultNode);
+                return _currentNode != null ? _currentNode.Run(deltaTime) : BehaviourResult.Failure;
+            }
+            
+            if (_blackboard.TryGetValue(BlackboardAPI.CurrentCommand, out ICommandData newCommand))
+            {
+                _currentCommand = newCommand;
 
+                if (_nodeMapping.TryGetValue(_currentCommand.Type, out BehaviourNode targetNode))
+                {
+                    SwitchCurrentNode(targetNode);
+                    return _currentNode.Run(deltaTime);
+                }
+
+                if (_currentCommand is { Type: CommandType.Default })
+                {
+                    SwitchCurrentNode(_defaultNode);
+                    return _currentNode != null ? _currentNode.Run(deltaTime) : BehaviourResult.Failure;
+                }
+            }
+            
+            SwitchCurrentNode(null);
             return BehaviourResult.Failure;
         }
 
-        protected override void OnAbort()
+        protected override void OnAbort() => StopCurrentNode();
+
+        private void SwitchCurrentNode(BehaviourNode newNode)
         {
-            base.OnAbort();
+            if (_currentNode == newNode)
+                return;
+
+            StopCurrentNode();
+            _currentNode = newNode;
+        }
         
+        private void StopCurrentNode()
+        {
             if (_currentNode != null && _currentNode.IsRunning)
                 _currentNode.Abort();
-        
+            
             _currentNode = null;
-
-            Vector3 currentPosition = _blackboard.GetValue(BlackboardAPI.Character).transform.position;
-            _currentCommand = new DefaultCommandData(new CommandPoint(currentPosition));
         }
-
+        
         private void BuildNodeMapping()
         {
             _nodeMapping.Clear();
 
             foreach (CommandNodeMapping mapping in _allNodes)
+            {
                 if (_nodeMapping.TryAdd(mapping.Command, mapping.Node) == false)
                     throw new InvalidOperationException($"Duplicate CommandType: {mapping.Command}");
+            }
         }
     }
 }
