@@ -7,10 +7,13 @@ namespace SampleGame.AI
     {
         public readonly List<CommandPoint> Points;
 
-        public PatrolCommandData(Vector3? basePoint)
+        public PatrolCommandData(Vector3? basePoint, CommandPoint endPoint)
         {
-            Points = new List<CommandPoint>();
-            Points.Add(new CommandPoint(basePoint));
+            Points = new List<CommandPoint>()
+            {
+                new(basePoint),
+                endPoint
+            };
         }
 
         public CommandType Type => CommandType.Patrol;

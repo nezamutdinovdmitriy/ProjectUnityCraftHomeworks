@@ -52,8 +52,8 @@ namespace SampleGame
                     }
                     else
                     {
-                        PatrolCommandData newPatrolCommand = new PatrolCommandData(_character.transform.position);
-                        newPatrolCommand.Points.Add(point.Value);
+                        PatrolCommandData newPatrolCommand = new PatrolCommandData(
+                            _character.transform.position, point.Value);
                         
                         blackboard.GetValue(BlackboardAPI.CommandQueue).Enqueue(newPatrolCommand);
                     }
@@ -62,8 +62,8 @@ namespace SampleGame
                 }
                 else
                 {
-                    PatrolCommandData newPatrolCommand = new PatrolCommandData(_character.transform.position);
-                    newPatrolCommand.Points.Add(point.Value);
+                    PatrolCommandData newPatrolCommand = new PatrolCommandData(
+                        _character.transform.position, point.Value);
                     
                     blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, newPatrolCommand);
                     // TODO: Switch to patrol
