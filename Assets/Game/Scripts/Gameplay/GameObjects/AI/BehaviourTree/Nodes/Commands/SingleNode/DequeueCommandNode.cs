@@ -11,21 +11,12 @@ namespace SampleGame.AI
 
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            Queue<ICommandData> queue = _blackboard.GetValue(BlackboardAPI.CommandQueue);
+            if (_blackboard.TryGetValue(BlackboardAPI.CommandQueue, out Queue<ICommandData> queue) == false)
+                return BehaviourResult.Failure;
             
             _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, queue.Dequeue());
 
             return BehaviourResult.Success;
-            
-            // if (_blackboard.TryGetValue(BlackboardAPI.CommandQueue, out Queue<ICommandData> queue))
-            // {
-            //     ICommandData nextCommand = queue.Dequeue();
-            //     _blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, nextCommand);
-            //
-            //     return BehaviourResult.Success;
-            // }
-            //
-            // return BehaviourResult.Failure;
         }
     }
 }

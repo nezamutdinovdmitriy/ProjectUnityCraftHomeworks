@@ -2,18 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4db75db7-a697-4678-b6bb-1a40ab16a19a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasCurrentCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasCurrentCommand.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/IsCommandQueueNotEmpty.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/IsCommandQueueNotEmpty.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/FSMCommandNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/FSMCommandNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/CleanupAllCommandNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/CleanupAllCommandNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/TargetIsReachedCondition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/TargetIsReachedCondition.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/DequeueCommandNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/DequeueCommandNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/IncreasePatrolIndexNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/IncreasePatrolIndexNode.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToPositionNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToPositionNode.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/ResetCurrentCommandNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/ResetCurrentCommandNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CommandsInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CommandsInstaller.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,6 +149,7 @@
       <workItem from="1788159517789" duration="1622000" />
       <workItem from="1788245593435" duration="4212000" />
       <workItem from="1789152940459" duration="14340000" />
+      <workItem from="1789195973802" duration="4245000" />
     </task>
     <servers />
   </component>

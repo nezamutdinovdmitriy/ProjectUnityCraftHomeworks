@@ -25,7 +25,11 @@ namespace SampleGame.AI.BehaviourTree.Conditions
             bool isReached = vector.sqrMagnitude <= sqrDistance;
 
             if (isReached)
+            {
+                Debug.Log($"[TargetIsReachedCondition] POSITION IS REACHED!");
                 return true;
+            }
+                
             
             return false;
         }

@@ -337,36 +337,36 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _condition:
-    rid: 6645919133923803227
+    rid: 6645919147679023196
   _child: {fileID: 167154956}
   references:
     version: 2
     RefIds:
-    - rid: 6645919133923803227
+    - rid: 6645919147679023196
       type: {class: AndCondition, ns: Modules.AI, asm: Modules.AI.Elements}
       data:
         conditions:
-        - rid: 6645919133923803228
-        - rid: 6645919133923803230
-    - rid: 6645919133923803228
+        - rid: 6645919147679023197
+        - rid: 6645919147679023202
+    - rid: 6645919147679023197
       type: {class: NotCondition, ns: Modules.AI, asm: Modules.AI.Elements}
       data:
         condition:
-          rid: 6645919133923803229
-    - rid: 6645919133923803229
+          rid: 6645919147679023198
+    - rid: 6645919147679023198
+      type: {class: HasTargetCondition, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 240965039}
+    - rid: 6645919147679023202
+      type: {class: NotCondition, ns: Modules.AI, asm: Modules.AI.Elements}
+      data:
+        condition:
+          rid: 6645919147679023203
+    - rid: 6645919147679023203
       type: {class: TargetIsReachedCondition, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 240965039}
         _stoppingDistance: 0.5
-    - rid: 6645919133923803230
-      type: {class: NotCondition, ns: Modules.AI, asm: Modules.AI.Elements}
-      data:
-        condition:
-          rid: 6645919133923803231
-    - rid: 6645919133923803231
-      type: {class: HasTargetCondition, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
-      data:
-        _blackboard: {fileID: 240965039}
 --- !u!114 &167154956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,7 +1217,6 @@ GameObject:
   m_Component:
   - component: {fileID: 592983923}
   - component: {fileID: 592983924}
-  - component: {fileID: 592983925}
   m_Layer: 0
   m_Name: <FSMBehaviourNode>
   m_TagString: Untagged
@@ -1276,19 +1275,6 @@ MonoBehaviour:
     Node: {fileID: 1387996491}
   - Command: 1
     Node: {fileID: 1412529512}
---- !u!114 &592983925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 592983922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a5078a9d4724670893d80ea9ec1d7d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeDebugger
-  _root: {fileID: 844960897}
 --- !u!1 &711934098
 GameObject:
   m_ObjectHideFlags: 0
@@ -3073,7 +3059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088123080}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

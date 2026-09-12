@@ -28,14 +28,14 @@ namespace SampleGame.AI
             float sqrDistance = vector.sqrMagnitude;
 
             float sqrStoppingDistance = _stoppingDistance * _stoppingDistance;
-            
+
             if (sqrDistance <= sqrStoppingDistance)
+            {
+                Debug.Log("[MoveToPositionNode] Target Position Is Reached!");
                 return BehaviourResult.Success;
+            }
             
             moveComponent.MoveStep(direction, deltaTime);
-            
-            Debug.Log($"MoveToPositionNode Invoked!");
-            
             return BehaviourResult.Running;
         }
     }
