@@ -5,10 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Game.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/TargetIsReachedCondition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/TargetIsReachedCondition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/DequeueCommandNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/DequeueCommandNode.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/IncreasePatrolIndexNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/IncreasePatrolIndexNode.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToPositionNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToPositionNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/ResetCurrentCommandNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/ResetCurrentCommandNode.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

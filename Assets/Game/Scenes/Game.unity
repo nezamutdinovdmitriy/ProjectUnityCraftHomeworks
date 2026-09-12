@@ -250,6 +250,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 167154953}
+  - {fileID: 1774286672}
   - {fileID: 2088123081}
   m_Father: {fileID: 716127008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -270,6 +271,7 @@ MonoBehaviour:
   _nodes:
   - {fileID: 768568594}
   - {fileID: 167154954}
+  - {fileID: 1774286673}
   - {fileID: 2088123082}
 --- !u!1 &167154952
 GameObject:
@@ -2690,6 +2692,62 @@ Transform:
   - {fileID: 1223950154}
   m_Father: {fileID: 1532908142}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1774286671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1774286672}
+  - component: {fileID: 1774286673}
+  m_Layer: 0
+  m_Name: IsTargetPontIsReachedCondition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1774286672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774286671}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 72074764}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1774286673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774286671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365f2751daa942308a17ddd12c2ee8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeCondition
+  _useUnityLifecycle: 0
+  _updateMode: 0
+  _condition:
+    rid: 6645919147679023218
+  references:
+    version: 2
+    RefIds:
+    - rid: 6645919147679023218
+      type: {class: TargetIsReachedCondition, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
+      data:
+        _blackboard: {fileID: 240965039}
+        _stoppingDistance: 0.5
 --- !u!1 &1777495385
 GameObject:
   m_ObjectHideFlags: 0

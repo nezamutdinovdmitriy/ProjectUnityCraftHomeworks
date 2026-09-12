@@ -17,8 +17,7 @@ namespace SampleGame.AI
                 int nextIndex = (index + 1) % patrolCommand.Points.Count;
 
                 _blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, nextIndex);
-
-                Debug.Log("[IncreasePatrolIndexNode] Patrol Index Increase!");
+                
                 return BehaviourResult.Success;
             }
 

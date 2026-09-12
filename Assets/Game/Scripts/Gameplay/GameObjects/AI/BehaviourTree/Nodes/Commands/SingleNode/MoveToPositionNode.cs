@@ -31,7 +31,6 @@ namespace SampleGame.AI
 
             if (sqrDistance <= sqrStoppingDistance)
             {
-                Debug.Log("[MoveToPositionNode] Target Position Is Reached!");
                 return BehaviourResult.Success;
             }
             
