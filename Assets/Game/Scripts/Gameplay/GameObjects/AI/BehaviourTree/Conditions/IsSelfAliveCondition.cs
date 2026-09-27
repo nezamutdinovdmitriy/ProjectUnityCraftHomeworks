@@ -9,12 +9,9 @@ namespace SampleGame.AI.BehaviourTree.Conditions
         
         public bool Invoke()
         {
-            if (_blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character)
-                && character.TryGetComponent(out HealthComponent health)
-                && health.IsAlive)
-                return true;
-
-            return false;
+            return _blackboard.TryGetValue(BlackboardAPI.Character, out GameObject character) 
+                   && character.TryGetComponent(out HealthComponent health) 
+                   && health.IsAlive;
         }
     }
 }

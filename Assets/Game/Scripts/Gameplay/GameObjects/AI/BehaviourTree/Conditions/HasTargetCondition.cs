@@ -8,12 +8,6 @@ namespace SampleGame.AI.BehaviourTree.Conditions
         [SerializeField]
         private Blackboard _blackboard;
 
-        public bool Invoke()
-        {
-            if (_blackboard.HasValue(BlackboardAPI.Target))
-                return true;
-
-            return false;
-        }
+        public bool Invoke() => _blackboard.HasValue(BlackboardAPI.Target);
     }
 }
