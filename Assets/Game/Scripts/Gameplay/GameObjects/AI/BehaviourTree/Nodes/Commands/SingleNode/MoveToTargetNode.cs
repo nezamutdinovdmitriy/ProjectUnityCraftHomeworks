@@ -22,15 +22,15 @@ namespace SampleGame.AI
             
             Vector3 vector = target.transform.position - selfPosition;
             vector.y = 0f;
-
-            Vector3 direction = vector.normalized;
-
+            
             float sqrDistance = vector.sqrMagnitude;
 
             float sqrStoppingDistance = _stoppingDistance * _stoppingDistance;
             
             if (sqrDistance <= sqrStoppingDistance)
                 return BehaviourResult.Success;
+            
+            Vector3 direction = vector.normalized;
             
             moveComponent.MoveStep(direction, deltaTime);
             return BehaviourResult.Running;

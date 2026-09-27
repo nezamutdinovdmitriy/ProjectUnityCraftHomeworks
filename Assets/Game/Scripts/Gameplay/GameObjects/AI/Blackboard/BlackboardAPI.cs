@@ -13,6 +13,8 @@ namespace SampleGame.AI
         
         public static readonly BlackboardValueKey<Collider[]> ColliderBuffer = new(nameof(ColliderBuffer));
         
+        public static readonly BlackboardValueKey<GameObject> NearestEnemy = new(nameof(NearestEnemy));
+        
         // Commands
         public static readonly BlackboardValueKey<ICommandData> CurrentCommand = new(nameof(CurrentCommand));
         public static readonly BlackboardValueKey<Queue<ICommandData>> CommandQueue = new(nameof(CommandQueue));
