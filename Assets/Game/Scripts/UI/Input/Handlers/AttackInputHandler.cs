@@ -36,7 +36,6 @@ namespace SampleGame
                 {
                     attackCommand = new AttackCommandData(new CommandPoint(context.target));
                     _markersView.ShowAttackMarker(context.target.transform);
-                    // Тут возможно стоит сразу проставлять таргета в blackboard?.
                     // TODO: Attack Target
                 }
 

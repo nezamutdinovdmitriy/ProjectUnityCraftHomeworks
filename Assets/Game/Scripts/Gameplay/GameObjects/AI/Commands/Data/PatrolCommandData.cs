@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Modules.AI;
 using UnityEngine;
 
 namespace SampleGame.AI
@@ -9,7 +10,7 @@ namespace SampleGame.AI
 
         public PatrolCommandData(Vector3? basePoint, CommandPoint endPoint)
         {
-            Points = new List<CommandPoint>()
+            Points = new List<CommandPoint>
             {
                 new(basePoint),
                 endPoint
@@ -17,5 +18,15 @@ namespace SampleGame.AI
         }
 
         public CommandType Type => CommandType.Patrol;
+        
+        public void Unpack(Blackboard blackboard)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Cleanup(Blackboard blackboard)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
