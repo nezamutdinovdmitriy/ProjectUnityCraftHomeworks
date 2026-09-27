@@ -2,20 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4db75db7-a697-4678-b6bb-1a40ab16a19a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasNearestEnemy.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasNearestEnemy.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/BehaviourNodeReactiveSelector.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/BehaviourNodeReactiveSelector.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/AssignNearestEnemyAsTarget.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/AssignNearestEnemyAsTarget.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Sensors.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Sensors/FindNearestEnemySensor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Sensors/FindNearestEnemySensor.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasPatrolPoints.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasPatrolPoints.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/AssignPatrolPointNode.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/AssignPatrolPointNode.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/ValidatePatrolPointNode.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/ValidatePatrolPointNode.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Game.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToPositionNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToPositionNode.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToTargetNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToTargetNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/IncreasePatrolIndexNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/IncreasePatrolIndexNode.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/BlackboardAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/BlackboardAPI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/PatrolCommandData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Commands/Data/PatrolCommandData.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +28,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasCurrentCommand.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasNearestEnemy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasPatrolPoints.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/HasTargetCondition.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/IsSubtreeSuccessfulCondition.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Conditions/TargetIsReachedCondition.cs" root0="FORCE_HIGHLIGHTING" />
@@ -41,6 +39,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/MonolithicNodeArchive/FollowCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/MonolithicNodeArchive/HoldPositionCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/MonolithicNodeArchive/MoveCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/AssignPatrolPointNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/AssignTargetNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/AssignTargetPositionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/AttackTargetNode.cs" root0="FORCE_HIGHLIGHTING" />
@@ -50,7 +49,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToPositionNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/MoveToTargetNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/ResetCurrentCommandNode.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/ReactiveSelector.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/BehaviourTree/Nodes/Commands/SingleNode/ValidatePatrolPointNode.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/BlackboardAPI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CharacterInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Game/Scripts/Gameplay/GameObjects/AI/Blackboard/Installers/CommandsInstaller.cs" root0="FORCE_HIGHLIGHTING" />
@@ -160,7 +159,7 @@
       <workItem from="1788245593435" duration="4212000" />
       <workItem from="1789152940459" duration="14340000" />
       <workItem from="1789195973802" duration="4245000" />
-      <workItem from="1790501810558" duration="22451000" />
+      <workItem from="1790501810558" duration="25507000" />
     </task>
     <servers />
   </component>

@@ -27,6 +27,7 @@ namespace SampleGame.AI
         
         // Patrol
         public static readonly BlackboardValueKey<int> PatrolPointIndex = new(nameof(PatrolPointIndex));
+        public static readonly BlackboardValueKey<List<CommandPoint>> PatrolPoints = new(nameof(PatrolPoints));
         
         // Movement
         public static readonly BlackboardValueKey<Vector3> TargetPosition = new(nameof(TargetPosition));

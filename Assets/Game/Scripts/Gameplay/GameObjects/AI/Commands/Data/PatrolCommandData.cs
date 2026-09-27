@@ -21,12 +21,15 @@ namespace SampleGame.AI
         
         public void Unpack(Blackboard blackboard)
         {
-            throw new System.NotImplementedException();
+            blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, 0);
+            blackboard.SetReferenceValue(BlackboardAPI.PatrolPoints, Points);
         }
 
         public void Cleanup(Blackboard blackboard)
         {
-            throw new System.NotImplementedException();
+            blackboard.DelValue(BlackboardAPI.PatrolPointIndex);
+            blackboard.DelValue(BlackboardAPI.Target);
+            blackboard.DelValue(BlackboardAPI.TargetPosition);
         }
     }
 }

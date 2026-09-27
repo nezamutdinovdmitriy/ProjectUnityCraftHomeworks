@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Modules.AI;
 using UnityEngine;
 
@@ -10,18 +11,16 @@ namespace SampleGame.AI
         
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
-            if (_blackboard.TryGetValue(BlackboardAPI.PatrolPointIndex, out int index)
-                && _blackboard.TryGetValue(BlackboardAPI.CurrentCommand, out ICommandData commandData)
-                && commandData is PatrolCommandData patrolCommand)
-            {
-                int nextIndex = (index + 1) % patrolCommand.Points.Count;
+            if (_blackboard.TryGetValue(BlackboardAPI.PatrolPointIndex, out int index) == false
+                || _blackboard.TryGetValue(BlackboardAPI.PatrolPoints, out List<CommandPoint> points) == false
+                || points.Count == 0)
+                return BehaviourResult.Failure;
+            
+            int nextIndex = (index + 1) % points.Count;
 
-                _blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, nextIndex);
-                
-                return BehaviourResult.Success;
-            }
+            _blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, nextIndex);
 
-            return BehaviourResult.Failure;
+            return BehaviourResult.Success;
         }
     }
 }
