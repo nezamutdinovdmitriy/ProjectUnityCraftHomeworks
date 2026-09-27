@@ -460,7 +460,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _stoppingDistance: 5
+  _stoppingDistance: 3
 --- !u!1 &384449286
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +509,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _stoppingDistance: 5
+  _stoppingDistance: 3
 --- !u!114 &384449289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,7 +1416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SampleGame.AI.Sensors.FindNearestEnemySensor
   _blackboard: {fileID: 240965039}
-  _detectRadius: 10
+  _detectRadius: 5
   _updateInterval: 1
   _bufferSize: 5
 --- !u!1 &906546670
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _attackDistance: 7
+  _attackDistance: 5
 --- !u!1 &974625536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,7 +1724,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _stoppingDistance: 5
+  _stoppingDistance: 3
 --- !u!1 &1134400097
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,7 +1772,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _stoppingDistance: 0.5
+  _stoppingDistance: 0.25
 --- !u!1 &1145309404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,7 +2483,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _stoppingDistance: 0.5
+  _stoppingDistance: 5
 --- !u!1001 &1515189632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2716,7 +2716,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _stoppingDistance: 0.5
+  _stoppingDistance: 0.25
 --- !u!1 &1598789538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,7 +2899,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _stoppingDistance: 5
+  _stoppingDistance: 3
 --- !u!1 &1783433301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3249,7 +3249,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _stoppingDistance: 0.5
+  _stoppingDistance: 0.25
 --- !u!1 &1997297329
 GameObject:
   m_ObjectHideFlags: 0

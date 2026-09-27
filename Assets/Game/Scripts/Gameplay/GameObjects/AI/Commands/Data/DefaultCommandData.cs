@@ -2,7 +2,7 @@ using Modules.AI;
 
 namespace SampleGame.AI
 {
-    public readonly struct DefaultCommandData : ICommandData, IHasCommandPoint
+    public readonly struct DefaultCommandData : ICommandData
     {
         private readonly CommandPoint _point;
 
@@ -10,8 +10,6 @@ namespace SampleGame.AI
             => _point = point;
 
         public CommandType Type => CommandType.Default;
-
-        public CommandPoint Point => _point;
                 
         public void Unpack(Blackboard blackboard)
         {

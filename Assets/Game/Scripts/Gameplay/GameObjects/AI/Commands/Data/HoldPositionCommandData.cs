@@ -6,12 +6,7 @@ namespace SampleGame.AI
     {
         public CommandType Type => CommandType.HoldPosition;
         
-        public void Unpack(Blackboard blackboard)
-        {
-        }
-
-        public void Cleanup(Blackboard blackboard)
-        {
-        }
+        public void Unpack(Blackboard blackboard) { }
+        public void Cleanup(Blackboard blackboard) { }
     }
 }
