@@ -404,13 +404,13 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _condition:
-    rid: 6645919500272140392
+    rid: 6645919501963755588
   _child: {fileID: 263230043}
   references:
     version: 2
     RefIds:
-    - rid: 6645919500272140392
-      type: {class: IsSelfAliveCondition, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
+    - rid: 6645919501963755588
+      type: {class: HasCommandsInQueue, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 240965039}
 --- !u!1 &308361448
@@ -2483,7 +2483,7 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _blackboard: {fileID: 240965039}
-  _stoppingDistance: 5
+  _stoppingDistance: 1
 --- !u!1001 &1515189632
 PrefabInstance:
   m_ObjectHideFlags: 0
