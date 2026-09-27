@@ -6,24 +6,19 @@ namespace SampleGame
 {
     public sealed class PatrolInputHandler : InputHandler
     {
-        [SerializeField]
-        private KeyCode _keyCode = KeyCode.P;
+        [SerializeField] private KeyCode _keyCode = KeyCode.P;
 
-        [SerializeField]
-        private GameObject _character;
+        [SerializeField] private GameObject _character;
 
-        [SerializeField]
-        private InputHandler _next;
+        [SerializeField] private InputHandler _next;
 
-        [SerializeField]
-        private CommandMarkerView _markersView;
-        
+        [SerializeField] private CommandMarkerView _markersView;
+
         public override void Handle(ref InputContext context)
         {
             if (Input.GetKey(_keyCode) && context.leftClick)
             {
                 Blackboard blackboard = _character.GetComponentInChildren<Blackboard>();
-                ICommandData currentCommand = blackboard.GetValue(BlackboardAPI.CurrentCommand);
 
                 CommandPoint? point = null;
 
@@ -42,10 +37,11 @@ namespace SampleGame
 
                 if (point == null)
                     return;
-                
+
                 if (context.enqueueCommand)
                 {
-                    if (currentCommand is PatrolCommandData currentPatrol)
+                    if (blackboard.TryGetValue(BlackboardAPI.CurrentCommand, out var currentCommand)
+                        && currentCommand is PatrolCommandData currentPatrol)
                     {
                         currentPatrol.Points.Add(point.Value);
                         blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, currentPatrol);
@@ -54,7 +50,7 @@ namespace SampleGame
                     {
                         PatrolCommandData newPatrolCommand = new PatrolCommandData(
                             _character.transform.position, point.Value);
-                        
+
                         blackboard.GetValue(BlackboardAPI.CommandQueue).Enqueue(newPatrolCommand);
                     }
 
@@ -64,7 +60,7 @@ namespace SampleGame
                 {
                     PatrolCommandData newPatrolCommand = new PatrolCommandData(
                         _character.transform.position, point.Value);
-                    
+
                     blackboard.SetReferenceValue(BlackboardAPI.CurrentCommand, newPatrolCommand);
                     // TODO: Switch to patrol
                 }

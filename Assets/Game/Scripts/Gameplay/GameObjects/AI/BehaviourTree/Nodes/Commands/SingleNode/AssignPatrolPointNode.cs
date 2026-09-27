@@ -6,42 +6,60 @@ namespace SampleGame.AI
 {
     public class AssignPatrolPointNode : BehaviourNode
     {
-        [SerializeField]
-        private Blackboard _blackboard;
-        
+        [SerializeField] private Blackboard _blackboard;
+
         protected override BehaviourResult OnUpdate(float deltaTime)
         {
             if (_blackboard.TryGetValue(BlackboardAPI.PatrolPoints, out List<CommandPoint> points) == false
                 || _blackboard.TryGetValue(BlackboardAPI.PatrolPointIndex, out int index) == false
                 || points == null
-                || index < 0
-                || index >= points.Count)
+                || points.Count == 0)
                 return BehaviourResult.Failure;
 
-            CommandPoint point = points[index];
-            
-            _blackboard.DelValue(BlackboardAPI.Target);
-            _blackboard.DelValue(BlackboardAPI.TargetPosition);
+            index %= points.Count;
 
+            while (points.Count > 0)
+            {
+                CommandPoint point = points[index];
+
+                if (point.Target != null || point.Position.HasValue)
+                {
+                    _blackboard.SetPrimitiveValue(BlackboardAPI.PatrolPointIndex, index);
+
+                    _blackboard.DelValue(BlackboardAPI.Target);
+                    _blackboard.DelValue(BlackboardAPI.TargetPosition);
+
+                    SetPatrolPoint(point);
+
+                    return BehaviourResult.Success;
+                }
+
+                points.RemoveAt(index);
+
+                if (points.Count == 0)
+                    return BehaviourResult.Failure;
+
+                if (index >= points.Count)
+                    index = 0;
+            }
+
+            return BehaviourResult.Failure;
+        }
+
+        private void SetPatrolPoint(CommandPoint point)
+        {
             if (point.Target != null)
             {
                 _blackboard.SetReferenceValue(
                     BlackboardAPI.Target,
                     point.Target);
-
-                return BehaviourResult.Success;
             }
-
-            if (point.Position.HasValue)
+            else if (point.Position != null)
             {
                 _blackboard.SetPrimitiveValue(
                     BlackboardAPI.TargetPosition,
                     point.Position.Value);
-
-                return BehaviourResult.Success;
             }
-
-            return BehaviourResult.Failure;
         }
     }
 }
