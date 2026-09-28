@@ -1,8 +1,10 @@
+using System;
 using Unity.Entities;
 
 namespace Game.Components
 {
-    public struct AttackDistance : IComponentData
+    [Serializable]
+    public struct Mana : IComponentData
     {
         public float Value;
     }

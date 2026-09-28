@@ -1,8 +1,10 @@
+using System;
 using Unity.Entities;
 
 namespace Game.Components
 {
-    public struct MaxMana : IComponentData
+    [Serializable]
+    public struct Health : IComponentData
     {
         public float Value;
     }
