@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6854243942854037326}
+  - component: {fileID: 4938803403904392816}
+  - component: {fileID: -1455696147112586999}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -36,6 +38,31 @@ Transform:
   - {fileID: 5306908465344004425}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4938803403904392816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981802089077454633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec1c2b74e564bf7b4b60f8d9596d91e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealthAuthoring
+  _maxHealth: 100
+--- !u!114 &-1455696147112586999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981802089077454633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4008d9eb2e540108a809380b49c077b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.TakeDamageAuthoring
 --- !u!1001 &2441520716458160203
 PrefabInstance:
   m_ObjectHideFlags: 0
