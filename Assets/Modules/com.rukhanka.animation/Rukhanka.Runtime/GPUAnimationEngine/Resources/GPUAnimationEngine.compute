@@ -8,10 +8,10 @@
 
 /////////////////////////////////////////////////////////////////////////////////
 
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/ShaderConf.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/Debug.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/GPUStructures.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/MakeSkinMatrices.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/ProcessAnimations.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/MakeRigSpaceBoneTransforms.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/MakeSkinMatrices.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/ShaderConf.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/Debug.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/GPUStructures.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/MakeSkinMatrices.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/ProcessAnimations.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/MakeRigSpaceBoneTransforms.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/MakeSkinMatrices.hlsl"

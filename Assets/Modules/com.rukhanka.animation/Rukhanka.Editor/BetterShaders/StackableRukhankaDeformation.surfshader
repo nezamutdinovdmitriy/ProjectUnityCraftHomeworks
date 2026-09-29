@@ -37,7 +37,7 @@ UNITY_INSTANCING_BUFFER_END(SGPerInstanceData)
 #define UNITY_ACCESS_HYBRID_INSTANCED_PROP(var, type) var
 #endif
 
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/ComputeDeformedVertex.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/ComputeDeformedVertex.hlsl"
 
 void ModifyVertex(inout VertexData v, inout ExtraV2F d)
 {

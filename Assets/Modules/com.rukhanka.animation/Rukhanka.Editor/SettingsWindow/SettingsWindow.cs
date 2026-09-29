@@ -16,11 +16,11 @@ public class SettingsWindow: SettingsProvider
     
     ShaderConfigManager scm;
     
-    const string EDITOR_RSP_PATH = "Packages/com.rukhanka.animation/Rukhanka.Editor/csc.rsp";
-    const string HYBRID_RSP_PATH = "Packages/com.rukhanka.animation/Rukhanka.Hybrid/csc.rsp";
-    const string RUNTIME_RSP_PATH = "Packages/com.rukhanka.animation/Rukhanka.Runtime/csc.rsp";
-    const string DEBUG_DRAWER_RSP_PATH = "Packages/com.rukhanka.animation/Rukhanka.DebugDrawer/csc.rsp";
-    public const string SHADER_CONFIG_PATH = "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/ShaderConf.hlsl";
+    const string EDITOR_RSP_PATH = "Assets/Modules/com.rukhanka.animation/Rukhanka.Editor/csc.rsp";
+    const string HYBRID_RSP_PATH = "Assets/Modules/com.rukhanka.animation/Rukhanka.Hybrid/csc.rsp";
+    const string RUNTIME_RSP_PATH = "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/csc.rsp";
+    const string DEBUG_DRAWER_RSP_PATH = "Assets/Modules/com.rukhanka.animation/Rukhanka.DebugDrawer/csc.rsp";
+    public const string SHADER_CONFIG_PATH = "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/ShaderConf.hlsl";
     
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +43,7 @@ public class SettingsWindow: SettingsProvider
     {
         InitSymbolManagers();
         
-        var vta = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Packages/com.rukhanka.animation/Rukhanka.Editor/UXML/SettingsWindow.uxml");
+        var vta = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Modules/com.rukhanka.animation/Rukhanka.Editor/UXML/SettingsWindow.uxml");
         var settingsInstance = vta.Instantiate();
         rootElement.Add(settingsInstance);
         

@@ -3,9 +3,9 @@
 //#pragma enable_d3d11_debug_symbols
 
 #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/GPUStructures.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/ShaderConf.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/Debug.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/GPUStructures.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/ShaderConf.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/Debug.hlsl"
 
 /////////////////////////////////////////////////////////////////////////////////
 

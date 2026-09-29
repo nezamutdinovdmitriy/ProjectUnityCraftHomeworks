@@ -4,9 +4,9 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 #pragma warning (disable: 4000)
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/BoneTransform.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/DualQuaternion.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/SkinMatrix.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/BoneTransform.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/DualQuaternion.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/SkinMatrix.hlsl"
 
 /////////////////////////////////////////////////////////////////////////////////
 

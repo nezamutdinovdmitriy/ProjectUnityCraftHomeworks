@@ -2,11 +2,11 @@
 
 /////////////////////////////////////////////////////////////////////////////////
 
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/ShaderConf.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/Debug.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/DeformationCommon.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/ShaderConf.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/Debug.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/DeformationCommon.hlsl"
 #ifdef RUKHANKA_INPLACE_SKINNING
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/Skinning.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/Skinning.hlsl"
 #endif
 
 #ifdef RUKHANKA_HALF_DEFORMED_DATA

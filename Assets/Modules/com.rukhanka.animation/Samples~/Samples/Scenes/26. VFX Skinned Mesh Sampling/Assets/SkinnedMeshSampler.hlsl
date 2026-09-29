@@ -1,7 +1,7 @@
 #ifndef SKINNDE_MESH_SAMPLER_HLSL_
 #define SKINNDE_MESH_SAMPLER_HLSL_
 
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/ComputeDeformedVertex.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/ComputeDeformedVertex.hlsl"
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 

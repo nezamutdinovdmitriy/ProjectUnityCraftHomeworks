@@ -12,7 +12,7 @@ namespace Rukhanka.Hybrid
 [Icon(iconPath)]
 public class RigDefinitionAuthoring: MonoBehaviour
 {
-    public const string iconPath = "Packages/com.rukhanka.animation/Rukhanka.Editor/Editor Default Resources/Icons/Icon@64.png";
+    public const string iconPath = "Assets/Modules/com.rukhanka.animation/Rukhanka.Editor/Editor Default Resources/Icons/Icon@64.png";
     
     public enum BoneEntityStrippingMode
     {

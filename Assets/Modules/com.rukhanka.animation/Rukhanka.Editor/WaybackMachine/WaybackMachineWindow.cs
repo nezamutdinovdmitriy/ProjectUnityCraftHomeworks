@@ -72,7 +72,7 @@ public partial class WaybackMachineWindow: EditorWindow
     int prevKnobFrame = 1000000;
     WaybackMachineSettings settings;
     
-    public const string iconPath = "Packages/com.rukhanka.animation/Rukhanka.Editor/Editor Default Resources/Icons/RukhankaWaybackMachine@16.png";
+    public const string iconPath = "Assets/Modules/com.rukhanka.animation/Rukhanka.Editor/Editor Default Resources/Icons/RukhankaWaybackMachine@16.png";
     
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

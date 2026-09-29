@@ -42,7 +42,7 @@ MonoBehaviour:
     m_nativeDirectivesFoldout: 0
     m_directivesSaveItems:
     - LineType: 0
-      LineValue: Packages/com.rukhanka.animation/Rukhanka.Editor/AmplifyShaderEditor/RukhankaDeformationPropertyDefines.hlsl
+      LineValue: Assets/Modules/com.rukhanka.animation/Rukhanka.Editor/AmplifyShaderEditor/RukhankaDeformationPropertyDefines.hlsl
       GUIDToggle: 0
       GUIDValue: 
       ShowConditionals: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
       Passes: 
       Origin: 2
     - LineType: 0
-      LineValue: Packages/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/ComputeDeformedVertex.hlsl
+      LineValue: Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Deformation/Resources/ComputeDeformedVertex.hlsl
       GUIDToggle: 0
       GUIDValue: 
       ShowConditionals: 0

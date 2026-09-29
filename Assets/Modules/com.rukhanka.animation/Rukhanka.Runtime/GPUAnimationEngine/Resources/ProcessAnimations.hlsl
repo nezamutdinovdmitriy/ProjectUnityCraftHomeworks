@@ -1,7 +1,7 @@
 #ifndef PROCESS_ANIMATIONS_HLSL_
 #define PROCESS_ANIMATIONS_HLSL_
 
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/TrackGroupSampler.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/TrackGroupSampler.hlsl"
 
 /////////////////////////////////////////////////////////////////////////////////
 

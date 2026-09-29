@@ -3,7 +3,7 @@
 
 /////////////////////////////////////////////////////////////////////////////////
 
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/TrackSampler.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/TrackSampler.hlsl"
 
 /////////////////////////////////////////////////////////////////////////////////
 

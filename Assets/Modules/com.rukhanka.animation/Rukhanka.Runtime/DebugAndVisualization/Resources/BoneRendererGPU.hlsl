@@ -9,8 +9,8 @@
 
 /////////////////////////////////////////////////////////////////////////////////
 
-#include "Packages/com.rukhanka.animation/Rukhanka.DebugDrawer/Resources/RukhankaBoneRenderer.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/GPUStructures.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.DebugDrawer/Resources/RukhankaBoneRenderer.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/GPUAnimationEngine/Resources/GPUStructures.hlsl"
 
 StructuredBuffer<BoneTransform> rigSpaceBoneTransforms;
 

@@ -16,18 +16,18 @@ int animatedBonesCount;
 
 /////////////////////////////////////////////////////////////////////////////////
 
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/Debug.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/BoneTransform.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/AnimationClip.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/Track.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/SkinnedMeshBone.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/RigDefinition.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/RigBone.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/HumanRotationData.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/AnimationToProcess.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/AvatarMask.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/PerfectHashTable.hlsl"
-#include "Packages/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/SkinMatrix.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/Debug.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/BoneTransform.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/AnimationClip.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/Track.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/SkinnedMeshBone.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/RigDefinition.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/RigBone.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/HumanRotationData.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/AnimationToProcess.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/AvatarMask.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/PerfectHashTable.hlsl"
+#include "Assets/Modules/com.rukhanka.animation/Rukhanka.Runtime/Common/Shaders/GPUStructures/SkinMatrix.hlsl"
 
 /////////////////////////////////////////////////////////////////////////////////
 
