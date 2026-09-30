@@ -97,6 +97,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DeformedMeshIndex: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -128,10 +129,11 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color1: {r: 0.3803922, g: 0.56078434, b: 0.80392164, a: 1}
+    - _Color1: {r: 0.3803922, g: 0.46068558, b: 0.8039216, a: 1}
     - _Color2: {r: 0.59607846, g: 0.2392157, b: 0.15294118, a: 1}
     - _Color3: {r: 0.78039217, g: 0.78039217, b: 0.78039217, a: 1}
     - _CorneaColor: {r: 0.20392157, g: 0.87058824, b: 0.9490196, a: 1}
+    - _DeformationParamsForMotionVectors: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EyeWhiteColor: {r: 0.8, g: 0.8, b: 0.8, a: 0}
     - _Flash: {r: 1, g: 1, b: 1, a: 0}
