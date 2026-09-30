@@ -3,16 +3,16 @@ using UnityEngine;
 
 namespace Game.Components.Authoring
 {
-    public class ModelEntityAuthoring : MonoBehaviour
+    public class ModelLinkAuthoring : MonoBehaviour
     {
         [SerializeField] private GameObject _model;
         
-        public class ModelEntityBaker : Baker<ModelEntityAuthoring>
+        public class Baker : Baker<ModelLinkAuthoring>
         {
-            public override void Bake(ModelEntityAuthoring authoring)
+            public override void Bake(ModelLinkAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.None);
-                AddComponent(entity, new ModelEntity
+                AddComponent(entity, new ModelLink
                 {
                     Value = GetEntity(authoring._model, TransformUsageFlags.Dynamic)
                 });

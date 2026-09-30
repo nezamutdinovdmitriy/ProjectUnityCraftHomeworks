@@ -10,7 +10,7 @@ namespace Game.Components.Authoring
             public override void Bake(TakeDamageAuthoring authoring)
             {
                 Entity entity = GetEntity(TransformUsageFlags.None);
-
+                
                 AddBuffer<TakeDamageRequest>(entity);
                 AddBuffer<TakeDamageEvent>(entity);
             }

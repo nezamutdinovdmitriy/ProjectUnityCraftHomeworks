@@ -1,6 +1,7 @@
+using Game.Components;
 using Unity.Entities;
 
-namespace Game.Components
+namespace Game.Systems
 {
     public partial struct TakeDamageSystem : ISystem
     {

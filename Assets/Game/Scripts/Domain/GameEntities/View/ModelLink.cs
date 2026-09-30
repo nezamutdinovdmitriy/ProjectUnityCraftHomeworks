@@ -2,7 +2,7 @@ using Unity.Entities;
 
 namespace Game.Components
 {
-    public struct ModelEntity : IComponentData
+    public struct ModelLink : IComponentData
     {
         public Entity Value;
     }
