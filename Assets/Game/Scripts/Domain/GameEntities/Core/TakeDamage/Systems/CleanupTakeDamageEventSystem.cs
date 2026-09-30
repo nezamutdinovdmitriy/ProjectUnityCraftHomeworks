@@ -1,12 +1,15 @@
 using Game.Components;
 using Game.Scripts.Common.ECS.SystemGroups;
+using Unity.Burst;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(CleanupSystemGroup))]
     public partial struct CleanupTakeDamageEventSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             foreach (DynamicBuffer<TakeDamageEvent> events 

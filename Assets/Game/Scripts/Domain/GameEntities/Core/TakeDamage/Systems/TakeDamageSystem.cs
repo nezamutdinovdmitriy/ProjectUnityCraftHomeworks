@@ -1,10 +1,12 @@
 using Game.Components;
+using Unity.Burst;
 using Unity.Entities;
 
 namespace Game.Systems
 {
     public partial struct TakeDamageSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             foreach ((DynamicBuffer<TakeDamageEvent> events,
