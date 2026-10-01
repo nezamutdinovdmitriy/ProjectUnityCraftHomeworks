@@ -2104,6 +2104,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 707590013}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &753238895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3106224043233755830, guid: 6beeda15e0dde43369f490f535cbd94e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2873688074205370161}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &753238897 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4542091049710589381, guid: 6beeda15e0dde43369f490f535cbd94e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2873688074205370161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753238895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efb638943ff495782137b02a92a3f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &753238898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753238895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585cbe256b7a410f87f159108dbc1966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.View.Presenters.HealthPresenter
+  _view: {fileID: 753238897}
+  _team: 0
 --- !u!1001 &753826586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4414,6 +4446,38 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1349197272}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1355708863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8271758322889032561, guid: 6beeda15e0dde43369f490f535cbd94e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2873688074205370161}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1355708865 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7410683836300547074, guid: 6beeda15e0dde43369f490f535cbd94e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2873688074205370161}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355708863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efb638943ff495782137b02a92a3f89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1355708866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355708863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585cbe256b7a410f87f159108dbc1966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.View.Presenters.HealthPresenter
+  _view: {fileID: 1355708865}
+  _team: 1
 --- !u!1001 &1395991331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6450,7 +6514,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8271758322889032561, guid: 6beeda15e0dde43369f490f535cbd94e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1355708866}
+    - targetCorrespondingSourceObject: {fileID: 3106224043233755830, guid: 6beeda15e0dde43369f490f535cbd94e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 753238898}
   m_SourcePrefab: {fileID: 100100000, guid: 6beeda15e0dde43369f490f535cbd94e, type: 3}
 --- !u!114 &3104742964259598404
 MonoBehaviour:
