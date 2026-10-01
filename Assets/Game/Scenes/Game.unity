@@ -404,12 +404,17 @@ MonoBehaviour:
   _useUnityLifecycle: 0
   _updateMode: 0
   _condition:
-    rid: 6645919501963755588
+    rid: 6166223977614934085
   _child: {fileID: 263230043}
   references:
     version: 2
     RefIds:
-    - rid: 6645919501963755588
+    - rid: 6166223977614934085
+      type: {class: NotCondition, ns: Modules.AI, asm: Modules.AI.Elements}
+      data:
+        condition:
+          rid: 6166223977614934086
+    - rid: 6166223977614934086
       type: {class: HasCommandsInQueue, ns: SampleGame.AI.BehaviourTree.Conditions, asm: Assembly-CSharp}
       data:
         _blackboard: {fileID: 240965039}
@@ -838,6 +843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 466858780}
   - component: {fileID: 466858781}
+  - component: {fileID: 466858782}
   m_Layer: 0
   m_Name: FSMCommand
   m_TagString: Untagged
@@ -897,6 +903,19 @@ MonoBehaviour:
     Node: {fileID: 1145309406}
   - Command: 1
     Node: {fileID: 1583095592}
+--- !u!114 &466858782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466858779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5078a9d4724670893d80ea9ec1d7d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Modules.AI.BehaviourTree::Modules.AI.BehaviourNodeDebugger
+  _root: {fileID: 466858781}
 --- !u!1 &475315680
 GameObject:
   m_ObjectHideFlags: 0
