@@ -1,4 +1,5 @@
 using Game.Components;
+using Game.Scripts.Domain.GameEntities.Core.TakeDamage;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -16,8 +17,8 @@ namespace Game.Systems
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach ((DynamicBuffer<TakeDamageEvent> takeDamageEvents,
-                         DynamicBuffer<TakeDamageRequest> takeDamageRequests,
+            foreach ((DynamicBuffer<TakeDamageEvent> events,
+                         DynamicBuffer<TakeDamageRequest> requests,
                          RefRW<Health> health,
                          RefRO<Armor> armor)
                      in SystemAPI.Query<DynamicBuffer<TakeDamageEvent>,
@@ -25,21 +26,9 @@ namespace Game.Systems
                          RefRW<Health>,
                          RefRO<Armor>>())
             {
-                float reduction = math.saturate(armor.ValueRO.Value);
+                float multiplier = 1f - math.saturate(armor.ValueRO.Value);
 
-                for (int i = 0; i < takeDamageRequests.Length && health.ValueRO.IsAlive(); i++)
-                {
-                    float damage = takeDamageRequests[i].Damage * (1f - reduction);
-                    
-                    health.ValueRW.ReduceHealth(damage);
-
-                    takeDamageEvents.Add(new TakeDamageEvent
-                    {
-                        Damage = damage
-                    });
-                }
-                
-                takeDamageRequests.Clear();
+                TakeDamageUseCase.ApplyDamage(events, requests, ref health.ValueRW, multiplier);
             }
         }
     }
