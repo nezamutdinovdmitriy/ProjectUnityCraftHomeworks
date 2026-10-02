@@ -4,8 +4,13 @@ using Unity.Entities;
 
 namespace Game.Systems
 {
-    public partial struct TakeDamageSystem : ISystem
+    public partial struct FlatTakeDamageSystem : ISystem
     {
+        public void OnCreate(ref SystemState state)
+        {
+            state.RequireForUpdate<TakeDamageRequest>();
+        }
+        
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -15,7 +20,8 @@ namespace Game.Systems
                      in SystemAPI.Query<
                          DynamicBuffer<TakeDamageEvent>,
                          DynamicBuffer<TakeDamageRequest>,
-                         RefRW<Health>>())
+                         RefRW<Health>>()
+                         .WithNone<Armor>())
             {
                 for (int i = 0; i < requests.Length && health.ValueRO.IsAlive(); i++)
                 {

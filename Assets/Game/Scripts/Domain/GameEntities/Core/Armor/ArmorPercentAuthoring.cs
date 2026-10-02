@@ -13,7 +13,7 @@ namespace Game.Components.Authoring
             {
                 Entity entity = GetEntity(TransformUsageFlags.None);
                 
-                AddComponent(entity, new ArmorPercent {Value = authoring._initialArmorPercent});
+                AddComponent(entity, new Armor {Value = authoring._initialArmorPercent});
             }
         }
     }

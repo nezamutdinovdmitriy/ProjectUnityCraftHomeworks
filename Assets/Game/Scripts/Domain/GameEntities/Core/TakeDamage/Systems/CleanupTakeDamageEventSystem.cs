@@ -2,7 +2,6 @@ using Game.Components;
 using Game.Scripts.Common.ECS.SystemGroups;
 using Unity.Burst;
 using Unity.Entities;
-using UnityEngine;
 
 namespace Game.Systems
 {
