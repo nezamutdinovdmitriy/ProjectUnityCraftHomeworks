@@ -26,19 +26,16 @@ namespace Game.View.Presenters
 
         private void LateUpdate()
         {
-            if (_view == null
-                || _entityManager.World is not {IsCreated: true})
+            if (_view == null || _entityManager.World is not {IsCreated: true})
                 return;
 
             NativeArray<Entity> bases = _query.ToEntityArray(Allocator.Temp);
-
             foreach (Entity entity in bases)
             {
                 Team teamComponent = _entityManager.GetComponentData<Team>(entity);
                 float maxHealth = _entityManager.GetComponentData<MaxHealth>(entity).Value;
 
-                if (teamComponent.Value != _team 
-                    || maxHealth <= 0f)
+                if (teamComponent.Value != _team || maxHealth <= 0f)
                     continue;
 
                 float health = _entityManager.GetComponentData<Health>(entity).Value;
