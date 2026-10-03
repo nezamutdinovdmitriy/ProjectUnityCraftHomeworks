@@ -3,17 +3,14 @@ using Game.Scripts.Domain.GameEntities.Core.TakeDamage;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
+using UnityEngine;
 
 namespace Game.Systems
 {
+    [RequireMatchingQueriesForUpdate]
     public partial struct ArmoredTakeDamageSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
-        {
-            state.RequireForUpdate<Armor>();
-            state.RequireForUpdate<TakeDamageRequest>();
-        }
-
+        
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -28,7 +25,20 @@ namespace Game.Systems
             {
                 float multiplier = 1f - math.saturate(armor.ValueRO.Value);
 
-                TakeDamageUseCase.ApplyDamage(events, requests, ref health.ValueRW, multiplier);
+                for (int i = 0; i < requests.Length && health.ValueRO.IsAlive(); i++)
+                {
+                    float requestedDamage = requests[i].Damage;
+                    
+                    float appliedDamage = TakeDamageUseCase
+                        .Apply(ref health.ValueRW, requestedDamage, multiplier);
+                    
+                    events.Add(new TakeDamageEvent
+                    {
+                        Damage = appliedDamage
+                    });
+                }
+                
+                requests.Clear();
             }
         }
     }

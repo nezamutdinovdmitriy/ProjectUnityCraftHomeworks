@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Game.Components.Authoring
 {
-    public sealed class ArmorPercentAuthoring : MonoBehaviour
+    public sealed class ArmorAuthoring : MonoBehaviour
     {
         [SerializeField] private float _initialArmorPercent;
         
-        private sealed class Baker : Baker<ArmorPercentAuthoring>
+        private sealed class Baker : Baker<ArmorAuthoring>
         {
-            public override void Bake(ArmorPercentAuthoring authoring)
+            public override void Bake(ArmorAuthoring authoring)
             {
                 Entity entity = GetEntity(TransformUsageFlags.None);
                 

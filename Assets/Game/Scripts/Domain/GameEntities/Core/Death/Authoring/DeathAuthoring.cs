@@ -1,7 +1,7 @@
 using Unity.Entities;
 using UnityEngine;
 
-namespace Game.Scripts.Domain.GameEntities.Core.Death.Authoring
+namespace Game.Components.Authoring
 {
     public sealed class DeathAuthoring : MonoBehaviour
     {
@@ -18,7 +18,10 @@ namespace Game.Scripts.Domain.GameEntities.Core.Death.Authoring
                     Duration = authoring._deathDelay
                 });
                 
+                SetComponentEnabled<DeathCooldown>(entity, false);
+                
                 AddComponent(entity, new DeathEvent());
+                SetComponentEnabled<DeathEvent>(entity, false);
             }
         }
     }

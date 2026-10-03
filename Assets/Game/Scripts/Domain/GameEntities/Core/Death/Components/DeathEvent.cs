@@ -1,6 +1,6 @@
 using Unity.Entities;
 
-namespace Game.Scripts.Domain.GameEntities.Core.Death
+namespace Game.Components
 {
     public struct DeathEvent : IComponentData, IEnableableComponent
     {

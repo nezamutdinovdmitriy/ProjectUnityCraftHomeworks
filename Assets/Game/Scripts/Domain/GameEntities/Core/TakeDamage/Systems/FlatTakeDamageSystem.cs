@@ -2,14 +2,13 @@ using Game.Components;
 using Game.Scripts.Domain.GameEntities.Core.TakeDamage;
 using Unity.Burst;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Game.Systems
 {
+    [RequireMatchingQueriesForUpdate]
     public partial struct FlatTakeDamageSystem : ISystem
     {
-        public void OnCreate(ref SystemState state) 
-            => state.RequireForUpdate<TakeDamageRequest>();
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
@@ -22,7 +21,19 @@ namespace Game.Systems
                          RefRW<Health>>()
                          .WithNone<Armor>())
             {
-                TakeDamageUseCase.ApplyDamage(events, requests, ref health.ValueRW);
+                for (int i = 0; i < requests.Length && health.ValueRO.IsAlive(); i++)
+                {
+                    float requestedDamage = requests[i].Damage;
+                    
+                    float appliedDamage = TakeDamageUseCase.Apply(ref health.ValueRW, requestedDamage);
+
+                    events.Add(new TakeDamageEvent
+                    {
+                        Damage = appliedDamage
+                    });
+                }
+                
+                requests.Clear();
             }
         }
     }
