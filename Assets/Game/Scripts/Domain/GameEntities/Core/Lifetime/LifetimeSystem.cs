@@ -27,6 +27,8 @@ namespace Game.Systems
                              RefRW<Lifetime>,
                              RefRW<DeathCooldown>,
                              EnabledRefRW<DeathEvent>>()
+                         .WithPresent<DeathEvent>()
+                         .WithPresent<DeathCooldown>()
                          .WithEntityAccess())
             {
                 if (lifetime.ValueRO.IsExpired() == false)
