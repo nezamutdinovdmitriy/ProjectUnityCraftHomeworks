@@ -6,11 +6,9 @@ using Unity.Transforms;
 
 namespace Game.Systems
 {
+    [RequireMatchingQueriesForUpdate]
     public partial struct MovementSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
-            => state.RequireForUpdate<MovementRequest>();
-
         public void OnUpdate(ref SystemState state)
         {
             float deltaTime = SystemAPI.Time.DeltaTime;

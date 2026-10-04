@@ -5,7 +5,7 @@ namespace Game.Components.Authoring
 {
     public sealed class ArmorAuthoring : MonoBehaviour
     {
-        [SerializeField] private float _initialArmorPercent;
+        [SerializeField] private float _armorPercent;
         
         private sealed class Baker : Baker<ArmorAuthoring>
         {
@@ -13,7 +13,7 @@ namespace Game.Components.Authoring
             {
                 Entity entity = GetEntity(TransformUsageFlags.None);
                 
-                AddComponent(entity, new Armor {Value = authoring._initialArmorPercent});
+                AddComponent(entity, new Armor {Value = authoring._armorPercent});
             }
         }
     }
