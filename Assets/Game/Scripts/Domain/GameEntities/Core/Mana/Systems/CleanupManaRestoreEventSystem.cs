@@ -6,12 +6,15 @@ namespace Game.Systems
 {
     [UpdateInGroup(typeof(CleanupSystemGroup))]
     [RequireMatchingQueriesForUpdate]
-    public partial struct CleanupDeathEventSystem : ISystem
+    public partial struct CleanupManaRestoreEventSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)
         {
-            foreach (EnabledRefRW<DeathEvent> deathEvent in SystemAPI.Query<EnabledRefRW<DeathEvent>>())
-                deathEvent.ValueRW = false;
+            foreach (EnabledRefRW<ManaRestoreEvent> restoreEvent 
+                     in SystemAPI.Query<EnabledRefRW<ManaRestoreEvent>>())
+            {
+                restoreEvent.ValueRW = false;
+            }
         }
     }
 }
