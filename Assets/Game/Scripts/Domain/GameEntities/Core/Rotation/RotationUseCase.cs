@@ -3,7 +3,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-namespace Game.Scripts.Domain.GameEntities.Core.Rotation
+namespace Game.Components.UseCases
 {
     public static class RotationUseCase
     {

@@ -1,4 +1,4 @@
-namespace Game.Components
+namespace Game.Components.UseCases
 {
     public static class LifetimeUseCase
     {

@@ -1,6 +1,5 @@
 using Game.Components;
-using Game.Scripts.Domain.GameEntities.Core.Movement;
-using Game.Scripts.Domain.GameEntities.Core.Rotation;
+using Game.Components.UseCases;
 using Unity.Entities;
 using Unity.Transforms;
 

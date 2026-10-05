@@ -6,6 +6,7 @@ namespace Game.Components.Authoring
     public sealed class AmmoAuthoring : MonoBehaviour
     {
         [SerializeField] private int _initialAmmo;
+        [SerializeField] private int _maxAmmo;
 
         private sealed class Baker : Baker<AmmoAuthoring>
         {
@@ -14,6 +15,7 @@ namespace Game.Components.Authoring
                 Entity entity = GetEntity(TransformUsageFlags.None);
 
                 AddComponent(entity, new Ammo {Value = authoring._initialAmmo});
+                AddComponent(entity, new MaxAmmo {Value = authoring._maxAmmo});
             }
         }
     }

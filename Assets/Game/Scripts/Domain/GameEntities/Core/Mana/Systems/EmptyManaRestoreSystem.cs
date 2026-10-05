@@ -1,4 +1,5 @@
 using Game.Components;
+using Game.Components.UseCases;
 using Unity.Entities;
 
 namespace Game.Systems

@@ -1,9 +1,8 @@
-using Game.Components;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-namespace Game.Scripts.Domain.GameEntities.Core.Movement
+namespace Game.Components.UseCases
 {
     public static class MovementUseCase
     {

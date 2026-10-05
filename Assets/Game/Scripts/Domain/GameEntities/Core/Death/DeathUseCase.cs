@@ -1,7 +1,6 @@
-using Game.Components;
 using Unity.Entities;
 
-namespace Game.Scripts.Domain.GameEntities.Core.Death
+namespace Game.Components.UseCases
 {
     public static class DeathUseCase
     {

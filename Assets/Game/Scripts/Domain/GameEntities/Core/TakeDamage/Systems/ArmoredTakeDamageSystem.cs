@@ -1,9 +1,9 @@
 using Game.Components;
+using Game.Components.UseCases;
 using Game.Scripts.Domain.GameEntities.Core.TakeDamage;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace Game.Systems
 {

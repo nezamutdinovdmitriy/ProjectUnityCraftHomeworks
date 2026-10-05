@@ -1,6 +1,6 @@
 using Game.Components;
+using Game.Components.UseCases;
 using Unity.Entities;
-using UnityEngine;
 
 namespace Game.Systems
 {
