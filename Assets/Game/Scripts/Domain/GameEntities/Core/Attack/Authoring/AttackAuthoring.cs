@@ -20,6 +20,8 @@ namespace Game.Components.Authoring
                     Duration = authoring._cooldown
                 });
                 
+                SetComponentEnabled<AttackCooldown>(entity, false);
+                
                 AddComponent(entity, new AttackDistance
                 {
                     Value = authoring._distance
@@ -29,6 +31,12 @@ namespace Game.Components.Authoring
                 {
                     Value = authoring._damage
                 });
+                
+                AddComponent(entity, new AttackRequest());
+                SetComponentEnabled<AttackRequest>(entity, false);
+                
+                AddComponent(entity, new AttackEvent());
+                SetComponentEnabled<AttackEvent>(entity, false);
             }
         }
     }

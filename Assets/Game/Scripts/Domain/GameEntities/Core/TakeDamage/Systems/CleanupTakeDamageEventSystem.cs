@@ -1,5 +1,5 @@
 using Game.Components;
-using Game.Scripts.Common.ECS.SystemGroups;
+using Game.ECS.SystemGroups;
 using Unity.Burst;
 using Unity.Entities;
 

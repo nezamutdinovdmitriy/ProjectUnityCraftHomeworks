@@ -4,7 +4,7 @@ using Unity.Entities;
 namespace Game.Components
 {
     [Serializable]
-    public struct DetectRadius : IComponentData
+    public struct TargetDetectionRadius : IComponentData
     {
         public float Value;
     }

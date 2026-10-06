@@ -27,7 +27,8 @@ namespace Game.Systems
                              RefRO<RotationSpeed>,
                              RefRW<LocalTransform>,
                              RefRO<Health>>()
-                         .WithPresent<MovementRequest>())
+                         .WithAll<MovementRequest>()
+                         .WithPresent<MovementEvent>())
             {
                 enabledRequest.ValueRW = false;
 

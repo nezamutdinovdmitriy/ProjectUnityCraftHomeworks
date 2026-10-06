@@ -17,6 +17,8 @@ namespace Game.Components.Authoring
                 {
                     Duration = authoring._attackCooldown
                 });
+                
+                SetComponentEnabled<AttackCooldown>(entity, false);
             }
         }
     }

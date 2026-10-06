@@ -354,8 +354,41 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 564497915}
   m_SourcePrefab: {fileID: 100100000, guid: 64170d8b6a7c5c84e9a0841f53002a09, type: 3}
+--- !u!1 &564497914 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8692576747330127513, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+    type: 3}
+  m_PrefabInstance: {fileID: 564497913}
+  m_PrefabAsset: {fileID: 0}
+--- !u!136 &564497915
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564497914}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &831626648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -580,7 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e42e4424f64b46b4965bfd3c6a61ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.TeamAuthoring
-  _team: 0
+  _team: 1
 --- !u!114 &831626656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,7 +724,7 @@ PrefabInstance:
     - target: {fileID: 8692576747330127514, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.65
+      value: 27.7
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
@@ -701,7 +734,7 @@ PrefabInstance:
     - target: {fileID: 8692576747330127514, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.2
+      value: -15.27
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127514, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
@@ -765,14 +798,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1291028436}
-    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1291028435}
-    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1291028434}
     - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
@@ -802,6 +827,30 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1291028427}
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291028445}
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291028444}
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291028443}
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291028442}
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291028446}
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1291028447}
     - targetCorrespondingSourceObject: {fileID: 7906830424652367557, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
       insertIndex: -1
@@ -953,32 +1002,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealAmountAuthoring
   _healAmount: 10
---- !u!114 &1291028435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291028422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0141349843364b2dbcf2b43886e4001a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AttackCooldownAuthoring
-  _attackCooldown: 5
---- !u!114 &1291028436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291028422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6af2d043d5e42299db2919cf014f355, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AttackDistanceAuthoring
-  _attackDistance: 5
 --- !u!114 &1291028437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1067,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.EntityNameAuthoring
   _entityName: TestMook
+--- !u!114 &1291028442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291028422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165e7b5b8c74ee484639178e449f3f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.TargetDetectionCooldownAuthoring
+  _detectionCooldown: 1
+--- !u!114 &1291028443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291028422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9241dec29754f9c8c0befa02cd52ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.TargetAuthoring
+--- !u!114 &1291028444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291028422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 421cf290944949c7855575ff10e41533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AttackAuthoring
+  _damage: 5
+  _distance: 5
+  _cooldown: 1
+--- !u!114 &1291028445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291028422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0371a3b845ab496c83072afe6ae02e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AIControlledAuthoring
+--- !u!114 &1291028446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291028422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f432436cc6344426861e85fbbd6db091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DetectionRadiusAuthoring
+  _detectRadius: 10
+--- !u!114 &1291028447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291028422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19aa0617c256450e934c6a0067c12275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.DefaultTargetEntityAuthoring
+  _defaultTarget: {fileID: 1294538070}
 --- !u!1 &1294538070 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7078650420259860604, guid: a82794b5cab41ef46a2ba26c65e32fc1,
