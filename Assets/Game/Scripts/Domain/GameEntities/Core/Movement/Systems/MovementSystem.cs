@@ -1,5 +1,5 @@
 using Game.Components;
-using Game.Components.UseCases;
+using Game.UseCases;
 using Unity.Entities;
 using Unity.Transforms;
 

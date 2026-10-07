@@ -1,7 +1,8 @@
+using Game.Components;
 using Unity.Burst;
 using Unity.Mathematics;
 
-namespace Game.Components.UseCases
+namespace Game.UseCases
 {
     [BurstCompile]
     public static class HealthUseCase

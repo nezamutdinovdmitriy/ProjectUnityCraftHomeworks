@@ -1,4 +1,6 @@
-namespace Game.Components.UseCases
+using Game.Components;
+
+namespace Game.UseCases
 {
     public static class AmmoUseCase
     {

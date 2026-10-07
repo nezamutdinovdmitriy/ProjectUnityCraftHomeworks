@@ -1,6 +1,7 @@
+using Game.Components;
 using Unity.Mathematics;
 
-namespace Game.Components.UseCases
+namespace Game.UseCases
 {
     public static class AttackUseCase
     {

@@ -1,11 +1,10 @@
 using Game.Components;
-using Game.Components.UseCases;
+using Game.UseCases;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace Game.Systems
 {
@@ -58,7 +57,7 @@ namespace Game.Systems
 
                 float radius = detectionRadiusRO.ValueRO.Value;
                 float3 center = selfTransformRO.ValueRO.Position + new float3(0f, 1f, 0f);
-
+                
                 NativeList<DistanceHit> hits = new NativeList<DistanceHit>(Allocator.Temp);
 
                 collisionWorld.OverlapSphere(center, radius, ref hits, CollisionFilter.Default);

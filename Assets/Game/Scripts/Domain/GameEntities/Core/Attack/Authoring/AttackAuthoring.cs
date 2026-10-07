@@ -32,11 +32,11 @@ namespace Game.Components.Authoring
                     Value = authoring._damage
                 });
                 
-                AddComponent(entity, new AttackRequest());
-                SetComponentEnabled<AttackRequest>(entity, false);
+                AddComponent(entity, new AttackStartedRequest());
+                SetComponentEnabled<AttackStartedRequest>(entity, false);
                 
-                AddComponent(entity, new AttackEvent());
-                SetComponentEnabled<AttackEvent>(entity, false);
+                AddComponent(entity, new AttackStartedEvent());
+                SetComponentEnabled<AttackStartedEvent>(entity, false);
             }
         }
     }

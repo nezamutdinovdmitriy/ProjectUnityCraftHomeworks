@@ -2,7 +2,7 @@ using Unity.Entities;
 
 namespace Game.Components
 {
-    public struct AttackRequest : IComponentData, IEnableableComponent
+    public struct AttackStartedRequest : IComponentData, IEnableableComponent
     {
         public Entity Target;
     }

@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.View.Components.Authoring.TeamMaterialPartAuthoring
   _renderers:
-  - {fileID: 1291028423}
   - {fileID: 1291028424}
+  - {fileID: 1291028423}
 --- !u!114 &4197147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +170,24 @@ MonoBehaviour:
   hasAnimationEvents: 0
   hasAnimatorControllerEvents: 0
   animationEngine: 0
+--- !u!1 &152441772 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3048374063512422513, guid: e509c663fa25e2749bbb17707ca86b90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1291028421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &152441775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152441772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8bdb34723504e72974d0e2c0100cab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.View.Components.TeamColorPropertyAuthoring
 --- !u!1 &242969059 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7906830424652367557, guid: e509c663fa25e2749bbb17707ca86b90,
@@ -296,6 +314,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3511347784791895645, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      propertyPath: _team
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127513, guid: 64170d8b6a7c5c84e9a0841f53002a09,
         type: 3}
       propertyPath: m_Name
@@ -389,6 +412,12 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &737066507 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 163879017748496445, guid: e509c663fa25e2749bbb17707ca86b90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1291028421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &831626648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -703,6 +732,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16549610bfe4458aa9389201d072bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Entities.Hybrid::Unity.Entities.Hybrid.Baking.LinkedEntityGroupAuthoring
+--- !u!114 &1151808313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737066507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8bdb34723504e72974d0e2c0100cab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.View.Components.TeamColorPropertyAuthoring
+--- !u!1 &1152557564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 909742817751929338, guid: e509c663fa25e2749bbb17707ca86b90,
+    type: 3}
+  m_PrefabInstance: {fileID: 1291028421}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1187377894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152557564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8bdb34723504e72974d0e2c0100cab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.View.Components.TeamColorPropertyAuthoring
 --- !u!1001 &1291028421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -867,6 +926,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4197145}
+    - targetCorrespondingSourceObject: {fileID: 3048374063512422513, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 152441775}
+    - targetCorrespondingSourceObject: {fileID: 909742817751929338, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1187377894}
+    - targetCorrespondingSourceObject: {fileID: 163879017748496445, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1151808313}
   m_SourcePrefab: {fileID: 100100000, guid: e509c663fa25e2749bbb17707ca86b90, type: 3}
 --- !u!1 &1291028422 stripped
 GameObject:

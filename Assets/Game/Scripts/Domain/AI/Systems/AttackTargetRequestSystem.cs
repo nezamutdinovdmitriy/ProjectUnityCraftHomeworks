@@ -1,5 +1,5 @@
 using Game.Components;
-using Game.Components.UseCases;
+using Game.UseCases;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -26,8 +26,7 @@ namespace Game.Systems
             foreach (var (
                          healthRO, 
                          selfTransformRO, 
-                         attackDistanceRO, 
-                         attackCooldownRO, 
+                         attackDistanceRO,
                          targetRO, 
                          attackRequest,
                          attackRequestEnabled)
@@ -35,12 +34,11 @@ namespace Game.Systems
                          RefRO<Health>,
                          RefRO<LocalTransform>,
                          RefRO<AttackDistance>,
-                         RefRO<AttackCooldown>,
                          RefRO<TargetEntity>,
-                         RefRW<AttackRequest>,
-                         EnabledRefRW<AttackRequest>>()
+                         RefRW<AttackStartedRequest>,
+                         EnabledRefRW<AttackStartedRequest>>()
                          .WithAll<AIControlled>()
-                         .WithDisabled<AttackRequest, AttackCooldown>())
+                         .WithDisabled<AttackStartedRequest, AttackCooldown>())
             {
                 if(targetRO.ValueRO.Value == Entity.Null
                    || healthRO.ValueRO.IsDead()

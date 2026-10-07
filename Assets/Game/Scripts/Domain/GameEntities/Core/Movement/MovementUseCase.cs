@@ -2,7 +2,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-namespace Game.Components.UseCases
+namespace Game.UseCases
 {
     public static class MovementUseCase
     {
