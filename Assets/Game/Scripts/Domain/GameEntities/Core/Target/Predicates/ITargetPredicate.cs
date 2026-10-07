@@ -4,6 +4,6 @@ namespace Game.Predicates
 {
     public interface ITargetPredicate
     {
-        bool Invoke(Entity entity);
+        bool Invoke(Entity candidate);
     }
 }
