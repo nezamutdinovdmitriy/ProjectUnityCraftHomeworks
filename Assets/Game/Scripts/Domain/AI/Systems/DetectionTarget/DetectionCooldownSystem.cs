@@ -4,7 +4,7 @@ using Unity.Entities;
 
 namespace Game.Systems
 {
-    public partial struct TargetDetectionCooldownSystem : ISystem
+    public partial struct DetectionCooldownSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)
         {
