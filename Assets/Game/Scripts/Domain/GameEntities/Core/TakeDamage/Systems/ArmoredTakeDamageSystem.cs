@@ -10,7 +10,6 @@ namespace Game.Systems
     [RequireMatchingQueriesForUpdate]
     public partial struct ArmoredTakeDamageSystem : ISystem
     {
-        
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
