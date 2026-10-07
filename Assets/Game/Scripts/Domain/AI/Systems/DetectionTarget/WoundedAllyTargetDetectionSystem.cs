@@ -1,6 +1,5 @@
 using Game.Components;
 using Game.Predicates;
-using Game.Scripts.Domain.GameEntities.Content.Units.Mage;
 using Game.UseCases;
 using Unity.Collections;
 using Unity.Entities;

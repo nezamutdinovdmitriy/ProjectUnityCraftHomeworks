@@ -1,6 +1,6 @@
 using Unity.Entities;
 
-namespace Game.Scripts.Domain.GameEntities.Content.Units.Mage
+namespace Game.Components
 {
     public struct WoundedAllyTargeting : IComponentData
     {
