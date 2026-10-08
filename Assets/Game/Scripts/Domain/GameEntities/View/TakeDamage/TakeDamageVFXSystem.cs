@@ -30,7 +30,7 @@ namespace Game.View.Systems
                 if (_takeDamageEventLookup.TryGetBuffer(model, out DynamicBuffer<TakeDamageEvent> events) == false
                     || events.IsEmpty)
                     continue;
-
+            
                 particleSystem.Value.Play(withChildren: true);
             }
         }

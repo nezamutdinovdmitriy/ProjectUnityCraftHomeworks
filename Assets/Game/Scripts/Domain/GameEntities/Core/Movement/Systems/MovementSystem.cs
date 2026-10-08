@@ -40,12 +40,6 @@ namespace Game.Systems
                     movementSpeed.ValueRO.Value,
                     deltaTime);
 
-                RotationUseCase.RotationStep(
-                    transform,
-                    request.ValueRO.Direction,
-                    rotationSpeed.ValueRO.Value,
-                    deltaTime);
-
                 enabledEvent.ValueRW = true;
             }
         }

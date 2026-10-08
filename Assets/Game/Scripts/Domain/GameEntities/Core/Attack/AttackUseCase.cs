@@ -17,5 +17,20 @@ namespace Game.UseCases
         {
             return cooldown.Time <= 0;
         }
+        
+        public static bool IsExpired(this in AttackHitDelay hitDelay)
+        {
+            return hitDelay.Time <= 0;
+        }
+        
+        public static void Reset(this ref AttackHitDelay delay)
+        {
+            delay.Time = delay.Delay;
+        }
+        
+        public static void Reset(this ref AttackCooldown cooldown)
+        {
+            cooldown.Time = cooldown.Duration;
+        }
     }
 }

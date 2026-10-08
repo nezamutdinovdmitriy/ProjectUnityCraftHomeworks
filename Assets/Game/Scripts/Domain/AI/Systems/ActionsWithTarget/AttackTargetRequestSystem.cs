@@ -53,7 +53,6 @@ namespace Game.Systems
                 {
                     attackRequest.ValueRW.Target = targetRO.ValueRO.Value;
                     attackRequestEnabled.ValueRW = true;
-                    Debug.Log("BOOM!");
                 }
             }
         }

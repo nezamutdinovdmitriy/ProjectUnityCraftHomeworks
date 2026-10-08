@@ -35,6 +35,9 @@ namespace Game.View.Systems
             {
                 Entity model = modelLinkRO.ValueRO.Value;
 
+                if(_movementEventLookup.HasComponent(model) == false)
+                    continue;
+                
                 bool isMoving = _movementEventLookup.IsComponentEnabled(model);
 
                 _animator.parametersArr = parameters;

@@ -3,7 +3,7 @@ using Game.UseCases;
 using Unity.Burst;
 using Unity.Entities;
 
-namespace Game.Scripts
+namespace Game.Systems
 {
     [BurstCompile]
     public partial struct AttackCooldownSystem : ISystem
@@ -25,7 +25,7 @@ namespace Game.Scripts
                 if (cooldown.ValueRO.IsExpired())
                 {
                     cooldownEnabled.ValueRW = false;
-                    cooldown.ValueRW.Time = cooldown.ValueRO.Duration;
+                    cooldown.ValueRW.Reset();
                 }
             }
         }
