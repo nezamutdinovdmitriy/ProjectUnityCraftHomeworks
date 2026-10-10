@@ -16,7 +16,7 @@ namespace Game.UseCases
 
         public static bool IsFull(this in Ammo ammo, in MaxAmmo maxAmmo)
         {
-            return maxAmmo.Value == ammo.Value;
+            return ammo.Value >= maxAmmo.Value;
         }
     }
 }

@@ -1,6 +1,7 @@
 using Game.Components;
 using Game.UseCases;
 using Unity.Entities;
+using Unity.Mathematics;
 
 namespace Game.Systems
 {
@@ -27,9 +28,12 @@ namespace Game.Systems
                     restoreCooldown.ValueRW.Time -= deltaTime;
 
                 if (restoreCooldown.ValueRO.IsExpired()
-                    && ammo.ValueRO.Value < maxAmmo.ValueRO.Value)
+                    && ammo.ValueRO.IsFull(in maxAmmo.ValueRO) == false)
                 {
-                    ammo.ValueRW.Value += restoreAmount.ValueRO.Value;
+                    ammo.ValueRW.Value = math.min(
+                        maxAmmo.ValueRO.Value, 
+                        ammo.ValueRO.Value + restoreAmount.ValueRO.Value);
+                    
                     restoreCooldown.ValueRW.ResetCooldown();
                 }
             }
