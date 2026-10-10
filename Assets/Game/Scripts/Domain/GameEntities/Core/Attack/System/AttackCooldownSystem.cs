@@ -23,10 +23,7 @@ namespace Game.Systems
                 cooldown.ValueRW.Time -= deltaTime;
 
                 if (cooldown.ValueRO.IsExpired())
-                {
                     cooldownEnabled.ValueRW = false;
-                    cooldown.ValueRW.Reset();
-                }
             }
         }
     }

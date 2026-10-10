@@ -10,6 +10,7 @@ namespace Game.Systems
         private ComponentLookup<Damage> _damageLookup;
         private BufferLookup<TakeDamageRequest> _takeDamageRequestLookup;
         private ComponentLookup<Health> _healthLookup;
+        private ComponentLookup<AttackCooldown> _attackCooldownLookup;
 
 
         public void OnCreate(ref SystemState state)
@@ -17,10 +18,12 @@ namespace Game.Systems
             _damageLookup = SystemAPI.GetComponentLookup<Damage>();
             _takeDamageRequestLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>();
             _healthLookup = SystemAPI.GetComponentLookup<Health>();
+            _attackCooldownLookup = SystemAPI.GetComponentLookup<AttackCooldown>();
         }
 
         public void OnUpdate(ref SystemState state)
         {
+            _attackCooldownLookup.Update(ref state);
             _healthLookup.Update(ref state);
             _damageLookup.Update(ref state);
             _takeDamageRequestLookup.Update(ref state);
@@ -59,7 +62,9 @@ namespace Game.Systems
                 if (attackHitDelay.ValueRO.IsExpired() == false)
                     continue;
                 
+                attackInProcess.ValueRW = false;
                 attackStartedRequestEnabled.ValueRW = false;
+                
                 Entity target = attackStartedRequest.ValueRO.Target;
 
                 if (_healthLookup.TryGetRefRO(target, out RefRO<Health> targetHealth)
@@ -67,9 +72,9 @@ namespace Game.Systems
                     && targetHealth.ValueRO.IsAlive()
                     && selfHealth.ValueRO.IsAlive())
                 {
+                    _attackCooldownLookup.GetRefRW(self).ValueRW.Reset();
                     attackCooldown.ValueRW = true;
                     attackHitEvent.ValueRW = true;
-                    attackInProcess.ValueRW = false;
                     
                     if (_takeDamageRequestLookup.TryGetBuffer(target, out var buffer))
                     {

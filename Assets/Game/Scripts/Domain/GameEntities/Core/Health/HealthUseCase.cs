@@ -20,6 +20,6 @@ namespace Game.UseCases
         public static bool IsAlive(this in Health health) => health.Value > 0;
         
         [BurstCompile]
-        public static bool IsDead(this in Health health) => health.Value < 0;
+        public static bool IsDead(this in Health health) => health.Value <= 0;
     }
 }

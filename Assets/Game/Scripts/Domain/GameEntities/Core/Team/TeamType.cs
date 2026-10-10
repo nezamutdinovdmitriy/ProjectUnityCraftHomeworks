@@ -2,7 +2,8 @@ namespace Game.Components
 {
     public enum TeamType
     {
-        Red,
-        Blue
+        Blue = 0,
+        Red = 1,
+        Neutral = 2
     }
 }
