@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace Game.Components.Authoring
 {
-    public sealed class DetectionRadiusAuthoring : MonoBehaviour
+    public sealed class TargetDetectionRadiusAuthoring : MonoBehaviour
     {
         [SerializeField] private float _detectRadius;
         
-        private sealed class Baker : Baker<DetectionRadiusAuthoring>
+        private sealed class Baker : Baker<TargetDetectionRadiusAuthoring>
         {
-            public override void Bake(DetectionRadiusAuthoring authoring)
+            public override void Bake(TargetDetectionRadiusAuthoring authoring)
             {
                 Entity entity = GetEntity(TransformUsageFlags.None);
                 
