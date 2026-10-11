@@ -5,7 +5,6 @@ namespace Game.Components.Authoring
 {
     public sealed class AttackAuthoring : MonoBehaviour
     {
-        [SerializeField] private float _damage;
         [SerializeField] private float _distance;
         [SerializeField] private float _cooldown;
         [SerializeField] private float _hitDelay;
@@ -25,11 +24,6 @@ namespace Game.Components.Authoring
                 AddComponent(entity, new AttackDistance
                 {
                     Value = authoring._distance
-                });
-                
-                AddComponent(entity, new Damage
-                {
-                    Value = authoring._damage
                 });
                 
                 AddComponent(entity, new AttackHitDelay

@@ -16,24 +16,17 @@ namespace Game.Systems
                          EnabledRefRW<MovementRequest> enabledRequest,
                          EnabledRefRW<MovementEvent> enabledEvent,
                          RefRO<MovementSpeed> movementSpeed,
-                         RefRO<RotationSpeed> rotationSpeed,
-                         RefRW<LocalTransform> transform,
-                         RefRO<Health> health)
+                         RefRW<LocalTransform> transform)
                      in SystemAPI.Query<
                              RefRO<MovementRequest>,
                              EnabledRefRW<MovementRequest>,
                              EnabledRefRW<MovementEvent>,
                              RefRO<MovementSpeed>,
-                             RefRO<RotationSpeed>,
-                             RefRW<LocalTransform>,
-                             RefRO<Health>>()
+                             RefRW<LocalTransform>>()
                          .WithAll<MovementRequest>()
                          .WithPresent<MovementEvent>())
             {
                 enabledRequest.ValueRW = false;
-
-                if (health.ValueRO.IsDead())
-                    continue;
 
                 MovementUseCase.MoveStep(transform,
                     request.ValueRO.Direction,

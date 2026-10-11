@@ -1,7 +1,6 @@
 using Game.Components;
 using Game.UseCases;
 using Unity.Entities;
-using UnityEngine;
 
 namespace Game.Systems
 {
@@ -11,7 +10,6 @@ namespace Game.Systems
         private BufferLookup<TakeDamageRequest> _takeDamageRequestLookup;
         private ComponentLookup<Health> _healthLookup;
         private ComponentLookup<AttackCooldown> _attackCooldownLookup;
-
 
         public void OnCreate(ref SystemState state)
         {
@@ -65,24 +63,23 @@ namespace Game.Systems
                 attackInProcess.ValueRW = false;
                 attackStartedRequestEnabled.ValueRW = false;
                 
+                _attackCooldownLookup.GetRefRW(self).ValueRW.Reset();
+                attackCooldown.ValueRW = true;
+                
                 Entity target = attackStartedRequest.ValueRO.Target;
 
                 if (_healthLookup.TryGetRefRO(target, out RefRO<Health> targetHealth)
                     && _healthLookup.TryGetRefRO(self, out RefRO<Health> selfHealth)
                     && targetHealth.ValueRO.IsAlive()
-                    && selfHealth.ValueRO.IsAlive())
+                    && selfHealth.ValueRO.IsAlive()
+                    && _takeDamageRequestLookup.TryGetBuffer(target, out var buffer))
                 {
-                    _attackCooldownLookup.GetRefRW(self).ValueRW.Reset();
-                    attackCooldown.ValueRW = true;
-                    attackHitEvent.ValueRW = true;
-                    
-                    if (_takeDamageRequestLookup.TryGetBuffer(target, out var buffer))
+                    buffer.Add(new TakeDamageRequest
                     {
-                        buffer.Add(new TakeDamageRequest
-                        {
-                            Damage = _damageLookup[self].Value
-                        });
-                    }
+                        Damage = _damageLookup[self].Value
+                    });
+                    
+                    attackHitEvent.ValueRW = true;
                 }
             }
         }

@@ -1,9 +1,8 @@
-using System;
 using Unity.Entities;
 
 namespace Game.Components
 {
-    public struct ProjectilePrefab : IComponentData
+    public struct ProjectileSpawnPoint : IComponentData
     {
         public Entity Value;
     }

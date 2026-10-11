@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1105433006553778494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6445208222111238760}
+  m_Layer: 0
+  m_Name: <ProjectileSpawnPoint>
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6445208222111238760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105433006553778494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.023, y: 1.597, z: 2.513}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6534080225490336123}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8692576747330127513
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,17 +40,26 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8692576747330127514}
+  - component: {fileID: 5278552302465890198}
+  - component: {fileID: 3516154630755222526}
   - component: {fileID: 9024360137494233482}
   - component: {fileID: 5715891638559324607}
   - component: {fileID: 6372487324371600291}
   - component: {fileID: 3511347784791895645}
   - component: {fileID: 1951029066455060764}
   - component: {fileID: 5934068552474749697}
-  - component: {fileID: 1123023313773079519}
   - component: {fileID: 8748939372465282254}
+  - component: {fileID: 2159859664392042693}
   - component: {fileID: 4661996298203026676}
   - component: {fileID: 8647763222981143479}
   - component: {fileID: 791218990268721317}
+  - component: {fileID: 3732398538015427653}
+  - component: {fileID: 3301642073933005462}
+  - component: {fileID: 7131873886139814781}
+  - component: {fileID: 9043798983305210902}
+  - component: {fileID: 8478390727971146433}
+  - component: {fileID: 4213732499045623460}
+  - component: {fileID: 5723812383453701031}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -44,6 +84,30 @@ Transform:
   - {fileID: 8194177642520444206}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &5278552302465890198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6fd2ee4d334861a206d1bca6f4d077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.ArcherAuthoring
+--- !u!114 &3516154630755222526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0371a3b845ab496c83072afe6ae02e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AIControlledAuthoring
 --- !u!114 &9024360137494233482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e42e4424f64b46b4965bfd3c6a61ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.TeamAuthoring
-  _team: 1
+  _team: 0
 --- !u!114 &1951029066455060764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,19 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16549610bfe4458aa9389201d072bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Entities.Hybrid::Unity.Entities.Hybrid.Baking.LinkedEntityGroupAuthoring
---- !u!114 &1123023313773079519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692576747330127513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 139cb53b5e874ab28cf90f750fb93744, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.ArmorPercentAuthoring
-  _armorPercent: 0
 --- !u!114 &8748939372465282254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +197,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.RotationSpeedAuthoring
   _rotationSpeed: 800
+--- !u!114 &2159859664392042693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 127d573936bd4ba2bb95e9ced78933c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.RotationRequestAuthoring
 --- !u!114 &4661996298203026676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,9 +234,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421cf290944949c7855575ff10e41533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AttackAuthoring
-  _damage: 15
-  _distance: 0.5
-  _cooldown: 1
+  _distance: 10
+  _cooldown: 2
+  _hitDelay: 1
 --- !u!114 &791218990268721317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +249,100 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f432436cc6344426861e85fbbd6db091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DetectRadiusAuthoring
-  _detectRadius: 5
+  _detectRadius: 15
+--- !u!114 &3732398538015427653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165e7b5b8c74ee484639178e449f3f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.TargetDetectionCooldownAuthoring
+  _detectionCooldown: 0.5
+--- !u!114 &3301642073933005462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e434abb07342aba142ac1ab9e19366, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AmmoAuthoring
+  _initialAmmo: 5
+  _maxAmmo: 5
+--- !u!114 &7131873886139814781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a6364879164d1e8181c683362239f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AmmoRestoreAuthoring
+  _cooldown: 3
+  _amount: 1
+--- !u!114 &9043798983305210902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77f8e7fc7bae42a5a487627e0d654ea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.ProjectilePrefabAuthoring
+  _projectilePrefab: {fileID: 5883565171892982307, guid: a524751f5fc054ba9b0c9ca113234ee6,
+    type: 3}
+--- !u!114 &8478390727971146433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfd5ab5fe032474ea35d74e6dbcca4c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.ProjectileSpawnPointAuthoring
+  _attackPoint: {fileID: 6445208222111238760}
+--- !u!114 &4213732499045623460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9241dec29754f9c8c0befa02cd52ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.TargetEntityAuthoring
+--- !u!114 &5723812383453701031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19aa0617c256450e934c6a0067c12275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.DefaultTargetEntityAuthoring
+  _defaultTarget: {fileID: 0}
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -347,7 +503,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8817714461371831943, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6445208222111238760}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6489447675202979944, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
@@ -400,6 +560,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bdb34723504e72974d0e2c0100cab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.View.Components.TeamColorPropertyAuthoring
+--- !u!4 &6534080225490336123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8817714461371831943, guid: 9ade5523b6f916f43a919cde252ff319,
+    type: 3}
+  m_PrefabInstance: {fileID: 2374355558966095868}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7963259228962873409 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5652098753705480125, guid: 9ade5523b6f916f43a919cde252ff319,
