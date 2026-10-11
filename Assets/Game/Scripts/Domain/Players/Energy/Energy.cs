@@ -4,7 +4,7 @@ using Unity.Entities;
 namespace Game.Components
 {
     [Serializable]
-    public struct Money : IComponentData
+    public struct Energy : IComponentData
     {
         public int Value;
     }

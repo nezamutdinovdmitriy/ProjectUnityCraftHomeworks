@@ -9,23 +9,23 @@ namespace Game.Systems
     public partial struct ProjectileSystem : ISystem
     {
         private ComponentLookup<Health> _healthLookup;
-        private ComponentLookup<LocalTransform> _transformLookup;
         private BufferLookup<TakeDamageRequest> _takeDamageRequestLookup;
         private ComponentLookup<TargetHitPoint> _targetHitPointLookup;
+        private ComponentLookup<LocalToWorld> _worldTransformLookup;
 
         public void OnCreate(ref SystemState state)
         {
             _healthLookup = SystemAPI.GetComponentLookup<Health>(true);
-            _transformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true);
             _takeDamageRequestLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>();
             _targetHitPointLookup = SystemAPI.GetComponentLookup<TargetHitPoint>(true);
+            _worldTransformLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true);
         }
 
         public void OnUpdate(ref SystemState state)
         {
+            _worldTransformLookup.Update(ref state);
             _targetHitPointLookup.Update(ref state);
             _takeDamageRequestLookup.Update(ref state);
-            _transformLookup.Update(ref state);
             _healthLookup.Update(ref state);
 
             foreach (var (
@@ -53,15 +53,12 @@ namespace Game.Systems
                 Entity targetEntity = target.ValueRO.Value;
 
                 if (targetEntity != Entity.Null
-                    && _healthLookup.TryGetRefRO(targetEntity, out RefRO<Health> targetHealth)
-                    && targetHealth.ValueRO.IsAlive()
-                    && _transformLookup.TryGetRefRO(targetEntity, out RefRO<LocalTransform> targetTransform))
+                    && _healthLookup.TryGetComponent(targetEntity, out Health targetHealth)
+                    && targetHealth.IsAlive()
+                    && _targetHitPointLookup.TryGetComponent(targetEntity, out TargetHitPoint hitPoint)
+                    && _worldTransformLookup.TryGetComponent(hitPoint.Value, out LocalToWorld hitPointTransform))
                 {
-                    // float3 targetPosition = targetTransform.ValueRO.Position + new float3(0, 2f, 0);
-                    // float3 delta = targetPosition - selfTransform.ValueRO.Position;
-                    
-                    float3 targetHitPointPosition = _transformLookup[_targetHitPointLookup[targetEntity].Value].Position;
-                    float3 delta = targetHitPointPosition - selfTransform.ValueRO.Position;
+                    float3 delta = hitPointTransform.Position - selfTransform.ValueRO.Position;
                     
                     float distanceSq = math.lengthsq(delta);
                     float stoppingDistance = 0.25f;

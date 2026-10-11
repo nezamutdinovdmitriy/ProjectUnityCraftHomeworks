@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1105433006553778494
+--- !u!1 &1931859054473450417
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,28 +8,59 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6445208222111238760}
+  - component: {fileID: 8731664865764794337}
   m_Layer: 0
-  m_Name: <ProjectileSpawnPoint>
+  m_Name: <HitPoint>
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6445208222111238760
+--- !u!4 &8731664865764794337
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105433006553778494}
+  m_GameObject: {fileID: 1931859054473450417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.023, y: 1.597, z: 2.513}
+  m_LocalPosition: {x: -0.12, y: 0.48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6534080225490336123}
+  m_Father: {fileID: 6483840924733176150}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4447577348478659221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3337006750784842634}
+  m_Layer: 0
+  m_Name: ProjectileSpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3337006750784842634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4447577348478659221}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.051, y: -0.043, z: -0.058}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 471816417599818480}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8692576747330127513
 GameObject:
@@ -60,6 +91,8 @@ GameObject:
   - component: {fileID: 8478390727971146433}
   - component: {fileID: 4213732499045623460}
   - component: {fileID: 5723812383453701031}
+  - component: {fileID: 4646494033681779696}
+  - component: {fileID: 8931491110432565458}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -145,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec1c2b74e564bf7b4b60f8d9596d91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealthAuthoring
-  _maxHealth: 100
+  _maxHealth: 50
 --- !u!114 &3511347784791895645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,9 +267,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 421cf290944949c7855575ff10e41533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AttackAuthoring
-  _distance: 10
-  _cooldown: 2
-  _hitDelay: 1
+  _distance: 20
+  _cooldown: 1
+  _hitDelay: 0.6165
 --- !u!114 &791218990268721317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f432436cc6344426861e85fbbd6db091, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DetectRadiusAuthoring
-  _detectRadius: 15
+  _detectRadius: 20
 --- !u!114 &3732398538015427653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f8e7fc7bae42a5a487627e0d654ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.ProjectilePrefabAuthoring
-  _projectilePrefab: {fileID: 5883565171892982307, guid: a524751f5fc054ba9b0c9ca113234ee6,
+  _projectilePrefab: {fileID: 4672097092362585949, guid: 57fc226be7422dc4f9b9556dcf8193ea,
     type: 3}
 --- !u!114 &8478390727971146433
 MonoBehaviour:
@@ -317,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd5ab5fe032474ea35d74e6dbcca4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.ProjectileSpawnPointAuthoring
-  _attackPoint: {fileID: 6445208222111238760}
+  _attackPoint: {fileID: 3337006750784842634}
 --- !u!114 &4213732499045623460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +376,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.DefaultTargetEntityAuthoring
   _defaultTarget: {fileID: 0}
+--- !u!65 &4646494033681779696
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2.5, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &8931491110432565458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30f18e7608ae43aaae1af4494b7fcf2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.TargetHitPointAuthoring
+  _hitPoint: {fileID: 8731664865764794337}
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -504,10 +571,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8817714461371831943, guid: 9ade5523b6f916f43a919cde252ff319,
+    - targetCorrespondingSourceObject: {fileID: 8721323185657190058, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6445208222111238760}
+      addedObject: {fileID: 8731664865764794337}
+    - targetCorrespondingSourceObject: {fileID: 2774038447434360076, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3337006750784842634}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6489447675202979944, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
@@ -530,6 +601,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3716924888007663814}
   m_SourcePrefab: {fileID: 100100000, guid: 9ade5523b6f916f43a919cde252ff319, type: 3}
+--- !u!4 &471816417599818480 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2774038447434360076, guid: 9ade5523b6f916f43a919cde252ff319,
+    type: 3}
+  m_PrefabInstance: {fileID: 2374355558966095868}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &4319570553555854973 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1945930269987621249, guid: 9ade5523b6f916f43a919cde252ff319,
@@ -560,9 +637,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8bdb34723504e72974d0e2c0100cab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.View.Components.TeamColorPropertyAuthoring
---- !u!4 &6534080225490336123 stripped
+--- !u!4 &6483840924733176150 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8817714461371831943, guid: 9ade5523b6f916f43a919cde252ff319,
+  m_CorrespondingSourceObject: {fileID: 8721323185657190058, guid: 9ade5523b6f916f43a919cde252ff319,
     type: 3}
   m_PrefabInstance: {fileID: 2374355558966095868}
   m_PrefabAsset: {fileID: 0}

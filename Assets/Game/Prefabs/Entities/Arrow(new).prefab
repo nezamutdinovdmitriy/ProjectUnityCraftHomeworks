@@ -55,7 +55,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f05e3664c74df6bda56557441fe897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DamageAuthoring
-  _damage: 15
+  _damage: 10
 --- !u!114 &3094187197591098880
 MonoBehaviour:
   m_ObjectHideFlags: 0
