@@ -15,9 +15,16 @@ namespace Game.View.Presenters
 
         private Entity _player;
 
+        private World _world;
+
         private void Awake()
         {
-            _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            _world = World.DefaultGameObjectInjectionWorld;
+            
+            if (_world == null || _world.IsCreated == false)
+                return;
+            
+            _entityManager = _world.EntityManager;
 
             _player = Entity.Null;
 
@@ -28,12 +35,15 @@ namespace Game.View.Presenters
 
         private void OnDestroy()
         {
-            if (_entityManager.World is {IsCreated: true})
+            if (_world is {IsCreated: true})
                 _query.Dispose();
         }
 
         private void LateUpdate()
         {
+            if (_world == null || _world.IsCreated == false)
+                return;
+            
             if (_entityManager.Exists(_player) == false)
             {
                 if (_query.IsEmpty)

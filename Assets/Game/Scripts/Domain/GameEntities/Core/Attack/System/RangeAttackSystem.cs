@@ -1,4 +1,5 @@
 using Game.Components;
+using Game.ECS.SystemGroups;
 using Game.UseCases;
 using Unity.Entities;
 using Unity.Transforms;
@@ -6,8 +7,7 @@ using Unity.Mathematics;
 
 namespace Game.Systems
 {
-    [UpdateInGroup(typeof(SimulationSystemGroup))]
-    [UpdateAfter(typeof(TransformSystemGroup))]
+    [UpdateInGroup(typeof(ExecuteAbilitiesSystemGroup))]
     public partial struct RangeAttackSystem : ISystem
     {
         private ComponentLookup<Health> _healthLookup;
@@ -101,6 +101,7 @@ namespace Game.Systems
                             target))
                     {
                         attackHitEventEnabled.ValueRW = true;
+                        SystemAPI.SetComponentEnabled<AbilityCostPending>(self, true);
                     }
                 }
             }

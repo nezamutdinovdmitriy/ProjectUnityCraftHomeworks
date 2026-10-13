@@ -1,12 +1,15 @@
 using Game.Components;
+using Game.ECS.SystemGroups;
 using Game.UseCases;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace Game.Systems
 {
+    [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
+    [BurstCompile]
     public partial struct AttackTargetRequestSystem : ISystem
     {
         private ComponentLookup<LocalTransform> _transformLookup;

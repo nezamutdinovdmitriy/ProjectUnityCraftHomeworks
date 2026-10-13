@@ -1,9 +1,11 @@
 using Game.Components;
+using Game.ECS.SystemGroups;
 using Game.UseCases;
 using Unity.Entities;
 
 namespace Game.Systems
 {
+    [UpdateInGroup(typeof(ExecuteAbilitiesSystemGroup))]
     public partial struct MeleeAttackSystem : ISystem
     {
         private ComponentLookup<Damage> _damageLookup;
@@ -78,6 +80,8 @@ namespace Game.Systems
                     {
                         Damage = _damageLookup[self].Value
                     });
+                    
+                    SystemAPI.SetComponentEnabled<AbilityCostPending>(self, true);
                     
                     attackHitEvent.ValueRW = true;
                 }

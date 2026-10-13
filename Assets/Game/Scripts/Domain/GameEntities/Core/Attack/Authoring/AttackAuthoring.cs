@@ -43,6 +43,9 @@ namespace Game.Components.Authoring
                 
                 AddComponent(entity, new AttackStartedRequest());
                 SetComponentEnabled<AttackStartedRequest>(entity, false);
+                
+                AddComponent(entity, new AbilityCostPending());
+                SetComponentEnabled<AbilityCostPending>(entity, false);
             }
         }
     }

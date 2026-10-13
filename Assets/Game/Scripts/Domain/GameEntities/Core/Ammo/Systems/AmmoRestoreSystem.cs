@@ -1,10 +1,14 @@
 using Game.Components;
+using Game.ECS.SystemGroups;
 using Game.UseCases;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 
 namespace Game.Systems
 {
+    [UpdateInGroup(typeof(UpdateTimersSystemGroup))]
+    [BurstCompile]
     public partial struct AmmoRestoreSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)

@@ -1,10 +1,14 @@
 using Game.Components;
+using Game.ECS.SystemGroups;
 using Game.UseCases;
+using Unity.Burst;
 using Unity.Entities;
 
 namespace Game.Systems
 {
     [RequireMatchingQueriesForUpdate]
+    [UpdateInGroup(typeof(UpdateTimersSystemGroup))]
+    [BurstCompile]
     public partial struct ManaRestoreDelaySystem : ISystem
     {
         public void OnUpdate(ref SystemState state)

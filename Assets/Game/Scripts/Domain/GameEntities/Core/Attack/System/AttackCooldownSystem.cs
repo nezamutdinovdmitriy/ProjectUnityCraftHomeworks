@@ -1,10 +1,12 @@
 using Game.Components;
+using Game.ECS.SystemGroups;
 using Game.UseCases;
 using Unity.Burst;
 using Unity.Entities;
 
 namespace Game.Systems
 {
+    [UpdateInGroup(typeof(UpdateTimersSystemGroup))]
     [BurstCompile]
     public partial struct AttackCooldownSystem : ISystem
     {
