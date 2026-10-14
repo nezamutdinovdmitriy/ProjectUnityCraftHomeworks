@@ -3,6 +3,7 @@ using Game.UseCases;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
+using UnityEngine;
 
 namespace Game.Systems
 {
@@ -38,6 +39,8 @@ namespace Game.Systems
                     {
                         Value = restored
                     });
+
+                    Debug.Log($"Heal Event: Restored = {restored}");
                 }
                 
                 requests.Clear();

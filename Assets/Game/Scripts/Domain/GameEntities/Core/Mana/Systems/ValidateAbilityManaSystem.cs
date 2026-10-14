@@ -9,7 +9,7 @@ namespace Game.Systems
     [BurstCompile]
     public partial struct ValidateAbilityManaSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
+        public void OnUpdate(ref SystemState state)
         {
             foreach (var (cost, mana, requestEnabled) 
                      in SystemAPI.Query<RefRO<ManaCost>, RefRO<Mana>, EnabledRefRW<AttackStartedRequest>>()

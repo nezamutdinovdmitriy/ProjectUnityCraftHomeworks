@@ -71,7 +71,7 @@ namespace Game.Systems
                     && selfHealth.ValueRO.IsAlive()
                     && _healRequestLookup.TryGetBuffer(target, out var buffer))
                 {
-                    buffer.Add(new HealRequest()
+                    buffer.Add(new HealRequest
                     {
                         Value = healAmount.ValueRO.Value
                     });

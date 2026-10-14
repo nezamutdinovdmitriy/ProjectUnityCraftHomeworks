@@ -2,6 +2,7 @@ using Game.Components;
 using Game.ECS.SystemGroups;
 using Unity.Burst;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Game.Systems
 {
@@ -9,7 +10,7 @@ namespace Game.Systems
     [BurstCompile]
     public partial struct ValidateAbilityAmmoSystem : ISystem
     {
-        public void OnCreate(ref SystemState state)
+        public void OnUpdate(ref SystemState state)
         {
             foreach (var (cost, ammo, requestEnabled) 
                      in SystemAPI.Query<RefRO<AmmoCost>, RefRO<Ammo>, EnabledRefRW<AttackStartedRequest>>()

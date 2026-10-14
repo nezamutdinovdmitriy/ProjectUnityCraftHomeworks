@@ -338,7 +338,12 @@ PrefabInstance:
     - target: {fileID: 825625786214927258, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
       propertyPath: _healManaCost
-      value: 1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920570824597136682, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      propertyPath: _cooldown
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
         type: 3}
@@ -403,6 +408,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 971408134}
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 971408135}
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 971408136}
   m_SourcePrefab: {fileID: 100100000, guid: e509c663fa25e2749bbb17707ca86b90, type: 3}
 --- !u!4 &971408103 stripped
 Transform:
@@ -429,6 +442,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DeathAuthoring
   _deathDelay: 5
+--- !u!114 &971408135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971408110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2fce7ac916e422ead886ae0cb774630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealAmountAuthoring
+  _healAmount: 40
+--- !u!114 &971408136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971408110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f593bf3a96c4f9e97bc188ee16870c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealRecipientAuthoring
 --- !u!1 &1294538070 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7078650420259860604, guid: a82794b5cab41ef46a2ba26c65e32fc1,
@@ -643,7 +681,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1665108241}
   m_SourcePrefab: {fileID: 100100000, guid: 64170d8b6a7c5c84e9a0841f53002a09, type: 3}
 --- !u!4 &1665108239 stripped
 Transform:
@@ -651,6 +693,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1665108238}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1665108240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8692576747330127513, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+    type: 3}
+  m_PrefabInstance: {fileID: 1665108238}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1665108241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665108240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f593bf3a96c4f9e97bc188ee16870c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealRecipientAuthoring
 --- !u!1001 &1792506248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -722,7 +782,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8692576747330127513, guid: 672d95e5eaa94fe4c890e0965e4ea820,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1792506251}
   m_SourcePrefab: {fileID: 100100000, guid: 672d95e5eaa94fe4c890e0965e4ea820, type: 3}
 --- !u!4 &1792506249 stripped
 Transform:
@@ -730,6 +794,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1792506248}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1792506250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8692576747330127513, guid: 672d95e5eaa94fe4c890e0965e4ea820,
+    type: 3}
+  m_PrefabInstance: {fileID: 1792506248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1792506251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792506250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f593bf3a96c4f9e97bc188ee16870c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealRecipientAuthoring
 --- !u!1001 &423135267784322734
 PrefabInstance:
   m_ObjectHideFlags: 0
