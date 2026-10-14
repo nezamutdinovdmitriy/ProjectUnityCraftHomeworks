@@ -85,7 +85,7 @@ namespace Game.Systems
                     
                     attackHitEvent.ValueRW = true;
                 }
-            }
+            }   
         }
     }
 }
