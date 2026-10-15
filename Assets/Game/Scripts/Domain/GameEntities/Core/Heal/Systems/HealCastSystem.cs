@@ -7,7 +7,7 @@ using Unity.Entities;
 namespace Game.Systems
 {
     [BurstCompile]
-    [UpdateInGroup(typeof(ExecuteAbilitiesSystemGroup))]
+    [UpdateInGroup(typeof(AbilitiesSystemGroup))]
     public partial struct HealCastSystem : ISystem
     {
         private ComponentLookup<Health> _healthLookup;
@@ -42,7 +42,7 @@ namespace Game.Systems
                              EnabledRefRW<AttackInProcess>,
                              EnabledRefRW<AttackStartedEvent>>()
                          .WithPresent<AttackHitDelay, AttackCooldown, AttackInProcess>()
-                         .WithPresent<AttackStartedEvent, AttackHitEvent, AbilityCostPending>()
+                         .WithPresent<AttackStartedEvent, AttackHitEvent>()
                          .WithEntityAccess())
             {
                 if (attackInProcessEnabled.ValueRO == false)
@@ -75,8 +75,6 @@ namespace Game.Systems
                     {
                         Value = healAmount.ValueRO.Value
                     });
-                    
-                    SystemAPI.SetComponentEnabled<AbilityCostPending>(self, true);
                     
                     SystemAPI.SetComponentEnabled<AttackHitEvent>(self, true);
                 }
