@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 5723812383453701031}
   - component: {fileID: 4646494033681779696}
   - component: {fileID: 8931491110432565458}
+  - component: {fileID: 2204709566491868342}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6fd2ee4d334861a206d1bca6f4d077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.ArcherAuthoring
+  _attackAmmoCost: 0
 --- !u!114 &3516154630755222526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,6 +412,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.TargetHitPointAuthoring
   _hitPoint: {fileID: 8731664865764794337}
+--- !u!114 &2204709566491868342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02cc349a76b4d849d29bcf7b14e92e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AbilityLoadoutAuthoring
+  _abilities:
+  - {fileID: 9213029211332376037, guid: 611ccbe73b201b845bbb42dfbdeb7806, type: 3}
+  _selectedAbilityIndex: 0
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0

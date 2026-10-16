@@ -9,16 +9,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2620490648695952815}
-  - component: {fileID: 1774283345588747180}
-  - component: {fileID: 3094187197591098880}
-  - component: {fileID: 2930672651926544797}
   - component: {fileID: 5747289127591656556}
-  - component: {fileID: 2446751531879809636}
   - component: {fileID: 6593447861699024165}
-  - component: {fileID: 904316927256064355}
+  - component: {fileID: 3094187197591098880}
   - component: {fileID: 7145366117951756765}
   - component: {fileID: 647820819878121103}
   - component: {fileID: 6842336183695579187}
+  - component: {fileID: 2446751531879809636}
+  - component: {fileID: 2930672651926544797}
+  - component: {fileID: 1774283345588747180}
+  - component: {fileID: 904316927256064355}
   - component: {fileID: 6507572969755992723}
   m_Layer: 0
   m_Name: Arrow(new)
@@ -43,44 +43,6 @@ Transform:
   - {fileID: 2067311144285917303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1774283345588747180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4672097092362585949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f05e3664c74df6bda56557441fe897, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DamageAuthoring
-  _damage: 10
---- !u!114 &3094187197591098880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4672097092362585949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9241dec29754f9c8c0befa02cd52ec8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.TargetEntityAuthoring
---- !u!114 &2930672651926544797
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4672097092362585949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4996dcfd99e84e13be1bf75131c63ab5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.LifeTimeAuthoring
-  _lifetime: 3
 --- !u!114 &5747289127591656556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,19 +56,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.EntityNameAuthoring
   _entityName: ArrowPrefab
---- !u!114 &2446751531879809636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4672097092362585949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73871791d77d46f9a81104d2291f5f3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DeathAuthoring
-  _deathDelay: 0
 --- !u!114 &6593447861699024165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,27 +68,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ead3b2de3f0d47e684100a7b31150af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.ProjectileAuthoring
---- !u!65 &904316927256064355
-BoxCollider:
+--- !u!114 &3094187197591098880
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4672097092362585949}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.15, y: 0.9, z: 0.15}
-  m_Center: {x: 0.0006, y: 0.45, z: 0.0048}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9241dec29754f9c8c0befa02cd52ec8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.TargetEntityAuthoring
 --- !u!114 &7145366117951756765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +118,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.RotationSpeedAuthoring
   _rotationSpeed: 900
+--- !u!114 &2446751531879809636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672097092362585949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73871791d77d46f9a81104d2291f5f3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DeathAuthoring
+  _deathDelay: 0
+--- !u!114 &2930672651926544797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672097092362585949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4996dcfd99e84e13be1bf75131c63ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.LifeTimeAuthoring
+  _lifetime: 3
+--- !u!114 &1774283345588747180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672097092362585949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f05e3664c74df6bda56557441fe897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DamageAuthoring
+  _damage: 10
+--- !u!65 &904316927256064355
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672097092362585949}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.15, y: 0.9, z: 0.15}
+  m_Center: {x: 0.0006, y: 0.45, z: 0.0048}
 --- !u!114 &6507572969755992723
 MonoBehaviour:
   m_ObjectHideFlags: 0
