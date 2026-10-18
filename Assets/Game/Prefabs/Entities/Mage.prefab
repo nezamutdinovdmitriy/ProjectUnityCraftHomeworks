@@ -52,13 +52,15 @@ GameObject:
   - component: {fileID: 3181930924549461354}
   - component: {fileID: 4750398139251725705}
   - component: {fileID: 3525097866834872359}
-  - component: {fileID: 6920570824597136682}
   - component: {fileID: 7368962797987398464}
   - component: {fileID: 7481822765585452495}
   - component: {fileID: 5735655856122736556}
   - component: {fileID: 266209711655233886}
   - component: {fileID: 343188749414623138}
   - component: {fileID: 7375257763320646288}
+  - component: {fileID: 4146136164159014223}
+  - component: {fileID: 4777202610745065308}
+  - component: {fileID: 5774199953947361333}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -235,21 +237,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.RotationSpeedAuthoring
   _rotationSpeed: 800
---- !u!114 &6920570824597136682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692576747330127513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 421cf290944949c7855575ff10e41533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AttackAuthoring
-  _distance: 15
-  _cooldown: 3
-  _hitDelay: 0
 --- !u!114 &7368962797987398464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +321,46 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.TargetHitPointAuthoring
   _hitPoint: {fileID: 4735538376203391024}
+--- !u!114 &4146136164159014223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73871791d77d46f9a81104d2291f5f3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DeathAuthoring
+  _deathDelay: 5
+--- !u!114 &4777202610745065308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f593bf3a96c4f9e97bc188ee16870c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealRecipientAuthoring
+--- !u!114 &5774199953947361333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02cc349a76b4d849d29bcf7b14e92e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AbilityLoadoutAuthoring
+  _abilities:
+  - {fileID: 1104570382883851294, guid: efcb9569d50f27b43b5e475a87b017f9, type: 3}
+  _selectedAbilityIndex: 0
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0

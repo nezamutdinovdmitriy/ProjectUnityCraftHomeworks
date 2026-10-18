@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Game.Components.Authoring
 {
+    [DisallowMultipleComponent]
     public sealed class HealRecipientAuthoring : MonoBehaviour
     {
         private sealed class Baker : Baker<HealRecipientAuthoring>

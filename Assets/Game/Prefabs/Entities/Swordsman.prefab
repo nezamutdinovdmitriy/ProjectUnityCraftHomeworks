@@ -46,8 +46,6 @@ GameObject:
   - component: {fileID: 670484112263061575}
   - component: {fileID: 4687546636252182308}
   - component: {fileID: 9000384363433785384}
-  - component: {fileID: 43217776492931994}
-  - component: {fileID: 1937045467445189305}
   - component: {fileID: 3809540395182686964}
   - component: {fileID: 2885739312806510391}
   - component: {fileID: 6596384202014421980}
@@ -60,6 +58,8 @@ GameObject:
   - component: {fileID: 1318480144712383909}
   - component: {fileID: 8286793109361805674}
   - component: {fileID: 711833746254885897}
+  - component: {fileID: 2708565593628184066}
+  - component: {fileID: 1316733446504232089}
   m_Layer: 0
   m_Name: Swordsman
   m_TagString: Untagged
@@ -160,34 +160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127d573936bd4ba2bb95e9ced78933c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.RotationRequestAuthoring
---- !u!114 &43217776492931994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692576747330127513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f05e3664c74df6bda56557441fe897, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DamageAuthoring
-  _damage: 15
---- !u!114 &1937045467445189305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692576747330127513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 421cf290944949c7855575ff10e41533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AttackAuthoring
-  _distance: 2.5
-  _cooldown: 2
-  _hitDelay: 0.43
 --- !u!114 &3809540395182686964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +321,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2.5, z: 1}
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &2708565593628184066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f593bf3a96c4f9e97bc188ee16870c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealRecipientAuthoring
+--- !u!114 &1316733446504232089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02cc349a76b4d849d29bcf7b14e92e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AbilityLoadoutAuthoring
+  _abilities:
+  - {fileID: 7951105875476475254, guid: ef53f20d908a0c24b85ff2186aa3ed49, type: 3}
+  _selectedAbilityIndex: 0
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0

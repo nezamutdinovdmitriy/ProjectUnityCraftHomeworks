@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Game.Components.Authoring
 {
+    [DisallowMultipleComponent]
     public sealed class HealAmountAuthoring : MonoBehaviour
     {
         [SerializeField] private float _healAmount;

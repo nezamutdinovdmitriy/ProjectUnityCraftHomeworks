@@ -7,7 +7,6 @@ namespace Game.UseCases
     [BurstCompile]
     public static class HealthUseCase
     {
-        [BurstCompile]
         public static void ReduceHealth(this ref Health health, float damage)
         {
             if (damage < 0)
@@ -15,11 +14,15 @@ namespace Game.UseCases
 
             health.Value = math.max(0, health.Value - damage);
         }
-
-        [BurstCompile]
+        
         public static bool IsAlive(this in Health health) => health.Value > 0;
         
-        [BurstCompile]
         public static bool IsDead(this in Health health) => health.Value <= 0;
+
+        public static bool IsWounded(this in Health health, MaxHealth maxHealth)
+        {
+            return health.IsAlive()
+                   && health.Value < maxHealth.Value;
+        }
     }
 }

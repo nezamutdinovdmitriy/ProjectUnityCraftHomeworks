@@ -59,9 +59,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 791103b94dcb44c78d863892cfdde5b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AbilityDefinitionAuthoring
-  _range: 1.5
-  _windup: 0.4
-  _cooldown: 0.8
+  _range: 2.5
+  _windup: 0.43
+  _cooldown: 2
 --- !u!114 &3001171434519270371
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,8 +39,6 @@ namespace Game.Systems
                     {
                         Value = restored
                     });
-
-                    Debug.Log($"Heal Event: Restored = {restored}");
                 }
                 
                 requests.Clear();

@@ -20,8 +20,8 @@ namespace Game.Systems
         private ComponentLookup<LocalTransform> _localTransformLookup;
         private ComponentLookup<ProjectileSpawnPoint> _spawnPointLookup;
         private ComponentLookup<Damage> _damageLookup;
-        private ComponentLookup<AttackStartedEvent> _startedEventLookup;
-        private ComponentLookup<AttackHitEvent> _releasedEventLookup;
+        private ComponentLookup<AbilityStartedEvent> _startedEventLookup;
+        private ComponentLookup<AbilityExecutedEvent> _releasedEventLookup;
 
         public void OnCreate(ref SystemState state)
         {
@@ -36,8 +36,8 @@ namespace Game.Systems
             _localTransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true);
             _spawnPointLookup = SystemAPI.GetComponentLookup<ProjectileSpawnPoint>(true);
             _damageLookup = SystemAPI.GetComponentLookup<Damage>(true);
-            _startedEventLookup = SystemAPI.GetComponentLookup<AttackStartedEvent>();
-            _releasedEventLookup = SystemAPI.GetComponentLookup<AttackHitEvent>();
+            _startedEventLookup = SystemAPI.GetComponentLookup<AbilityStartedEvent>();
+            _releasedEventLookup = SystemAPI.GetComponentLookup<AbilityExecutedEvent>();
         }
 
         public void OnUpdate(ref SystemState state)
@@ -121,7 +121,7 @@ namespace Game.Systems
                         windupEnabled,
                         definition.ValueRO.Windup);
 
-                    AttackUseCase.NotifyStarted(actor, ref _startedEventLookup);
+                    AbilityUseCase.NotifyStarted(actor, ref _startedEventLookup);
                 }
 
                 if (windupEnabled.ValueRO)
@@ -156,7 +156,7 @@ namespace Game.Systems
                 if (cost > 0)
                     ammo.ValueRW.Value -= cost;
                 
-                AttackUseCase.NotifyHit(actor, request.ValueRO.Target, ref _releasedEventLookup);
+                AbilityUseCase.NotifyExecuted(actor, request.ValueRO.Target, ref _releasedEventLookup);
 
                 AbilityUseCase.Complete(
                     ref request.ValueRW,
@@ -211,7 +211,7 @@ namespace Game.Systems
             if (_damageLookup.TryGetRefRO(prefab, out RefRO<Damage> projectileDamage) == false)
                 return;
 
-            float damage = AttackUseCase.CalculateDamage(projectileDamage.ValueRO.Value, actor, ref _damageLookup);
+            float damage = DamageUseCase.Calculate(projectileDamage.ValueRO.Value, actor, ref _damageLookup);
 
             commands.SetComponent(projectile, new Damage
             {

@@ -18,8 +18,8 @@ namespace Game.Systems
         private ComponentLookup<LocalToWorld> _worldTransformLookup;
         private ComponentLookup<Damage> _damageLookup;
         private BufferLookup<TakeDamageRequest> _damageRequestLookup;
-        private ComponentLookup<AttackStartedEvent> _startedEventLookup;
-        private ComponentLookup<AttackHitEvent> _hitEventLookup;
+        private ComponentLookup<AbilityStartedEvent> _startedEventLookup;
+        private ComponentLookup<AbilityExecutedEvent> _hitEventLookup;
 
         public void OnCreate(ref SystemState state)
         {
@@ -29,8 +29,8 @@ namespace Game.Systems
             _worldTransformLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true);
             _damageLookup = SystemAPI.GetComponentLookup<Damage>(true);
             _damageRequestLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>();
-            _startedEventLookup = SystemAPI.GetComponentLookup<AttackStartedEvent>();
-            _hitEventLookup = SystemAPI.GetComponentLookup<AttackHitEvent>();
+            _startedEventLookup = SystemAPI.GetComponentLookup<AbilityStartedEvent>();
+            _hitEventLookup = SystemAPI.GetComponentLookup<AbilityExecutedEvent>();
         }
 
         [BurstCompile]
@@ -102,7 +102,7 @@ namespace Game.Systems
                         windupEnabled,
                         definition.ValueRO.Windup);
 
-                    AttackUseCase.NotifyStarted(actor, ref _startedEventLookup);
+                    AbilityUseCase.NotifyStarted(actor, ref _startedEventLookup);
                 }
 
                 if (windupEnabled.ValueRO)
@@ -118,14 +118,14 @@ namespace Game.Systems
                     continue;
                 }
 
-                float damage = AttackUseCase.CalculateDamage(ability.ValueRO.Damage, actor, ref _damageLookup);
+                float damage = DamageUseCase.Calculate(ability.ValueRO.Damage, actor, ref _damageLookup);
 
                 requests.Add(new TakeDamageRequest
                 {
                     Damage = damage
                 });
                 
-                AttackUseCase.NotifyHit(actor, target, ref _hitEventLookup);
+                AbilityUseCase.NotifyExecuted(actor, target, ref _hitEventLookup);
 
                 AbilityUseCase.Complete(
                     ref request.ValueRW,

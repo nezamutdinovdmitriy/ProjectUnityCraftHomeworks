@@ -86,5 +86,20 @@ namespace Game.UseCases
                 cooldownEnabled,
                 cooldownDuration);
         }
+        
+        public static void NotifyStarted(Entity actor, ref ComponentLookup<AbilityStartedEvent> eventLookup)
+        {
+            if (eventLookup.HasComponent(actor))
+                eventLookup.SetComponentEnabled(actor, true);
+        }
+        
+        public static void NotifyExecuted(Entity actor, Entity target, ref ComponentLookup<AbilityExecutedEvent> eventLookup)
+        {
+            if (eventLookup.TryGetRefRW(actor, out var hitEvent) == false)
+                return;
+
+            hitEvent.ValueRW.Target = target;
+            eventLookup.SetComponentEnabled(actor, true);
+        }
     }
 }

@@ -5,16 +5,16 @@ using Unity.Entities;
 namespace Game.View.Systems
 {
     [UpdateInGroup(typeof(PresentationSystemGroup))]
-    public partial struct AttackAnimationSystem : ISystem
+    public partial struct AbilityAnimationSystem : ISystem
     {
         private FastAnimatorParameter _attackKey;
-        private ComponentLookup<AttackStartedEvent> _attackStartedEventLookup;
+        private ComponentLookup<AbilityStartedEvent> _attackStartedEventLookup;
         private AnimatorParametersAspect _animator;
 
         public void OnCreate(ref SystemState state)
         {
             _attackKey = new FastAnimatorParameter("Fire");
-            _attackStartedEventLookup = SystemAPI.GetComponentLookup<AttackStartedEvent>();
+            _attackStartedEventLookup = SystemAPI.GetComponentLookup<AbilityStartedEvent>();
             _animator = new AnimatorParametersAspect();
         }
 

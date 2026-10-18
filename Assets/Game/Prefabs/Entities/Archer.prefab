@@ -82,7 +82,6 @@ GameObject:
   - component: {fileID: 8748939372465282254}
   - component: {fileID: 2159859664392042693}
   - component: {fileID: 4661996298203026676}
-  - component: {fileID: 8647763222981143479}
   - component: {fileID: 791218990268721317}
   - component: {fileID: 3732398538015427653}
   - component: {fileID: 3301642073933005462}
@@ -94,6 +93,7 @@ GameObject:
   - component: {fileID: 4646494033681779696}
   - component: {fileID: 8931491110432565458}
   - component: {fileID: 2204709566491868342}
+  - component: {fileID: 7363322506047416803}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -130,7 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc6fd2ee4d334861a206d1bca6f4d077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.ArcherAuthoring
-  _attackAmmoCost: 0
 --- !u!114 &3516154630755222526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,21 +256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.MovementAuthoring
   _movementSpeed: 5
---- !u!114 &8647763222981143479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692576747330127513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 421cf290944949c7855575ff10e41533, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AttackAuthoring
-  _distance: 20
-  _cooldown: 1
-  _hitDelay: 0.6165
 --- !u!114 &791218990268721317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +411,18 @@ MonoBehaviour:
   _abilities:
   - {fileID: 9213029211332376037, guid: 611ccbe73b201b845bbb42dfbdeb7806, type: 3}
   _selectedAbilityIndex: 0
+--- !u!114 &7363322506047416803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692576747330127513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f593bf3a96c4f9e97bc188ee16870c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealRecipientAuthoring
 --- !u!1001 &2374355558966095868
 PrefabInstance:
   m_ObjectHideFlags: 0

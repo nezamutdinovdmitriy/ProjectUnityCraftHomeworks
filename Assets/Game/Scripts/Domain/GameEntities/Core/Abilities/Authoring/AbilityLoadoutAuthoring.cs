@@ -36,7 +36,13 @@ namespace Game.Components.Authoring
                 
                 AddComponent(actor, new AbilityCooldown());
                 SetComponentEnabled<AbilityCooldown>(actor, false);
+                
+                AddComponent(actor, new AbilityStartedEvent());
+                SetComponentEnabled<AbilityStartedEvent>(actor, false);
 
+                AddComponent(actor, new AbilityExecutedEvent());
+                SetComponentEnabled<AbilityExecutedEvent>(actor, false);
+                
                 DynamicBuffer<AvailableAbility> available = AddBuffer<AvailableAbility>(actor);
                 
                 foreach (var definition in definitions)
