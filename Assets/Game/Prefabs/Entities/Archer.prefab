@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 3732398538015427653}
   - component: {fileID: 3301642073933005462}
   - component: {fileID: 7131873886139814781}
-  - component: {fileID: 9043798983305210902}
   - component: {fileID: 8478390727971146433}
   - component: {fileID: 4213732499045623460}
   - component: {fileID: 5723812383453701031}
@@ -310,20 +309,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AmmoRestoreAuthoring
   _cooldown: 3
   _amount: 1
---- !u!114 &9043798983305210902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8692576747330127513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f8e7fc7bae42a5a487627e0d654ea3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.ProjectilePrefabAuthoring
-  _projectilePrefab: {fileID: 4672097092362585949, guid: 57fc226be7422dc4f9b9556dcf8193ea,
-    type: 3}
 --- !u!114 &8478390727971146433
 MonoBehaviour:
   m_ObjectHideFlags: 0
