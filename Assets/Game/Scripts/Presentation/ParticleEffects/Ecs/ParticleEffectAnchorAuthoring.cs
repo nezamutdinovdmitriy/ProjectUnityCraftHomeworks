@@ -12,6 +12,9 @@ namespace Game.Presentation.ParticleEffects.Ecs
         {
             public override void Bake(ParticleEffectAnchorAuthoring authoring)
             {
+                DependsOn(authoring.transform);
+                DependsOn(authoring._effectAnchor);
+                
                 Entity entity = GetEntity(TransformUsageFlags.Dynamic);
                 
                 Vector3 localPosition = authoring.transform.InverseTransformPoint(
