@@ -5632,6 +5632,76 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1796344153}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1839579103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1839579106}
+  - component: {fileID: 1839579105}
+  - component: {fileID: 1839579104}
+  m_Layer: 0
+  m_Name: VfxService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1839579104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839579103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7764956696f4f45bbd531468ee7af7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Scripts.Domain.GameEntities.View.VFX.Integration.VFXContextBinding
+--- !u!114 &1839579105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839579103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69da806e568465c9b50d27c70f65f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.View.VfxPlayer
+  _effects:
+  - _id: 1
+    _prefab: {fileID: -4175446961047797634, guid: 527a4c35f07b5a343b68a84e6f238373,
+      type: 3}
+    _prefabOffset: {x: 0, y: 0, z: 0}
+    _prewarmCount: 4
+    _maxRetained: 16
+  - _id: 2
+    _prefab: {fileID: -8475622354110528734, guid: c561dd26eb0244242a84fc4e5cab600b,
+      type: 3}
+    _prefabOffset: {x: 0, y: 0, z: 0}
+    _prewarmCount: 4
+    _maxRetained: 16
+--- !u!4 &1839579106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839579103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1925784388 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1893730989326349607, guid: cca1f9906e692ae438d4c8e23b8beb5e,
@@ -6475,3 +6545,4 @@ SceneRoots:
   - {fileID: 895386437}
   - {fileID: 2873688074205370161}
   - {fileID: 359842844}
+  - {fileID: 1839579106}

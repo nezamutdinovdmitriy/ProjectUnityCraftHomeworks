@@ -4917,7 +4917,7 @@ GameObject:
   - component: {fileID: 5056238625072254654}
   - component: {fileID: 6283086142451857085}
   - component: {fileID: 3657995979659139182}
-  - component: {fileID: 1499016248075661173}
+  - component: {fileID: -4175446961047797634}
   m_Layer: 0
   m_Name: HealParticleVFX
   m_TagString: Untagged
@@ -9823,7 +9823,7 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!114 &1499016248075661173
+--- !u!114 &-4175446961047797634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9832,6 +9832,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5868650648049242934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6114e592a824fc5be44c5a519f09e8e, type: 3}
+  m_Script: {fileID: 11500000, guid: a21728ecfc6c440f86dfca448bea7061, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.ParticleVFXAuthoring
+  m_EditorClassIdentifier: Assembly-CSharp::Game.View.ParticleVfxView
