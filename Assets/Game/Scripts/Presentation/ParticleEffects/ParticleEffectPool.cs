@@ -9,14 +9,12 @@ namespace Game.Presentation.ParticleEffects
     internal sealed class ParticleEffectPool : IDisposable
     {
         private readonly ParticleEffectView _prefab;
-        private readonly Transform _root;
         private readonly Transform _storage;
         private readonly ObjectPool<ParticleEffectView> _pool;
 
         public ParticleEffectPool(Transform root, ParticleEffectSettings settings)
         {
             _prefab = settings.Prefab;
-            _root = root;
 
             GameObject storage = new GameObject($"{settings.Id} (Pool)");
 
@@ -45,15 +43,11 @@ namespace Game.Presentation.ParticleEffects
                 _pool.Release(instance);
         }
 
-        public ParticleEffectView Rent()
-        {
-            return _pool.Get();
-        }
+        public ParticleEffectView Rent() 
+            => _pool.Get();
 
-        public void Release(ParticleEffectView instance)
-        {
-            _pool.Release(instance);
-        }
+        public void Release(ParticleEffectView instance) 
+            => _pool.Release(instance);
 
         public void Dispose()
         {

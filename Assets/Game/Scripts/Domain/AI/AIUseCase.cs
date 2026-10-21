@@ -35,10 +35,5 @@ namespace Game.UseCases
         {
             return timer.Time <= 0;
         }
-        
-        public static bool IsEnemy(this in Team selfTeam, in Team candidateTeam)
-        {
-            return selfTeam.Value != candidateTeam.Value;
-        }
     }
 }
