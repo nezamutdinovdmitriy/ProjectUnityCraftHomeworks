@@ -5,7 +5,7 @@ namespace Game.Components
 {
     public struct AbilitySounds : IComponentData
     {
-        public FixedString128Bytes Started;
-        public FixedString128Bytes Executed;
+        public FixedString32Bytes Started;
+        public FixedString32Bytes Executed;
     }
 }

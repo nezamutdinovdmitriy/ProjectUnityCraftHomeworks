@@ -6,9 +6,9 @@ namespace Game.Presentation.Audio
 {
     public sealed class AudioEventKeyCache
     {
-        private readonly Dictionary<FixedString128Bytes, AudioEventKey> _keys = new();
+        private readonly Dictionary<FixedString32Bytes, AudioEventKey> _keys = new();
 
-        public bool TryGet(in FixedString128Bytes name, out AudioEventKey key)
+        public bool TryGet(in FixedString32Bytes name, out AudioEventKey key)
         {
             if (name.Length == 0)
             {

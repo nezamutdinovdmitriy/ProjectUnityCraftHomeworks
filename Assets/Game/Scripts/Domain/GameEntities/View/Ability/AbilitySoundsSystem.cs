@@ -1,7 +1,6 @@
 using Game.Components;
 using Game.Presentation.Audio;
-using Game.UseCases;
-using Modules.AudioEvents;
+using Game.Presentation.Audio.Ecs;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -9,35 +8,35 @@ using UnityEngine;
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(PresentationSystemGroup))]
-    public partial class AbilitySoundsSystem : SystemBase
+    public partial struct AbilitySoundsSystem : ISystem
     {
         private ComponentLookup<AbilityStartedEvent> _startedLookup;
         private ComponentLookup<AbilityExecutedEvent> _executedLookup;
         private ComponentLookup<AbilitySounds> _soundsLookup;
 
-        private readonly AudioEventKeyCache _keys = new();
-
-        protected override void OnCreate()
+        public void OnCreate(ref SystemState state)
         {
-            RequireForUpdate<ModelLink>();
+            state.RequireForUpdate<ModelLink>();
 
-            _startedLookup = GetComponentLookup<AbilityStartedEvent>(true);
-            _executedLookup = GetComponentLookup<AbilityExecutedEvent>(true);
-            _soundsLookup = GetComponentLookup<AbilitySounds>(true);
+            _startedLookup = state.GetComponentLookup<AbilityStartedEvent>(true);
+            _executedLookup = state.GetComponentLookup<AbilityExecutedEvent>(true);
+            _soundsLookup = state.GetComponentLookup<AbilitySounds>(true);
         }
 
-        protected override void OnUpdate()
+        public void OnUpdate(ref SystemState state)
         {
-            AudioSystem audio = AudioSystem.Instance;
-
-            if (audio == null || audio.isActiveAndEnabled == false)
+            if (SystemAPI.ManagedAPI
+                    .TryGetSingleton(out AudioPlaybackState audioState) == false
+                || audioState.Playback == null)
                 return;
 
-            Dependency.Complete();
+            AudioPlayback playback = audioState.Playback;
 
-            _startedLookup.Update(this);
-            _executedLookup.Update(this);
-            _soundsLookup.Update(this);
+            state.Dependency.Complete();
+
+            _startedLookup.Update(ref state);
+            _executedLookup.Update(ref state);
+            _soundsLookup.Update(ref state);
 
             foreach (var (
                          modelLink,
@@ -49,22 +48,22 @@ namespace Game.Systems
                 Entity actor = modelLink.ValueRO.Value;
                 Vector3 position = transform.ValueRO.Position;
 
-                if (_startedLookup.HasComponent(actor) 
+                if (_startedLookup.HasComponent(actor)
                     && _startedLookup.IsComponentEnabled(actor))
                 {
                     Entity definition = _startedLookup.GetRefRO(actor).ValueRO.Definition;
 
                     if (_soundsLookup.TryGetRefRO(definition, out RefRO<AbilitySounds> sounds))
-                        AudioUseCase.Play(audio, sounds.ValueRO.Started, position, _keys);
+                        playback.Play(sounds.ValueRO.Started, position);
                 }
 
-                if (_executedLookup.HasComponent(actor) 
+                if (_executedLookup.HasComponent(actor)
                     && _executedLookup.IsComponentEnabled(actor))
                 {
                     Entity definition = _executedLookup.GetRefRO(actor).ValueRO.Definition;
 
                     if (_soundsLookup.TryGetRefRO(definition, out RefRO<AbilitySounds> sounds))
-                        AudioUseCase.Play(audio, sounds.ValueRO.Executed, position, _keys);
+                        playback.Play(sounds.ValueRO.Executed, position);
                 }
             }
         }

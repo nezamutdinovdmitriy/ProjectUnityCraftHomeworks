@@ -19,10 +19,10 @@ namespace Game.Components
 
                 AddComponent(definition, new AbilitySounds
                 {
-                    Started = new FixedString128Bytes(
+                    Started = new FixedString32Bytes(
                         authoring._started.Key),
 
-                    Executed = new FixedString128Bytes(
+                    Executed = new FixedString32Bytes(
                         authoring._executed.Key)
                 });
             }
