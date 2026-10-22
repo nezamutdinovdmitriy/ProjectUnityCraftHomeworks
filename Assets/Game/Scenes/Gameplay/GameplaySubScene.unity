@@ -393,7 +393,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8862030228295296916, guid: e509c663fa25e2749bbb17707ca86b90,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 971408105}
   m_SourcePrefab: {fileID: 100100000, guid: e509c663fa25e2749bbb17707ca86b90, type: 3}
 --- !u!4 &971408103 stripped
 Transform:
@@ -401,6 +405,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 971408102}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &971408104 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8862030228295296916, guid: e509c663fa25e2749bbb17707ca86b90,
+    type: 3}
+  m_PrefabInstance: {fileID: 971408102}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &971408105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971408104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb84e9b11bf4ba6a26595695c6d1c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.UnitSoundsAuthoring
+  _takeDamage:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: HumanTakeDamage
+    _key: .HumanTakeDamage
+  _heal:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: 
+    _key: 
+  _death:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: Death
+    _key: .Death
 --- !u!1 &1294538070 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7078650420259860604, guid: a82794b5cab41ef46a2ba26c65e32fc1,
@@ -610,7 +644,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8862030228295296916, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1665108241}
   m_SourcePrefab: {fileID: 100100000, guid: 64170d8b6a7c5c84e9a0841f53002a09, type: 3}
 --- !u!4 &1665108239 stripped
 Transform:
@@ -618,6 +656,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1665108238}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1665108240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8862030228295296916, guid: 64170d8b6a7c5c84e9a0841f53002a09,
+    type: 3}
+  m_PrefabInstance: {fileID: 1665108238}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1665108241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665108240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb84e9b11bf4ba6a26595695c6d1c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.UnitSoundsAuthoring
+  _takeDamage:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: HumanTakeDamage
+    _key: .HumanTakeDamage
+  _heal:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: 
+    _key: 
+  _death:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: Death
+    _key: .Death
 --- !u!1001 &1792506248
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -689,7 +757,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8862030228295296916, guid: 672d95e5eaa94fe4c890e0965e4ea820,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1792506251}
   m_SourcePrefab: {fileID: 100100000, guid: 672d95e5eaa94fe4c890e0965e4ea820, type: 3}
 --- !u!4 &1792506249 stripped
 Transform:
@@ -697,6 +769,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1792506248}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1792506250 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8862030228295296916, guid: 672d95e5eaa94fe4c890e0965e4ea820,
+    type: 3}
+  m_PrefabInstance: {fileID: 1792506248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1792506251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792506250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb84e9b11bf4ba6a26595695c6d1c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.UnitSoundsAuthoring
+  _takeDamage:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: HumanTakeDamage
+    _key: .HumanTakeDamage
+  _heal:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: 
+    _key: 
+  _death:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: Death
+    _key: .Death
 --- !u!1001 &423135267784322734
 PrefabInstance:
   m_ObjectHideFlags: 0

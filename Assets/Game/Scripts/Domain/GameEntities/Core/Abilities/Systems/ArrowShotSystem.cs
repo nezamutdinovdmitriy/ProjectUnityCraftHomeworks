@@ -85,11 +85,16 @@ namespace Game.Systems
                         request.ValueRO.Definition,
                         out RefRO<AbilityDefinition> definition) == false)
                 {
-                    AbilityUseCase.Finish(ref request.ValueRW, requestEnabled, ref windup.ValueRW, windupEnabled);
+                    AbilityUseCase.Finish(
+                        ref request.ValueRW,
+                        requestEnabled,
+                        ref windup.ValueRW, windupEnabled);
                     continue;
                 }
 
-                int cost = _costsLookup.TryGetRefRO(request.ValueRO.Definition, out var ammoCost)
+                int cost = _costsLookup.TryGetRefRO(
+                    request.ValueRO.Definition,
+                    out RefRO<AmmoCost> ammoCost)
                     ? ammoCost.ValueRO.Value
                     : 0;
 
@@ -121,7 +126,10 @@ namespace Game.Systems
                         windupEnabled,
                         definition.ValueRO.Windup);
 
-                    AbilityUseCase.NotifyStarted(actor, ref _startedEventLookup);
+                    AbilityUseCase.NotifyStarted(
+                        actor,
+                        request.ValueRO.Definition,
+                        ref _startedEventLookup);
                 }
 
                 if (windupEnabled.ValueRO)
@@ -155,8 +163,12 @@ namespace Game.Systems
 
                 if (cost > 0)
                     ammo.ValueRW.Value -= cost;
-                
-                AbilityUseCase.NotifyExecuted(actor, request.ValueRO.Target, ref _releasedEventLookup);
+
+                AbilityUseCase.NotifyExecuted(
+                    actor,
+                    request.ValueRO.Target,
+                    request.ValueRO.Definition,
+                    ref _releasedEventLookup);
 
                 AbilityUseCase.Complete(
                     ref request.ValueRW,

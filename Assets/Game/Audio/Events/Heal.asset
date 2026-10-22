@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966df4d6c0dc4ec0b855f32895a79c89, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: AudioEngine::Modules.AudioEvents.AudioEvent
+  _poolable: 1
+  output: {fileID: 0}
+  loop: 0
+  startTime:
+    rid: 6166224441643892736
+  duration: 0.85466665
+  overrideDuration: 0
+  spatialBlend: 0
+  clip:
+    rid: 6166224441643892737
+  pitch:
+    rid: 6166224441643892738
+  volume:
+    rid: 6166224441643892739
+  reverbZoneMix:
+    rid: 6166224441643892740
+  rolloffMode: 0
+  rolloffCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minDistance:
+    rid: 6166224441643892741
+  maxDistance:
+    rid: 6166224441643892742
+  dopplerLevel:
+    rid: 6166224441643892743
+  spread:
+    rid: 6166224441643892744
+  behaviours: []
+  actions: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6166224441643892736
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 0
+    - rid: 6166224441643892737
+      type: {class: ClipConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        clip: {fileID: 8300000, guid: a72920763d06a454a8ee0aa035b02b93, type: 3}
+    - rid: 6166224441643892738
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 1
+    - rid: 6166224441643892739
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 1
+    - rid: 6166224441643892740
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 1
+    - rid: 6166224441643892741
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 1
+    - rid: 6166224441643892742
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 500
+    - rid: 6166224441643892743
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 0.8
+    - rid: 6166224441643892744
+      type: {class: FloatConst, ns: Modules.AudioEvents, asm: AudioEngine}
+      data:
+        value: 0

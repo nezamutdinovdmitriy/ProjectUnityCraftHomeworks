@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6438445799020932693}
   - component: {fileID: 7951105875476475254}
   - component: {fileID: 3001171434519270371}
+  - component: {fileID: -937764706135232177}
   m_Layer: 0
   m_Name: SwordSlash
   m_TagString: Untagged
@@ -75,3 +76,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.MeleeAttackDefinitionAuthoring
   _damage: 4
+--- !u!114 &-937764706135232177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365929656337424979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e35f9d42cb42a297162a47adc395da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.AbilitySoundsAuthoring
+  _started:
+    _bank: {fileID: 0}
+    _event: 
+    _key: 
+  _executed:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: Sword
+    _key: .Sword

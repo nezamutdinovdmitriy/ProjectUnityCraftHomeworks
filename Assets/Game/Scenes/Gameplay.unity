@@ -3154,7 +3154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: AudioEngine::Modules.AudioEvents.AudioSystem
   initOnAwake: 1
-  initialBanks: []
+  initialBanks:
+  - {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
 --- !u!81 &895386440
 AudioListener:
   m_ObjectHideFlags: 0

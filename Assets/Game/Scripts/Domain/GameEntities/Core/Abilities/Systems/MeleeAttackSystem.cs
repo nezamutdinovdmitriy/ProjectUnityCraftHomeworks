@@ -102,7 +102,10 @@ namespace Game.Systems
                         windupEnabled,
                         definition.ValueRO.Windup);
 
-                    AbilityUseCase.NotifyStarted(actor, ref _startedEventLookup);
+                    AbilityUseCase.NotifyStarted(
+                        actor,
+                        request.ValueRO.Definition,
+                        ref _startedEventLookup);
                 }
 
                 if (windupEnabled.ValueRO)
@@ -125,7 +128,11 @@ namespace Game.Systems
                     Damage = damage
                 });
                 
-                AbilityUseCase.NotifyExecuted(actor, target, ref _hitEventLookup);
+                AbilityUseCase.NotifyExecuted(
+                    actor,
+                    target,
+                    request.ValueRO.Definition,
+                    ref _hitEventLookup);
 
                 AbilityUseCase.Complete(
                     ref request.ValueRW,

@@ -115,7 +115,10 @@ namespace Game.Systems
                         ref windup.ValueRW, windupEnabled,
                         definition.ValueRO.Windup);
 
-                    AbilityUseCase.NotifyStarted(actor, ref _startedEventLookup);
+                    AbilityUseCase.NotifyStarted(
+                        actor,
+                        request.ValueRO.Definition,
+                        ref _startedEventLookup);
                 }
 
                 if (windupEnabled.ValueRO)
@@ -150,7 +153,11 @@ namespace Game.Systems
                 if (cost > 0f)
                     mana.ValueRW.Value -= cost;
 
-                AbilityUseCase.NotifyExecuted(actor, target, ref _executedEventLookup);
+                AbilityUseCase.NotifyExecuted(
+                    actor,
+                    target,
+                    request.ValueRO.Definition,
+                    ref _executedEventLookup);
 
                 AbilityUseCase.Complete(
                     ref request.ValueRW, requestEnabled,

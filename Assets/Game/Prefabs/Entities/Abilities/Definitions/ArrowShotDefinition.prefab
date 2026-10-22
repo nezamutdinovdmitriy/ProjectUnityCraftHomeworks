@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5296681918614290794}
   - component: {fileID: 8271374759631580260}
   - component: {fileID: 7866356000551712596}
+  - component: {fileID: -305892069239500975}
   m_Layer: 0
   m_Name: ArrowShotDefinition
   m_TagString: Untagged
@@ -90,3 +91,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.EntityNameAuthoring
   _entityName: ArrowShotDefinition
+--- !u!114 &-305892069239500975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075802831466734293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e35f9d42cb42a297162a47adc395da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.AbilitySoundsAuthoring
+  _started:
+    _bank: {fileID: 0}
+    _event: 
+    _key: 
+  _executed:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: Bow
+    _key: .Bow

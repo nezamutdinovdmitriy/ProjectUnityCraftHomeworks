@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c59311ed514f81aa536eb0ff91b011, type: 3}
+  m_Name: GameplayBank
+  m_EditorClassIdentifier: AudioEngine::Modules.AudioEvents.AudioBank
+  _identifier: 
+  _events:
+  - name: Bow
+    value: {fileID: 11400000, guid: 14d779c61d984e94b9872064eb1c6ac0, type: 2}
+  - name: BuildingTakeDamage
+    value: {fileID: 11400000, guid: 1c63005ffc0a0024e9af17646d80789f, type: 2}
+  - name: Death
+    value: {fileID: 11400000, guid: 0a88bcc974767a64fba4025b1818ed75, type: 2}
+  - name: HumanTakeDamage
+    value: {fileID: 11400000, guid: ac6db280ec88fc544b615671e3a738d5, type: 2}
+  - name: Sword
+    value: {fileID: 11400000, guid: ff824919881c9674686044e71bcfef47, type: 2}
+  - name: Heal
+    value: {fileID: 11400000, guid: 496bc01cca0a18e46be26669744d98de, type: 2}
+  _boolParameters: []
+  _intParameters: []
+  _floatParameters: []
+  _callbacks: []
+  _namespace: Modules.AudioEvents
+  _directoryPath: Assets/Audio

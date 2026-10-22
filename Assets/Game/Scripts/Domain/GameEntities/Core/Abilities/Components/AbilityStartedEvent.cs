@@ -4,5 +4,6 @@ namespace Game.Components
 {
     public struct AbilityStartedEvent : IComponentData, IEnableableComponent
     {
+        public Entity Definition;
     }
 }

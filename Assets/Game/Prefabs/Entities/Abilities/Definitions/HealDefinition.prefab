@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1104570382883851294}
   - component: {fileID: 471711140028877627}
   - component: {fileID: 8374975543719089159}
+  - component: {fileID: -1753435986649588640}
   m_Layer: 0
   m_Name: HealDefinition
   m_TagString: Untagged
@@ -75,3 +76,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.ManaCostAuthoring
   _manaCost: 5
+--- !u!114 &-1753435986649588640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692854953300752115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0e35f9d42cb42a297162a47adc395da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.AbilitySoundsAuthoring
+  _started:
+    _bank: {fileID: 0}
+    _event: 
+    _key: 
+  _executed:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: Heal
+    _key: .Heal
