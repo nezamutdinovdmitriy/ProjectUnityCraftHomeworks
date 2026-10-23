@@ -33,7 +33,8 @@ namespace Game.View.Systems
             {
                 Entity model = modelLink.ValueRO.Value;
 
-                if (_deathEventLookup.IsComponentEnabled(model) == false)
+                if (_deathEventLookup.HasComponent(model) == false
+                    || _deathEventLookup.IsComponentEnabled(model) == false)
                     continue;
 
                 _animator.parametersArr = parameters;

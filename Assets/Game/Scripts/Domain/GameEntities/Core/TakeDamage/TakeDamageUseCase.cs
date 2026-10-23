@@ -1,7 +1,6 @@
 using Game.Components;
-using Game.UseCases;
 
-namespace Game.Scripts.Domain.GameEntities.Core.TakeDamage
+namespace Game.UseCases
 {
     public static class TakeDamageUseCase
     {

@@ -5,9 +5,9 @@ namespace Game.Components.Authoring
 {
     public sealed class WoundedAllyTargetingAuthoring : MonoBehaviour
     {
-        private sealed class Baker : Baker<MageAuthoring>
+        private sealed class Baker : Baker<WoundedAllyTargetingAuthoring>
         {
-            public override void Bake(MageAuthoring authoring)
+            public override void Bake(WoundedAllyTargetingAuthoring authoring)
             {
                 AddComponent(GetEntity(TransformUsageFlags.None), new WoundedAllyTargeting());
             }

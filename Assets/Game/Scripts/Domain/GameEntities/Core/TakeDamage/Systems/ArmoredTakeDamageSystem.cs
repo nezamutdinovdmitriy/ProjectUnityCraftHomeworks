@@ -1,6 +1,5 @@
 using Game.Components;
 using Game.UseCases;
-using Game.Scripts.Domain.GameEntities.Core.TakeDamage;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;

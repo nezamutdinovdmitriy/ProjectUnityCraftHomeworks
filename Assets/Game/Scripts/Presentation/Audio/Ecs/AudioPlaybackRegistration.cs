@@ -19,9 +19,6 @@ namespace Game.Presentation.Audio.Ecs
             _world = World.DefaultGameObjectInjectionWorld;
             EntityManager manager = _world.EntityManager;
 
-            using EntityQuery existing = manager.CreateEntityQuery(
-                ComponentType.ReadOnly<AudioPlaybackState>());
-
             AudioSystem audioSystem = GetComponent<AudioSystem>();
 
             Playback = new AudioPlayback(audioSystem);
