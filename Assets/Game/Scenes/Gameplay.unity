@@ -2166,7 +2166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.View.Presenters.HealthPresenter
   _view: {fileID: 753238897}
-  _team: 0
+  _team: 1
 --- !u!1001 &753826586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4472,7 +4472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.View.Presenters.HealthPresenter
   _view: {fileID: 1355708865}
-  _team: 1
+  _team: 0
 --- !u!1001 &1395991331
 PrefabInstance:
   m_ObjectHideFlags: 0
