@@ -1,8 +1,9 @@
 using Unity.Entities;
 
-namespace Game.Scripts.Domain.GameContext
+namespace Game.Components
 {
     public struct GameContext : IComponentData
     {
+        public GameResult Result;
     }
 }

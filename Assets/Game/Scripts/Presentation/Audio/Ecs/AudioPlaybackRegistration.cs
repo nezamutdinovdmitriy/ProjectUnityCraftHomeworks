@@ -11,7 +11,7 @@ namespace Game.Presentation.Audio.Ecs
     {
         private World _world;
         private Entity _entity = Entity.Null;
-        
+
         public AudioPlayback Playback { get; private set; }
 
         private void OnEnable()
@@ -32,7 +32,7 @@ namespace Game.Presentation.Audio.Ecs
                     Playback = Playback
                 });
         }
-        
+
         private void OnDisable()
         {
             if (_world is {IsCreated: true}

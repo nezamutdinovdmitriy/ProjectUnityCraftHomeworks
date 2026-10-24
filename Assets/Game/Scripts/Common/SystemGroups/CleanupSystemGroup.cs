@@ -1,3 +1,4 @@
+using Game.Components;
 using Unity.Entities;
 
 namespace Game.ECS.SystemGroups
