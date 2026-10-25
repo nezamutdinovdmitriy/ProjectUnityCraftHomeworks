@@ -5658,7 +5658,7 @@ GameObject:
   - component: {fileID: 1839579105}
   - component: {fileID: 1839579104}
   m_Layer: 0
-  m_Name: VfxService
+  m_Name: '[VFX]'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6557,6 +6557,6 @@ SceneRoots:
   - {fileID: 800337253}
   - {fileID: 1758309460}
   - {fileID: 895386437}
+  - {fileID: 1839579106}
   - {fileID: 2873688074205370161}
   - {fileID: 359842844}
-  - {fileID: 1839579106}

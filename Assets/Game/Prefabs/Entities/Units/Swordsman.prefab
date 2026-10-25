@@ -527,6 +527,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1156317698932546693}
+    - targetCorrespondingSourceObject: {fileID: 6489447675202979944, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 91541339412775144}
+    - targetCorrespondingSourceObject: {fileID: 6489447675202979944, guid: 9ade5523b6f916f43a919cde252ff319,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6510148123256177208}
     - targetCorrespondingSourceObject: {fileID: 1456208094891242170, guid: 9ade5523b6f916f43a919cde252ff319,
         type: 3}
       insertIndex: -1
@@ -660,3 +668,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Presentation.ParticleEffects.Ecs.ParticleEffectAnchorAuthoring
   _effectAnchor: {fileID: 3656935697880683085}
+--- !u!114 &91541339412775144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862030228295296916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a623106c550f4a2da9ec2daa95544faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DeathSfxAuthoring
+  _audioEvent:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: Death
+    _key: .Death
+--- !u!114 &6510148123256177208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8862030228295296916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca2b4e0897b43df88bd1053873bd8fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.TakeDamageSfxAuthoring
+  _audioEvent:
+    _bank: {fileID: 11400000, guid: c3b66f4ed8fdbde449ba4e0ba1434b56, type: 2}
+    _event: HumanTakeDamage
+    _key: .HumanTakeDamage
