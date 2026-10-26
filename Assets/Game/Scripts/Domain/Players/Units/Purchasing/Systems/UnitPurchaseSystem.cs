@@ -1,3 +1,4 @@
+using System;
 using Game.Components;
 using Game.UseCases;
 using Unity.Entities;
@@ -123,14 +124,8 @@ namespace Game.Systems
                             || _prefabTransformLookup.TryGetRefRO(
                                 item.Prefab,
                                 out RefRO<LocalTransform> prefabTransform) == false)
-                        {
-                            Debug.Log(
-                                $"UnitPurchase: item {itemIndex} needs "
-                                + "an ECS prefab with Team "
-                                + "and LocalTransform.");
-
-                            continue;
-                        }
+                            throw new InvalidOperationException(
+                                $"UnitPurchase: item {itemIndex} needs an ECS prefab with Team and LocalTransform.");
 
                         int pointIndex = random.ValueRW.Generator.NextInt(points.Length);
 
@@ -140,7 +135,7 @@ namespace Game.Systems
                                 point,
                                 out RefRO<LocalToWorld> pointTransform) == false)
                         {
-                            Debug.LogError("UnitPurchase: a spawn point has no LocalToWorld.");
+                            Debug.Log("UnitPurchase: a spawn point has no LocalToWorld.");
 
                             continue;
                         }
