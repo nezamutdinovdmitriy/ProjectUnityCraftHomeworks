@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.AbilityDefinitionAuthoring
   _range: 15
   _windup: 0.5
-  _cooldown: 3
+  _cooldown: 5
 --- !u!114 &471711140028877627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2fce7ac916e422ead886ae0cb774630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.HealAmountAuthoring
-  _healAmount: 20
+  _healAmount: 3
 --- !u!114 &8374975543719089159
 MonoBehaviour:
   m_ObjectHideFlags: 0

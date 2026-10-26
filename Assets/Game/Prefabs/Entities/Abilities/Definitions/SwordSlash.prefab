@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6dede92479d44259f8cc0b83afd5a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.MeleeAttackDefinitionAuthoring
-  _damage: 4
+  _damage: 5
 --- !u!114 &-937764706135232177
 MonoBehaviour:
   m_ObjectHideFlags: 0

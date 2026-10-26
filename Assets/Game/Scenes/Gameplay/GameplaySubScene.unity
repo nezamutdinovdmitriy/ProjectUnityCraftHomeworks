@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 1547101465}
   - component: {fileID: 1547101467}
   - component: {fileID: 1547101468}
+  - component: {fileID: 1547101469}
   m_Layer: 0
   m_Name: PlayerRed
   m_TagString: Untagged
@@ -570,6 +571,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.TeamAuthoring
   _team: 1
+--- !u!114 &1547101469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547101463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3964e1ab0ec24549a5c8a8b4ccc0f45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.UnitPurchaseAIAuthoring
+  _seed: 1
 --- !u!1 &1589448940
 GameObject:
   m_ObjectHideFlags: 0

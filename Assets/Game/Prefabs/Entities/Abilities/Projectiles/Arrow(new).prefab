@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8b24b795ca40fbba52ede6b7cce1cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.MovementAuthoring
-  _movementSpeed: 25
+  _movementSpeed: 30
 --- !u!114 &647820819878121103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27f05e3664c74df6bda56557441fe897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.DamageAuthoring
-  _damage: 10
+  _damage: 3
 --- !u!65 &904316927256064355
 BoxCollider:
   m_ObjectHideFlags: 0
