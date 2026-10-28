@@ -8,36 +8,38 @@ using Unity.Entities;
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
-    [BurstCompile]
     public partial struct AbilityTargetRequestSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var (
-                         health,
-                         selectedAbility,
-                         target,
-                         request,
-                         requestEnabled)
-                     in SystemAPI.Query<
-                             RefRO<Health>,
-                             RefRO<SelectedAbility>,
-                             RefRO<TargetEntity>,
-                             RefRW<AbilityUseRequest>,
-                             EnabledRefRW<AbilityUseRequest>>()
-                         .WithAll<AIControlled>()
-                         .WithDisabled<AbilityUseRequest, AbilityCooldown>())
+            state.Dependency = new GenerateAbilityRequestJob()
+                .ScheduleParallel(state.Dependency);
+        }
+
+        [BurstCompile]
+        [WithAll(typeof(AIControlled))]
+        [WithDisabled(typeof(AbilityUseRequest), typeof(AbilityCooldown))]
+        private partial struct GenerateAbilityRequestJob : IJobEntity
+        {
+            private void Execute(
+                in Health health,
+                in SelectedAbility selectedAbility,
+                in TargetEntity target,
+                ref AbilityUseRequest request,
+                EnabledRefRW<AbilityUseRequest> requestEnabled)
             {
-                if(health.ValueRO.IsDead())
-                    continue;
+                if (health.IsDead())
+                    return;
 
-                Entity definition = selectedAbility.ValueRO.Value;
-                Entity targetEntity = target.ValueRO.Value;
-                
-                if(definition == Entity.Null || targetEntity == Entity.Null)
-                    continue;
+                Entity definition = selectedAbility.Value;
+                Entity targetEntity = target.Value;
 
-                request.ValueRW = new AbilityUseRequest
+                if (definition == Entity.Null
+                    || targetEntity == Entity.Null)
+                    return;
+
+                request = new AbilityUseRequest
                 {
                     Definition = definition,
                     Target = targetEntity,

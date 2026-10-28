@@ -1,6 +1,8 @@
 using Game.Components;
 using Game.ECS.SystemGroups;
 using Game.UseCases;
+using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -10,72 +12,60 @@ namespace Game.Systems
     [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
     public partial struct ProjectileSystem : ISystem
     {
-        private ComponentLookup<Health> _healthLookup;
-        private ComponentLookup<TargetHitPoint> _hitPointLookup;
-        private ComponentLookup<LocalToWorld> _worldTransformLookup;
-        private ComponentLookup<Damage> _damageLookup;
-        private BufferLookup<TakeDamageRequest> _damageRequestLookup;
-        private ComponentLookup<DeathCooldown> _deathCooldownLookup;
-        private ComponentLookup<DeathEvent> _deathEventLookup;
-
-
-        public void OnCreate(ref SystemState state)
-        {
-            _healthLookup = SystemAPI.GetComponentLookup<Health>(true);
-            _hitPointLookup = SystemAPI.GetComponentLookup<TargetHitPoint>(true);
-            _worldTransformLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true);
-            _damageLookup = SystemAPI.GetComponentLookup<Damage>(true);
-            _damageRequestLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>();
-            _deathCooldownLookup = SystemAPI.GetComponentLookup<DeathCooldown>();
-            _deathEventLookup = SystemAPI.GetComponentLookup<DeathEvent>();
-        }
-
+        private const float HitRadius = 0.25f;
+        
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            state.Dependency.Complete();
-
-            _healthLookup.Update(ref state);
-            _hitPointLookup.Update(ref state);
-            _worldTransformLookup.Update(ref state);
-            _damageLookup.Update(ref state);
-            _damageRequestLookup.Update(ref state);
-            _deathCooldownLookup.Update(ref state);
-            _deathEventLookup.Update(ref state);
-
-            foreach (var (
-                         target,
-                         transform,
-                         movementRequest,
-                         rotationRequest,
-                         movementRequestEnabled,
-                         rotationRequestEnabled,
-                         deathCooldownEnabled,
-                         projectile)
-                     in SystemAPI.Query<
-                             RefRO<TargetEntity>,
-                             RefRO<LocalTransform>,
-                             RefRW<MovementRequest>,
-                             RefRW<RotationRequest>,
-                             EnabledRefRW<MovementRequest>,
-                             EnabledRefRW<RotationRequest>,
-                             EnabledRefRW<DeathCooldown>>()
-                         .WithAll<Projectile>()
-                         .WithDisabled<DeathCooldown>()
-                         .WithPresent<MovementRequest, RotationRequest, DeathEvent>()
-                         .WithEntityAccess())
+            state.Dependency = new UpdateProjectilesJob
             {
-                float3 direction = movementRequest.ValueRO.Direction;
-                Entity targetEntity = target.ValueRO.Value;
+                HealthLookup = SystemAPI.GetComponentLookup<Health>(true),
+                HitPointsLookup = SystemAPI.GetComponentLookup<TargetHitPoint>(true),
+                WorldTransformsLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true),
+                DamageLookup = SystemAPI.GetComponentLookup<Damage>(true),
+                DamageRequestsLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>()
+            }.Schedule(state.Dependency);         
+        }
+        
+        [BurstCompile]
+        [WithAll(typeof(Projectile))]
+        [WithDisabled(typeof(DeathCooldown))]
+        [WithPresent(
+            typeof(MovementRequest),
+            typeof(RotationRequest),
+            typeof(DeathEvent))]
+        private partial struct UpdateProjectilesJob : IJobEntity
+        {
+            [ReadOnly] public ComponentLookup<Health> HealthLookup;
+            [ReadOnly] public ComponentLookup<TargetHitPoint> HitPointsLookup;
+            [ReadOnly] public ComponentLookup<LocalToWorld> WorldTransformsLookup;
+            [ReadOnly] public ComponentLookup<Damage> DamageLookup;
+
+            public BufferLookup<TakeDamageRequest> DamageRequestsLookup;
+
+            private void Execute(
+                Entity projectile,
+                in TargetEntity target,
+                in LocalTransform transform,
+                ref MovementRequest movementRequest,
+                EnabledRefRW<MovementRequest> movementRequestEnabled,
+                ref RotationRequest rotationRequest,
+                EnabledRefRW<RotationRequest> rotationRequestEnabled,
+                ref DeathCooldown deathCooldown,
+                EnabledRefRW<DeathCooldown> deathCooldownEnabled,
+                EnabledRefRW<DeathEvent> deathEvent)
+            {
+                float3 direction = movementRequest.Direction;
+                Entity targetEntity = target.Value;
 
                 if (TryGetTargetPosition(targetEntity, out float3 targetPosition))
                 {
-                    float3 delta = targetPosition - transform.ValueRO.Position;
-                    const float hitRadius = 0.25f;
+                    float3 delta = targetPosition - transform.Position;
 
-                    if (math.lengthsq(delta) <= hitRadius * hitRadius)
+                    if (math.lengthsq(delta) <= HitRadius * HitRadius)
                     {
-                        if (_damageLookup.TryGetRefRO(projectile, out RefRO<Damage> damage)
-                            && _damageRequestLookup.TryGetBuffer(
+                        if (DamageLookup.TryGetRefRO(projectile, out RefRO<Damage> damage)
+                            && DamageRequestsLookup.TryGetBuffer(
                                 targetEntity,
                                 out DynamicBuffer<TakeDamageRequest> requests))
                         {
@@ -84,49 +74,59 @@ namespace Game.Systems
                                 Damage = damage.ValueRO.Value
                             });
                         }
-                        
+
                         movementRequestEnabled.ValueRW = false;
                         rotationRequestEnabled.ValueRW = false;
 
                         DeathUseCase.StartProcess(
-                            ref _deathCooldownLookup.GetRefRW(projectile).ValueRW,
+                            ref deathCooldown,
                             deathCooldownEnabled,
-                            _deathEventLookup.GetEnabledRefRW<DeathEvent>(projectile));
-                        
-                        continue;
+                            deathEvent);
+
+                        return;
                     }
 
                     direction = math.normalizesafe(delta, direction);
                 }
-                
-                movementRequest.ValueRW.Direction = direction;
+
+                movementRequest.Direction = direction;
                 movementRequestEnabled.ValueRW = true;
 
-                rotationRequest.ValueRW.Direction = direction;
+                rotationRequest.Direction = direction;
                 rotationRequestEnabled.ValueRW = true;
             }
-        }
-        
-        private bool TryGetTargetPosition(Entity target, out float3 position)
-        {
-            position = default;
 
-            if (_healthLookup.TryGetRefRO(target, out var health) == false
-                || health.ValueRO.IsDead())
-                return false;
-
-            if (_hitPointLookup.TryGetRefRO(target, out var hitPoint)
-                && _worldTransformLookup.TryGetRefRO(hitPoint.ValueRO.Value, out var hitTransform))
+            private bool TryGetTargetPosition(
+                Entity target,
+                out float3 position)
             {
-                position = hitTransform.ValueRO.Position;
+                position = default;
+
+                if (HealthLookup.TryGetRefRO(
+                        target,
+                        out RefRO<Health> health) == false
+                    || health.ValueRO.IsDead())
+                    return false;
+
+                if (HitPointsLookup.TryGetRefRO(
+                        target,
+                        out RefRO<TargetHitPoint> hitPoint)
+                    && WorldTransformsLookup.TryGetRefRO(
+                        hitPoint.ValueRO.Value,
+                        out RefRO<LocalToWorld> hitTransform))
+                {
+                    position = hitTransform.ValueRO.Position;
+                    return true;
+                }
+
+                if (WorldTransformsLookup.TryGetRefRO(
+                        target,
+                        out RefRO<LocalToWorld> targetTransform) == false)
+                    return false;
+
+                position = targetTransform.ValueRO.Position;
                 return true;
             }
-
-            if (_worldTransformLookup.TryGetRefRO(target, out var targetTransform) == false)
-                return false;
-
-            position = targetTransform.ValueRO.Position;
-            return true;
         }
     }
 }

@@ -2,95 +2,113 @@ using Game.Components;
 using Game.ECS.SystemGroups;
 using Game.UseCases;
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(AbilitiesSystemGroup))]
-    [BurstCompile]
     public partial struct HealCastSystem : ISystem
     {
-        private ComponentLookup<HealAmount> _amountLookup;
-        private ComponentLookup<AbilityDefinition> _definitionsLookup;
-        private ComponentLookup<ManaCost> _costsLookup;
-        private ComponentLookup<Mana> _manaLookup;
-        private ComponentLookup<Health> _healthLookup;
-        private ComponentLookup<MaxHealth> _maxHealthLookup;
-        private ComponentLookup<LocalToWorld> _worldTransformLookup;
-        private BufferLookup<HealRequest> _healRequestLookup;
-        private ComponentLookup<AbilityStartedEvent> _startedEventLookup;
-        private ComponentLookup<AbilityExecutedEvent> _executedEventLookup;
-
-        public void OnCreate(ref SystemState state)
-        {
-            _amountLookup = SystemAPI.GetComponentLookup<HealAmount>(true);
-            _definitionsLookup = SystemAPI.GetComponentLookup<AbilityDefinition>(true);
-            _costsLookup = SystemAPI.GetComponentLookup<ManaCost>(true);
-            _manaLookup = SystemAPI.GetComponentLookup<Mana>();
-            _healthLookup = SystemAPI.GetComponentLookup<Health>(true);
-            _maxHealthLookup = SystemAPI.GetComponentLookup<MaxHealth>(true);
-            _worldTransformLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true);
-            _healRequestLookup = SystemAPI.GetBufferLookup<HealRequest>();
-            _startedEventLookup = SystemAPI.GetComponentLookup<AbilityStartedEvent>();
-            _executedEventLookup = SystemAPI.GetComponentLookup<AbilityExecutedEvent>();
-        }
-
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            state.CompleteDependency();
-
-            _amountLookup.Update(ref state);
-            _definitionsLookup.Update(ref state);
-            _costsLookup.Update(ref state);
-            _manaLookup.Update(ref state);
-            _healthLookup.Update(ref state);
-            _maxHealthLookup.Update(ref state);
-            _worldTransformLookup.Update(ref state);
-            _healRequestLookup.Update(ref state);
-            _startedEventLookup.Update(ref state);
-            _executedEventLookup.Update(ref state);
-
-            foreach (var (request, requestEnabled,
-                         windup, windupEnabled,
-                         cooldown, cooldownEnabled,
-                         health,
-                         actor) in SystemAPI.Query<
-                             RefRW<AbilityUseRequest>, EnabledRefRW<AbilityUseRequest>,
-                             RefRW<AbilityWindup>, EnabledRefRW<AbilityWindup>,
-                             RefRW<AbilityCooldown>, EnabledRefRW<AbilityCooldown>,
-                             RefRO<Health>>()
-                         .WithPresent<AbilityWindup, AbilityCooldown>()
-                         .WithEntityAccess())
+            state.Dependency = new HealCastJob
             {
-                Entity definitionEntity = request.ValueRO.Definition;
+                AmountsLookup = SystemAPI
+                    .GetComponentLookup<HealAmount>(true),
 
-                if (_amountLookup.TryGetRefRO(
-                        definitionEntity, out RefRO<HealAmount> amount) == false)
-                    continue;
+                DefinitionsLookup = SystemAPI
+                    .GetComponentLookup<AbilityDefinition>(true),
 
-                if (request.ValueRO.CancelRequested
-                    || health.ValueRO.IsDead()
-                    || _definitionsLookup.TryGetRefRO(
-                        definitionEntity, out RefRO<AbilityDefinition> definition) == false)
+                CostsLookup = SystemAPI
+                    .GetComponentLookup<ManaCost>(true),
+
+                ManaLookup = SystemAPI.GetComponentLookup<Mana>(),
+
+                HealthLookup = SystemAPI
+                    .GetComponentLookup<Health>(true),
+
+                MaxHealthLookup = SystemAPI
+                    .GetComponentLookup<MaxHealth>(true),
+
+                WorldTransformsLookup = SystemAPI
+                    .GetComponentLookup<LocalToWorld>(true),
+
+                HealRequestsLookup = SystemAPI.GetBufferLookup<HealRequest>(),
+
+                StartedEventsLookup = SystemAPI
+                    .GetComponentLookup<AbilityStartedEvent>(),
+
+                ExecutedEventsLookup = SystemAPI
+                    .GetComponentLookup<AbilityExecutedEvent>()
+            }.Schedule(state.Dependency);
+        }
+
+        [BurstCompile]
+        [WithPresent(typeof(AbilityWindup), typeof(AbilityCooldown))]
+        private partial struct HealCastJob : IJobEntity
+        {
+            [ReadOnly] public ComponentLookup<HealAmount> AmountsLookup;
+            [ReadOnly] public ComponentLookup<AbilityDefinition> DefinitionsLookup;
+            [ReadOnly] public ComponentLookup<ManaCost> CostsLookup;
+            [ReadOnly] public ComponentLookup<Health> HealthLookup;
+            [ReadOnly] public ComponentLookup<MaxHealth> MaxHealthLookup;
+            [ReadOnly] public ComponentLookup<LocalToWorld> WorldTransformsLookup;
+
+            public ComponentLookup<Mana> ManaLookup;
+            public BufferLookup<HealRequest> HealRequestsLookup;
+
+            public ComponentLookup<AbilityStartedEvent> StartedEventsLookup;
+            public ComponentLookup<AbilityExecutedEvent> ExecutedEventsLookup;
+            
+            private void Execute(
+                Entity actor,
+                ref AbilityUseRequest request,
+                EnabledRefRW<AbilityUseRequest> requestEnabled,
+                ref AbilityWindup windup,
+                EnabledRefRW<AbilityWindup> windupEnabled,
+                ref AbilityCooldown cooldown,
+                EnabledRefRW<AbilityCooldown> cooldownEnabled,
+                in Health health)
+            {
+                Entity definitionEntity = request.Definition;
+
+                if (AmountsLookup.TryGetRefRO(
+                        definitionEntity,
+                        out RefRO<HealAmount> amount) == false)
+                    return;
+
+                if (request.CancelRequested
+                    || health.IsDead()
+                    || DefinitionsLookup.TryGetRefRO(
+                        definitionEntity,
+                        out RefRO<AbilityDefinition> definition) == false)
                 {
                     AbilityUseCase.Finish(
-                        ref request.ValueRW, requestEnabled,
-                        ref windup.ValueRW, windupEnabled);
-                    continue;
+                        ref request, requestEnabled,
+                        ref windup, windupEnabled);
+
+                    return;
                 }
 
-                Entity target = request.ValueRO.Target;
+                Entity target = request.Target;
 
-                float cost = _costsLookup.TryGetRefRO(definitionEntity, out RefRO<ManaCost> manaCost)
+                float cost = CostsLookup.TryGetRefRO(
+                    definitionEntity,
+                    out RefRO<ManaCost> manaCost)
                     ? manaCost.ValueRO.Value
                     : 0f;
 
-                if (request.ValueRO.Preparing == false)
+                if (request.Preparing == false)
                 {
                     bool enoughMana = cost == 0f
-                                      || (cost > 0f && _manaLookup.TryGetRefRO(actor, out RefRO<Mana> balance)
-                                                    && balance.ValueRO.Value >= cost);
+                        || (cost > 0f
+                            && ManaLookup.TryGetRefRO(
+                                actor,
+                                out RefRO<Mana> balance)
+                            && balance.ValueRO.Value >= cost);
 
                     if (enoughMana == false
                         || amount.ValueRO.Value > 0f == false
@@ -99,50 +117,54 @@ namespace Game.Systems
                             target,
                             definition.ValueRO.Range,
                             cooldownEnabled.ValueRO,
-                            ref _healthLookup,
-                            ref _worldTransformLookup) == false
+                            ref HealthLookup,
+                            ref WorldTransformsLookup) == false
                         || IsWounded(target) == false
-                        || _healRequestLookup.HasBuffer(target) == false)
+                        || HealRequestsLookup.HasBuffer(target) == false)
                     {
                         AbilityUseCase.Finish(
-                            ref request.ValueRW, requestEnabled,
-                            ref windup.ValueRW, windupEnabled);
-                        continue;
+                            ref request, requestEnabled,
+                            ref windup, windupEnabled);
+
+                        return;
                     }
 
                     AbilityUseCase.Begin(
-                        ref request.ValueRW,
-                        ref windup.ValueRW, windupEnabled,
+                        ref request,
+                        ref windup, windupEnabled,
                         definition.ValueRO.Windup);
 
                     AbilityUseCase.NotifyStarted(
                         actor,
-                        request.ValueRO.Definition,
-                        ref _startedEventLookup);
+                        request.Definition,
+                        ref StartedEventsLookup);
                 }
 
                 if (windupEnabled.ValueRO)
-                    continue;
+                    return;
 
                 if (IsWounded(target) == false
-                    || _healRequestLookup.TryGetBuffer(
-                        target, out DynamicBuffer<HealRequest> requests) == false)
+                    || HealRequestsLookup.TryGetBuffer(
+                        target,
+                        out DynamicBuffer<HealRequest> requests) == false)
                 {
                     AbilityUseCase.Finish(
-                        ref request.ValueRW, requestEnabled,
-                        ref windup.ValueRW, windupEnabled);
-                    continue;
+                        ref request, requestEnabled,
+                        ref windup, windupEnabled);
+
+                    return;
                 }
 
                 RefRW<Mana> mana = default;
 
                 if (cost > 0f
-                    && _manaLookup.TryGetRefRW(actor, out mana) == false)
+                    && ManaLookup.TryGetRefRW(actor, out mana) == false)
                 {
                     AbilityUseCase.Finish(
-                        ref request.ValueRW, requestEnabled,
-                        ref windup.ValueRW, windupEnabled);
-                    continue;
+                        ref request, requestEnabled,
+                        ref windup, windupEnabled);
+
+                    return;
                 }
 
                 requests.Add(new HealRequest
@@ -156,22 +178,23 @@ namespace Game.Systems
                 AbilityUseCase.NotifyExecuted(
                     actor,
                     target,
-                    request.ValueRO.Definition,
-                    ref _executedEventLookup);
+                    request.Definition,
+                    ref ExecutedEventsLookup);
 
                 AbilityUseCase.Complete(
-                    ref request.ValueRW, requestEnabled,
-                    ref windup.ValueRW, windupEnabled,
-                    ref cooldown.ValueRW, cooldownEnabled,
+                    ref request, requestEnabled,
+                    ref windup, windupEnabled,
+                    ref cooldown, cooldownEnabled,
                     definition.ValueRO.Cooldown);
             }
+            
+            private bool IsWounded(Entity target)
+            {
+                return HealthLookup.TryGetRefRO(target, out RefRO<Health> health)
+                       && MaxHealthLookup.TryGetRefRO(target, out RefRO<MaxHealth> maxHealth)
+                       && health.ValueRO.IsWounded(maxHealth.ValueRO);
+            }
         }
-
-        private bool IsWounded(Entity target)
-        {
-            return _healthLookup.TryGetRefRO(target, out RefRO<Health> health)
-                   && _maxHealthLookup.TryGetRefRO(target, out RefRO<MaxHealth> maxHealth)
-                   && health.ValueRO.IsWounded(maxHealth.ValueRO);
-        }
+        
     }
 }

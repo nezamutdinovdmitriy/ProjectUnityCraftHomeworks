@@ -1,5 +1,6 @@
 using Game.Components;
 using Game.UseCases;
+using Unity.Burst;
 using Unity.Entities;
 
 namespace Game.Systems
@@ -7,24 +8,27 @@ namespace Game.Systems
     [RequireMatchingQueriesForUpdate]
     public partial struct HealthDeathSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach ((RefRW<DeathCooldown> cooldown,
-                         EnabledRefRW<DeathCooldown> cooldownEnabled,
-                         EnabledRefRW<DeathEvent> deathEvent,
-                         RefRO<Health> health)
-                     in SystemAPI.Query<
-                             RefRW<DeathCooldown>,
-                             EnabledRefRW<DeathCooldown>,
-                             EnabledRefRW<DeathEvent>,
-                             RefRO<Health>>()
-                         .WithDisabled<DeathCooldown>()
-                         .WithPresent<DeathEvent>())
+            state.Dependency = new StartDeathJob().ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        [WithDisabled(typeof(DeathCooldown))]
+        [WithPresent(typeof(DeathEvent))]
+        private partial struct StartDeathJob : IJobEntity
+        {
+            private void Execute(
+                ref DeathCooldown cooldown,
+                EnabledRefRW<DeathCooldown> cooldownEnabled,
+                EnabledRefRW<DeathEvent> events,
+                in Health health)
             {
-                if (health.ValueRO.IsAlive())
-                    continue;
-
-                DeathUseCase.StartProcess(ref cooldown.ValueRW, cooldownEnabled, deathEvent);
+                if (health.IsAlive())
+                    return;
+                
+                DeathUseCase.StartProcess(ref cooldown, cooldownEnabled, events);
             }
         }
     }

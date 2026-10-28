@@ -2,145 +2,162 @@ using Game.Components;
 using Game.ECS.SystemGroups;
 using Game.UseCases;
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(AbilitiesSystemGroup))]
-    [BurstCompile]
     public partial struct MeleeAttackSystem : ISystem
     {
-        private ComponentLookup<MeleeAttackAbility> _abilitiesLookup;
-        private ComponentLookup<AbilityDefinition> _definitionsLookup;
-        private ComponentLookup<Health> _healthLookup;
-        private ComponentLookup<LocalToWorld> _worldTransformLookup;
-        private ComponentLookup<Damage> _damageLookup;
-        private BufferLookup<TakeDamageRequest> _damageRequestLookup;
-        private ComponentLookup<AbilityStartedEvent> _startedEventLookup;
-        private ComponentLookup<AbilityExecutedEvent> _hitEventLookup;
-
-        public void OnCreate(ref SystemState state)
-        {
-            _abilitiesLookup = SystemAPI.GetComponentLookup<MeleeAttackAbility>(true);
-            _definitionsLookup = SystemAPI.GetComponentLookup<AbilityDefinition>(true);
-            _healthLookup = SystemAPI.GetComponentLookup<Health>(true);
-            _worldTransformLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true);
-            _damageLookup = SystemAPI.GetComponentLookup<Damage>(true);
-            _damageRequestLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>();
-            _startedEventLookup = SystemAPI.GetComponentLookup<AbilityStartedEvent>();
-            _hitEventLookup = SystemAPI.GetComponentLookup<AbilityExecutedEvent>();
-        }
-
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            state.CompleteDependency();
-
-            _abilitiesLookup.Update(ref state);
-            _definitionsLookup.Update(ref state);
-            _healthLookup.Update(ref state);
-            _worldTransformLookup.Update(ref state);
-            _damageLookup.Update(ref state);
-            _damageRequestLookup.Update(ref state);
-            _startedEventLookup.Update(ref state);
-            _hitEventLookup.Update(ref state);
-
-            foreach (var (
-                         request, requestEnabled,
-                         windup, windupEnabled,
-                         cooldown, cooldownEnabled,
-                         health,
-                         actor) in
-                     SystemAPI.Query<
-                             RefRW<AbilityUseRequest>, EnabledRefRW<AbilityUseRequest>,
-                             RefRW<AbilityWindup>, EnabledRefRW<AbilityWindup>,
-                             RefRW<AbilityCooldown>, EnabledRefRW<AbilityCooldown>,
-                             RefRO<Health>>()
-                         .WithPresent<AbilityWindup, AbilityCooldown>()
-                         .WithEntityAccess())
+            state.Dependency = new MeleeAttackJob
             {
-                Entity definitionEntity = request.ValueRO.Definition;
-                
-                if (_abilitiesLookup.TryGetRefRO(
+                AbilitiesLookup = SystemAPI
+                    .GetComponentLookup<MeleeAttackAbility>(true),
+
+                DefinitionsLookup = SystemAPI
+                    .GetComponentLookup<AbilityDefinition>(true),
+
+                HealthLookup = SystemAPI
+                    .GetComponentLookup<Health>(true),
+
+                WorldTransformsLookup = SystemAPI
+                    .GetComponentLookup<LocalToWorld>(true),
+
+                DamageLookup = SystemAPI
+                    .GetComponentLookup<Damage>(true),
+
+                DamageRequestsLookup = SystemAPI
+                    .GetBufferLookup<TakeDamageRequest>(),
+
+                StartedEventsLookup = SystemAPI
+                    .GetComponentLookup<AbilityStartedEvent>(),
+
+                ExecutedEventsLookup = SystemAPI
+                    .GetComponentLookup<AbilityExecutedEvent>()
+            }.Schedule(state.Dependency);
+        }
+        
+        
+        [BurstCompile]
+        [WithPresent(typeof(AbilityWindup), typeof(AbilityCooldown))]
+        private partial struct MeleeAttackJob : IJobEntity
+        {
+            [ReadOnly] public ComponentLookup<MeleeAttackAbility> AbilitiesLookup;
+            [ReadOnly] public ComponentLookup<AbilityDefinition> DefinitionsLookup;
+            [ReadOnly] public ComponentLookup<Health> HealthLookup;
+            [ReadOnly] public ComponentLookup<LocalToWorld> WorldTransformsLookup;
+            [ReadOnly] public ComponentLookup<Damage> DamageLookup;
+
+            public BufferLookup<TakeDamageRequest> DamageRequestsLookup;
+
+            public ComponentLookup<AbilityStartedEvent> StartedEventsLookup;
+            public ComponentLookup<AbilityExecutedEvent> ExecutedEventsLookup;
+            
+            private void Execute(
+                Entity actor,
+                ref AbilityUseRequest request,
+                EnabledRefRW<AbilityUseRequest> requestEnabled,
+                ref AbilityWindup windup,
+                EnabledRefRW<AbilityWindup> windupEnabled,
+                ref AbilityCooldown cooldown,
+                EnabledRefRW<AbilityCooldown> cooldownEnabled,
+                in Health health)
+            {
+                Entity definitionEntity = request.Definition;
+
+                if (AbilitiesLookup.TryGetRefRO(
                         definitionEntity,
                         out RefRO<MeleeAttackAbility> ability) == false)
-                    continue;
+                    return;
 
-                if (request.ValueRO.CancelRequested
-                    || health.ValueRO.IsDead()
-                    || _definitionsLookup.TryGetRefRO(
+                if (request.CancelRequested
+                    || health.IsDead()
+                    || DefinitionsLookup.TryGetRefRO(
                         definitionEntity,
                         out RefRO<AbilityDefinition> definition) == false)
                 {
-                    AbilityUseCase.Finish(ref request.ValueRW, requestEnabled, ref windup.ValueRW, windupEnabled);
-                    continue;
+                    AbilityUseCase.Finish(
+                        ref request, requestEnabled,
+                        ref windup, windupEnabled);
+
+                    return;
                 }
 
-                Entity target = request.ValueRO.Target;
+                Entity target = request.Target;
 
-                if (request.ValueRO.Preparing == false)
+                if (request.Preparing == false)
                 {
                     bool canStart = AbilityUseCase.CanStartTargeted(
-                        in actor, 
-                        in target,
+                        actor,
+                        target,
                         definition.ValueRO.Range,
                         cooldownEnabled.ValueRO,
-                        ref _healthLookup,
-                        ref _worldTransformLookup);
-                    
-                    if (cooldownEnabled.ValueRO || canStart == false)
+                        ref HealthLookup,
+                        ref WorldTransformsLookup);
+
+                    if (canStart == false)
                     {
-                        AbilityUseCase.Finish(ref request.ValueRW, requestEnabled, ref windup.ValueRW, windupEnabled);
-                        continue;
+                        AbilityUseCase.Finish(
+                            ref request, requestEnabled,
+                            ref windup, windupEnabled);
+
+                        return;
                     }
 
                     AbilityUseCase.Begin(
-                        ref request.ValueRW,
-                        ref windup.ValueRW,
-                        windupEnabled,
+                        ref request,
+                        ref windup, windupEnabled,
                         definition.ValueRO.Windup);
 
                     AbilityUseCase.NotifyStarted(
                         actor,
-                        request.ValueRO.Definition,
-                        ref _startedEventLookup);
+                        request.Definition,
+                        ref StartedEventsLookup);
                 }
 
                 if (windupEnabled.ValueRO)
-                    continue;
-                
-                if (_healthLookup.TryGetRefRO(
-                        target, out RefRO<Health> targetHealth) == false
+                    return;
+
+                if (HealthLookup.TryGetRefRO(
+                        target,
+                        out RefRO<Health> targetHealth) == false
                     || targetHealth.ValueRO.IsDead()
-                    || _damageRequestLookup.TryGetBuffer(
-                        target, out DynamicBuffer<TakeDamageRequest> requests) == false)
+                    || DamageRequestsLookup.TryGetBuffer(
+                        target,
+                        out DynamicBuffer<TakeDamageRequest> requests) == false)
                 {
-                    AbilityUseCase.Finish(ref request.ValueRW, requestEnabled, ref windup.ValueRW, windupEnabled);
-                    continue;
+                    AbilityUseCase.Finish(
+                        ref request, requestEnabled,
+                        ref windup, windupEnabled);
+
+                    return;
                 }
 
-                float damage = DamageUseCase.Calculate(ability.ValueRO.Damage, actor, ref _damageLookup);
+                float damage = DamageUseCase.Calculate(
+                    ability.ValueRO.Damage,
+                    actor,
+                    ref DamageLookup);
 
                 requests.Add(new TakeDamageRequest
                 {
                     Damage = damage
                 });
-                
+
                 AbilityUseCase.NotifyExecuted(
                     actor,
                     target,
-                    request.ValueRO.Definition,
-                    ref _hitEventLookup);
+                    request.Definition,
+                    ref ExecutedEventsLookup);
 
                 AbilityUseCase.Complete(
-                    ref request.ValueRW,
-                    requestEnabled,
-                    ref windup.ValueRW,
-                    windupEnabled,
-                    ref cooldown.ValueRW,
-                    cooldownEnabled,
+                    ref request, requestEnabled,
+                    ref windup, windupEnabled,
+                    ref cooldown, cooldownEnabled,
                     definition.ValueRO.Cooldown);
             }
         }

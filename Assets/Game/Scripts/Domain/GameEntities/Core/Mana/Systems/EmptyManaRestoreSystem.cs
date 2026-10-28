@@ -1,5 +1,6 @@
 using Game.Components;
 using Game.UseCases;
+using Unity.Burst;
 using Unity.Entities;
 
 namespace Game.Systems
@@ -7,21 +8,25 @@ namespace Game.Systems
     [RequireMatchingQueriesForUpdate]
     public partial struct EmptyManaRestoreSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach ((RefRO<Mana> mana,
-                         RefRW<ManaRestoreDelay> restoreDelay,
-                         EnabledRefRW<ManaRestoreDelay> delayEnabled)
-                     in SystemAPI.Query<
-                             RefRO<Mana>,
-                             RefRW<ManaRestoreDelay>,
-                             EnabledRefRW<ManaRestoreDelay>>()
-                         .WithDisabled<ManaRestoreDelay>())
+            state.Dependency = new StartManaRestoreJob().ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        [WithDisabled(typeof(ManaRestoreDelay))]
+        private partial struct StartManaRestoreJob : IJobEntity
+        {
+            private void Execute(
+                ref ManaRestoreDelay delay,
+                EnabledRefRW<ManaRestoreDelay> delayEnabled,
+                in Mana mana)
             {
-                if (mana.ValueRO.IsEmpty() == false)
-                    continue;
+                if (mana.IsEmpty() == false)
+                    return;
 
-                restoreDelay.ValueRW.Time = restoreDelay.ValueRO.Delay;
+                delay.Time = delay.Delay;
                 delayEnabled.ValueRW = true;
             }
         }

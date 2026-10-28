@@ -2,6 +2,7 @@ using Game.Components;
 using Game.ECS.SystemGroups;
 using Game.UseCases;
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -9,7 +10,6 @@ using Unity.Transforms;
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
-    [BurstCompile]
     public partial struct FaceTargetRequestSystem : ISystem
     {
         private ComponentLookup<Health> _healthLookup;
@@ -21,38 +21,55 @@ namespace Game.Systems
             _transformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true);
         }
 
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             _healthLookup.Update(ref state);
             _transformLookup.Update(ref state);
-            
-            foreach (var (
-                         transform,
-                         health,
-                         target,
-                         rotationRequest,
-                         rotationRequestEnabled)
-                     in SystemAPI.Query<
-                             RefRO<LocalTransform>,
-                             RefRO<Health>,
-                             RefRO<TargetEntity>,
-                             RefRW<RotationRequest>,
-                             EnabledRefRW<RotationRequest>>()
-                         .WithAll<AIControlled>()
-                         .WithDisabled<RotationRequest>())
+
+            state.Dependency = new GenerateRotationRequestJob
             {
-                if(target.ValueRO.Value == Entity.Null
-                   || health.ValueRO.IsDead()
-                   || _transformLookup.TryGetRefRO(target.ValueRO.Value, out RefRO<LocalTransform> targetTransform) == false
-                   || _healthLookup.TryGetRefRO(target.ValueRO.Value, out RefRO<Health> targetHealth) == false
-                   || targetHealth.ValueRO.IsDead())
-                    continue;
-                
-                float3 delta = targetTransform.ValueRO.Position - transform.ValueRO.Position;
+                HealthLookup = _healthLookup,
+                TransformLookup = _transformLookup
+            }.ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        [WithAll(typeof(AIControlled))]
+        [WithDisabled(typeof(RotationRequest))]
+        private partial struct GenerateRotationRequestJob : IJobEntity
+        {
+            [ReadOnly] public ComponentLookup<Health> HealthLookup;
+            [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
+            
+            private void Execute(
+                ref RotationRequest request,
+                in LocalTransform selfTransform,
+                in Health selfHealth,
+                in TargetEntity target,
+                EnabledRefRW<RotationRequest> requestEnabled)
+            {
+                Entity targetEntity = target.Value;
+
+                if (targetEntity == Entity.Null || selfHealth.IsDead())
+                    return;
+
+                if (TransformLookup.TryGetRefRO(
+                        targetEntity,
+                        out RefRO<LocalTransform> targetTransform) == false)
+                    return;
+
+                if (HealthLookup.TryGetRefRO(
+                        targetEntity,
+                        out RefRO<Health> targetHealth) == false
+                    || targetHealth.ValueRO.IsDead())
+                    return;
+
+                float3 delta = targetTransform.ValueRO.Position - selfTransform.Position;
                 delta.y = 0;
 
-                rotationRequest.ValueRW.Direction = math.normalizesafe(delta);
-                rotationRequestEnabled.ValueRW = true;
+                request.Direction = math.normalizesafe(delta);
+                requestEnabled.ValueRW = true;
             }
         }
     }
