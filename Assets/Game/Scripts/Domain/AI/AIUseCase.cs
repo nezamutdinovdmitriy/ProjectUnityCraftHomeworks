@@ -1,34 +1,31 @@
 using Game.Components;
 using Game.Predicates;
-using Unity.Collections;
+using Game.UseCases.Queries;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Physics;
 
 namespace Game.UseCases
 {
     public static class AIUseCase
     {
-        public static Entity FindClosestTarget<TPredicate>(NativeList<DistanceHit> hits, in TPredicate predicate)
+        public static Entity FindClosestTarget<TPredicate>(
+            ref PhysicsWorldSingleton physicsWorld,
+            float3 center,
+            float radius,
+            in TPredicate predicate)
             where TPredicate : struct, ITargetPredicate
         {
-            TPredicate condition = predicate;
-            
-            Entity closest = Entity.Null;
-            float closestDistance = float.MaxValue;
-
-            foreach (DistanceHit hit in hits)
+            if (radius > 0f)
             {
-                if (condition.Invoke(hit.Entity) == false)
-                    continue;
+                var collector = new ClosestTargetCollector<TPredicate>(radius, in predicate);
 
-                if (hit.Distance < closestDistance)
-                {
-                    closestDistance = hit.Distance;
-                    closest = hit.Entity;
-                }
+                physicsWorld.OverlapSphereCustom(center, radius, ref collector, CollisionFilter.Default);
+
+                return collector.ClosestEntity;
             }
 
-            return closest;
+            return Entity.Null;
         }
         
         public static bool IsExpired(this in TargetDetectionCooldown timer)

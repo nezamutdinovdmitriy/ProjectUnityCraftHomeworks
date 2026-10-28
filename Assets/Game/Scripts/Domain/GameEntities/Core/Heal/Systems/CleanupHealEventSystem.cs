@@ -1,5 +1,6 @@
 using Game.Components;
 using Game.ECS.SystemGroups;
+using Unity.Burst;
 using Unity.Entities;
 
 namespace Game.Systems
@@ -7,15 +8,16 @@ namespace Game.Systems
     [UpdateInGroup(typeof(CleanupSystemGroup))]
     public partial struct CleanupHealEventSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (DynamicBuffer<HealEvent> events in SystemAPI.Query<DynamicBuffer<HealEvent>>())
-            {
-                if (events.IsEmpty)
-                    continue;
-                
-                events.Clear();
-            }
+            state.Dependency = new CleanupHealEventsJob().ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        private partial struct CleanupHealEventsJob : IJobEntity
+        {
+            private void Execute(DynamicBuffer<HealEvent> events) => events.Clear();
         }
     }
 }

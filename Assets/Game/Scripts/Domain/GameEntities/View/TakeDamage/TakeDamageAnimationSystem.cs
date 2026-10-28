@@ -18,6 +18,8 @@ namespace Game.View.Systems
 
         public void OnUpdate(ref SystemState state)
         {
+            state.CompleteDependency();
+            
             _takeDamageEventLookup.Update(ref state);
             
             foreach ((RefRO<ModelLink> modelLink,

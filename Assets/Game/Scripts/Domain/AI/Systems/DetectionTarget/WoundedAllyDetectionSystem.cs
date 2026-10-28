@@ -1,6 +1,7 @@
 using Game.Components;
 using Game.Predicates;
 using Game.UseCases;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -30,56 +31,58 @@ namespace Game.Systems
             _healthLookup.Update(ref state);
             _maxHealthLookup.Update(ref state);
 
-            CollisionWorld collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
-
-            NativeList<DistanceHit> hits = new NativeList<DistanceHit>(Allocator.Temp);
-
-            foreach (var (
-                         targetRW,
-                         selfTeamRO,
-                         radiusRO,
-                         selfHealthRO,
-                         cooldownEnabled,
-                         selfTransformRO,
-                         selfEntity)
-                     in SystemAPI.Query<
-                             RefRW<TargetEntity>,
-                             RefRO<Team>,
-                             RefRO<TargetDetectionRadius>,
-                             RefRO<Health>,
-                             EnabledRefRW<TargetDetectionCooldown>,
-                             RefRO<LocalTransform>>()
-                         .WithAll<AIControlled, WoundedAllyTargeting>()
-                         .WithDisabled<TargetDetectionCooldown>()
-                         .WithEntityAccess())
+            state.Dependency = new FindWoundedAllyJob
             {
-                if (selfHealthRO.ValueRO.IsAlive() == false)
+                HealthLookup = _healthLookup,
+                MaxHealthLookup = _maxHealthLookup,
+                TeamLookup = _teamLookup,
+                PhysicsWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>()
+            }.ScheduleParallel(state.Dependency);
+        }
+
+        [BurstCompile]
+        [WithAll(typeof(AIControlled), typeof(WoundedAllyTargeting))]
+        [WithDisabled(typeof(TargetDetectionCooldown))]
+        private partial struct FindWoundedAllyJob : IJobEntity
+        {
+            [ReadOnly] public ComponentLookup<Team> TeamLookup;
+            [ReadOnly] public ComponentLookup<Health> HealthLookup;
+            [ReadOnly] public ComponentLookup<MaxHealth> MaxHealthLookup;
+
+            [ReadOnly] public PhysicsWorldSingleton PhysicsWorld;
+            
+            private void Execute(
+                Entity self,
+                ref TargetEntity target,
+                in Team team,
+                in TargetDetectionRadius radius,
+                in Health health,
+                in LocalTransform transform,
+                EnabledRefRW<TargetDetectionCooldown> cooldownEnabled)
+            {
+                if (health.IsDead())
                 {
-                    targetRW.ValueRW.Value = Entity.Null;
-                    continue;
+                    target.Value = Entity.Null;
+                    return;
                 }
 
-                hits.Clear();
-
-                float radius = radiusRO.ValueRO.Value;
-                float3 center = selfTransformRO.ValueRO.Position + new float3(0f, 1f, 0f);
-
-                if (radius > 0f)
-                    collisionWorld.OverlapSphere(center, radius, ref hits, CollisionFilter.Default);
-
                 var predicate = new IsWoundedAllyPredicate(
-                    selfEntity,
-                    selfTeamRO.ValueRO.Value,
-                    _teamLookup,
-                    _healthLookup,
-                    _maxHealthLookup);
+                    self,
+                    team.Value,
+                    TeamLookup,
+                    HealthLookup,
+                    MaxHealthLookup);
+                
+                float3 center = transform.Position + new float3(0, 1, 0);
 
-                targetRW.ValueRW.Value = AIUseCase.FindClosestTarget(hits, in predicate);
+                target.Value = AIUseCase.FindClosestTarget(
+                    ref PhysicsWorld,
+                    center,
+                    radius.Value,
+                    in predicate);
 
                 cooldownEnabled.ValueRW = true;
             }
-
-            hits.Dispose();
         }
     }
 }

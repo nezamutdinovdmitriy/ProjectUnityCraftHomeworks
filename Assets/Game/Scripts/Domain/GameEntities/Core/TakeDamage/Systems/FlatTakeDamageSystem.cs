@@ -11,20 +11,22 @@ namespace Game.Systems
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach ((DynamicBuffer<TakeDamageEvent> events,
-                         DynamicBuffer<TakeDamageRequest> requests,
-                         RefRW<Health> health)
-                     in SystemAPI.Query<
-                         DynamicBuffer<TakeDamageEvent>,
-                         DynamicBuffer<TakeDamageRequest>,
-                         RefRW<Health>>()
-                         .WithNone<Armor>())
+            state.Dependency = new ApplyDamageJob()
+                .ScheduleParallel(state.Dependency);
+        }
+
+        [BurstCompile]
+        [WithNone(typeof(Armor))]
+        private partial struct ApplyDamageJob : IJobEntity
+        {
+            private void Execute(
+                DynamicBuffer<TakeDamageRequest> requests,
+                DynamicBuffer<TakeDamageEvent> events,
+                ref Health health)
             {
-                for (int i = 0; i < requests.Length && health.ValueRO.IsAlive(); i++)
+                for (int i = 0; i < requests.Length && health.IsAlive(); i++)
                 {
-                    float requestedDamage = requests[i].Damage;
-                    
-                    float appliedDamage = TakeDamageUseCase.Apply(ref health.ValueRW, requestedDamage);
+                    float appliedDamage = TakeDamageUseCase.Apply(ref health, requests[i].Damage);
 
                     events.Add(new TakeDamageEvent
                     {

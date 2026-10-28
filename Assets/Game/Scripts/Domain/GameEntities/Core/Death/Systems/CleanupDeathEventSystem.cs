@@ -1,5 +1,6 @@
 using Game.Components;
 using Game.ECS.SystemGroups;
+using Unity.Burst;
 using Unity.Entities;
 
 namespace Game.Systems
@@ -8,10 +9,17 @@ namespace Game.Systems
     [RequireMatchingQueriesForUpdate]
     public partial struct CleanupDeathEventSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (EnabledRefRW<DeathEvent> deathEvent in SystemAPI.Query<EnabledRefRW<DeathEvent>>())
-                deathEvent.ValueRW = false;
+            state.Dependency = new CleanupDeathEventsJob().ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        private partial struct CleanupDeathEventsJob : IJobEntity
+        {
+            private void Execute(EnabledRefRW<DeathEvent> enabled) 
+                => enabled.ValueRW = false;
         }
     }
 }

@@ -11,14 +11,15 @@ namespace Game.Systems
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (DynamicBuffer<TakeDamageEvent> events 
-                     in SystemAPI.Query<DynamicBuffer<TakeDamageEvent>>())
-            {
-                if(events.IsEmpty)
-                    continue;
-                
-                events.Clear();
-            }
+            state.Dependency = new ClearDamageEventsJob()
+                .ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        private partial struct ClearDamageEventsJob : IJobEntity
+        {
+            private void Execute(DynamicBuffer<TakeDamageEvent> events) 
+                => events.Clear();
         }
     }
 }

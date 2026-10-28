@@ -1,6 +1,7 @@
 using Game.Components;
 using Game.Predicates;
 using Game.UseCases;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -22,72 +23,62 @@ namespace Game.Systems
             _healthLookup = SystemAPI.GetComponentLookup<Health>(true);
         }
 
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             _healthLookup.Update(ref state);
             _teamLookup.Update(ref state);
 
-            CollisionWorld collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
-
-            NativeList<DistanceHit> hits = new NativeList<DistanceHit>(Allocator.Temp);
-            
-            foreach (var (
-                         targetRW,
-                         defaultTargetRO,
-                         selfTeamRO,
-                         radiusRO,
-                         selfHealthRO,
-                         cooldownEnabled,
-                         selfTransformRO,
-                         selfEntity)
-                     in SystemAPI.Query<
-                             RefRW<TargetEntity>,
-                             RefRO<DefaultTargetEntity>,
-                             RefRO<Team>,
-                             RefRO<TargetDetectionRadius>,
-                             RefRO<Health>,
-                             EnabledRefRW<TargetDetectionCooldown>,
-                             RefRO<LocalTransform>>()
-                         .WithAll<AIControlled>()
-                         .WithAbsent<WoundedAllyTargeting>()
-                         .WithDisabled<TargetDetectionCooldown>()
-                         .WithEntityAccess())
+            state.Dependency = new FindEnemyJob
             {
-                if (selfHealthRO.ValueRO.IsAlive() == false)
+                HealthLookup = _healthLookup,
+                TeamLookup = _teamLookup,
+                PhysicsWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>()
+            }.ScheduleParallel(state.Dependency);
+        }
+
+        [BurstCompile]
+        [WithAll(typeof(AIControlled))]
+        [WithAbsent(typeof(WoundedAllyTargeting))]
+        [WithDisabled(typeof(TargetDetectionCooldown))]
+        private partial struct FindEnemyJob : IJobEntity
+        {
+            [ReadOnly] public PhysicsWorldSingleton PhysicsWorld;
+            [ReadOnly] public ComponentLookup<Team> TeamLookup;
+            [ReadOnly] public ComponentLookup<Health> HealthLookup;
+            
+            private void Execute(
+                Entity self,
+                ref TargetEntity target,
+                in DefaultTargetEntity defaultTarget,
+                in Team team,
+                in TargetDetectionRadius radius,
+                in Health health,
+                in LocalTransform transform,
+                EnabledRefRW<TargetDetectionCooldown> cooldownEnabled)
+            {
+                if (health.IsDead())
                 {
-                    targetRW.ValueRW.Value = Entity.Null;
-                    continue;
-                }
-                
-                hits.Clear();
-                
-                float radius = radiusRO.ValueRO.Value;
-                float3 center = selfTransformRO.ValueRO.Position + new float3(0f, 1f, 0f);
-
-                if (radius > 0f)
-                    collisionWorld.OverlapSphere(center, radius, ref hits, CollisionFilter.Default);
-                
-                IsEnemyPredicate predicate = new IsEnemyPredicate(
-                    selfEntity,
-                    selfTeamRO.ValueRO.Value,
-                    _teamLookup,
-                    _healthLookup);
-
-                Entity selectedTarget = AIUseCase.FindClosestTarget(hits, predicate);
-
-                if (selectedTarget == Entity.Null)
-                {
-                    Entity defaultTarget = defaultTargetRO.ValueRO.Value;
-                    
-                    if (predicate.Invoke(defaultTarget))
-                        selectedTarget = defaultTarget;
+                    target.Value = Entity.Null;
+                    return;
                 }
 
-                targetRW.ValueRW.Value = selectedTarget;
+                var predicate = new IsEnemyPredicate(self, team.Value, TeamLookup, HealthLookup);
+
+                float3 center = transform.Position + new float3(0, 1, 0);
+
+                Entity selected = AIUseCase.FindClosestTarget(
+                    ref PhysicsWorld,
+                    center,
+                    radius.Value,
+                    in predicate);
+
+                if (selected == Entity.Null && predicate.Invoke(defaultTarget.Value))
+                    selected = defaultTarget.Value;
+
+                target.Value = selected;
                 cooldownEnabled.ValueRW = true;
             }
-
-            hits.Dispose();
         }
     }
 }

@@ -3,7 +3,6 @@ using Game.UseCases;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
-using UnityEngine;
 
 namespace Game.Systems
 {
@@ -12,29 +11,32 @@ namespace Game.Systems
     {
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var (
-                         requests,
-                         events,
-                         health,
-                         maxHealth)
-                     in SystemAPI.Query<
-                         DynamicBuffer<HealRequest>,
-                         DynamicBuffer<HealEvent>,
-                         RefRW<Health>,
-                         RefRO<MaxHealth>>())
+            state.Dependency = new ApplyHealJob()
+                .ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        private partial struct ApplyHealJob : IJobEntity
+        {
+            private void Execute(
+                DynamicBuffer<HealRequest> requests,
+                DynamicBuffer<HealEvent> events,
+                ref Health health,
+                in MaxHealth maxHealth)
             {
-                foreach (HealRequest request in requests)
+                for (int i = 0; i < requests.Length; i++)
                 {
-                    if (health.ValueRO.IsDead())
+                    if(health.IsDead())
                         break;
 
-                    float restored = math.min(request.Value, math.max(0, maxHealth.ValueRO.Value - health.ValueRO.Value));
+                    float missingHealth = math.max(0, maxHealth.Value - health.Value);
+                    float restored = math.min(requests[i].Value, missingHealth);
 
-                    if (restored <= 0f)
+                    if (restored <= 0)
                         continue;
 
-                    health.ValueRW.Value += restored;
-                    
+                    health.Value += restored;
+
                     events.Add(new HealEvent
                     {
                         Value = restored

@@ -20,6 +20,8 @@ namespace Game.View.Systems
 
         public void OnUpdate(ref SystemState state)
         {
+            state.CompleteDependency();
+            
             _attackStartedEventLookup.Update(ref state);
 
             foreach (var (

@@ -1,5 +1,6 @@
 using Game.Components;
 using Game.ECS.SystemGroups;
+using Unity.Burst;
 using Unity.Entities;
 
 namespace Game.Systems
@@ -8,13 +9,17 @@ namespace Game.Systems
     [RequireMatchingQueriesForUpdate]
     public partial struct CleanupManaRestoreEventSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (EnabledRefRW<ManaRestoreEvent> restoreEvent 
-                     in SystemAPI.Query<EnabledRefRW<ManaRestoreEvent>>())
-            {
-                restoreEvent.ValueRW = false;
-            }
+            state.Dependency = new CleanupRestoreEventsJob().ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        private partial struct CleanupRestoreEventsJob : IJobEntity
+        {
+            private void Execute(EnabledRefRW<ManaRestoreEvent> enabled) 
+                => enabled.ValueRW = false;
         }
     }
 }

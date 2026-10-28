@@ -1,6 +1,8 @@
 using Game.Components;
 using Game.ECS.SystemGroups;
+using Unity.Burst;
 using Unity.Entities;
+using Unity.Jobs;
 
 namespace Game.Systems
 {
@@ -8,17 +10,26 @@ namespace Game.Systems
     [RequireMatchingQueriesForUpdate]
     public partial struct CleanupAbilityEventsSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var enabled in SystemAPI.Query<EnabledRefRW<AbilityExecutedEvent>>())
-            {
-                enabled.ValueRW = false;
-            }
-            
-            foreach (var enabled in SystemAPI.Query<EnabledRefRW<AbilityStartedEvent>>())
-            {
-                enabled.ValueRW = false;
-            }
+            state.Dependency = JobHandle.CombineDependencies(
+                new ClearExecutedEventsJob().ScheduleParallel(state.Dependency),
+                new ClearStartedEventsJob().ScheduleParallel(state.Dependency));
+        }
+        
+        [BurstCompile]
+        private partial struct ClearExecutedEventsJob : IJobEntity
+        {
+            private void Execute(EnabledRefRW<AbilityExecutedEvent> enabled) 
+                => enabled.ValueRW = false;
+        }
+        
+        [BurstCompile]
+        private partial struct ClearStartedEventsJob : IJobEntity
+        {
+            private void Execute(EnabledRefRW<AbilityStartedEvent> enabled) 
+                => enabled.ValueRW = false;
         }
     }
 }
