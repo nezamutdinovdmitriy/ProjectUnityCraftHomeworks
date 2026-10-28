@@ -1,5 +1,7 @@
 using Game.Components;
 using Rukhanka;
+using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 
 namespace Game.View.Systems
@@ -8,41 +10,42 @@ namespace Game.View.Systems
     public partial struct AbilityAnimationSystem : ISystem
     {
         private FastAnimatorParameter _attackKey;
-        private ComponentLookup<AbilityStartedEvent> _attackStartedEventLookup;
-        private AnimatorParametersAspect _animator;
 
         public void OnCreate(ref SystemState state)
         {
             _attackKey = new FastAnimatorParameter("Fire");
-            _attackStartedEventLookup = SystemAPI.GetComponentLookup<AbilityStartedEvent>(true);
-            _animator = new AnimatorParametersAspect();
         }
 
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            state.CompleteDependency();
-            
-            _attackStartedEventLookup.Update(ref state);
-
-            foreach (var (
-                         modelLink,
-                         indexTable,
-                         parameters)
-                     in SystemAPI.Query<
-                         RefRO<ModelLink>,
-                         RefRO<AnimatorControllerParameterIndexTableComponent>,
-                         DynamicBuffer<AnimatorControllerParameterComponent>>())
+            state.Dependency = new UpdateAbilityAnimationJob
             {
-                Entity model = modelLink.ValueRO.Value;
+                EventsLookup = SystemAPI.GetComponentLookup<AbilityStartedEvent>(true),
+                Key = _attackKey
+            }.ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        private partial struct UpdateAbilityAnimationJob : IJobEntity
+        {
+            [ReadOnly] public ComponentLookup<AbilityStartedEvent> EventsLookup;
+            [ReadOnly] public FastAnimatorParameter Key;
+            
+            private void Execute(
+                in ModelLink modelLink,
+                in AnimatorControllerParameterIndexTableComponent indexTable,
+                DynamicBuffer<AnimatorControllerParameterComponent> parameters)
+            {
+                Entity actor = modelLink.Value;
+
+                if (EventsLookup.HasComponent(actor) == false
+                    || EventsLookup.IsComponentEnabled(actor) == false)
+                    return;
+
+                var animator = new AnimatorParametersAspect(parameters, indexTable);
                 
-                if (_attackStartedEventLookup.HasComponent(model) == false
-                    || _attackStartedEventLookup.IsComponentEnabled(model) == false)
-                    continue;
-                
-                _animator.parametersArr = parameters;
-                _animator.indexTable = indexTable.ValueRO;
-                
-                _animator.SetTrigger(_attackKey);
+                animator.SetTrigger(Key);
             }
         }
     }

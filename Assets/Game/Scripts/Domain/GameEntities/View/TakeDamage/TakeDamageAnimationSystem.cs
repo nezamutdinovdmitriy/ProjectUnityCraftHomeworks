@@ -1,5 +1,7 @@
 using Game.Components;
 using Rukhanka;
+using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 
 namespace Game.View.Systems
@@ -8,37 +10,44 @@ namespace Game.View.Systems
     public partial struct TakeDamageAnimationSystem : ISystem
     {
         private FastAnimatorParameter _takeDamageKey;
-        private BufferLookup<TakeDamageEvent> _takeDamageEventLookup;
         
         public void OnCreate(ref SystemState state)
         {
             _takeDamageKey = new FastAnimatorParameter("TakeDamage");
-            _takeDamageEventLookup = SystemAPI.GetBufferLookup<TakeDamageEvent>(isReadOnly: true);
         }
 
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            state.CompleteDependency();
-            
-            _takeDamageEventLookup.Update(ref state);
-            
-            foreach ((RefRO<ModelLink> modelLink,
-                         DynamicBuffer<AnimatorControllerParameterComponent> parameters,
-                         RefRO<AnimatorControllerParameterIndexTableComponent> indexTable)
-                     in SystemAPI.Query<
-                         RefRO<ModelLink>,
-                         DynamicBuffer<AnimatorControllerParameterComponent>,
-                         RefRO<AnimatorControllerParameterIndexTableComponent>>())
+            state.Dependency = new UpdateTakeDamageAnimationJob
             {
-                Entity model = modelLink.ValueRO.Value;
-                if(_takeDamageEventLookup.TryGetBuffer(model, out DynamicBuffer<TakeDamageEvent> events) == false
-                   || events.IsEmpty)
-                    continue;
+                Key = _takeDamageKey,
+                EventsLookup = SystemAPI.GetBufferLookup<TakeDamageEvent>(true)
+            }.ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        private partial struct UpdateTakeDamageAnimationJob : IJobEntity
+        {
+            [ReadOnly] public FastAnimatorParameter Key;
+            [ReadOnly] public BufferLookup<TakeDamageEvent> EventsLookup;
+            
+            private void Execute(
+                in ModelLink modelLink,
+                DynamicBuffer<AnimatorControllerParameterComponent> parameters,
+                in AnimatorControllerParameterIndexTableComponent indexTable)
+            {
+                Entity actor = modelLink.Value;
 
-                AnimatorParametersAspect animator =
-                    new AnimatorParametersAspect(parameters, indexTable.ValueRO);
+                if (EventsLookup.TryGetBuffer(
+                        actor,
+                        out DynamicBuffer<TakeDamageEvent> events) == false
+                    || events.IsEmpty)
+                    return;
 
-                animator.SetTrigger(_takeDamageKey);
+                var animator = new AnimatorParametersAspect(parameters, indexTable);
+                
+                animator.SetTrigger(Key);
             }
         }
     }

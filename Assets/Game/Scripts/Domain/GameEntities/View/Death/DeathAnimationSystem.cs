@@ -1,5 +1,7 @@
 using Game.Components;
 using Rukhanka;
+using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 
 namespace Game.View.Systems
@@ -8,41 +10,42 @@ namespace Game.View.Systems
     public partial struct DeathAnimationSystem : ISystem
     {
         private FastAnimatorParameter _deathKey;
-        private ComponentLookup<DeathEvent> _deathEventLookup;
-        private AnimatorParametersAspect _animator;
 
         public void OnCreate(ref SystemState state)
         {
             _deathKey = new FastAnimatorParameter("Death");
-            _deathEventLookup = SystemAPI.GetComponentLookup<DeathEvent>(isReadOnly: true);
-            
-            _animator = new AnimatorParametersAspect();
         }
 
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            state.CompleteDependency();
-            
-            _deathEventLookup.Update(ref state);
-
-            foreach ((RefRO<ModelLink> modelLink,
-                         DynamicBuffer<AnimatorControllerParameterComponent> parameters,
-                         RefRO<AnimatorControllerParameterIndexTableComponent> indexTable)
-                     in SystemAPI.Query<
-                         RefRO<ModelLink>,
-                         DynamicBuffer<AnimatorControllerParameterComponent>,
-                         RefRO<AnimatorControllerParameterIndexTableComponent>>())
+            state.Dependency = new UpdateDeathAnimationJob
             {
-                Entity model = modelLink.ValueRO.Value;
+                EventsLookup = SystemAPI.GetComponentLookup<DeathEvent>(true),
+                Key = _deathKey
+            }.ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        private partial struct UpdateDeathAnimationJob : IJobEntity
+        {
+            [ReadOnly] public FastAnimatorParameter Key;
+            [ReadOnly] public ComponentLookup<DeathEvent> EventsLookup;
+            
+            private void Execute(
+                in ModelLink modelLink,
+                DynamicBuffer<AnimatorControllerParameterComponent> parameters,
+                in AnimatorControllerParameterIndexTableComponent indexTable)
+            {
+                Entity actor = modelLink.Value;
 
-                if (_deathEventLookup.HasComponent(model) == false
-                    || _deathEventLookup.IsComponentEnabled(model) == false)
-                    continue;
+                if (EventsLookup.HasComponent(actor) == false
+                    || EventsLookup.IsComponentEnabled(actor) == false)
+                    return;
 
-                _animator.parametersArr = parameters;
-                _animator.indexTable = indexTable.ValueRO;
+                var animator = new AnimatorParametersAspect(parameters, indexTable);
                 
-                _animator.SetTrigger(_deathKey);
+                animator.SetTrigger(Key);
             }
         }
     }

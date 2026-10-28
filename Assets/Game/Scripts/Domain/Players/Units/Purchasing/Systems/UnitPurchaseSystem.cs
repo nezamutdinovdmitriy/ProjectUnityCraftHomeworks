@@ -35,19 +35,10 @@ namespace Game.Systems
             if (SystemAPI.GetSingleton<GameTime>().DeltaTime <= 0f)
                 return;
 
-            state.CompleteDependency();
-
-            _worldLookup.Update(ref state);
-            _prefabTransformLookup.Update(ref state);
-            _teamLookup.Update(ref state);
-            _defaultTargetLookup.Update(ref state);
-
             DynamicBuffer<UnitPurchaseItem> items = SystemAPI
                 .GetSingletonBuffer<UnitPurchaseItem>(true);
 
-            EntityCommandBuffer commands = SystemAPI
-                .GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
-                .CreateCommandBuffer(state.WorldUnmanaged);
+            EntityCommandBuffer commands = default;
 
             foreach (var (
                          requests,
@@ -61,6 +52,20 @@ namespace Game.Systems
             {
                 if (requests.IsEmpty)
                     continue;
+
+                if (commands.IsCreated == false)
+                {
+                    state.CompleteDependency();
+
+                    _worldLookup.Update(ref state);
+                    _prefabTransformLookup.Update(ref state);
+                    _teamLookup.Update(ref state);
+                    _defaultTargetLookup.Update(ref state);
+
+                    commands = SystemAPI
+                        .GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
+                        .CreateCommandBuffer(state.WorldUnmanaged);
+                }
 
                 Entity enemyBase = Entity.Null;
 

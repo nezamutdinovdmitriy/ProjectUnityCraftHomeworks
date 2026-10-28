@@ -5,20 +5,25 @@ using Unity.Entities;
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(PresentationSystemGroup))]
+    [RequireMatchingQueriesForUpdate]
     public partial struct EntityNameSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)
         {
-            var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-            foreach ((RefRO<EntityName> name, Entity entity) in 
-                     SystemAPI.Query<RefRO<EntityName>>().WithEntityAccess())
+            using var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            foreach (var (name, entity)
+                     in SystemAPI.Query<RefRO<EntityName>>()
+                         .WithEntityAccess())
             {
                 FixedString64Bytes entityName = name.ValueRO.Value;
+                
                 entityName.Append(" (");
                 entityName.Append(entity.Index);
                 entityName.Append(":");
                 entityName.Append(entity.Version);
                 entityName.Append(")");
+                
                 ecb.SetName(entity, entityName);
                 ecb.RemoveComponent<EntityName>(entity);
             }
