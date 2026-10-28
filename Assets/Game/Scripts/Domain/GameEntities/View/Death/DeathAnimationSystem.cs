@@ -21,6 +21,8 @@ namespace Game.View.Systems
 
         public void OnUpdate(ref SystemState state)
         {
+            state.CompleteDependency();
+            
             _deathEventLookup.Update(ref state);
 
             foreach ((RefRO<ModelLink> modelLink,

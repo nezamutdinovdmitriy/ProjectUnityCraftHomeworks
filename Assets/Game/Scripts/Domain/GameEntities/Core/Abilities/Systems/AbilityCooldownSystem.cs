@@ -6,21 +6,29 @@ using Unity.Entities;
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(UpdateTimersSystemGroup))]
-    [BurstCompile]
     public partial struct AbilityCooldownSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            float deltaTime = SystemAPI.Time.DeltaTime;
-            
-            foreach (var (cooldown, enabled) 
-                     in SystemAPI.Query<
-                         RefRW<AbilityCooldown>,
-                         EnabledRefRW<AbilityCooldown>>())
+            state.Dependency = new UpdateCooldownJob
             {
-                cooldown.ValueRW.Time -= deltaTime;
+                DeltaTime = SystemAPI.Time.DeltaTime
+            }.ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        private partial struct UpdateCooldownJob : IJobEntity
+        {
+            public float DeltaTime;
+            
+            private void Execute(
+                ref AbilityCooldown cooldown,
+                EnabledRefRW<AbilityCooldown> enabled)
+            {
+                cooldown.Time -= DeltaTime;
 
-                if (cooldown.ValueRO.Time <= 0)
+                if (cooldown.Time <= 0)
                     enabled.ValueRW = false;
             }
         }

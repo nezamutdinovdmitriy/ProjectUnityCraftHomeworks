@@ -14,7 +14,7 @@ namespace Game.View.Systems
         public void OnCreate(ref SystemState state)
         {
             _attackKey = new FastAnimatorParameter("Fire");
-            _attackStartedEventLookup = SystemAPI.GetComponentLookup<AbilityStartedEvent>();
+            _attackStartedEventLookup = SystemAPI.GetComponentLookup<AbilityStartedEvent>(true);
             _animator = new AnimatorParametersAspect();
         }
 

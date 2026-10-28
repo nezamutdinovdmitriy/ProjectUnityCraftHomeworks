@@ -8,32 +8,37 @@ namespace Game.Systems
 {
     [RequireMatchingQueriesForUpdate]
     [UpdateInGroup(typeof(UpdateTimersSystemGroup))]
-    [BurstCompile]
     public partial struct LifetimeDeathSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            float deltaTime = SystemAPI.Time.DeltaTime;
-
-            foreach ((RefRW<Lifetime> lifetime,
-                         RefRW<DeathCooldown> deathCooldown,
-                         EnabledRefRW<DeathCooldown> cooldownEnabled,
-                         EnabledRefRW<DeathEvent> deathEvent)
-                     in SystemAPI.Query<
-                             RefRW<Lifetime>,
-                             RefRW<DeathCooldown>,
-                             EnabledRefRW<DeathCooldown>,
-                             EnabledRefRW<DeathEvent>>()
-                         .WithDisabled<DeathCooldown>()
-                         .WithPresent<DeathEvent>())
+            state.Dependency = new UpdateLifeTimeJob
             {
-                if (lifetime.ValueRO.IsExpired() == false)
+                DeltaTime = SystemAPI.Time.DeltaTime
+            }.ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        [WithDisabled(typeof(DeathCooldown))]
+        [WithPresent(typeof(DeathEvent))]
+        private partial struct UpdateLifeTimeJob : IJobEntity
+        {
+            public float DeltaTime;
+            
+            private void Execute(
+                ref Lifetime lifetime,
+                ref DeathCooldown cooldown,
+                EnabledRefRW<DeathCooldown> cooldownEnabled,
+                EnabledRefRW<DeathEvent> eventEnabled)
+            {
+                if (lifetime.IsExpired() == false)
                 {
-                    lifetime.ValueRW.Value -= deltaTime;
-                    continue;
+                    lifetime.Value -= DeltaTime;
+                    return;
                 }
-
-                DeathUseCase.StartProcess(deathCooldown, cooldownEnabled, deathEvent);
+                
+                DeathUseCase.StartProcess(ref cooldown, cooldownEnabled, eventEnabled);
             }
         }
     }

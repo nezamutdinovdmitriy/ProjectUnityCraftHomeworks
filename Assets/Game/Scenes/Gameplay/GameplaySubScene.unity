@@ -583,7 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3964e1ab0ec24549a5c8a8b4ccc0f45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.UnitPurchaseAIAuthoring
-  _seed: 1
+  _seed: 2
 --- !u!1 &1589448940
 GameObject:
   m_ObjectHideFlags: 0

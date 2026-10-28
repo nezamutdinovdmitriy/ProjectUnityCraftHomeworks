@@ -24,7 +24,7 @@ namespace Game.Systems
                 if (health.ValueRO.IsAlive())
                     continue;
 
-                DeathUseCase.StartProcess(cooldown, cooldownEnabled, deathEvent);
+                DeathUseCase.StartProcess(ref cooldown.ValueRW, cooldownEnabled, deathEvent);
             }
         }
     }

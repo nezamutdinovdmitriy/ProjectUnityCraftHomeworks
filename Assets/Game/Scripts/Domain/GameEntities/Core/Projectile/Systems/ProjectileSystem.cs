@@ -89,7 +89,7 @@ namespace Game.Systems
                         rotationRequestEnabled.ValueRW = false;
 
                         DeathUseCase.StartProcess(
-                            _deathCooldownLookup.GetRefRW(projectile),
+                            ref _deathCooldownLookup.GetRefRW(projectile).ValueRW,
                             deathCooldownEnabled,
                             _deathEventLookup.GetEnabledRefRW<DeathEvent>(projectile));
                         

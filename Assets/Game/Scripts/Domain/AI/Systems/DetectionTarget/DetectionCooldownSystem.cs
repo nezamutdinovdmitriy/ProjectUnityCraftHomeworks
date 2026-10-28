@@ -7,25 +7,32 @@ using Unity.Entities;
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(UpdateTimersSystemGroup))]
-    [BurstCompile]
     public partial struct DetectionCooldownSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var (cooldownRW,
-                         cooldownEnabled) 
-                     in SystemAPI.Query<
-                         RefRW<TargetDetectionCooldown>,
-                         EnabledRefRW<TargetDetectionCooldown>>())
+            state.Dependency = new UpdateCooldownJob
             {
-                float deltaTime = SystemAPI.Time.DeltaTime;
+                DeltaTime = SystemAPI.Time.DeltaTime
+            }.ScheduleParallel(state.Dependency);
+        }
 
-                cooldownRW.ValueRW.Time -= deltaTime;
+        [BurstCompile]
+        private partial struct UpdateCooldownJob : IJobEntity
+        {
+            public float DeltaTime;
+            
+            private void Execute(
+                RefRW<TargetDetectionCooldown> cooldown,
+                EnabledRefRW<TargetDetectionCooldown> enabled)
+            {
+                cooldown.ValueRW.Time -= DeltaTime;
 
-                if (cooldownRW.ValueRO.IsExpired())
+                if (cooldown.ValueRO.IsExpired())
                 {
-                    cooldownRW.ValueRW.Time = cooldownRW.ValueRO.Interval;
-                    cooldownEnabled.ValueRW = false;
+                    cooldown.ValueRW.Time = cooldown.ValueRO.Interval;
+                    enabled.ValueRW = false;
                 }
             }
         }

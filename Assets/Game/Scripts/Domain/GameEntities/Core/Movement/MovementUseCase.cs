@@ -7,12 +7,12 @@ namespace Game.UseCases
     public static class MovementUseCase
     {
         public static void MoveStep(
-            RefRW<LocalTransform> transform, 
+            ref LocalTransform transform, 
             in float3 direction, 
             in float speed, 
             float deltaTime)
         {
-            transform.ValueRW.Position += direction * speed * deltaTime;
+            transform.Position += direction * speed * deltaTime;
         }
     }
 }

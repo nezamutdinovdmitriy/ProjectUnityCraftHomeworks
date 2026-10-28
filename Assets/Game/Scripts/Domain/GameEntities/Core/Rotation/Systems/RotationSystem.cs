@@ -1,6 +1,6 @@
 using Game.Components;
+using Unity.Burst;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace Game.UseCases.Systems
@@ -8,27 +8,29 @@ namespace Game.UseCases.Systems
     [RequireMatchingQueriesForUpdate]
     public partial struct RotationSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            float deltaTime = SystemAPI.Time.DeltaTime;
-
-            foreach (var (
-                         rotationRequest,
-                         rotationRequestEnabled,
-                         speed,
-                         transform)
-                     in SystemAPI.Query<
-                             RefRO<RotationRequest>,
-                             EnabledRefRW<RotationRequest>,
-                             RefRO<RotationSpeed>,
-                             RefRW<LocalTransform>>()
-                         .WithAll<RotationRequest>())
+            state.Dependency = new RotationJob
             {
-                rotationRequestEnabled.ValueRW = false;
+                DeltaTime = SystemAPI.Time.DeltaTime
+            }.ScheduleParallel(state.Dependency);
+        }
 
-                float3 direction = rotationRequest.ValueRO.Direction;
-
-                RotationUseCase.RotationStep(transform, direction, in speed.ValueRO.Value, deltaTime);
+        [BurstCompile]
+        private partial struct RotationJob : IJobEntity
+        {
+            public float DeltaTime;
+            
+            private void Execute(
+                ref RotationRequest request,
+                EnabledRefRW<RotationRequest> requestEnabled,
+                in RotationSpeed speed,
+                ref LocalTransform transform)
+            {
+                requestEnabled.ValueRW = false;
+                
+                RotationUseCase.RotationStep(ref transform, request.Direction, speed.Value, DeltaTime);
             }
         }
     }

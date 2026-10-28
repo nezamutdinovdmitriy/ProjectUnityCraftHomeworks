@@ -15,13 +15,15 @@ namespace Game.View.Systems
         public void OnCreate(ref SystemState state)
         {
             _isMovingKey = new FastAnimatorParameter("IsMoving");
-            _movementEventLookup = SystemAPI.GetComponentLookup<MovementEvent>();
+            _movementEventLookup = SystemAPI.GetComponentLookup<MovementEvent>(true);
             _animator = new AnimatorParametersAspect();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            state.CompleteDependency();
+            
             _movementEventLookup.Update(ref state);
 
             foreach (var (

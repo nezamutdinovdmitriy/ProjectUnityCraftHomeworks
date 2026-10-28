@@ -1,5 +1,6 @@
 using Game.Components;
 using Game.UseCases;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
 
@@ -8,32 +9,39 @@ namespace Game.Systems
     [RequireMatchingQueriesForUpdate]
     public partial struct MovementSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             float deltaTime = SystemAPI.Time.DeltaTime;
 
-            foreach ((RefRO<MovementRequest> request,
-                         EnabledRefRW<MovementRequest> enabledRequest,
-                         EnabledRefRW<MovementEvent> enabledEvent,
-                         RefRO<MovementSpeed> movementSpeed,
-                         RefRW<LocalTransform> transform)
-                     in SystemAPI.Query<
-                             RefRO<MovementRequest>,
-                             EnabledRefRW<MovementRequest>,
-                             EnabledRefRW<MovementEvent>,
-                             RefRO<MovementSpeed>,
-                             RefRW<LocalTransform>>()
-                         .WithAll<MovementRequest>()
-                         .WithPresent<MovementEvent>())
+            state.Dependency = new MovementJob
             {
-                enabledRequest.ValueRW = false;
+                DeltaTime = SystemAPI.Time.DeltaTime
+            }.ScheduleParallel(state.Dependency);
+        }
 
-                MovementUseCase.MoveStep(transform,
-                    request.ValueRO.Direction,
-                    movementSpeed.ValueRO.Value,
-                    deltaTime);
+        [BurstCompile]
+        [WithPresent(typeof(MovementEvent))]
+        private partial struct MovementJob : IJobEntity
+        {
+            public float DeltaTime;
+            
+            private void Execute(
+                ref MovementRequest request,
+                EnabledRefRW<MovementRequest> requestEnabled,
+                EnabledRefRW<MovementEvent> movementEvent,
+                in MovementSpeed speed,
+                ref LocalTransform transform)
+            {
+                requestEnabled.ValueRW = false;
 
-                enabledEvent.ValueRW = true;
+                MovementUseCase.MoveStep(
+                    ref transform,
+                    request.Direction,
+                    speed.Value,
+                    DeltaTime);
+
+                movementEvent.ValueRW = true;
             }
         }
     }

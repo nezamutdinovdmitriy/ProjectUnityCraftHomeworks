@@ -8,34 +8,38 @@ namespace Game.Systems
 {
     [RequireMatchingQueriesForUpdate]
     [UpdateInGroup(typeof(UpdateTimersSystemGroup))]
-    [BurstCompile]
     public partial struct ManaRestoreDelaySystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            float deltaTime = SystemAPI.Time.DeltaTime;
-
-            foreach ((RefRW<ManaRestoreDelay> delay,
-                         EnabledRefRW<ManaRestoreDelay> delayEnabled,
-                         EnabledRefRW<ManaRestoreEvent> restoreEvent,
-                         RefRW<Mana> mana,
-                         RefRO<MaxMana> maxMana)
-                     in SystemAPI.Query<
-                             RefRW<ManaRestoreDelay>,
-                             EnabledRefRW<ManaRestoreDelay>,
-                             EnabledRefRW<ManaRestoreEvent>,
-                             RefRW<Mana>,
-                             RefRO<MaxMana>>()
-                         .WithPresent<ManaRestoreEvent>())
+            state.Dependency = new RestoreDelayJob
             {
-                delay.ValueRW.Time -= deltaTime;
+                DeltaTime = SystemAPI.Time.DeltaTime
+            }.ScheduleParallel(state.Dependency);
+        }
+        
+        [BurstCompile]
+        [WithPresent(typeof(ManaRestoreEvent))]
+        private partial struct RestoreDelayJob : IJobEntity
+        {
+            public float DeltaTime;
+            
+            private void Execute(
+                ref ManaRestoreDelay delay,
+                ref Mana mana,
+                in MaxMana maxMana,
+                EnabledRefRW<ManaRestoreDelay> delayEnabled,
+                EnabledRefRW<ManaRestoreEvent> eventEnabled)
+            {
+                delay.Time -= DeltaTime;
 
-                if (delay.ValueRO.IsExpired())
+                if (delay.IsExpired())
                 {
-                    mana.ValueRW.Value = maxMana.ValueRO.Value;
-                
+                    mana.Value = maxMana.Value;
+
                     delayEnabled.ValueRW = false;
-                    restoreEvent.ValueRW = true;
+                    eventEnabled.ValueRW = true;
                 }
             }
         }

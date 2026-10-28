@@ -17,8 +17,8 @@ namespace Game.Systems
 
         public void OnCreate(ref SystemState state)
         {
-            _healthLookup = SystemAPI.GetComponentLookup<Health>();
-            _transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
+            _healthLookup = SystemAPI.GetComponentLookup<Health>(true);
+            _transformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true);
         }
 
         public void OnUpdate(ref SystemState state)
@@ -33,7 +33,7 @@ namespace Game.Systems
                          rotationRequest,
                          rotationRequestEnabled)
                      in SystemAPI.Query<
-                             RefRW<LocalTransform>,
+                             RefRO<LocalTransform>,
                              RefRO<Health>,
                              RefRO<TargetEntity>,
                              RefRW<RotationRequest>,
