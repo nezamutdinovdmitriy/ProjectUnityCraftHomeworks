@@ -2,6 +2,7 @@ using Game.Components;
 using Game.ECS.SystemGroups;
 using Game.UseCases;
 using Unity.Burst;
+using Unity.Burst.Intrinsics;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -13,40 +14,129 @@ namespace Game.Systems
     public partial struct ProjectileSystem : ISystem
     {
         private const float HitRadius = 0.25f;
-        
+        private EntityQuery _query;
+
+
+        public void OnCreate(ref SystemState state)
+        {
+            _query = SystemAPI.QueryBuilder()
+                .WithAll<Projectile, TargetEntity, LocalTransform>()
+                .WithDisabledRW<DeathCooldown>()
+                .WithPresentRW<MovementRequest, RotationRequest>()
+                .WithPresentRW<DeathEvent>()
+                .Build();
+
+            state.RequireForUpdate(_query);
+
+            state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
+        }
+
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            EntityCommandBuffer.ParallelWriter commands = SystemAPI
+                .GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
+                .CreateCommandBuffer(state.WorldUnmanaged)
+                .AsParallelWriter();
+
             state.Dependency = new UpdateProjectilesJob
             {
+                Commands = commands,
+
+                TargetHandle = SystemAPI.GetComponentTypeHandle<TargetEntity>(true),
+                TransformHandle = SystemAPI.GetComponentTypeHandle<LocalTransform>(true),
+                MovementHandle = SystemAPI.GetComponentTypeHandle<MovementRequest>(),
+                RotationHandle = SystemAPI.GetComponentTypeHandle<RotationRequest>(),
+                DeathCooldownHandle = SystemAPI.GetComponentTypeHandle<DeathCooldown>(),
+                DeathEventHandle = SystemAPI.GetComponentTypeHandle<DeathEvent>(),
+                DamageHandle = SystemAPI.GetComponentTypeHandle<Damage>(true),
+
                 HealthLookup = SystemAPI.GetComponentLookup<Health>(true),
                 HitPointsLookup = SystemAPI.GetComponentLookup<TargetHitPoint>(true),
                 WorldTransformsLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true),
-                DamageLookup = SystemAPI.GetComponentLookup<Damage>(true),
-                DamageRequestsLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>()
-            }.Schedule(state.Dependency);         
+                DamageRequestsLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>(true)
+            }.ScheduleParallel(_query, state.Dependency);
         }
-        
+
         [BurstCompile]
-        [WithAll(typeof(Projectile))]
-        [WithDisabled(typeof(DeathCooldown))]
-        [WithPresent(
-            typeof(MovementRequest),
-            typeof(RotationRequest),
-            typeof(DeathEvent))]
-        private partial struct UpdateProjectilesJob : IJobEntity
+        private struct UpdateProjectilesJob : IJobChunk
         {
+            [ReadOnly] public ComponentTypeHandle<TargetEntity> TargetHandle;
+            [ReadOnly] public ComponentTypeHandle<LocalTransform> TransformHandle;
+            [ReadOnly] public ComponentTypeHandle<Damage> DamageHandle;
+
+            public ComponentTypeHandle<MovementRequest> MovementHandle;
+            public ComponentTypeHandle<RotationRequest> RotationHandle;
+            public ComponentTypeHandle<DeathCooldown> DeathCooldownHandle;
+            public ComponentTypeHandle<DeathEvent> DeathEventHandle;
+
             [ReadOnly] public ComponentLookup<Health> HealthLookup;
             [ReadOnly] public ComponentLookup<TargetHitPoint> HitPointsLookup;
             [ReadOnly] public ComponentLookup<LocalToWorld> WorldTransformsLookup;
-            [ReadOnly] public ComponentLookup<Damage> DamageLookup;
+            [ReadOnly] public BufferLookup<TakeDamageRequest> DamageRequestsLookup;
 
-            public BufferLookup<TakeDamageRequest> DamageRequestsLookup;
+            public EntityCommandBuffer.ParallelWriter Commands;
 
-            private void Execute(
-                Entity projectile,
-                in TargetEntity target,
-                in LocalTransform transform,
+            public void Execute(
+                in ArchetypeChunk chunk,
+                int unfilteredChunkIndex,
+                bool useEnabledMask,
+                in v128 chunkEnabledMask)
+            {
+                NativeArray<TargetEntity> targets = chunk.GetNativeArray(ref TargetHandle);
+                NativeArray<LocalTransform> transforms = chunk.GetNativeArray(ref TransformHandle);
+                NativeArray<MovementRequest> movements = chunk.GetNativeArray(ref MovementHandle);
+                NativeArray<RotationRequest> rotations = chunk.GetNativeArray(ref RotationHandle);
+
+                NativeArray<DeathCooldown> deathCooldowns = chunk.GetNativeArray(ref DeathCooldownHandle);
+                EnabledMask movementMask = chunk.GetEnabledMask(ref MovementHandle);
+                EnabledMask rotationMask = chunk.GetEnabledMask(ref RotationHandle);
+                EnabledMask deathCooldownMask = chunk.GetEnabledMask(ref DeathCooldownHandle);
+                EnabledMask deathEventMask = chunk.GetEnabledMask(ref DeathEventHandle);
+
+                bool hasDamage = chunk.Has(ref DamageHandle);
+
+                NativeArray<Damage> damages = hasDamage
+                    ? chunk.GetNativeArray(ref DamageHandle)
+                    : default;
+
+                var enumerator = new ChunkEntityEnumerator(
+                    useEnabledMask,
+                    chunkEnabledMask,
+                    chunk.Count);
+
+                while (enumerator.NextEntityIndex(out int index))
+                {
+                    RefRW<MovementRequest> movementRequestRef = new RefRW<MovementRequest>(movements, index);
+                    RefRW<RotationRequest> rotationRequestRef = new RefRW<RotationRequest>(rotations, index);
+                    RefRW<DeathCooldown> deathCooldownRef = new RefRW<DeathCooldown>(deathCooldowns, index);
+
+                    float damage = hasDamage
+                        ? damages[index].Value
+                        : 0f;
+
+                    ProcessProjectile(
+                        unfilteredChunkIndex,
+                        targets[index].Value,
+                        transforms[index].Position,
+                        hasDamage,
+                        damage,
+                        ref movementRequestRef.ValueRW,
+                        movementMask.GetEnabledRefRW<MovementRequest>(index),
+                        ref rotationRequestRef.ValueRW,
+                        rotationMask.GetEnabledRefRW<RotationRequest>(index),
+                        ref deathCooldownRef.ValueRW,
+                        deathCooldownMask.GetEnabledRefRW<DeathCooldown>(index),
+                        deathEventMask.GetEnabledRefRW<DeathEvent>(index));
+                }
+            }
+
+            private void ProcessProjectile(
+                int sortKey,
+                Entity target,
+                float3 position,
+                bool hasDamage,
+                float damage,
                 ref MovementRequest movementRequest,
                 EnabledRefRW<MovementRequest> movementRequestEnabled,
                 ref RotationRequest rotationRequest,
@@ -56,23 +146,22 @@ namespace Game.Systems
                 EnabledRefRW<DeathEvent> deathEvent)
             {
                 float3 direction = movementRequest.Direction;
-                Entity targetEntity = target.Value;
 
-                if (TryGetTargetPosition(targetEntity, out float3 targetPosition))
+                if (TryGetTargetPosition(target, out float3 targetPosition))
                 {
-                    float3 delta = targetPosition - transform.Position;
+                    float3 delta = targetPosition - position;
 
                     if (math.lengthsq(delta) <= HitRadius * HitRadius)
                     {
-                        if (DamageLookup.TryGetRefRO(projectile, out RefRO<Damage> damage)
-                            && DamageRequestsLookup.TryGetBuffer(
-                                targetEntity,
-                                out DynamicBuffer<TakeDamageRequest> requests))
+                        if (hasDamage && DamageRequestsLookup.HasBuffer(target))
                         {
-                            requests.Add(new TakeDamageRequest
-                            {
-                                Damage = damage.ValueRO.Value
-                            });
+                            Commands.AppendToBuffer(
+                                sortKey,
+                                target,
+                                new TakeDamageRequest
+                                {
+                                    Damage = damage
+                                });
                         }
 
                         movementRequestEnabled.ValueRW = false;
@@ -86,7 +175,9 @@ namespace Game.Systems
                         return;
                     }
 
-                    direction = math.normalizesafe(delta, direction);
+                    direction = math.normalizesafe(
+                        delta,
+                        direction);
                 }
 
                 movementRequest.Direction = direction;
@@ -96,9 +187,7 @@ namespace Game.Systems
                 rotationRequestEnabled.ValueRW = true;
             }
 
-            private bool TryGetTargetPosition(
-                Entity target,
-                out float3 position)
+            private bool TryGetTargetPosition(Entity target, out float3 position)
             {
                 position = default;
 

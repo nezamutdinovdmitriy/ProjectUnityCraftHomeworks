@@ -11,40 +11,38 @@ namespace Game.Systems
     [UpdateInGroup(typeof(AbilitiesSystemGroup))]
     public partial struct MeleeAttackSystem : ISystem
     {
+        public void OnCreate(ref SystemState state)
+        {
+            state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
+        }
+        
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
+            EntityCommandBuffer.ParallelWriter commands = SystemAPI
+                .GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
+                .CreateCommandBuffer(state.WorldUnmanaged)
+                .AsParallelWriter();
+            
             state.Dependency = new MeleeAttackJob
             {
-                AbilitiesLookup = SystemAPI
-                    .GetComponentLookup<MeleeAttackAbility>(true),
-
-                DefinitionsLookup = SystemAPI
-                    .GetComponentLookup<AbilityDefinition>(true),
-
-                HealthLookup = SystemAPI
-                    .GetComponentLookup<Health>(true),
-
-                WorldTransformsLookup = SystemAPI
-                    .GetComponentLookup<LocalToWorld>(true),
-
-                DamageLookup = SystemAPI
-                    .GetComponentLookup<Damage>(true),
-
-                DamageRequestsLookup = SystemAPI
-                    .GetBufferLookup<TakeDamageRequest>(),
-
-                StartedEventsLookup = SystemAPI
-                    .GetComponentLookup<AbilityStartedEvent>(),
-
-                ExecutedEventsLookup = SystemAPI
-                    .GetComponentLookup<AbilityExecutedEvent>()
-            }.Schedule(state.Dependency);
+                Commands = commands,
+                AbilitiesLookup = SystemAPI.GetComponentLookup<MeleeAttackAbility>(true),
+                DefinitionsLookup = SystemAPI.GetComponentLookup<AbilityDefinition>(true),
+                HealthLookup = SystemAPI.GetComponentLookup<Health>(true),
+                WorldTransformsLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true),
+                DamageLookup = SystemAPI.GetComponentLookup<Damage>(true),
+                DamageRequestsLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>(true),
+            }.ScheduleParallel(state.Dependency);
         }
         
         
         [BurstCompile]
-        [WithPresent(typeof(AbilityWindup), typeof(AbilityCooldown))]
+        [WithPresent(
+            typeof(AbilityWindup),
+            typeof(AbilityCooldown),
+            typeof(AbilityStartedEvent),
+            typeof(AbilityExecutedEvent))]
         private partial struct MeleeAttackJob : IJobEntity
         {
             [ReadOnly] public ComponentLookup<MeleeAttackAbility> AbilitiesLookup;
@@ -52,13 +50,12 @@ namespace Game.Systems
             [ReadOnly] public ComponentLookup<Health> HealthLookup;
             [ReadOnly] public ComponentLookup<LocalToWorld> WorldTransformsLookup;
             [ReadOnly] public ComponentLookup<Damage> DamageLookup;
-
-            public BufferLookup<TakeDamageRequest> DamageRequestsLookup;
-
-            public ComponentLookup<AbilityStartedEvent> StartedEventsLookup;
-            public ComponentLookup<AbilityExecutedEvent> ExecutedEventsLookup;
+            [ReadOnly] public BufferLookup<TakeDamageRequest> DamageRequestsLookup;
+            
+            public EntityCommandBuffer.ParallelWriter Commands;
             
             private void Execute(
+                [ChunkIndexInQuery] int sortKey,
                 Entity actor,
                 ref AbilityUseRequest request,
                 EnabledRefRW<AbilityUseRequest> requestEnabled,
@@ -66,6 +63,10 @@ namespace Game.Systems
                 EnabledRefRW<AbilityWindup> windupEnabled,
                 ref AbilityCooldown cooldown,
                 EnabledRefRW<AbilityCooldown> cooldownEnabled,
+                ref AbilityStartedEvent startedEvent,
+                EnabledRefRW<AbilityStartedEvent> startedEventEnabled,
+                ref AbilityExecutedEvent executedEvent,
+                EnabledRefRW<AbilityExecutedEvent> executedEventEnabled,
                 in Health health)
             {
                 Entity definitionEntity = request.Definition;
@@ -115,9 +116,9 @@ namespace Game.Systems
                         definition.ValueRO.Windup);
 
                     AbilityUseCase.NotifyStarted(
-                        actor,
                         request.Definition,
-                        ref StartedEventsLookup);
+                        ref startedEvent,
+                        startedEventEnabled);
                 }
 
                 if (windupEnabled.ValueRO)
@@ -127,9 +128,7 @@ namespace Game.Systems
                         target,
                         out RefRO<Health> targetHealth) == false
                     || targetHealth.ValueRO.IsDead()
-                    || DamageRequestsLookup.TryGetBuffer(
-                        target,
-                        out DynamicBuffer<TakeDamageRequest> requests) == false)
+                    || DamageRequestsLookup.HasBuffer(target) == false)
                 {
                     AbilityUseCase.Finish(
                         ref request, requestEnabled,
@@ -143,16 +142,16 @@ namespace Game.Systems
                     actor,
                     ref DamageLookup);
 
-                requests.Add(new TakeDamageRequest
+                Commands.AppendToBuffer(sortKey, target, new TakeDamageRequest
                 {
                     Damage = damage
                 });
 
                 AbilityUseCase.NotifyExecuted(
-                    actor,
                     target,
                     request.Definition,
-                    ref ExecutedEventsLookup);
+                    ref executedEvent,
+                    executedEventEnabled);
 
                 AbilityUseCase.Complete(
                     ref request, requestEnabled,

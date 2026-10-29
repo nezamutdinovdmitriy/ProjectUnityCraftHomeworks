@@ -2,6 +2,7 @@ using Game.Components;
 using Game.ECS.SystemGroups;
 using Game.UseCases;
 using Unity.Burst;
+using Unity.Burst.Intrinsics;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
@@ -11,61 +12,66 @@ namespace Game.Systems
     [UpdateInGroup(typeof(AbilitiesSystemGroup))]
     public partial struct ArrowShotSystem : ISystem
     {
+        private EntityQuery _query;
+
         public void OnCreate(ref SystemState state)
         {
+            _query = SystemAPI.QueryBuilder()
+                .WithAllRW<AbilityUseRequest>()
+                .WithAll<Health>()
+                .WithPresentRW<AbilityWindup, AbilityCooldown>()
+                .WithPresentRW<AbilityStartedEvent, AbilityExecutedEvent>()
+                .Build();
+
+            state.RequireForUpdate(_query);
+
             state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            EntityCommandBuffer commands = SystemAPI
+            EntityCommandBuffer.ParallelWriter commands = SystemAPI
                 .GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
-                .CreateCommandBuffer(state.WorldUnmanaged);
-            
+                .CreateCommandBuffer(state.WorldUnmanaged)
+                .AsParallelWriter();
+
             state.Dependency = new ArrowShotJob
             {
                 Commands = commands,
-
-                AbilitiesLookup =
-                    SystemAPI.GetComponentLookup<ArrowShotAbility>(true),
-
-                DefinitionsLookup =
-                    SystemAPI.GetComponentLookup<AbilityDefinition>(true),
-
-                CostsLookup =
-                    SystemAPI.GetComponentLookup<AmmoCost>(true),
-
-                AmmoLookup =
-                    SystemAPI.GetComponentLookup<Ammo>(),
-
-                HealthLookup =
-                    SystemAPI.GetComponentLookup<Health>(true),
-
-                WorldTransformsLookup =
-                    SystemAPI.GetComponentLookup<LocalToWorld>(true),
-
-                PrefabTransformsLookup =
-                    SystemAPI.GetComponentLookup<LocalTransform>(true),
-
-                SpawnPointsLookup =
-                    SystemAPI.GetComponentLookup<ProjectileSpawnPoint>(true),
-
-                DamageLookupLookup =
-                    SystemAPI.GetComponentLookup<Damage>(true),
-
-                StartedEventsLookup =
-                    SystemAPI.GetComponentLookup<AbilityStartedEvent>(),
-
-                ExecutedEventsLookup =
-                    SystemAPI.GetComponentLookup<AbilityExecutedEvent>()
-            }.Schedule(state.Dependency);
+                EntityHandle = SystemAPI.GetEntityTypeHandle(),
+                RequestHandle = SystemAPI.GetComponentTypeHandle<AbilityUseRequest>(),
+                WindupHandle = SystemAPI.GetComponentTypeHandle<AbilityWindup>(),
+                CooldownHandle = SystemAPI.GetComponentTypeHandle<AbilityCooldown>(),
+                StartedEventHandle = SystemAPI.GetComponentTypeHandle<AbilityStartedEvent>(),
+                ExecutedEventHandle = SystemAPI.GetComponentTypeHandle<AbilityExecutedEvent>(),
+                HealthHandle = SystemAPI.GetComponentTypeHandle<Health>(true),
+                AmmoHandle = SystemAPI.GetComponentTypeHandle<Ammo>(),
+                AbilitiesLookup = SystemAPI.GetComponentLookup<ArrowShotAbility>(true),
+                DefinitionsLookup = SystemAPI.GetComponentLookup<AbilityDefinition>(true),
+                CostsLookup = SystemAPI.GetComponentLookup<AmmoCost>(true),
+                HealthLookup = SystemAPI.GetComponentLookup<Health>(true),
+                WorldTransformsLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true),
+                PrefabTransformsLookup = SystemAPI.GetComponentLookup<LocalTransform>(true),
+                SpawnPointsLookup = SystemAPI.GetComponentLookup<ProjectileSpawnPoint>(true),
+                DamageLookup = SystemAPI.GetComponentLookup<Damage>(true)
+            }.ScheduleParallel(_query, state.Dependency);
         }
 
         [BurstCompile]
-        [WithPresent(typeof(AbilityWindup), typeof(AbilityCooldown))]
-        private partial struct ArrowShotJob : IJobEntity
+        private struct ArrowShotJob : IJobChunk
         {
+            [ReadOnly] public EntityTypeHandle EntityHandle;
+            [ReadOnly] public ComponentTypeHandle<Health> HealthHandle;
+
+            public ComponentTypeHandle<AbilityUseRequest> RequestHandle;
+            public ComponentTypeHandle<AbilityWindup> WindupHandle;
+            public ComponentTypeHandle<AbilityCooldown> CooldownHandle;
+            public ComponentTypeHandle<AbilityStartedEvent> StartedEventHandle;
+            public ComponentTypeHandle<AbilityExecutedEvent> ExecutedEventHandle;
+
+            public ComponentTypeHandle<Ammo> AmmoHandle;
+
             [ReadOnly] public ComponentLookup<ArrowShotAbility> AbilitiesLookup;
             [ReadOnly] public ComponentLookup<AbilityDefinition> DefinitionsLookup;
             [ReadOnly] public ComponentLookup<AmmoCost> CostsLookup;
@@ -73,16 +79,78 @@ namespace Game.Systems
             [ReadOnly] public ComponentLookup<LocalToWorld> WorldTransformsLookup;
             [ReadOnly] public ComponentLookup<LocalTransform> PrefabTransformsLookup;
             [ReadOnly] public ComponentLookup<ProjectileSpawnPoint> SpawnPointsLookup;
-            [ReadOnly] public ComponentLookup<Damage> DamageLookupLookup;
+            [ReadOnly] public ComponentLookup<Damage> DamageLookup;
 
-            public ComponentLookup<Ammo> AmmoLookup;
+            public EntityCommandBuffer.ParallelWriter Commands;
 
-            public ComponentLookup<AbilityStartedEvent> StartedEventsLookup;
-            public ComponentLookup<AbilityExecutedEvent> ExecutedEventsLookup;
-            
-            public EntityCommandBuffer Commands;
+            public void Execute(
+                in ArchetypeChunk chunk,
+                int unfilteredChunkIndex,
+                bool useEnabledMask,
+                in v128 chunkEnabledMask)
+            {
+                NativeArray<Entity> actors = chunk.GetNativeArray(EntityHandle);
+                NativeArray<Health> healths = chunk.GetNativeArray(ref HealthHandle);
+                NativeArray<AbilityUseRequest> requests = chunk.GetNativeArray(ref RequestHandle);
+                NativeArray<AbilityWindup> windups = chunk.GetNativeArray(ref WindupHandle);
+                NativeArray<AbilityCooldown> cooldowns = chunk.GetNativeArray(ref CooldownHandle);
+                NativeArray<AbilityStartedEvent> startedEvents = chunk.GetNativeArray(ref StartedEventHandle);
+                NativeArray<AbilityExecutedEvent> executedEvents = chunk.GetNativeArray(ref ExecutedEventHandle);
 
-            private void Execute(
+                EnabledMask requestMask = chunk.GetEnabledMask(ref RequestHandle);
+                EnabledMask windupMask = chunk.GetEnabledMask(ref WindupHandle);
+                EnabledMask cooldownMask = chunk.GetEnabledMask(ref CooldownHandle);
+                EnabledMask startedMask = chunk.GetEnabledMask(ref StartedEventHandle);
+                EnabledMask executedMask = chunk.GetEnabledMask(ref ExecutedEventHandle);
+
+                bool hasAmmo = chunk.Has(ref AmmoHandle);
+
+                NativeArray<Ammo> balances = hasAmmo
+                    ? chunk.GetNativeArray(ref AmmoHandle)
+                    : default;
+
+                var enumerator = new ChunkEntityEnumerator(
+                    useEnabledMask,
+                    chunkEnabledMask,
+                    chunk.Count);
+
+                while (enumerator.NextEntityIndex(out int index))
+                {
+                    RefRW<AbilityUseRequest> requestRef = new RefRW<AbilityUseRequest>(requests, index);
+                    RefRW<AbilityWindup> windupRef = new RefRW<AbilityWindup>(windups, index);
+                    RefRW<AbilityCooldown> cooldownRef = new RefRW<AbilityCooldown>(cooldowns, index);
+                    RefRW<AbilityStartedEvent> startedEventRef = new RefRW<AbilityStartedEvent>(startedEvents, index);
+                    RefRW<AbilityExecutedEvent> executeEventRef = new RefRW<AbilityExecutedEvent>(executedEvents, index);
+                    RefRW<Health> healthRef = new RefRW<Health>(healths, index);
+                    
+                    Ammo ammo = hasAmmo
+                        ? balances[index]
+                        : default;
+
+                    ProcessEntity(
+                        unfilteredChunkIndex,
+                        actors[index],
+                        ref requestRef.ValueRW,
+                        requestMask.GetEnabledRefRW<AbilityUseRequest>(index),
+                        ref windupRef.ValueRW,
+                        windupMask.GetEnabledRefRW<AbilityWindup>(index),
+                        ref cooldownRef.ValueRW,
+                        cooldownMask.GetEnabledRefRW<AbilityCooldown>(index),
+                        ref startedEventRef.ValueRW,
+                        startedMask.GetEnabledRefRW<AbilityStartedEvent>(index),
+                        ref executeEventRef.ValueRW,
+                        executedMask.GetEnabledRefRW<AbilityExecutedEvent>(index),
+                        in healthRef.ValueRW,
+                        hasAmmo,
+                        ref ammo);
+
+                    if (hasAmmo)
+                        balances[index] = ammo;
+                }
+            }
+
+            private void ProcessEntity(
+                int sortKey,
                 Entity actor,
                 ref AbilityUseRequest request,
                 EnabledRefRW<AbilityUseRequest> requestEnabled,
@@ -90,7 +158,13 @@ namespace Game.Systems
                 EnabledRefRW<AbilityWindup> windupEnabled,
                 ref AbilityCooldown cooldown,
                 EnabledRefRW<AbilityCooldown> cooldownEnabled,
-                in Health health)
+                ref AbilityStartedEvent startedEvent,
+                EnabledRefRW<AbilityStartedEvent> startedEventEnabled,
+                ref AbilityExecutedEvent executedEvent,
+                EnabledRefRW<AbilityExecutedEvent> executedEventEnabled,
+                in Health health,
+                bool hasAmmo,
+                ref Ammo ammo)
             {
                 if (AbilitiesLookup.TryGetRefRO(
                         request.Definition,
@@ -119,11 +193,9 @@ namespace Game.Systems
                 if (request.Preparing == false)
                 {
                     bool enoughAmmo = cost == 0
-                        || (cost > 0
-                            && AmmoLookup.TryGetRefRO(
-                                actor,
-                                out RefRO<Ammo> balance)
-                            && balance.ValueRO.Value >= cost);
+                                      || (cost > 0
+                                          && hasAmmo
+                                          && ammo.Value >= cost);
 
                     bool canStart = AbilityUseCase.CanStartTargeted(
                         actor,
@@ -152,9 +224,9 @@ namespace Game.Systems
                         definition.ValueRO.Windup);
 
                     AbilityUseCase.NotifyStarted(
-                        actor,
                         request.Definition,
-                        ref StartedEventsLookup);
+                        ref startedEvent,
+                        startedEventEnabled);
                 }
 
                 if (windupEnabled.ValueRO)
@@ -163,20 +235,10 @@ namespace Game.Systems
                 if (HealthLookup.TryGetRefRO(
                         request.Target,
                         out RefRO<Health> targetHealth) == false
-                    || targetHealth.ValueRO.IsDead())
-                {
-                    AbilityUseCase.Finish(
-                        ref request, requestEnabled,
-                        ref windup, windupEnabled);
-
-                    return;
-                }
-
-                RefRW<Ammo> ammo = default;
-
-                if ((cost > 0
-                     && AmmoLookup.TryGetRefRW(actor, out ammo) == false)
+                    || targetHealth.ValueRO.IsDead()
+                    || (cost > 0 && hasAmmo == false)
                     || TryCreateProjectile(
+                        sortKey,
                         actor,
                         request.Target,
                         ability.ValueRO.ProjectilePrefab,
@@ -190,18 +252,19 @@ namespace Game.Systems
                 }
 
                 SetDamage(
+                    sortKey,
                     actor,
                     ability.ValueRO.ProjectilePrefab,
                     projectile);
 
                 if (cost > 0)
-                    ammo.ValueRW.Value -= cost;
+                    ammo.Value -= cost;
 
                 AbilityUseCase.NotifyExecuted(
-                    actor,
                     request.Target,
                     request.Definition,
-                    ref ExecutedEventsLookup);
+                    ref executedEvent,
+                    executedEventEnabled);
 
                 AbilityUseCase.Complete(
                     ref request, requestEnabled,
@@ -215,11 +278,13 @@ namespace Game.Systems
                 return SpawnPointsLookup.TryGetRefRO(
                            actor,
                            out RefRO<ProjectileSpawnPoint> spawnPoint)
-                    && WorldTransformsLookup.HasComponent(spawnPoint.ValueRO.Value)
-                    && PrefabTransformsLookup.HasComponent(prefab);
+                       && WorldTransformsLookup.HasComponent(
+                           spawnPoint.ValueRO.Value)
+                       && PrefabTransformsLookup.HasComponent(prefab);
             }
 
             private bool TryCreateProjectile(
+                int sortKey,
                 Entity actor,
                 Entity target,
                 Entity prefab,
@@ -239,10 +304,13 @@ namespace Game.Systems
                     || PrefabTransformsLookup.TryGetRefRO(
                         prefab,
                         out RefRO<LocalTransform> prefabTransform) == false)
+                {
                     return false;
+                }
 
                 projectile = ProjectileUseCase.Create(
                     ref Commands,
+                    sortKey,
                     prefab,
                     target,
                     in muzzle.ValueRO,
@@ -252,9 +320,13 @@ namespace Game.Systems
                 return true;
             }
 
-            private void SetDamage(Entity actor, Entity prefab, Entity projectile)
+            private void SetDamage(
+                int sortKey,
+                Entity actor,
+                Entity prefab,
+                Entity projectile)
             {
-                if (DamageLookupLookup.TryGetRefRO(
+                if (DamageLookup.TryGetRefRO(
                         prefab,
                         out RefRO<Damage> projectileDamage) == false)
                     return;
@@ -262,12 +334,15 @@ namespace Game.Systems
                 float damage = DamageUseCase.Calculate(
                     projectileDamage.ValueRO.Value,
                     actor,
-                    ref DamageLookupLookup);
+                    ref DamageLookup);
 
-                Commands.SetComponent(projectile, new Damage
-                {
-                    Value = damage
-                });
+                Commands.SetComponent(
+                    sortKey,
+                    projectile,
+                    new Damage
+                    {
+                        Value = damage
+                    });
             }
         }
     }

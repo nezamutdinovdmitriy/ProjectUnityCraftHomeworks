@@ -88,31 +88,24 @@ namespace Game.UseCases
         }
         
         public static void NotifyStarted(
-            Entity actor,
             Entity definition,
-            ref ComponentLookup<AbilityStartedEvent> eventLookup)
+            ref AbilityStartedEvent startedEvent,
+            EnabledRefRW<AbilityStartedEvent> eventEnabled)
         {
-            if (eventLookup.TryGetRefRW(
-                    actor, out RefRW<AbilityStartedEvent> startedEvent) == false)
-                return;
-            
-            startedEvent.ValueRW.Definition = definition;
-            eventLookup.SetComponentEnabled(actor, true);
+            startedEvent.Definition = definition;
+            eventEnabled.ValueRW = true;
         }
         
         public static void NotifyExecuted(
-            Entity actor,
             Entity target,
-            Entity definition,
-            ref ComponentLookup<AbilityExecutedEvent> eventLookup)
+            Entity definition, 
+            ref AbilityExecutedEvent executedEvent,
+            EnabledRefRW<AbilityExecutedEvent> eventEnabled)
         {
-            if (eventLookup.TryGetRefRW(
-                    actor, out RefRW<AbilityExecutedEvent> executedEvent) == false)
-                return;
-
-            executedEvent.ValueRW.Definition = definition;
-            executedEvent.ValueRW.Target = target;
-            eventLookup.SetComponentEnabled(actor, true);
+            executedEvent.Definition = definition;
+            executedEvent.Target = target;
+            
+            eventEnabled.ValueRW = true;
         }
     }
 }

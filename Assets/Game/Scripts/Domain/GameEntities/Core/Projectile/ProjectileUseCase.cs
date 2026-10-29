@@ -8,7 +8,8 @@ namespace Game.UseCases
     public static class ProjectileUseCase
     {
         public static Entity Create(
-            ref EntityCommandBuffer commands,
+            ref EntityCommandBuffer.ParallelWriter commands,
+            int sortKey,
             Entity prefab,
             Entity target,
             in LocalToWorld spawnTransform,
@@ -26,28 +27,28 @@ namespace Game.UseCases
                 quaternion.LookRotationSafe(direction, math.up()),
                 transform.Rotation);
 
-            Entity projectile = commands.Instantiate(prefab);
+            Entity projectile = commands.Instantiate(sortKey, prefab);
             
-            commands.SetComponent(projectile, transform);
+            commands.SetComponent(sortKey, projectile, transform);
             
-            commands.SetComponent(projectile, new TargetEntity
+            commands.SetComponent(sortKey, projectile, new TargetEntity
             {
                 Value = target
             });
             
-            commands.SetComponent(projectile, new MovementRequest
+            commands.SetComponent(sortKey, projectile, new MovementRequest
             {
                 Direction = direction
             });
 
-            commands.SetComponentEnabled<MovementRequest>(projectile, true);
+            commands.SetComponentEnabled<MovementRequest>(sortKey, projectile, true);
 
-            commands.SetComponent(projectile, new RotationRequest
+            commands.SetComponent(sortKey, projectile, new RotationRequest
             {
                 Direction = direction
             });
                 
-            commands.SetComponentEnabled<RotationRequest>(projectile, true);
+            commands.SetComponentEnabled<RotationRequest>(sortKey, projectile, true);
 
             return projectile;
         }
