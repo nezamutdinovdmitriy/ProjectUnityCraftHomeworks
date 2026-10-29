@@ -2,9 +2,12 @@ using System;
 using Game.Components;
 using Game.ECS.SystemGroups;
 using Unity.Entities;
+using Random = Unity.Mathematics.Random;
 
 namespace Game.UseCases.Systems
 {
+    
+
     [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
     public partial struct UnitPurchaseAISystem : ISystem
     {
@@ -35,8 +38,17 @@ namespace Game.UseCases.Systems
                 if(requests.IsEmpty == false)
                     continue;
 
+                if (buyer.ValueRO.Generator.state == 0)
+                {
+                    uint seed = (uint)UnityEngine.Random.Range(1, int.MaxValue);
+
+                    buyer.ValueRW.Generator = Random.CreateFromIndex(seed);
+                }
+                
                 if (buyer.ValueRO.SelectedItemIndex < 0)
+                {
                     buyer.ValueRW.SelectedItemIndex = buyer.ValueRW.Generator.NextInt(items.Length);
+                }
 
                 int itemIndex = buyer.ValueRO.SelectedItemIndex;
                 int price = items[itemIndex].Price;
