@@ -5,14 +5,21 @@ namespace Game.UseCases
 {
     public static class DamageUseCase
     {
+        public static float Calculate(float baseDamage, float actorDamage)
+        {
+            return baseDamage + actorDamage;
+        }
+        
         public static float Calculate(
             float baseDamage,
             Entity actor,
-            ref ComponentLookup<Components.Damage> damageLookup)
+            ref ComponentLookup<Damage> damageLookup)
         {
-            return damageLookup.TryGetRefRO(actor, out RefRO<Damage> actorDamage)
-                ? baseDamage + actorDamage.ValueRO.Value
-                : baseDamage;
+            float actorDamage = damageLookup.TryGetRefRO(actor, out RefRO<Damage> damage)
+                ? damage.ValueRO.Value
+                : 0f;
+
+            return Calculate(baseDamage, actorDamage);
         }
     }
 }

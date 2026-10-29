@@ -22,9 +22,7 @@ namespace Game.Systems
                 .WithAllRW<AbilityUseRequest>()
                 .WithAll<Health>()
                 .WithPresentRW<AbilityWindup, AbilityCooldown>()
-                .WithPresentRW<
-                    AbilityStartedEvent,
-                    AbilityExecutedEvent>()
+                .WithPresentRW<AbilityStartedEvent, AbilityExecutedEvent>()
                 .Build();
 
             state.RequireForUpdate(_query);
@@ -38,7 +36,7 @@ namespace Game.Systems
                 .CreateCommandBuffer(state.WorldUnmanaged)
                 .AsParallelWriter();
 
-            state.Dependency = new HealCastJob
+            HealCastJob job = new HealCastJob
             {
                 Commands = commands,
                 EntityHandle = SystemAPI.GetEntityTypeHandle(),
@@ -56,7 +54,9 @@ namespace Game.Systems
                 MaxHealthLookup = SystemAPI.GetComponentLookup<MaxHealth>(true),
                 WorldTransformsLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true),
                 HealRequestsLookup = SystemAPI.GetBufferLookup<HealRequest>(true)
-            }.ScheduleParallel(_query, state.Dependency);
+            };
+
+            state.Dependency = job.ScheduleParallelByRef(_query, state.Dependency);
         }
 
         [BurstCompile]
@@ -118,7 +118,7 @@ namespace Game.Systems
                     RefRW<AbilityCooldown> cooldownRef = new RefRW<AbilityCooldown>(cooldowns, index);
                     RefRW<AbilityStartedEvent> startedEventRef = new RefRW<AbilityStartedEvent>(startedEvents, index);
                     RefRW<AbilityExecutedEvent> executeEventRef = new RefRW<AbilityExecutedEvent>(executedEvents, index);
-                    RefRW<Health> healthRef = new RefRW<Health>(healths, index);
+                    RefRO<Health> healthRef = new RefRO<Health>(healths, index);
 
                     Mana mana = hasMana
                         ? balances[index]
@@ -132,7 +132,8 @@ namespace Game.Systems
                         ref cooldownRef.ValueRW, cooldownMask.GetEnabledRefRW<AbilityCooldown>(index),
                         ref startedEventRef.ValueRW, startedMask.GetEnabledRefRW<AbilityStartedEvent>(index),
                         ref executeEventRef.ValueRW, executedMask.GetEnabledRefRW<AbilityExecutedEvent>(index),
-                        in healthRef.ValueRW, hasMana,
+                        in healthRef.ValueRO, 
+                        hasMana,
                         ref mana);
 
                     if (hasMana)

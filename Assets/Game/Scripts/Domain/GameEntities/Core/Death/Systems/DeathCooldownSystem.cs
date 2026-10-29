@@ -26,21 +26,6 @@ namespace Game.Systems
                 DeltaTime = SystemAPI.Time.DeltaTime,
                 Commands = commands
             }.ScheduleParallel(state.Dependency);
-
-            // float deltaTime = SystemAPI.Time.DeltaTime;
-            //
-            // EntityCommandBuffer ecb = SystemAPI
-            //     .GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
-            //     .CreateCommandBuffer(state.WorldUnmanaged);
-            //
-            // foreach ((RefRW<DeathCooldown> cooldown, Entity entity)
-            //          in SystemAPI.Query<RefRW<DeathCooldown>>().WithEntityAccess())
-            // {
-            //     cooldown.ValueRW.Time -= deltaTime;
-            //
-            //     if (cooldown.ValueRO.Time <= 0)
-            //         ecb.DestroyEntity(entity);
-            // }
         }
         
         [BurstCompile]

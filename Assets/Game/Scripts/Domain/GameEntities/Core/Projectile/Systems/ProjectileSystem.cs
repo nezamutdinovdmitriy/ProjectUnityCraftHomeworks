@@ -39,7 +39,7 @@ namespace Game.Systems
                 .CreateCommandBuffer(state.WorldUnmanaged)
                 .AsParallelWriter();
 
-            state.Dependency = new UpdateProjectilesJob
+            UpdateProjectilesJob job = new UpdateProjectilesJob
             {
                 Commands = commands,
 
@@ -55,7 +55,9 @@ namespace Game.Systems
                 HitPointsLookup = SystemAPI.GetComponentLookup<TargetHitPoint>(true),
                 WorldTransformsLookup = SystemAPI.GetComponentLookup<LocalToWorld>(true),
                 DamageRequestsLookup = SystemAPI.GetBufferLookup<TakeDamageRequest>(true)
-            }.ScheduleParallel(_query, state.Dependency);
+            };
+
+            state.Dependency = job.ScheduleParallelByRef(_query, state.Dependency);
         }
 
         [BurstCompile]

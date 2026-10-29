@@ -35,8 +35,8 @@ namespace Game.Systems
                 .GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged)
                 .AsParallelWriter();
-
-            state.Dependency = new ArrowShotJob
+            
+            ArrowShotJob job = new ArrowShotJob
             {
                 Commands = commands,
                 EntityHandle = SystemAPI.GetEntityTypeHandle(),
@@ -55,7 +55,9 @@ namespace Game.Systems
                 PrefabTransformsLookup = SystemAPI.GetComponentLookup<LocalTransform>(true),
                 SpawnPointsLookup = SystemAPI.GetComponentLookup<ProjectileSpawnPoint>(true),
                 DamageLookup = SystemAPI.GetComponentLookup<Damage>(true)
-            }.ScheduleParallel(_query, state.Dependency);
+            };
+
+            state.Dependency = job.ScheduleByRef(_query, state.Dependency);
         }
 
         [BurstCompile]
@@ -121,7 +123,7 @@ namespace Game.Systems
                     RefRW<AbilityCooldown> cooldownRef = new RefRW<AbilityCooldown>(cooldowns, index);
                     RefRW<AbilityStartedEvent> startedEventRef = new RefRW<AbilityStartedEvent>(startedEvents, index);
                     RefRW<AbilityExecutedEvent> executeEventRef = new RefRW<AbilityExecutedEvent>(executedEvents, index);
-                    RefRW<Health> healthRef = new RefRW<Health>(healths, index);
+                    RefRO<Health> healthRef = new RefRO<Health>(healths, index);
                     
                     Ammo ammo = hasAmmo
                         ? balances[index]
@@ -140,7 +142,7 @@ namespace Game.Systems
                         startedMask.GetEnabledRefRW<AbilityStartedEvent>(index),
                         ref executeEventRef.ValueRW,
                         executedMask.GetEnabledRefRW<AbilityExecutedEvent>(index),
-                        in healthRef.ValueRW,
+                        in healthRef.ValueRO,
                         hasAmmo,
                         ref ammo);
 
