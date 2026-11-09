@@ -19,7 +19,7 @@ namespace Game.Systems
         {
             state.RequireForUpdate<UnitPurchaseItem>();
             state.RequireForUpdate<UnitPurchaseRequest>();
-            state.RequireForUpdate<GameDeltaTime>();
+            state.RequireForUpdate<GameState>();
             state.RequireForUpdate<Base>();
 
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
@@ -32,7 +32,7 @@ namespace Game.Systems
         
         public void OnUpdate(ref SystemState state)
         {
-            if (SystemAPI.GetSingleton<GameDeltaTime>().DeltaTime <= 0f)
+            if (SystemAPI.GetSingleton<GameState>().Value != GameStateType.Playing)
                 return;
 
             DynamicBuffer<UnitPurchaseItem> items = SystemAPI

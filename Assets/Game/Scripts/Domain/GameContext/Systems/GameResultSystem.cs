@@ -25,9 +25,9 @@ namespace Game.Systems
 
         public void OnUpdate(ref SystemState state)
         {
-            RefRW<GameState> context = SystemAPI.GetSingletonRW<GameState>();
+            RefRW<GameState> gameState = SystemAPI.GetSingletonRW<GameState>();
 
-            if (context.ValueRO.Value != GameStateType.Playing)
+            if (gameState.ValueRO.Value != GameStateType.Playing)
                 return;
 
             TeamType localTeam = _localPlayerQuery.GetSingleton<Team>().Value;
@@ -53,7 +53,7 @@ namespace Game.Systems
             if (stateType == GameStateType.Playing)
                 return;
 
-            context.ValueRW.Value = stateType;
+            gameState.ValueRW.Value = stateType;
 
             SystemAPI.GetSingletonRW<GameDeltaTime>().ValueRW.DeltaTime = 0f;
         }
