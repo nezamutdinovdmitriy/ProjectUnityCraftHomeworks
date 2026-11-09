@@ -8,8 +8,8 @@ namespace Game.ECS.SystemGroups
     {
         protected override void OnUpdate()
         {
-            if (SystemAPI.TryGetSingleton(out GameDeltaTime time) == false
-                || time.DeltaTime <= 0f)
+            if (!SystemAPI.TryGetSingleton(out GameState state) ||
+                state.Value != GameStateType.Playing)
                 return;
             
             base.OnUpdate();
