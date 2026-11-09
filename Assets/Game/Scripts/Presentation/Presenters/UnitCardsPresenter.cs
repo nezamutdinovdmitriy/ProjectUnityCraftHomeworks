@@ -15,8 +15,6 @@ namespace Game.View.Presenters
         {
             public UnitCardView View;
             public UnitCardConfig Config;
-            
-            public UnityAction ClickHandler;
 
             public int LastEnergy = int.MinValue;
             public int LastPrice = int.MinValue;
@@ -72,20 +70,15 @@ namespace Game.View.Presenters
 
                 UnitCardView view = Instantiate(_cardPrefab, _container);
 
-                UnityAction clickHandler = () => OnPurchaseClicked(itemIndex);
-
                 view.SetName(config.Name);
                 view.SetIcon(config.Icon);
                 view.SetProgressCaption("...");
                 view.SetEnabled(false);
 
-                view.OnClicked += clickHandler;
-
                 _cards[cardIndex] = new CardBinding
                 {
                     View = view,
                     Config = config,
-                    ClickHandler = clickHandler
                 };
 
                 cardIndex++;
@@ -147,8 +140,15 @@ namespace Game.View.Presenters
                 return;
             }
 
-            foreach (var card in _cards)
-                RefreshCard(card, energy, card.Config.Price, canPurchase);
+            for (int i = 0; i < _cards.Length; i++)
+            {
+                CardBinding cardBinding = _cards[i];
+
+                if (cardBinding.View.ConsumeClick())
+                    OnPurchaseClicked(i);
+                
+                RefreshCard(cardBinding, energy, cardBinding.Config.Price, canPurchase);
+            }
         }
 
         private void RefreshCard(
@@ -229,12 +229,6 @@ namespace Game.View.Presenters
 
         private void OnDestroy()
         {
-            foreach (CardBinding card in _cards)
-            {
-                if (card != null && card.View != null)
-                    card.View.OnClicked -= card.ClickHandler;
-            }
-
             if (_queriesCreated && _world is {IsCreated: true})
             {
                 _playerQuery.Dispose();
