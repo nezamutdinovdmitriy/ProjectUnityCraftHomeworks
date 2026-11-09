@@ -11,12 +11,12 @@ namespace Game.Components.Authoring
             {
                 Entity entity = GetEntity(TransformUsageFlags.None);
                 
-                AddComponent(entity, new GameContext
+                AddComponent(entity, new GameState
                 {
-                    Result = GameResult.None
+                    Value = GameStateType.Playing
                 });
                 
-                AddComponent(entity, new GameTime());
+                AddComponent(entity, new GameDeltaTime());
             }
         }
     }

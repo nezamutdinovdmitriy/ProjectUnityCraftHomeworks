@@ -4,37 +4,23 @@ using SampleGame;
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Game.View.Presenters
 {
     [DisallowMultipleComponent]
     public sealed class UnitCardsPresenter : MonoBehaviour
     {
-        private sealed class CardBinding
-        {
-            public UnitCardView View;
-            public UnitCardConfig Config;
-
-            public int LastEnergy = int.MinValue;
-            public int LastPrice = int.MinValue;
-
-            public bool CanPurchase;
-        }
-        
         [SerializeField] private UnitCardsCatalog _catalog;
         [SerializeField] private UnitCardView _cardPrefab;
         [SerializeField] private Transform _container;
 
-        private CardBinding[] _cards = Array.Empty<CardBinding>();
+        private UnitCardPresenter[] _unitCardPresenters = Array.Empty<UnitCardPresenter>();
 
         private World _world;
-
         private EntityQuery _playerQuery;
         private EntityQuery _timeQuery;
-        
         private bool _queriesCreated;
-        
+
         private void Awake()
         {
             if (_catalog == null
@@ -60,28 +46,50 @@ namespace Game.View.Presenters
                 }
             }
 
-            _cards = new CardBinding[_catalog.Cards.Count];
+            _unitCardPresenters = new UnitCardPresenter[_catalog.Cards.Count];
 
-            int cardIndex = 0;
+            int itemIndex = 0;
 
             foreach (UnitCardConfig config in _catalog.Cards)
             {
-                int itemIndex = cardIndex;
-
                 UnitCardView view = Instantiate(_cardPrefab, _container);
 
-                view.SetName(config.Name);
-                view.SetIcon(config.Icon);
-                view.SetProgressCaption("...");
-                view.SetEnabled(false);
+                _unitCardPresenters[itemIndex] = new UnitCardPresenter(view, config);
+                itemIndex++;
+            }
+        }
 
-                _cards[cardIndex] = new CardBinding
-                {
-                    View = view,
-                    Config = config,
-                };
+        private void OnDisable() => DisablePurchases();
+        
+        private void OnDestroy()
+        {
+            if (!_queriesCreated || _world is not {IsCreated: true})
+                return;
 
-                cardIndex++;
+            EntityManager manager = _world.EntityManager;
+
+            if (manager.IsQueryValid(_playerQuery))
+                _playerQuery.Dispose();
+
+            if (manager.IsQueryValid(_timeQuery))
+                _timeQuery.Dispose();
+        }
+        
+        private void LateUpdate()
+        {
+            if (!TryReadState(out int energy, out bool purchasesAllowed))
+            {
+                DisablePurchases();
+                return;
+            }
+
+            for (int i = 0; i < _unitCardPresenters.Length; i++)
+            {
+                UnitCardPresenter unitCardPresenter = _unitCardPresenters[i];
+                unitCardPresenter.Refresh(energy, purchasesAllowed);
+
+                if (unitCardPresenter.TryConsumePurchaseClick())
+                    EnqueuePurchase(i);
             }
         }
         
@@ -92,7 +100,7 @@ namespace Game.View.Presenters
 
             _world = World.DefaultGameObjectInjectionWorld;
 
-            if (_world == null || _world.IsCreated == false)
+            if (_world is not {IsCreated: true})
                 return false;
 
             EntityManager manager = _world.EntityManager;
@@ -103,107 +111,37 @@ namespace Game.View.Presenters
                 .Build(manager);
 
             _timeQuery = new EntityQueryBuilder(Allocator.Temp)
-                .WithAll<GameTime>()
+                .WithAll<GameDeltaTime>()
                 .Build(manager);
 
             _queriesCreated = true;
 
             return true;
         }
-        
-        private bool TryReadState(out int energy, out bool canPurchase)
+
+        private bool TryReadState(out int energy, out bool purchasesAllowed)
         {
             energy = 0;
-            canPurchase = false;
+            purchasesAllowed = false;
 
-            if (TryInitializeQueries() == false)
+            if (!TryInitializeQueries())
                 return false;
 
             _playerQuery.CompleteDependency();
             _timeQuery.CompleteDependency();
 
-            if (_playerQuery.TryGetSingleton(out Energy playerEnergy) == false
-                || _timeQuery.TryGetSingleton(out GameTime time) == false)
+            if (!_playerQuery.TryGetSingleton(out Energy playerEnergy)
+                || !_timeQuery.TryGetSingleton(out GameDeltaTime time))
                 return false;
 
             energy = playerEnergy.Value;
-            canPurchase = time.DeltaTime > 0f;
+            purchasesAllowed = time.DeltaTime > 0f;
 
             return true;
         }
-        
-        private void LateUpdate()
+
+        private void EnqueuePurchase(int itemIndex)
         {
-            if (TryReadState(out int energy, out bool canPurchase) == false)
-            {
-                DisablePurchases();
-                return;
-            }
-
-            for (int i = 0; i < _cards.Length; i++)
-            {
-                CardBinding cardBinding = _cards[i];
-
-                if (cardBinding.View.ConsumeClick())
-                    OnPurchaseClicked(i);
-                
-                RefreshCard(cardBinding, energy, cardBinding.Config.Price, canPurchase);
-            }
-        }
-
-        private void RefreshCard(
-            CardBinding card,
-            int energy,
-            int price,
-            bool canPurchase)
-        {
-            if (card.LastEnergy != energy || card.LastPrice != price)
-            {
-                int accumulated = Mathf.Clamp(
-                    energy,
-                    0,
-                    Mathf.Max(0, price));
-
-                float progress = price == 0
-                    ? 1f
-                    : price > 0
-                        ? (float)accumulated / price
-                        : 0f;
-
-                string caption = price < 0
-                    ? "Недоступно"
-                    : price == 0
-                        ? "Бесплатно"
-                        : $"{accumulated} / {price}";
-
-                card.View.SetProgress(progress);
-                card.View.SetProgressCaption(caption);
-
-                card.LastEnergy = energy;
-                card.LastPrice = price;
-            }
-
-            bool canBuy = canPurchase && price >= 0 && energy >= price;
-
-            if (card.CanPurchase != canBuy)
-            {
-                card.CanPurchase = canBuy;
-                card.View.SetEnabled(canBuy);
-            }
-        }
-
-        private void OnPurchaseClicked(int itemIndex)
-        {
-            if (isActiveAndEnabled == false
-                || TryReadState(out int energy, out bool canPurchase) == false
-                || canPurchase == false)
-                return;
-
-            int price = _cards[itemIndex].Config.Price;
-
-            if (price < 0 || energy < price)
-                return;
-            
             DynamicBuffer<UnitPurchaseRequest> requests = _playerQuery
                 .GetSingletonBuffer<UnitPurchaseRequest>();
 
@@ -215,25 +153,8 @@ namespace Game.View.Presenters
 
         private void DisablePurchases()
         {
-            foreach (CardBinding card in _cards)
-            {
-                if (card == null || card.View == null)
-                    continue;
-
-                card.CanPurchase = false;
-                card.View.SetEnabled(false);
-            }
-        }
-
-        private void OnDisable() => DisablePurchases();
-
-        private void OnDestroy()
-        {
-            if (_queriesCreated && _world is {IsCreated: true})
-            {
-                _playerQuery.Dispose();
-                _timeQuery.Dispose();
-            }
+            foreach (UnitCardPresenter cardBinding in _unitCardPresenters)
+                cardBinding.DisablePurchase();
         }
     }
 }

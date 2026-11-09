@@ -7,7 +7,7 @@ namespace SampleGame
     {
         [SerializeField] private TMP_Text _healthValue;
         [SerializeField] private ProgressBarPro _healthProgressBar;
-
+        
         public float HealthProgress
         {
             get => _healthProgressBar.Value;

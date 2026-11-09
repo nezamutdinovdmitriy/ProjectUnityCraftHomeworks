@@ -2,7 +2,7 @@ using Unity.Entities;
 
 namespace Game.Components
 {
-    public struct GameTime : IComponentData
+    public struct GameDeltaTime : IComponentData
     {
         public float DeltaTime;
     }

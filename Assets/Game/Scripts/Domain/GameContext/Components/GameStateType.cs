@@ -1,8 +1,8 @@
 namespace Game.Components
 {
-    public enum GameResult : byte
+    public enum GameStateType : byte
     {
-        None = 0,
+        Playing = 0,
         Victory = 1,
         Defeat = 2
     }

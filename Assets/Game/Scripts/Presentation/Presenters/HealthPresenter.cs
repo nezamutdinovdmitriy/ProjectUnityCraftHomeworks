@@ -1,4 +1,3 @@
-using System;
 using Game.Components;
 using SampleGame;
 using Unity.Collections;

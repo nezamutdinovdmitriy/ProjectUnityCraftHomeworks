@@ -9,7 +9,7 @@ namespace Game.ECS.SystemGroups
     {
         protected override void OnUpdate()
         {
-            if (SystemAPI.TryGetSingleton(out GameTime time) == false
+            if (SystemAPI.TryGetSingleton(out GameDeltaTime time) == false
                 || time.DeltaTime <= 0f)
                 return;
             

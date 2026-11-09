@@ -19,20 +19,20 @@ namespace Game.Systems
                 .Build(ref state);
             
             state.RequireForUpdate(_localPlayerQuery);
-            state.RequireForUpdate<GameContext>();
-            state.RequireForUpdate<GameTime>();
+            state.RequireForUpdate<GameState>();
+            state.RequireForUpdate<GameDeltaTime>();
         }
 
         public void OnUpdate(ref SystemState state)
         {
-            RefRW<GameContext> context = SystemAPI.GetSingletonRW<GameContext>();
+            RefRW<GameState> context = SystemAPI.GetSingletonRW<GameState>();
 
-            if (context.ValueRO.Result != GameResult.None)
+            if (context.ValueRO.Value != GameStateType.Playing)
                 return;
 
             TeamType localTeam = _localPlayerQuery.GetSingleton<Team>().Value;
 
-            GameResult result = GameResult.None;
+            GameStateType stateType = GameStateType.Playing;
 
             foreach (var (health, team) 
                      in SystemAPI.Query<RefRO<Health>, RefRO<Team>>()
@@ -43,19 +43,19 @@ namespace Game.Systems
 
                 if (team.ValueRO.Value == localTeam)
                 {
-                    result = GameResult.Defeat;
+                    stateType = GameStateType.Defeat;
                     break;
                 }
 
-                result = GameResult.Victory;
+                stateType = GameStateType.Victory;
             }
 
-            if (result == GameResult.None)
+            if (stateType == GameStateType.Playing)
                 return;
 
-            context.ValueRW.Result = result;
+            context.ValueRW.Value = stateType;
 
-            SystemAPI.GetSingletonRW<GameTime>().ValueRW.DeltaTime = 0f;
+            SystemAPI.GetSingletonRW<GameDeltaTime>().ValueRW.DeltaTime = 0f;
         }
     }
 }

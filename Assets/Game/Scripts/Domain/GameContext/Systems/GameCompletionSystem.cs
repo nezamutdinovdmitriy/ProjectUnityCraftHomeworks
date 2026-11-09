@@ -9,17 +9,17 @@ namespace Game.Systems
     {
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<GameContext>();
+            state.RequireForUpdate<GameState>();
         }
 
         public void OnUpdate(ref SystemState state)
         {
-            GameResult result = SystemAPI.GetSingleton<GameContext>().Result;
+            GameStateType stateType = SystemAPI.GetSingleton<GameState>().Value;
 
-            if (result == GameResult.None)
+            if (stateType == GameStateType.Playing)
                 return;
             
-            Debug.Log(result == GameResult.Victory ? "Game Win" : "Game Over");
+            Debug.Log(stateType == GameStateType.Victory ? "Game Win" : "Game Over");
 
             state.Enabled = false;
         }
