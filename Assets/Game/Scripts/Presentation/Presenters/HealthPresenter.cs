@@ -25,7 +25,7 @@ namespace Game.View.Presenters
                 .Build(_world.EntityManager);
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             if (_world is not {IsCreated: true})
                 return;
