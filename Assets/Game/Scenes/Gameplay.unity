@@ -2101,38 +2101,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 707590013}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &753238895 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3106224043233755830, guid: 6beeda15e0dde43369f490f535cbd94e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2873688074205370161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &753238897 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4542091049710589381, guid: 6beeda15e0dde43369f490f535cbd94e,
     type: 3}
   m_PrefabInstance: {fileID: 2873688074205370161}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 753238895}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6efb638943ff495782137b02a92a3f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &753238898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 753238895}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 585cbe256b7a410f87f159108dbc1966, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.View.Presenters.HealthPresenter
-  _view: {fileID: 753238897}
-  _team: 1
 --- !u!1001 &753826586
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3580,6 +3560,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1029490081}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1041561623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6789685508163541426, guid: 6beeda15e0dde43369f490f535cbd94e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2873688074205370161}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1041561625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041561623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585cbe256b7a410f87f159108dbc1966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.View.Presenters.HealthPresenter
+  _blueTeam: {fileID: 1355708865}
+  _redTeam: {fileID: 753238897}
 --- !u!1001 &1056762381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4343,38 +4343,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1349197272}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1355708863 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8271758322889032561, guid: 6beeda15e0dde43369f490f535cbd94e,
-    type: 3}
-  m_PrefabInstance: {fileID: 2873688074205370161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1355708865 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7410683836300547074, guid: 6beeda15e0dde43369f490f535cbd94e,
     type: 3}
   m_PrefabInstance: {fileID: 2873688074205370161}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355708863}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6efb638943ff495782137b02a92a3f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1355708866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355708863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 585cbe256b7a410f87f159108dbc1966, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.View.Presenters.HealthPresenter
-  _view: {fileID: 1355708865}
-  _team: 0
 --- !u!1001 &1395991331
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6304,6 +6284,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6789685508163541426, guid: 6beeda15e0dde43369f490f535cbd94e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1041561625}
     - targetCorrespondingSourceObject: {fileID: 8053945255019186450, guid: 6beeda15e0dde43369f490f535cbd94e,
         type: 3}
       insertIndex: -1
@@ -6316,14 +6300,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 84105519}
-    - targetCorrespondingSourceObject: {fileID: 8271758322889032561, guid: 6beeda15e0dde43369f490f535cbd94e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1355708866}
-    - targetCorrespondingSourceObject: {fileID: 3106224043233755830, guid: 6beeda15e0dde43369f490f535cbd94e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 753238898}
   m_SourcePrefab: {fileID: 100100000, guid: 6beeda15e0dde43369f490f535cbd94e, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

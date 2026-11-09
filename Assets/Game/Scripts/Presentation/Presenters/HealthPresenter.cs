@@ -1,3 +1,4 @@
+using System;
 using Game.Components;
 using SampleGame;
 using Unity.Collections;
@@ -9,41 +10,56 @@ namespace Game.View.Presenters
 {
     public sealed class HealthPresenter : MonoBehaviour
     {
-        [SerializeField] private HealthView _view;
-        [SerializeField] private TeamType _team;
-
+        [SerializeField] private HealthView _blueTeam;
+        [SerializeField] private HealthView _redTeam;
+        
         private EntityQuery _query;
-        private EntityManager _entityManager;
-
+        private World _world;
+        
         private void Awake()
         {
-            _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            _world = World.DefaultGameObjectInjectionWorld;
 
             _query = new EntityQueryBuilder(Allocator.Temp)
                 .WithAll<Base, Team, Health, MaxHealth>()
-                .Build(_entityManager);
+                .Build(_world.EntityManager);
+        }
+
+        private void OnDestroy()
+        {
+            if (_world is not {IsCreated: true})
+                return;
+            
+            _query.Dispose();
         }
 
         private void LateUpdate()
         {
-            if (_view == null || _entityManager.World is not {IsCreated: true})
+            if (_world is not {IsCreated: true})
                 return;
+            
+            NativeArray<Team> teams = _query.ToComponentDataArray<Team>(Allocator.Temp);
+            NativeArray<MaxHealth> maxHealths = _query.ToComponentDataArray<MaxHealth>(Allocator.Temp);
+            NativeArray<Health> healths = _query.ToComponentDataArray<Health>(Allocator.Temp);
 
-            NativeArray<Entity> bases = _query.ToEntityArray(Allocator.Temp);
-            foreach (Entity entity in bases)
+            for (int i = 0; i < teams.Length; i++)
             {
-                Team teamComponent = _entityManager.GetComponentData<Team>(entity);
-                float maxHealth = _entityManager.GetComponentData<MaxHealth>(entity).Value;
+                HealthView view = teams[i].Value switch
+                {
+                    TeamType.Blue => _blueTeam,
+                    TeamType.Red => _redTeam,
+                    _ => null
+                };
 
-                if (teamComponent.Value != _team || maxHealth <= 0f)
+                float maxHealth = maxHealths[i].Value;
+                
+                if(view == null || maxHealth <= 0)
                     continue;
 
-                float health = _entityManager.GetComponentData<Health>(entity).Value;
-
-                _view.HealthText = $"{health} / {maxHealth}";
-                _view.HealthProgress = Mathf.Clamp01(health / maxHealth);
-
-                return;
+                float health = healths[i].Value;
+                
+                view.HealthText = $"{health} / {maxHealth}";
+                view.HealthProgress = Mathf.Clamp01(health / maxHealth);
             }
         }
     }
