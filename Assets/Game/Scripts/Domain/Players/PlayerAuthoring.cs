@@ -11,8 +11,6 @@ namespace Game.Components.Authoring
             {
                 Entity entity = GetEntity(TransformUsageFlags.None);
                 AddComponent(entity, new Player());
-
-                AddBuffer<UnitPurchaseRequest>(entity);
             }
         }
     }

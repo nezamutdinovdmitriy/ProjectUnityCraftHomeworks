@@ -24,7 +24,7 @@ namespace Game.Systems
                 }
 
                 energy.ValueRW.Value += cooldown.ValueRO.Income;
-                cooldown.ValueRW.Time = cooldown.ValueRO.Cooldown;
+                cooldown.ValueRW.Time += cooldown.ValueRO.Cooldown;
             }
         }
     }

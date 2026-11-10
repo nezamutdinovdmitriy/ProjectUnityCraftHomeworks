@@ -6,10 +6,10 @@ using UnityEngine;
 namespace Game.Configs
 {
     [CreateAssetMenu(
-        fileName = "TeamViewConfig",
-        menuName = "SampleGame/Common/New TeamViewConfig"
+        fileName = "TeamCatalog",
+        menuName = "SampleGame/Common/New TeamCatalog"
     )]
-    public sealed class TeamViewConfig : ScriptableObject
+    public sealed class TeamCatalog : ScriptableObject
     {
         [SerializeField]
         private TeamInfo[] _teams;
@@ -35,6 +35,9 @@ namespace Game.Configs
             [SerializeField]
             private Material material;
 
+            [SerializeField] 
+            private Color color;
+
             public Material Material
             {
                 get { return this.material; }
@@ -43,6 +46,11 @@ namespace Game.Configs
             public TeamType Type
             {
                 get { return type; }
+            }
+
+            public Color Color
+            {
+                get { return color; }
             }
         }
     }
