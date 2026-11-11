@@ -8,7 +8,7 @@ using Unity.Physics;
 
 namespace Game.UseCases
 {
-    public static class AIUseCase
+    public static class EnemyAIUseCase
     {
         public static Entity FindClosestTarget<TPredicate>(
             ref PhysicsWorldSingleton physicsWorld,

@@ -4,15 +4,15 @@ using UnityEngine;
 namespace Game.Components.Authoring
 {
     [DisallowMultipleComponent]
-    public sealed class UnitPurchaseAIAuthoring : MonoBehaviour
+    public sealed class EnemyAIAuthoring : MonoBehaviour
     {
-        private sealed class Baker : Baker<UnitPurchaseAIAuthoring>
+        private sealed class Baker : Baker<EnemyAIAuthoring>
         {
-            public override void Bake(UnitPurchaseAIAuthoring authoring)
+            public override void Bake(EnemyAIAuthoring authoring)
             {
                 Entity entity = GetEntity(TransformUsageFlags.None);
                 
-                AddComponent(entity, new UnitPurchaseAI
+                AddComponent(entity, new EnemyAIState
                 {
                     SelectedItemIndex = -1
                 });

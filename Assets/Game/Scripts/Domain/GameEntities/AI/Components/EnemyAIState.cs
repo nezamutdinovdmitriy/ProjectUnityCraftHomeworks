@@ -3,7 +3,7 @@ using Unity.Mathematics;
 
 namespace Game.Components
 {
-    public struct UnitPurchaseAI : IComponentData
+    public struct EnemyAIState : IComponentData
     {
         public Random Generator;
         public int SelectedItemIndex;

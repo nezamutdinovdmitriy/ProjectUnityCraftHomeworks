@@ -8,14 +8,14 @@ using Random = Unity.Mathematics.Random;
 namespace Game.UseCases.Systems
 {
     [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
-    public partial struct UnitPurchaseAISystem : ISystem
+    public partial struct EnemyAISystem : ISystem
     {
         private uint _nextSeedIndex;
         
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<UnitPurchaseItem>();
-            state.RequireForUpdate<UnitPurchaseAI>();
+            state.RequireForUpdate<EnemyAIState>();
 
             _nextSeedIndex = (uint) (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() % uint.MaxValue);
         }
@@ -36,7 +36,7 @@ namespace Game.UseCases.Systems
                      in SystemAPI.Query<
                              DynamicBuffer<UnitPurchaseRequest>,
                              RefRO<Energy>,
-                             RefRW<UnitPurchaseAI>>()
+                             RefRW<EnemyAIState>>()
                          .WithAll<Player>())
             {
                 if(requests.IsEmpty == false)
