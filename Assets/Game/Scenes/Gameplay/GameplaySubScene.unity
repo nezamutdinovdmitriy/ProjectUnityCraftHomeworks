@@ -863,6 +863,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 423135267784322741}
+    - targetCorrespondingSourceObject: {fileID: 7078650420259860604, guid: a82794b5cab41ef46a2ba26c65e32fc1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 423135267784322746}
   m_SourcePrefab: {fileID: 100100000, guid: a82794b5cab41ef46a2ba26c65e32fc1, type: 3}
 --- !u!4 &423135267784322735 stripped
 Transform:
@@ -899,6 +903,18 @@ MonoBehaviour:
   - {fileID: 1660021328}
   - {fileID: 327402696}
   _seed: 1
+--- !u!114 &423135267784322746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294538070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0805f60dfb1c49ab8747c0a022be99b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.UnitSpawnRequestAuthoring
 --- !u!1001 &6075334459726365621
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -979,6 +995,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6075334459726365624}
+    - targetCorrespondingSourceObject: {fileID: 6480648308455456160, guid: 09a84d2719aac2546a75f1c2d3fd70ee,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6075334459726365629}
   m_SourcePrefab: {fileID: 100100000, guid: 09a84d2719aac2546a75f1c2d3fd70ee, type: 3}
 --- !u!4 &6075334459726365622 stripped
 Transform:
@@ -1015,6 +1035,18 @@ MonoBehaviour:
   - {fileID: 168809603}
   - {fileID: 945504109}
   _seed: 2
+--- !u!114 &6075334459726365629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462118468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0805f60dfb1c49ab8747c0a022be99b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Components.Authoring.UnitSpawnRequestAuthoring
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

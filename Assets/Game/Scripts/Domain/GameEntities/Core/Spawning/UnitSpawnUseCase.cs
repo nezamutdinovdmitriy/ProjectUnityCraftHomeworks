@@ -1,7 +1,9 @@
 using Game.Components;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Game.UseCases
 {
@@ -19,30 +21,15 @@ namespace Game.UseCases
             return transform;
         }
 
-        public static Entity Create(
+        public static void Create(
             ref EntityCommandBuffer commands,
             Entity prefab,
             in LocalTransform transform,
-            TeamType team,
-            Entity defaultTarget)
+            TeamType team)
         {
             Entity unit = commands.Instantiate(prefab);
-
             commands.SetComponent(unit, transform);
-            commands.SetComponent(unit, new Team
-            {
-                Value = team
-            });
-
-            if (defaultTarget != Entity.Null)
-            {
-                commands.SetComponent(unit, new DefaultTargetEntity
-                {
-                    Value = defaultTarget
-                });
-            }
-
-            return unit;
+            commands.SetComponent(unit, new Team { Value = team });
         }
     }
 }

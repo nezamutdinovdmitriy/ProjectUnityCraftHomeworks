@@ -15,12 +15,19 @@ namespace Game.Systems
         private ComponentLookup<Team> _teamLookup;
         private ComponentLookup<Health> _healthLookup;
 
+        private EntityQuery _baseQuery;
+
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<PhysicsWorldSingleton>();
+            state.RequireForUpdate<AIControlled>();
 
             _teamLookup = SystemAPI.GetComponentLookup<Team>(true);
             _healthLookup = SystemAPI.GetComponentLookup<Health>(true);
+            
+            _baseQuery = new EntityQueryBuilder(Allocator.Temp)
+                .WithAll<Base>()
+                .Build(ref state);
         }
 
         [BurstCompile]
@@ -31,9 +38,10 @@ namespace Game.Systems
 
             state.Dependency = new FindEnemyJob
             {
+                PhysicsWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>(),
+                Bases = _baseQuery.ToEntityArray(state.WorldUpdateAllocator),
                 HealthLookup = _healthLookup,
                 TeamLookup = _teamLookup,
-                PhysicsWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>()
             }.ScheduleParallel(state.Dependency);
         }
 
@@ -44,6 +52,8 @@ namespace Game.Systems
         private partial struct FindEnemyJob : IJobEntity
         {
             [ReadOnly] public PhysicsWorldSingleton PhysicsWorld;
+            [ReadOnly] public NativeArray<Entity> Bases;
+            
             [ReadOnly] public ComponentLookup<Team> TeamLookup;
             [ReadOnly] public ComponentLookup<Health> HealthLookup;
             
@@ -73,11 +83,26 @@ namespace Game.Systems
                     radius.Value,
                     in predicate);
 
-                if (selected == Entity.Null && predicate.Invoke(defaultTarget.Value))
+                if (selected == Entity.Null && 
+                    predicate.Invoke(defaultTarget.Value))
                     selected = defaultTarget.Value;
 
+                if (selected == Entity.Null)
+                    selected = FindEnemyBase(ref predicate);
+                
                 target.Value = selected;
                 cooldownEnabled.ValueRW = true;
+            }
+            
+            private Entity FindEnemyBase(ref IsEnemyPredicate predicate)
+            {
+                foreach (Entity candidate in Bases)
+                {
+                    if (predicate.Invoke(candidate))
+                        return candidate;
+                }
+
+                return Entity.Null;
             }
         }
     }

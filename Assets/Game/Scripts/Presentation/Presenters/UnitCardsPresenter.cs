@@ -18,9 +18,9 @@ namespace Game.View.Presenters
 
         private World _world;
         private EntityQuery _playerQuery;
-        private EntityQuery _timeQuery;
+        private EntityQuery _gameStateQuery;
         private bool _queriesCreated;
-
+        
         private void Awake()
         {
             if (_catalog == null
@@ -71,8 +71,8 @@ namespace Game.View.Presenters
             if (manager.IsQueryValid(_playerQuery))
                 _playerQuery.Dispose();
 
-            if (manager.IsQueryValid(_timeQuery))
-                _timeQuery.Dispose();
+            if (manager.IsQueryValid(_gameStateQuery))
+                _gameStateQuery.Dispose();
         }
         
         private void LateUpdate()
@@ -110,10 +110,10 @@ namespace Game.View.Presenters
                 .WithAllRW<UnitPurchaseRequest>()
                 .Build(manager);
 
-            _timeQuery = new EntityQueryBuilder(Allocator.Temp)
-                .WithAll<GameDeltaTime>()
+            _gameStateQuery = new EntityQueryBuilder(Allocator.Temp)
+                .WithAll<GameState>()
                 .Build(manager);
-
+            
             _queriesCreated = true;
 
             return true;
@@ -123,19 +123,19 @@ namespace Game.View.Presenters
         {
             energy = 0;
             purchasesAllowed = false;
-
+            
             if (!TryInitializeQueries())
                 return false;
 
             _playerQuery.CompleteDependency();
-            _timeQuery.CompleteDependency();
+            _gameStateQuery.CompleteDependency();
 
             if (!_playerQuery.TryGetSingleton(out Energy playerEnergy)
-                || !_timeQuery.TryGetSingleton(out GameDeltaTime time))
+                || !_gameStateQuery.TryGetSingleton(out GameState state))
                 return false;
-
+            
             energy = playerEnergy.Value;
-            purchasesAllowed = time.DeltaTime > 0f;
+            purchasesAllowed = state.Value == GameStateType.Playing;
 
             return true;
         }
