@@ -1,22 +1,26 @@
 using System;
 using Game.Components;
 using Game.ECS.SystemGroups;
+using Unity.Burst;
 using Unity.Entities;
 using Random = Unity.Mathematics.Random;
 
 namespace Game.UseCases.Systems
 {
-    
-
     [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
     public partial struct UnitPurchaseAISystem : ISystem
     {
+        private uint _nextSeedIndex;
+        
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<UnitPurchaseItem>();
             state.RequireForUpdate<UnitPurchaseAI>();
+
+            _nextSeedIndex = (uint) (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() % uint.MaxValue);
         }
 
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             DynamicBuffer<UnitPurchaseItem> items = SystemAPI
@@ -40,15 +44,15 @@ namespace Game.UseCases.Systems
 
                 if (buyer.ValueRO.Generator.state == 0)
                 {
-                    uint seed = (uint)UnityEngine.Random.Range(1, int.MaxValue);
+                    buyer.ValueRW.Generator = Random.CreateFromIndex(_nextSeedIndex);
+                    _nextSeedIndex++;
 
-                    buyer.ValueRW.Generator = Random.CreateFromIndex(seed);
+                    if (_nextSeedIndex == uint.MaxValue)
+                        _nextSeedIndex = 0;
                 }
                 
                 if (buyer.ValueRO.SelectedItemIndex < 0)
-                {
                     buyer.ValueRW.SelectedItemIndex = buyer.ValueRW.Generator.NextInt(items.Length);
-                }
 
                 int itemIndex = buyer.ValueRO.SelectedItemIndex;
                 int price = items[itemIndex].Price;
