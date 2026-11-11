@@ -60,7 +60,6 @@ namespace Game.Systems
             private void Execute(
                 Entity self,
                 ref TargetEntity target,
-                in DefaultTargetEntity defaultTarget,
                 in Team team,
                 in TargetDetectionRadius radius,
                 in Health health,
@@ -83,26 +82,11 @@ namespace Game.Systems
                     radius.Value,
                     in predicate);
 
-                if (selected == Entity.Null && 
-                    predicate.Invoke(defaultTarget.Value))
-                    selected = defaultTarget.Value;
-
                 if (selected == Entity.Null)
-                    selected = FindEnemyBase(ref predicate);
+                    selected = AIUseCase.FindEnemyBase(ref predicate, in Bases);
                 
                 target.Value = selected;
                 cooldownEnabled.ValueRW = true;
-            }
-            
-            private Entity FindEnemyBase(ref IsEnemyPredicate predicate)
-            {
-                foreach (Entity candidate in Bases)
-                {
-                    if (predicate.Invoke(candidate))
-                        return candidate;
-                }
-
-                return Entity.Null;
             }
         }
     }

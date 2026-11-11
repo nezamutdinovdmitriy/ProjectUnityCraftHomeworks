@@ -1,6 +1,7 @@
 using Game.Components;
 using Game.Predicates;
 using Game.UseCases.Queries;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
@@ -23,6 +24,19 @@ namespace Game.UseCases
                 physicsWorld.OverlapSphereCustom(center, radius, ref collector, CollisionFilter.Default);
 
                 return collector.ClosestEntity;
+            }
+
+            return Entity.Null;
+        }
+        
+        public static Entity FindEnemyBase(
+            ref IsEnemyPredicate predicate,
+            in NativeArray<Entity> bases)
+        {
+            foreach (Entity candidate in bases)
+            {
+                if (predicate.Invoke(candidate))
+                    return candidate;
             }
 
             return Entity.Null;
