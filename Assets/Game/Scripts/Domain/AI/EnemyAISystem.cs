@@ -1,6 +1,7 @@
 using System;
 using Game.Components;
 using Game.ECS.SystemGroups;
+using SampleGame;
 using Unity.Burst;
 using Unity.Entities;
 using Random = Unity.Mathematics.Random;
@@ -8,26 +9,26 @@ using Random = Unity.Mathematics.Random;
 namespace Game.UseCases.Systems
 {
     [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
-    public partial struct EnemyAISystem : ISystem
+    public partial class EnemyAISystem : SystemBase
     {
         private uint _nextSeedIndex;
         
-        public void OnCreate(ref SystemState state)
+        protected override void OnCreate()
         {
-            state.RequireForUpdate<UnitPurchaseItem>();
-            state.RequireForUpdate<EnemyAIState>();
+            RequireForUpdate<UnitCatalogReference>();
+            RequireForUpdate<EnemyAIState>();
 
             _nextSeedIndex = (uint) (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() % uint.MaxValue);
         }
-
-        [BurstCompile]
-        public void OnUpdate(ref SystemState state)
+        
+        protected override void OnUpdate()
         {
-            DynamicBuffer<UnitPurchaseItem> items = SystemAPI
-                .GetSingletonBuffer<UnitPurchaseItem>(true);
+            UnitCardsCatalog catalog = SystemAPI.GetSingleton<UnitCatalogReference>().Catalog.Value;
 
-            if (items.IsEmpty)
+            if (catalog == null || catalog.Cards.Count == 0)
                 return;
+            
+            int cardCount = catalog.Cards.Count;
             
             foreach (var (
                          requests,
@@ -51,20 +52,29 @@ namespace Game.UseCases.Systems
                         _nextSeedIndex = 0;
                 }
                 
-                if (buyer.ValueRO.SelectedItemIndex < 0)
-                    buyer.ValueRW.SelectedItemIndex = buyer.ValueRW.Generator.NextInt(items.Length);
-
-                int itemIndex = buyer.ValueRO.SelectedItemIndex;
-                int price = items[itemIndex].Price;
                 
-                if(price < 0 || energy.ValueRO.Value < price)
-                    continue;
+                int itemIndex = buyer.ValueRO.SelectedItemIndex;
+                if (itemIndex < 0 || itemIndex >= cardCount)
+                {
+                    itemIndex = buyer.ValueRW.Generator.NextInt(cardCount);
+                    buyer.ValueRW.SelectedItemIndex = itemIndex;
+                }
 
+                UnitCardConfig cardConfig = catalog.GetCard(itemIndex);
+                if (cardConfig == null || cardConfig.Price < 0)
+                {
+                    buyer.ValueRW.SelectedItemIndex = -1;
+                    continue;
+                }
+                
+                if (energy.ValueRO.Value < cardConfig.Price)
+                    continue;
+                
                 requests.Add(new UnitPurchaseRequest
                 {
                     ItemIndex = itemIndex
                 });
-
+                
                 buyer.ValueRW.SelectedItemIndex = -1;
             }
         }

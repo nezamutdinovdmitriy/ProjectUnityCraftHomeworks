@@ -9,5 +9,7 @@ namespace SampleGame
         [SerializeField] private UnitCardConfig[] _cards;
 
         public IReadOnlyCollection<UnitCardConfig> Cards => _cards;
+
+        public UnitCardConfig GetCard(int index) => _cards[index];
     }
 }

@@ -10,7 +10,6 @@ namespace Game.View.Presenters
     [DisallowMultipleComponent]
     public sealed class UnitCardsPresenter : MonoBehaviour
     {
-        [SerializeField] private UnitCardsCatalog _catalog;
         [SerializeField] private UnitCardView _cardPrefab;
         [SerializeField] private Transform _container;
 
@@ -18,49 +17,20 @@ namespace Game.View.Presenters
 
         private World _world;
         private EntityQuery _playerQuery;
-        private EntityQuery _gameStateQuery;
+        private EntityQuery _gameContextQuery;
         private bool _queriesCreated;
-        
+
         private void Awake()
         {
-            if (_catalog == null
-                || _cardPrefab == null
-                || _container == null
-                || _catalog.Cards == null
-                || _catalog.Cards.Count == 0)
+            if (_cardPrefab == null || _container == null)
             {
-                Debug.Log("UnitCards: assign a catalog, card prefab and container.");
-
+                Debug.LogError("Assign a unit card prefab and container.", this);
                 enabled = false;
-                return;
-            }
-
-            foreach (UnitCardConfig config in _catalog.Cards)
-            {
-                if (config == null)
-                {
-                    Debug.Log("UnitCards: the catalog contains a missing card.");
-
-                    enabled = false;
-                    return;
-                }
-            }
-
-            _unitCardPresenters = new UnitCardPresenter[_catalog.Cards.Count];
-
-            int itemIndex = 0;
-
-            foreach (UnitCardConfig config in _catalog.Cards)
-            {
-                UnitCardView view = Instantiate(_cardPrefab, _container);
-
-                _unitCardPresenters[itemIndex] = new UnitCardPresenter(view, config);
-                itemIndex++;
             }
         }
 
         private void OnDisable() => DisablePurchases();
-        
+
         private void OnDestroy()
         {
             if (!_queriesCreated || _world is not {IsCreated: true})
@@ -71,10 +41,10 @@ namespace Game.View.Presenters
             if (manager.IsQueryValid(_playerQuery))
                 _playerQuery.Dispose();
 
-            if (manager.IsQueryValid(_gameStateQuery))
-                _gameStateQuery.Dispose();
+            if (manager.IsQueryValid(_gameContextQuery))
+                _gameContextQuery.Dispose();
         }
-        
+
         private void LateUpdate()
         {
             if (!TryReadState(out int energy, out bool purchasesAllowed))
@@ -92,7 +62,7 @@ namespace Game.View.Presenters
                     EnqueuePurchase(i);
             }
         }
-        
+
         private bool TryInitializeQueries()
         {
             if (_queriesCreated && _world is {IsCreated: true})
@@ -110,10 +80,10 @@ namespace Game.View.Presenters
                 .WithAllRW<UnitPurchaseRequest>()
                 .Build(manager);
 
-            _gameStateQuery = new EntityQueryBuilder(Allocator.Temp)
-                .WithAll<GameState>()
+            _gameContextQuery = new EntityQueryBuilder(Allocator.Temp)
+                .WithAll<GameState, UnitCatalogReference>()
                 .Build(manager);
-            
+
             _queriesCreated = true;
 
             return true;
@@ -123,16 +93,27 @@ namespace Game.View.Presenters
         {
             energy = 0;
             purchasesAllowed = false;
-            
+
             if (!TryInitializeQueries())
                 return false;
 
             _playerQuery.CompleteDependency();
-            _gameStateQuery.CompleteDependency();
+            _gameContextQuery.CompleteDependency();
 
             if (!_playerQuery.TryGetSingleton(out Energy playerEnergy)
-                || !_gameStateQuery.TryGetSingleton(out GameState state))
+                || !_gameContextQuery.TryGetSingleton(out GameState state))
                 return false;
+
+            if (_unitCardPresenters.Length == 0)
+            {
+                UnitCardsCatalog catalog = _gameContextQuery
+                    .GetSingleton<UnitCatalogReference>().Catalog.Value;
+
+                if (catalog == null || catalog.Cards.Count == 0)
+                    return false;
+
+                CreateCards(catalog);
+            }
             
             energy = playerEnergy.Value;
             purchasesAllowed = state.Value == GameStateType.Playing;
@@ -140,6 +121,19 @@ namespace Game.View.Presenters
             return true;
         }
 
+        private void CreateCards(UnitCardsCatalog catalog)
+        {
+            _unitCardPresenters = new UnitCardPresenter[catalog.Cards.Count];
+
+            int itemIndex = 0;
+            foreach (UnitCardConfig config in catalog.Cards)
+            {
+                UnitCardView view = Instantiate(_cardPrefab, _container);
+                _unitCardPresenters[itemIndex] = new UnitCardPresenter(view, config);
+                itemIndex++;
+            }
+        }
+        
         private void EnqueuePurchase(int itemIndex)
         {
             DynamicBuffer<UnitPurchaseRequest> requests = _playerQuery
@@ -153,8 +147,8 @@ namespace Game.View.Presenters
 
         private void DisablePurchases()
         {
-            foreach (UnitCardPresenter cardBinding in _unitCardPresenters)
-                cardBinding.DisablePurchase();
+            foreach (UnitCardPresenter unitCardPresenter in _unitCardPresenters)
+                unitCardPresenter.DisablePurchase();
         }
     }
 }

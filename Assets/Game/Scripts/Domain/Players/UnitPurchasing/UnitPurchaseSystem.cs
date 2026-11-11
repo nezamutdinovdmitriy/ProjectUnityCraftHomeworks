@@ -1,68 +1,77 @@
 using Game.Components;
 using Game.ECS.SystemGroups;
 using Game.UseCases;
+using SampleGame;
 using Unity.Entities;
 using Unity.Transforms;
 
 namespace Game.Systems
 {
     [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
-    public partial struct UnitPurchaseSystem : ISystem
+    public partial class UnitPurchaseSystem : SystemBase
     {
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<UnitPurchaseItem>();
+            state.RequireForUpdate<UnitCatalogReference>();
+            state.RequireForUpdate<UnitPrefab>();
             state.RequireForUpdate<UnitPurchaseRequest>();
             state.RequireForUpdate<UnitSpawnRequest>();
-            state.RequireForUpdate<GameState>();
         }
 
-        public void OnUpdate(ref SystemState state)
+        protected override void OnUpdate()
         {
-            GameState gameState = SystemAPI.GetSingleton<GameState>();
+            UnitCardsCatalog catalog = SystemAPI.GetSingleton<UnitCatalogReference>().Catalog.Value;
 
-            if (gameState.Value != GameStateType.Playing)
+            if (catalog == null)
                 return;
 
-            DynamicBuffer<UnitPurchaseItem> items = SystemAPI
-                .GetSingletonBuffer<UnitPurchaseItem>(true);
+            DynamicBuffer<UnitPrefab> prefabs = SystemAPI.GetSingletonBuffer<UnitPrefab>(true);
+
+            if (prefabs.IsEmpty || prefabs.Length != catalog.Cards.Count)
+                return;
 
             foreach (var (
                          purchaseRequests,
                          energy,
                          team)
                      in SystemAPI.Query<DynamicBuffer<UnitPurchaseRequest>,
-                             RefRW<Energy>,
-                             RefRO<Team>>()
-                         .WithAll<Player>())
+                         RefRW<Energy>,
+                         RefRO<Team>>().WithAll<Player>())
             {
                 if (purchaseRequests.IsEmpty)
                     continue;
 
                 if (TryGetSpawnRequestBuffer(
-                        ref state,
                         team.ValueRO.Value,
                         out DynamicBuffer<UnitSpawnRequest> spawns))
                 {
                     for (int i = 0; i < purchaseRequests.Length; i++)
                     {
                         int itemIndex = purchaseRequests[i].ItemIndex;
-
-                        if (itemIndex < 0 || itemIndex >= items.Length)
+                        if (itemIndex < 0 || itemIndex >= prefabs.Length)
                             continue;
 
-                        UnitPurchaseItem item = items[itemIndex];
-
-                        if (item.Price < 0 || energy.ValueRO.Value < item.Price)
+                        UnitCardConfig card = catalog.GetCard(itemIndex);
+                        if (card == null)
                             continue;
 
-                        if (!SystemAPI.HasComponent<Prefab>(item.Prefab) ||
-                            !SystemAPI.HasComponent<Team>(item.Prefab) ||
-                            !SystemAPI.HasComponent<LocalTransform>(item.Prefab))
+                        int price = card.Price;
+                        if (price < 0 || energy.ValueRO.Value < price)
                             continue;
 
-                        spawns.Add(new UnitSpawnRequest {Prefab = item.Prefab});
-                        energy.ValueRW.Value -= item.Price;
+                        Entity prefab = prefabs[itemIndex].Value;
+
+                        if (!SystemAPI.HasComponent<Prefab>(prefab) ||
+                            !SystemAPI.HasComponent<Team>(prefab) ||
+                            !SystemAPI.HasComponent<LocalTransform>(prefab))
+                            continue;
+
+                        spawns.Add(new UnitSpawnRequest
+                        {
+                            Prefab = prefab
+                        });
+                        
+                        energy.ValueRW.Value -= price;
                     }
                 }
 
@@ -71,7 +80,6 @@ namespace Game.Systems
         }
 
         private bool TryGetSpawnRequestBuffer(
-            ref SystemState state,
             TeamType team,
             out DynamicBuffer<UnitSpawnRequest> spawnRequests)
         {
@@ -91,7 +99,7 @@ namespace Game.Systems
                     points.IsEmpty)
                     continue;
 
-                if (!HasValidSpawnPoints(ref state, points))
+                if (!HasValidSpawnPoints(points))
                     continue;
 
                 spawnRequests = spawns;
@@ -102,9 +110,7 @@ namespace Game.Systems
             return false;
         }
 
-        private bool HasValidSpawnPoints(
-            ref SystemState state,
-            DynamicBuffer<UnitSpawnPoint> points)
+        private bool HasValidSpawnPoints(DynamicBuffer<UnitSpawnPoint> points)
         {
             for (int i = 0; i < points.Length; i++)
             {
