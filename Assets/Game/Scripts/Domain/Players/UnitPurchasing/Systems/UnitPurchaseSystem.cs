@@ -1,15 +1,14 @@
 using Game.Components;
+using Game.ECS.SystemGroups;
 using Game.UseCases;
 using Unity.Entities;
 using Unity.Transforms;
 
 namespace Game.Systems
 {
-    [UpdateInGroup(typeof(SimulationSystemGroup))]
+    [UpdateInGroup(typeof(GenerateRequestsSystemGroup))]
     public partial struct UnitPurchaseSystem : ISystem
     {
-        private EntityQuery _spawnBases;
-
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<UnitPurchaseItem>();
@@ -40,7 +39,7 @@ namespace Game.Systems
                 if (purchaseRequests.IsEmpty)
                     continue;
 
-                if (TryGetSpawnQueue(
+                if (TryGetSpawnRequestBuffer(
                         ref state,
                         team.ValueRO.Value,
                         out DynamicBuffer<UnitSpawnRequest> spawns))
@@ -71,10 +70,10 @@ namespace Game.Systems
             }
         }
 
-        private bool TryGetSpawnQueue(
+        private bool TryGetSpawnRequestBuffer(
             ref SystemState state,
             TeamType team,
-            out DynamicBuffer<UnitSpawnRequest> queue)
+            out DynamicBuffer<UnitSpawnRequest> spawnRequests)
         {
             foreach (var (
                          spawns,
@@ -95,11 +94,11 @@ namespace Game.Systems
                 if (!HasValidSpawnPoints(ref state, points))
                     continue;
 
-                queue = spawns;
+                spawnRequests = spawns;
                 return true;
             }
 
-            queue = default;
+            spawnRequests = default;
             return false;
         }
 
