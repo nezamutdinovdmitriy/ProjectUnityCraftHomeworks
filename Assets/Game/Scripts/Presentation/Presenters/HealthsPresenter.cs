@@ -7,7 +7,7 @@ using TeamType = Game.Components.TeamType;
 
 namespace Game.View.Presenters
 {
-    public sealed class HealthPresenter : MonoBehaviour
+    public sealed class HealthsPresenter : MonoBehaviour
     {
         [SerializeField] private HealthView _blueTeam;
         [SerializeField] private HealthView _redTeam;
