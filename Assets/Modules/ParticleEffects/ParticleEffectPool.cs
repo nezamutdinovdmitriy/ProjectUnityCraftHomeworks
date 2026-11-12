@@ -1,25 +1,22 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
-namespace Game.Presentation.ParticleEffects
+namespace Modules.ParticleEffects
 {
-    internal sealed class ParticleEffectPool : IDisposable
+    internal sealed class ParticleEffectPool<TKey> : IDisposable where TKey : struct, Enum
     {
         private readonly ParticleEffectView _prefab;
         private readonly Transform _storage;
         private readonly ObjectPool<ParticleEffectView> _pool;
 
-        public ParticleEffectPool(Transform root, ParticleEffectSettings settings)
+        public ParticleEffectPool(Transform root, ParticleEffectSettings<TKey> settings)
         {
             _prefab = settings.Prefab;
 
             GameObject storage = new GameObject($"{settings.Id} (Pool)");
-
             storage.transform.SetParent(root, worldPositionStays: false);
-
             _storage = storage.transform;
 
             int maxRetained = Mathf.Max(1, settings.MaxRetained);
@@ -43,11 +40,9 @@ namespace Game.Presentation.ParticleEffects
                 _pool.Release(instance);
         }
 
-        public ParticleEffectView Rent() 
-            => _pool.Get();
+        public ParticleEffectView Rent() => _pool.Get();
 
-        public void Release(ParticleEffectView instance) 
-            => _pool.Release(instance);
+        public void Release(ParticleEffectView instance) => _pool.Release(instance);
 
         public void Dispose()
         {

@@ -1,7 +1,7 @@
 using Unity.Entities;
 using Unity.Mathematics;
 
-namespace Game.Presentation.ParticleEffects.Ecs
+namespace Game.View.Vfx
 {
     public struct ParticleEffectAnchor : IComponentData
     {

@@ -1,7 +1,7 @@
 using Unity.Entities;
 using UnityEngine;
 
-namespace Game.Presentation.ParticleEffects.Ecs
+namespace Game.View.Vfx
 {
     [DisallowMultipleComponent]
     public sealed class ParticleEffectAnchorAuthoring : MonoBehaviour
@@ -14,6 +14,9 @@ namespace Game.Presentation.ParticleEffects.Ecs
             {
                 DependsOn(authoring.transform);
                 DependsOn(authoring._effectAnchor);
+                
+                if (authoring._effectAnchor == null)
+                    return;
                 
                 Entity entity = GetEntity(TransformUsageFlags.Dynamic);
                 

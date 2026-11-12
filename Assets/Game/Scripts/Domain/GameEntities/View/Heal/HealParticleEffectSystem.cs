@@ -1,11 +1,9 @@
 using Game.Components;
-using Game.Presentation.ParticleEffects;
-using Game.Presentation.ParticleEffects.Ecs;
+using Game.View;
+using Game.View.Vfx;
+using Modules.ParticleEffects;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
-using ManagedAPI = Unity.Entities.SystemAPI.ManagedAPI;
 
 namespace Game.Systems
 {
@@ -16,14 +14,16 @@ namespace Game.Systems
 
         protected override void OnCreate()
         {
+            RequireForUpdate<ParticleEffectAnchor>();
             _eventsLookup = GetBufferLookup<HealEvent>(isReadOnly: true);
         }
 
         protected override void OnUpdate()
         {
-            if (ManagedAPI.TryGetSingleton(out ParticleEffectsState state) == false
-                || state.Service == null
-                || state.Service.isActiveAndEnabled == false)
+            ParticleEffectService<ParticleEffectId> particleService =
+                GameParticleEffectService.Instance;
+
+            if (particleService == null)
                 return;
 
             Dependency.Complete();
@@ -32,42 +32,25 @@ namespace Game.Systems
             foreach (var (
                          model,
                          anchor,
-                         transform,
-                         view) in
-                     SystemAPI.Query<
-                             RefRO<ModelLink>,
-                             RefRO<ParticleEffectAnchor>,
-                             RefRO<LocalToWorld>>()
+                         view)
+                     in SystemAPI.Query<RefRO<ModelLink>, RefRO<ParticleEffectAnchor>>()
+                         .WithAll<LocalToWorld>()
                          .WithEntityAccess())
             {
-                Entity eventOwner = model.ValueRO.Value;
-
-                if (_eventsLookup.TryGetBuffer(
-                        eventOwner, out DynamicBuffer<HealEvent> events) == false
-                    || events.IsEmpty)
+                if(!_eventsLookup.TryGetBuffer(
+                       model.ValueRO.Value,
+                       out DynamicBuffer<HealEvent> events))
                     continue;
 
-                float3 anchorPosition = math.transform(
-                    transform.ValueRO.Value,
-                    anchor.ValueRO.Value);
+                ParticleEffectTarget target = null;
 
                 foreach (HealEvent healEvent in events)
                 {
                     if (healEvent.Value <= 0f)
                         continue;
 
-                    ParticleEffectHandle handle = state.Service.Play(
-                        ParticleEffectId.Heal,
-                        new Vector3(anchorPosition.x, anchorPosition.y, anchorPosition.z));
-
-                    if (handle.IsPlaying)
-                    {
-                        state.Followers.Add(new ParticleEffectFollowBinding
-                        {
-                            Target = view,
-                            Handle = handle
-                        });
-                    }
+                    target ??= new ParticleEffectTarget(World, view, anchor.ValueRO.Value);
+                    particleService.PlayFollowing(ParticleEffectId.Heal, target);
                 }
             }
         }

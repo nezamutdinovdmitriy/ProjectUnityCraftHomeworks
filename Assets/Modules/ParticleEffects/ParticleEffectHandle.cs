@@ -1,13 +1,13 @@
-using UnityEngine;
+using System;
 
-namespace Game.Presentation.ParticleEffects
+namespace Modules.ParticleEffects
 {
-    public readonly struct ParticleEffectHandle
+    public readonly struct ParticleEffectHandle<TKey> where TKey : struct, Enum
     {
-        private readonly ParticleEffectService _owner;
+        private readonly ParticleEffectService<TKey> _owner;
         private readonly ulong _playbackId;
 
-        public ParticleEffectHandle(ParticleEffectService owner, ulong playbackId)
+        public ParticleEffectHandle(ParticleEffectService<TKey> owner, ulong playbackId)
         {
             _owner = owner;
             _playbackId = playbackId;
@@ -15,9 +15,6 @@ namespace Game.Presentation.ParticleEffects
 
         public bool IsPlaying 
             => _owner != null && _owner.IsPlaying(_playbackId);
-
-        public bool TrySetPosition(Vector3 anchorPosition) 
-            => _owner != null && _owner.TrySetPosition(_playbackId, anchorPosition);
 
         public void Stop()
         {

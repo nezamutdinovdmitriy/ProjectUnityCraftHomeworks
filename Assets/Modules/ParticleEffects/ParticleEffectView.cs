@@ -1,12 +1,13 @@
 using UnityEngine;
 
-namespace Game.Presentation.ParticleEffects
+namespace Modules.ParticleEffects
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(ParticleSystem))]
     public sealed class ParticleEffectView : MonoBehaviour
     {
         private ParticleSystem _root;
+        private TransformHandle _transformHandle;
 
         public void Initialize()
         {
@@ -14,19 +15,23 @@ namespace Game.Presentation.ParticleEffects
                 return;
 
             _root = GetComponent<ParticleSystem>();
+            _transformHandle = gameObject.transformHandle;
 
-            ParticleSystem[] subParticleSystems = GetComponentsInChildren<ParticleSystem>(true);
-            foreach (ParticleSystem particles in subParticleSystems)
+            foreach (ParticleSystem particles in GetComponentsInChildren<ParticleSystem>(true))
             {
-                var main = particles.main;
+                ParticleSystem.MainModule main = particles.main;
                 main.playOnAwake = false;
                 main.stopAction = ParticleSystemStopAction.None;
             }
         }
         
+        public void SetPosition(Vector3 position) => _transformHandle.position = position;
+        
+        public bool IsAlive() => _root.IsAlive(withChildren: true);
+        
         public void PlayAt(Vector3 position)
         {
-            transform.position = position;
+            SetPosition(position);
             gameObject.SetActive(true);
             _root.Play(withChildren: true);
         }
@@ -37,8 +42,5 @@ namespace Game.Presentation.ParticleEffects
                 withChildren: true,
                 stopBehavior: ParticleSystemStopBehavior.StopEmittingAndClear);
         }
-        
-        public bool IsAlive() 
-            => _root.IsAlive(withChildren: true);
     }
 }

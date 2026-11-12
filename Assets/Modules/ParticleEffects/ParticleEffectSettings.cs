@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-namespace Game.Presentation.ParticleEffects
+namespace Modules.ParticleEffects
 {
     [Serializable]
-    public class ParticleEffectSettings
+    public class ParticleEffectSettings<TKey> where TKey : struct, Enum
     {
-        [SerializeField] private ParticleEffectId _id;
+        [SerializeField] private TKey _id;
         [SerializeField] private ParticleEffectView _prefab;
         [SerializeField] private Vector3 _prefabOffset;
         
@@ -16,7 +16,7 @@ namespace Game.Presentation.ParticleEffects
         [SerializeField, Min(1)]
         private int _maxRetained = 16;
 
-        public ParticleEffectId Id => _id;
+        public TKey Id => _id;
         public ParticleEffectView Prefab => _prefab;
         public Vector3 PrefabOffset => _prefabOffset;
         public int PrewarmCount => _prewarmCount;

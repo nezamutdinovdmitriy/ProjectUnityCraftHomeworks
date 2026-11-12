@@ -1,4 +1,4 @@
-namespace Game.Presentation.ParticleEffects
+namespace Game.View
 {
     public enum ParticleEffectId
     {
