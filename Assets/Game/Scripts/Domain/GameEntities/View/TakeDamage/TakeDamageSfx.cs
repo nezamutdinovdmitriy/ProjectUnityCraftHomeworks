@@ -1,10 +1,10 @@
-using Unity.Collections;
+using Modules.AudioEvents;
 using Unity.Entities;
 
 namespace Game.Components
 {
     public struct TakeDamageSfx : IComponentData
     {
-        public FixedString32Bytes Key;
+        public AudioEventKey Key;
     }
 }

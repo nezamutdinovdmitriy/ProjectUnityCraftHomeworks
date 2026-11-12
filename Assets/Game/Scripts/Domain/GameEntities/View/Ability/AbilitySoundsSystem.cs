@@ -1,6 +1,5 @@
 using Game.Components;
-using Game.Presentation.Audio;
-using Game.Presentation.Audio.Ecs;
+using Modules.AudioEvents;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -25,12 +24,10 @@ namespace Game.Systems
 
         public void OnUpdate(ref SystemState state)
         {
-            if (SystemAPI.ManagedAPI
-                    .TryGetSingleton(out AudioPlaybackState audioState) == false
-                || audioState.Playback == null)
-                return;
+            AudioSystem audioSystem = AudioSystem.Instance;
 
-            AudioPlayback playback = audioState.Playback;
+            if (audioSystem == null || !audioSystem.isActiveAndEnabled)
+                return;
 
             state.Dependency.Complete();
 
@@ -53,8 +50,9 @@ namespace Game.Systems
                 {
                     Entity definition = _startedLookup.GetRefRO(actor).ValueRO.Definition;
 
-                    if (_soundsLookup.TryGetRefRO(definition, out RefRO<AbilitySounds> sounds))
-                        playback.Play(sounds.ValueRO.Started, position);
+                    if (_soundsLookup.TryGetRefRO(definition, out RefRO<AbilitySounds> sounds) &&
+                        !sounds.ValueRO.Started.Equals(default))
+                        audioSystem.PlayEvent(sounds.ValueRO.Started, position);
                 }
 
                 if (_executedLookup.HasComponent(actor)
@@ -62,8 +60,9 @@ namespace Game.Systems
                 {
                     Entity definition = _executedLookup.GetRefRO(actor).ValueRO.Definition;
 
-                    if (_soundsLookup.TryGetRefRO(definition, out RefRO<AbilitySounds> sounds))
-                        playback.Play(sounds.ValueRO.Executed, position);
+                    if (_soundsLookup.TryGetRefRO(definition, out RefRO<AbilitySounds> sounds) &&
+                        !sounds.ValueRO.Executed.Equals(default))
+                        audioSystem.PlayEvent(sounds.ValueRO.Executed, position);
                 }
             }
         }

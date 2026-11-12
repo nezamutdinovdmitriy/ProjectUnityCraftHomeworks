@@ -1,5 +1,4 @@
 using Modules.AudioEvents;
-using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 
@@ -19,11 +18,11 @@ namespace Game.Components
 
                 AddComponent(definition, new AbilitySounds
                 {
-                    Started = new FixedString32Bytes(
-                        authoring._started.Key),
-
-                    Executed = new FixedString32Bytes(
-                        authoring._executed.Key)
+                    Started = string.IsNullOrEmpty(authoring._started.Key) 
+                        ? default(AudioEventKey) : authoring._started,
+                    
+                    Executed = string.IsNullOrEmpty(authoring._executed.Key) 
+                        ? default(AudioEventKey) : authoring._executed
                 });
             }
         }

@@ -17,7 +17,7 @@ namespace Game.Components.Authoring
 
                 AddComponent(view, new TakeDamageSfx
                 {
-                    Key = authoring._audioEvent.Key
+                    Key = authoring._audioEvent
                 });
             }
         }

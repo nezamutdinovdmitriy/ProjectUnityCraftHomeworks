@@ -1538,7 +1538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65976f7bcedf448e9944d094358eb55b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.View.Presenters.UnitCardsPresenter
-  _catalog: {fileID: 11400000, guid: e7061a0801beab04db9870077ec9a250, type: 2}
   _cardPrefab: {fileID: 6172936870883116238, guid: 504ef00ecfcda1f468d6d051259941a7,
     type: 3}
   _container: {fileID: 345783203}
@@ -2966,7 +2965,6 @@ GameObject:
   - component: {fileID: 895386438}
   - component: {fileID: 895386439}
   - component: {fileID: 895386440}
-  - component: {fileID: 895386441}
   m_Layer: 0
   m_Name: '[Audio]'
   m_TagString: Untagged
@@ -3109,18 +3107,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895386436}
   m_Enabled: 1
---- !u!114 &895386441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895386436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ba73c144a6f4578af4c296568796e6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Presentation.Audio.Ecs.AudioPlaybackRegistration
 --- !u!1 &938570152
 GameObject:
   m_ObjectHideFlags: 0

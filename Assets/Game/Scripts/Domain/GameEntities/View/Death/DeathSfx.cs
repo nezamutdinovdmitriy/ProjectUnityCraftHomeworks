@@ -1,10 +1,10 @@
-using Unity.Collections;
+using Modules.AudioEvents;
 using Unity.Entities;
 
 namespace Game.Components
 {
     public struct DeathSfx : IComponentData
     {
-        public FixedString32Bytes Value;
+        public AudioEventKey Value;
     }
 }

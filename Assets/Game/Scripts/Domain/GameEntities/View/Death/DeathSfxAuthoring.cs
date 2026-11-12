@@ -17,7 +17,7 @@ namespace Game.Components.Authoring
 
                     AddComponent(view, new DeathSfx
                     {
-                        Value = authoring._audioEvent.Key
+                        Value = authoring._audioEvent
                     });
                 }
             }

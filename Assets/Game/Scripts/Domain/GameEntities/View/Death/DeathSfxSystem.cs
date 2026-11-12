@@ -1,6 +1,5 @@
 using Game.Components;
-using Game.Presentation.Audio;
-using Game.Presentation.Audio.Ecs;
+using Modules.AudioEvents;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -21,14 +20,13 @@ namespace Game.Systems
 
         public void OnUpdate(ref SystemState state)
         {
-            if (SystemAPI.ManagedAPI
-                    .TryGetSingleton(out AudioPlaybackState audioState) == false
-                || audioState.Playback == null)
+            AudioSystem audioSystem = AudioSystem.Instance;
+
+            if (audioSystem == null || !audioSystem.isActiveAndEnabled)
                 return;
 
-            AudioPlayback playback = audioState.Playback;
-
             state.Dependency.Complete();
+            
             _eventsLookup.Update(ref state);
 
             foreach (var (
@@ -48,7 +46,7 @@ namespace Game.Systems
 
                 Vector3 position = transform.ValueRO.Position;
 
-                playback.Play(sfx.ValueRO.Value, position);
+                audioSystem.PlayEvent(sfx.ValueRO.Value, position);
             }
         }
     }
